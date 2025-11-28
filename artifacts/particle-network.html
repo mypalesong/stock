@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Particle Network | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .artifact-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 60px);
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+            overflow: hidden;
+        }
+
+        #particle-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: none;
+        }
+
+        .artifact-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 300px;
+            z-index: 10;
+        }
+
+        .artifact-info h2 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .artifact-info p {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .stats {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 11px;
+            font-family: monospace;
+            z-index: 10;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 12px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .artifact-info {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                max-width: none;
+                padding: 12px 16px;
+            }
+
+            .stats {
+                top: auto;
+                bottom: 60px;
+                right: 10px;
+                font-size: 10px;
+            }
+
+            .artifact-info h2 {
+                font-size: 14px;
+            }
+
+            .artifact-info p {
+                font-size: 11px;
+            }
+
+            .controls {
+                bottom: 10px;
+                padding: 10px 16px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="../index.html" class="site-logo">Stock Insights</a>
+                <p class="site-tagline">전문 주식 분석</p>
+            </div>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">메뉴</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#latest" class="nav-link">최신 분석</a></li>
+                    <li><a href="index.html" class="nav-link active">Artifact Gallery</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper" style="padding: 0;">
+            <div class="artifact-container">
+                <canvas id="particle-canvas"></canvas>
+
+                <div class="artifact-info">
+                    <h2>3D Particle Network</h2>
+                    <p>
+                        3,000개의 파티클이 네트워크를 형성합니다.
+                        파티클은 가까운 이웃과 연결되며 실시간으로 움직입니다.
+                    </p>
+                </div>
+
+                <div class="stats" id="stats">
+                    Particles: 0<br>
+                    Connections: 0
+                </div>
+
+                <div class="controls">
+                    드래그: 회전 | 스크롤/핀치: 줌
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x0a0a0a, 0.015);
+
+        const canvas = document.getElementById('particle-canvas');
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight - 60);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Particle system
+        const particleCount = 3000;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = [];
+        const colors = new Float32Array(particleCount * 3);
+
+        // Initialize particles
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 100;
+            positions[i + 1] = (Math.random() - 0.5) * 100;
+            positions[i + 2] = (Math.random() - 0.5) * 100;
+
+            velocities.push({
+                x: (Math.random() - 0.5) * 0.02,
+                y: (Math.random() - 0.5) * 0.02,
+                z: (Math.random() - 0.5) * 0.02
+            });
+
+            // Color variation
+            const colorChoice = Math.random();
+            if (colorChoice < 0.33) {
+                colors[i] = 0.2;
+                colors[i + 1] = 0.6;
+                colors[i + 2] = 1.0;
+            } else if (colorChoice < 0.66) {
+                colors[i] = 1.0;
+                colors[i + 1] = 0.3;
+                colors[i + 2] = 0.6;
+            } else {
+                colors[i] = 0.2;
+                colors[i + 1] = 1.0;
+                colors[i + 2] = 0.6;
+            }
+        }
+
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.5,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+
+        // Connection lines
+        const maxConnections = 150;
+        const maxDistance = 15;
+        const lineGeometry = new THREE.BufferGeometry();
+        const linePositions = new Float32Array(maxConnections * 6);
+        lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+
+        const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x4488ff,
+            transparent: true,
+            opacity: 0.15,
+            blending: THREE.AdditiveBlending
+        });
+
+        const lineSystem = new THREE.LineSegments(lineGeometry, lineMaterial);
+        scene.add(lineSystem);
+
+        camera.position.z = 50;
+
+        // Mouse/Touch interaction
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let rotation = { x: 0, y: 0 };
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const deltaX = e.clientX - previousMousePosition.x;
+                const deltaY = e.clientY - previousMousePosition.y;
+
+                rotation.y += deltaX * 0.005;
+                rotation.x += deltaY * 0.005;
+
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartDistance = 0;
+
+        canvas.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                isDragging = true;
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            } else if (e.touches.length === 2) {
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                touchStartDistance = Math.sqrt(dx * dx + dy * dy);
+            }
+        }, { passive: true });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1 && isDragging) {
+                const deltaX = e.touches[0].clientX - touchStartX;
+                const deltaY = e.touches[0].clientY - touchStartY;
+
+                rotation.y += deltaX * 0.005;
+                rotation.x += deltaY * 0.005;
+
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            } else if (e.touches.length === 2) {
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const delta = distance - touchStartDistance;
+
+                camera.position.z -= delta * 0.05;
+                camera.position.z = Math.max(20, Math.min(100, camera.position.z));
+
+                touchStartDistance = distance;
+            }
+        }, { passive: true });
+
+        canvas.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            camera.position.z += e.deltaY * 0.05;
+            camera.position.z = Math.max(20, Math.min(100, camera.position.z));
+        }, { passive: false });
+
+        // Animation
+        let time = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01;
+
+            const positions = particles.attributes.position.array;
+
+            // Update particle positions
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+
+                positions[i3] += velocities[i].x;
+                positions[i3 + 1] += velocities[i].y;
+                positions[i3 + 2] += velocities[i].z;
+
+                // Boundary check
+                if (Math.abs(positions[i3]) > 50) velocities[i].x *= -1;
+                if (Math.abs(positions[i3 + 1]) > 50) velocities[i].y *= -1;
+                if (Math.abs(positions[i3 + 2]) > 50) velocities[i].z *= -1;
+
+                // Add subtle wave motion
+                positions[i3 + 1] += Math.sin(time + i * 0.1) * 0.02;
+            }
+
+            particles.attributes.position.needsUpdate = true;
+
+            // Update connections (optimized - only check subset)
+            let connectionCount = 0;
+            const linePos = lineGeometry.attributes.position.array;
+            const step = Math.floor(particleCount / 100); // Sample every Nth particle
+
+            for (let i = 0; i < particleCount && connectionCount < maxConnections; i += step) {
+                const i3 = i * 3;
+
+                for (let j = i + step; j < particleCount && connectionCount < maxConnections; j += step) {
+                    const j3 = j * 3;
+
+                    const dx = positions[i3] - positions[j3];
+                    const dy = positions[i3 + 1] - positions[j3 + 1];
+                    const dz = positions[i3 + 2] - positions[j3 + 2];
+                    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                    if (distance < maxDistance) {
+                        const idx = connectionCount * 6;
+                        linePos[idx] = positions[i3];
+                        linePos[idx + 1] = positions[i3 + 1];
+                        linePos[idx + 2] = positions[i3 + 2];
+                        linePos[idx + 3] = positions[j3];
+                        linePos[idx + 4] = positions[j3 + 1];
+                        linePos[idx + 5] = positions[j3 + 2];
+                        connectionCount++;
+                    }
+                }
+            }
+
+            // Clear unused connections
+            for (let i = connectionCount * 6; i < maxConnections * 6; i++) {
+                linePos[i] = 0;
+            }
+
+            lineGeometry.attributes.position.needsUpdate = true;
+            lineGeometry.setDrawRange(0, connectionCount * 2);
+
+            // Update stats
+            document.getElementById('stats').innerHTML = `Particles: ${particleCount}<br>Connections: ${connectionCount}`;
+
+            // Apply rotation
+            particleSystem.rotation.x = rotation.x;
+            particleSystem.rotation.y = rotation.y;
+            lineSystem.rotation.x = rotation.x;
+            lineSystem.rotation.y = rotation.y;
+
+            // Auto-rotate
+            if (!isDragging) {
+                rotation.y += 0.001;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / (window.innerHeight - 60);
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight - 60);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
