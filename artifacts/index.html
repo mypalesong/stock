@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifact Gallery | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 32px 0;
+        }
+
+        .artifact-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .artifact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+
+        .artifact-preview {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .artifact-preview.graph {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .artifact-preview.particle {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+        }
+
+        .artifact-preview.globe {
+            background: radial-gradient(circle at center, #0f0f23 0%, #000000 100%);
+        }
+
+        .artifact-preview::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.5;
+            }
+        }
+
+        .artifact-info-box {
+            padding: 20px;
+        }
+
+        .artifact-info-box h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .artifact-info-box p {
+            margin: 0 0 12px 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .artifact-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .artifact-tag {
+            font-size: 10px;
+            padding: 4px 8px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-intro {
+            max-width: 800px;
+            margin: 0 auto 32px;
+            text-align: center;
+        }
+
+        .section-intro h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .section-intro p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px 0;
+            }
+
+            .section-intro h1 {
+                font-size: 22px;
+            }
+
+            .section-intro p {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="../index.html" class="site-logo">Stock Insights</a>
+                <p class="site-tagline">전문 주식 분석</p>
+            </div>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">메뉴</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#latest" class="nav-link">최신 분석</a></li>
+                    <li><a href="index.html" class="nav-link active">Artifact Gallery</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <header class="site-header">
+                <div class="header-content">
+                    <h1 class="header-title">Artifact Gallery</h1>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="article-page">
+                    <div class="section-intro">
+                        <h1>인터랙티브 3D 시각화</h1>
+                        <p>
+                            모바일에 최적화된 3D 시각화 갤러리입니다.
+                            각 아티팩트를 터치하여 회전하고 확대/축소할 수 있습니다.
+                        </p>
+                    </div>
+
+                    <div class="gallery-grid">
+                        <!-- Knowledge Graph -->
+                        <a href="knowledge-graph.html" class="artifact-card">
+                            <div class="artifact-preview graph"></div>
+                            <div class="artifact-info-box">
+                                <h3>3D Knowledge Graph</h3>
+                                <p>
+                                    노드와 연결선으로 구성된 지식 그래프입니다.
+                                    카테고리별로 색상이 구분되며, 실시간으로 애니메이션됩니다.
+                                </p>
+                                <div class="artifact-tags">
+                                    <span class="artifact-tag">Three.js</span>
+                                    <span class="artifact-tag">Interactive</span>
+                                    <span class="artifact-tag">Network</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Particle Network -->
+                        <a href="particle-network.html" class="artifact-card">
+                            <div class="artifact-preview particle"></div>
+                            <div class="artifact-info-box">
+                                <h3>3D Particle Network</h3>
+                                <p>
+                                    3,000개의 파티클이 네트워크를 형성합니다.
+                                    파티클은 가까운 이웃과 자동으로 연결되며 움직입니다.
+                                </p>
+                                <div class="artifact-tags">
+                                    <span class="artifact-tag">WebGL</span>
+                                    <span class="artifact-tag">Particles</span>
+                                    <span class="artifact-tag">Dynamic</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Globe Connections -->
+                        <a href="globe-connections.html" class="artifact-card">
+                            <div class="artifact-preview globe"></div>
+                            <div class="artifact-info-box">
+                                <h3>3D Globe Network</h3>
+                                <p>
+                                    글로벌 연결 네트워크를 시각화한 지구본입니다.
+                                    주요 도시 간의 데이터 흐름을 보여줍니다.
+                                </p>
+                                <div class="artifact-tags">
+                                    <span class="artifact-tag">Globe</span>
+                                    <span class="artifact-tag">Geography</span>
+                                    <span class="artifact-tag">Connections</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="conclusion-box" style="margin-top: 32px;">
+                        <p>
+                            모든 시각화는 Three.js를 사용하여 구현되었으며,
+                            모바일과 데스크톱 모두에서 원활하게 작동합니다.
+                        </p>
+                        <p>
+                            드래그하여 회전하고, 스크롤이나 핀치로 줌을 조절할 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">
+                        © 2024 Stock Insights. 본 콘텐츠는 투자 참고 자료입니다.
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
