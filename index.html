@@ -3,242 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주식 뉴스 & 분석 - Stock News</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Stock Insights - 전문 주식 뉴스 & 분석</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">📈 Stock News</h1>
-            <nav class="nav">
-                <a href="#home" class="nav-link active">홈</a>
-                <a href="#analysis" class="nav-link">분석</a>
-                <a href="#news" class="nav-link">뉴스</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h2 class="hero-title">실시간 주식 분석</h2>
-            <p class="hero-subtitle">국내 주요 종목의 최신 동향과 분석을 확인하세요</p>
-            <div class="date-info">📅 업데이트: 2024년 11월</div>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-
-            <!-- SK Hynix Analysis -->
-            <section class="stock-section" id="hynix">
-                <div class="stock-header">
-                    <h2 class="stock-title">SK하이닉스 (000660)</h2>
-                    <span class="stock-badge semiconductor">반도체</span>
-                </div>
-
-                <div class="summary-card">
-                    <div class="summary-item">
-                        <span class="summary-label">현재가</span>
-                        <span class="summary-value price-down">562,000원</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">1개월 변동</span>
-                        <span class="summary-value change-down">-3.1%</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">거래량</span>
-                        <span class="summary-value">8.5M</span>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <h3 class="chart-title">1개월 주가 추이</h3>
-                    <canvas id="hynixChart"></canvas>
-                </div>
-
-                <div class="table-container">
-                    <h3 class="table-title">주요 지표</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>항목</th>
-                                <th>값</th>
-                                <th>변동</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>시가총액</td>
-                                <td>130.2조원</td>
-                                <td class="positive">+10.5조</td>
-                            </tr>
-                            <tr>
-                                <td>PER</td>
-                                <td>8.5배</td>
-                                <td class="neutral">-</td>
-                            </tr>
-                            <tr>
-                                <td>PBR</td>
-                                <td>1.8배</td>
-                                <td class="positive">+0.2</td>
-                            </tr>
-                            <tr>
-                                <td>배당수익률</td>
-                                <td>1.2%</td>
-                                <td class="neutral">-</td>
-                            </tr>
-                            <tr>
-                                <td>ROE</td>
-                                <td>21.2%</td>
-                                <td class="positive">+5.3%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="analysis-box">
-                    <h3 class="analysis-title">📊 분석 요약</h3>
-                    <p class="analysis-text">
-                        SK하이닉스는 11월 중순 62만원대 고점을 기록한 후 56만원대로 조정을 받았습니다 (<strong>-3.1%</strong>).
-                        단기 차익실현 매물 출회에도 불구하고 <strong>HBM3E 세계 최초 양산</strong>과 엔비디아 독점 공급으로
-                        AI 반도체 시장에서 압도적인 경쟁력을 보유하고 있습니다. HBM 시장 점유율 90% 달성으로
-                        장기적 성장 전망은 매우 긍정적입니다.
-                    </p>
-                    <div class="tags">
-                        <span class="tag">HBM3E</span>
-                        <span class="tag">엔비디아 독점</span>
-                        <span class="tag">AI 메모리</span>
-                    </div>
-                    <a href="hynix-strengths.html" class="read-more-btn">상세 분석 보기 →</a>
-                </div>
-            </section>
-
-            <!-- Samsung Electronics Analysis -->
-            <section class="stock-section" id="samsung">
-                <div class="stock-header">
-                    <h2 class="stock-title">삼성전자 (005930)</h2>
-                    <span class="stock-badge semiconductor">반도체</span>
-                </div>
-
-                <div class="summary-card">
-                    <div class="summary-item">
-                        <span class="summary-label">현재가</span>
-                        <span class="summary-value price-down">53,200원</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">1개월 변동</span>
-                        <span class="summary-value change-down">-5.0%</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">거래량</span>
-                        <span class="summary-value">22.3M</span>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <h3 class="chart-title">1개월 주가 추이</h3>
-                    <canvas id="samsungChart"></canvas>
-                </div>
-
-                <div class="table-container">
-                    <h3 class="table-title">주요 지표</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>항목</th>
-                                <th>값</th>
-                                <th>변동</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>시가총액</td>
-                                <td>425.8조원</td>
-                                <td class="negative">-9.2조</td>
-                            </tr>
-                            <tr>
-                                <td>PER</td>
-                                <td>15.2배</td>
-                                <td class="neutral">-</td>
-                            </tr>
-                            <tr>
-                                <td>PBR</td>
-                                <td>1.2배</td>
-                                <td class="negative">-0.1</td>
-                            </tr>
-                            <tr>
-                                <td>배당수익률</td>
-                                <td>2.8%</td>
-                                <td class="positive">+0.2%</td>
-                            </tr>
-                            <tr>
-                                <td>ROE</td>
-                                <td>7.9%</td>
-                                <td class="negative">-1.2%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="analysis-box">
-                    <h3 class="analysis-title">📊 분석 요약</h3>
-                    <p class="analysis-text">
-                        삼성전자는 11월 중순 49,900원까지 하락하며 4년 5개월 만의 최저가를 기록했습니다 (<strong>-5.0%</strong>).
-                        외국인 순매도 지속과 HBM 시장 경쟁력 우려가 부담으로 작용했지만,
-                        <strong>3nm GAA 파운드리</strong> 세계 최초 양산과 <strong>통합 AI 솔루션</strong>을 통한
-                        턴키 서비스로 차별화를 추구하고 있습니다. 2nm 공정 개발과 일본 PFN의 2nm 기반 AI 가속기 수주 등
-                        시스템 반도체 부문의 성장 가능성이 주목받고 있습니다.
-                    </p>
-                    <div class="tags">
-                        <span class="tag">3nm 파운드리</span>
-                        <span class="tag">통합 AI 솔루션</span>
-                        <span class="tag">시스템반도체</span>
-                    </div>
-                    <a href="samsung-strengths.html" class="read-more-btn">상세 분석 보기 →</a>
-                </div>
-            </section>
-
-            <!-- Market Overview -->
-            <section class="market-overview">
-                <h2 class="section-title">시장 동향</h2>
-                <div class="overview-grid">
-                    <div class="overview-card">
-                        <div class="overview-icon">🌐</div>
-                        <h3>글로벌 반도체</h3>
-                        <p>AI 수요 증가로 반도체 시장 회복세</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="overview-icon">💡</div>
-                        <h3>HBM 시장</h3>
-                        <p>고대역폭 메모리 수요 급증</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="overview-icon">📱</div>
-                        <h3>모바일 시장</h3>
-                        <p>스마트폰 출하량 완만한 회복</p>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p class="footer-text">© 2024 Stock News. 투자 판단의 참고 자료이며, 투자 결과에 대한 책임은 투자자에게 있습니다.</p>
-            <div class="footer-links">
-                <a href="#disclaimer">면책조항</a>
-                <a href="#privacy">개인정보처리방침</a>
-                <a href="#contact">문의</a>
+    <div class="site-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="index.html" class="site-logo">
+                    📈 Stock Insights
+                </a>
+                <p class="site-tagline">Professional Stock Analysis</p>
             </div>
-        </div>
-    </footer>
 
-    <script src="script.js"></script>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">Menu</h3>
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link active">
+                        <span class="nav-icon">🏠</span> 홈
+                    </a></li>
+                    <li><a href="#trending" class="nav-link">
+                        <span class="nav-icon">🔥</span> 트렌딩
+                    </a></li>
+                    <li><a href="#latest" class="nav-link">
+                        <span class="nav-icon">⚡</span> 최신 분석
+                    </a></li>
+                    <li><a href="#market" class="nav-link">
+                        <span class="nav-icon">📊</span> 시장 동향
+                    </a></li>
+                </ul>
+            </nav>
+
+            <div class="categories-section">
+                <h3 class="nav-title">Categories</h3>
+                <a href="#semiconductor" class="category-link">
+                    <span>💾 반도체</span>
+                    <span class="category-count">2</span>
+                </a>
+                <a href="#ai" class="category-link">
+                    <span>🤖 AI & Tech</span>
+                    <span class="category-count">2</span>
+                </a>
+                <a href="#analysis" class="category-link">
+                    <span>📈 기업 분석</span>
+                    <span class="category-count">2</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-content-wrapper">
+            <!-- Header -->
+            <header class="site-header">
+                <div class="header-content">
+                    <h1 class="header-title">최신 주식 분석</h1>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="search-input" placeholder="종목명 또는 키워드 검색...">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="content-container">
+                    <!-- Hero Section -->
+                    <section class="hero-section">
+                        <div class="hero-content">
+                            <div class="hero-badge">🚀 Featured Analysis</div>
+                            <h2 class="hero-title">AI 반도체 시장의<br>새로운 패러다임</h2>
+                            <p class="hero-description">
+                                SK하이닉스와 삼성전자의 최신 기술 동향과 시장 경쟁력을 심층 분석합니다.
+                                HBM3E, GAA 파운드리 등 차세대 반도체 기술의 모든 것을 확인하세요.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Latest Articles Section -->
+                    <section id="latest">
+                        <div class="section-header">
+                            <h2 class="section-title">최신 분석</h2>
+                            <p class="section-subtitle">실시간 주가 데이터와 심층 기업 분석</p>
+                        </div>
+
+                        <div class="articles-grid">
+                            <!-- SK Hynix Article -->
+                            <a href="articles/hynix-strengths.html" class="article-card">
+                                <div class="article-image">🚀</div>
+                                <div class="article-content">
+                                    <div class="article-meta">
+                                        <span class="article-category">AI 반도체</span>
+                                        <span class="article-date">2024.11.28</span>
+                                    </div>
+                                    <h3 class="article-title">SK하이닉스: AI 메모리 시장의 절대 강자</h3>
+                                    <p class="article-excerpt">
+                                        HBM3E 세계 최초 양산과 엔비디아 독점 공급으로 AI 반도체 시장에서 압도적인 경쟁력을 확보한 SK하이닉스의 핵심 전략을 분석합니다.
+                                    </p>
+                                    <div class="article-footer">
+                                        <div class="article-tags">
+                                            <span class="tag">HBM3E</span>
+                                            <span class="tag">엔비디아</span>
+                                            <span class="tag">AI</span>
+                                        </div>
+                                        <span class="read-more">읽기 →</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Samsung Article -->
+                            <a href="articles/samsung-strengths.html" class="article-card">
+                                <div class="article-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">⚡</div>
+                                <div class="article-content">
+                                    <div class="article-meta">
+                                        <span class="article-category">파운드리</span>
+                                        <span class="article-date">2024.11.28</span>
+                                    </div>
+                                    <h3 class="article-title">삼성전자: 종합 반도체 기업의 차별화 전략</h3>
+                                    <p class="article-excerpt">
+                                        3nm GAA 파운드리 세계 최초 양산과 통합 AI 솔루션으로 시스템 반도체 시장에서 새로운 가능성을 열어가는 삼성전자를 분석합니다.
+                                    </p>
+                                    <div class="article-footer">
+                                        <div class="article-tags">
+                                            <span class="tag">3nm GAA</span>
+                                            <span class="tag">파운드리</span>
+                                            <span class="tag">2nm</span>
+                                        </div>
+                                        <span class="read-more">읽기 →</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">
+                        © 2024 Stock Insights. 본 콘텐츠는 투자 판단의 참고 자료이며, 투자 결과에 대한 책임은 투자자에게 있습니다.
+                    </p>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">면책조항</a>
+                        <a href="#" class="footer-link">개인정보처리방침</a>
+                        <a href="#" class="footer-link">문의</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="menuToggle">☰</button>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
