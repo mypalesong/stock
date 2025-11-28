@@ -1,19 +1,33 @@
-// Mobile Menu Toggle
-const menuToggle = document.getElementById('menuToggle');
+// Hamburger Menu
+const hamburger = document.getElementById('hamburger');
 const sidebar = document.getElementById('sidebar');
 
-if (menuToggle && sidebar) {
-    menuToggle.addEventListener('click', () => {
+if (hamburger && sidebar) {
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
         sidebar.classList.toggle('active');
+        hamburger.classList.toggle('active');
     });
 
-    // Close sidebar when clicking outside on mobile
+    // Close sidebar when clicking outside
     document.addEventListener('click', (e) => {
         if (window.innerWidth <= 1024) {
-            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+            if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
                 sidebar.classList.remove('active');
+                hamburger.classList.remove('active');
             }
         }
+    });
+
+    // Close sidebar when clicking a link
+    const navLinks = sidebar.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
     });
 }
 
@@ -21,7 +35,7 @@ if (menuToggle && sidebar) {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
-        if (href !== '#' && href !== '#!') {
+        if (href !== '#' && href.length > 1) {
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
@@ -34,22 +48,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Search functionality
+// Search
 const searchInput = document.querySelector('.search-input');
 if (searchInput) {
     searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        // Add search logic here
-        console.log('Searching for:', searchTerm);
+        const term = e.target.value.toLowerCase();
+        // Search logic here
     });
 }
 
-// Animation on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
+// Fade in animation
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -57,32 +65,14 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.style.transform = 'translateY(0)';
         }
     });
-}, observerOptions);
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
 
 document.querySelectorAll('.article-card').forEach(card => {
     card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    card.style.transform = 'translateY(10px)';
+    card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
     observer.observe(card);
 });
-
-// Chart.js integration (if needed)
-if (typeof Chart !== 'undefined') {
-    // Chart configuration will be added here
-    console.log('Chart.js is loaded');
-}
-
-// Last updated time
-const updateTime = () => {
-    const now = new Date();
-    const options = { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    };
-    return now.toLocaleDateString('ko-KR', options);
-};
-
-console.log('Site loaded at:', updateTime());
