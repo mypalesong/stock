@@ -297,6 +297,43 @@
     margin-bottom: 12px;
 }
 
+.sources-box {
+    background-color: var(--bg-secondary);
+    padding: 20px;
+    border: 1px solid var(--border);
+    margin: 24px 0;
+}
+
+.sources-box h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+}
+
+.sources-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sources-box li {
+    margin-bottom: 8px;
+}
+
+.sources-box a {
+    font-size: 12px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.sources-box a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
 .related-articles {
     background-color: var(--bg-primary);
     padding: 24px;
