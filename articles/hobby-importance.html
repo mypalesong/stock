@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>취미의 재발견: 그것은 단순한 여가가 아니다 | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        /* Custom Styles for This Article - Modern & Unique */
+        .hobby-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hobby-hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .hobby-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Floating Icons */
+        .floating-icons {
+            display: flex;
+            gap: 16px;
+            margin: 28px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .float-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+        }
+
+        .float-icon:hover {
+            transform: translateY(-8px) rotate(5deg);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hobby Cards - 3D Style */
+        .hobby-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            perspective: 1000px;
+        }
+
+        .hobby-card-3d {
+            background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+            border-radius: 24px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .hobby-card-3d:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.15);
+        }
+
+        .hobby-card-3d::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .hobby-card-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .hobby-card-3d h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1e293b;
+        }
+
+        .hobby-card-3d p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #64748b;
+            margin: 0;
+        }
+
+        .hobby-card-3d .benefits {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .benefit-tag {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #4f46e5;
+        }
+
+        /* Brain Section */
+        .brain-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 32px 0;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brain-section::before {
+            content: "🧠";
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            font-size: 150px;
+            opacity: 0.1;
+        }
+
+        .brain-section h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .neural-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .neural-item {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .neural-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(4px);
+        }
+
+        .neural-item h5 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 8px;
+        }
+
+        .neural-item p {
+            font-size: 13px;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Quote Fancy */
+        .fancy-quote {
+            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
+            border-radius: 24px;
+            padding: 36px;
+            margin: 32px 0;
+            position: relative;
+            border: 1px solid #f5d0fe;
+        }
+
+        .fancy-quote::before {
+            content: """;
+            position: absolute;
+            top: -10px;
+            left: 24px;
+            font-size: 80px;
+            font-family: Georgia, serif;
+            color: #d946ef;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .fancy-quote p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #86198f;
+            font-style: italic;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .fancy-quote .author {
+            margin-top: 16px;
+            font-size: 14px;
+            font-style: normal;
+            color: #a21caf;
+            font-weight: 600;
+        }
+
+        /* Comparison Table Modern */
+        .modern-comparison {
+            margin: 32px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .comparison-header div {
+            padding: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row div {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .comparison-row div:first-child {
+            background: #fef2f2;
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .comparison-row div:last-child {
+            background: #f0fdf4;
+        }
+
+        /* Animated Stats */
+        .animated-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        @media (max-width: 768px) {
+            .animated-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .anim-stat {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .anim-stat:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .anim-stat .number {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .anim-stat .label {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        /* Journey Timeline */
+        .journey-timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 40px;
+        }
+
+        .journey-timeline::before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 3px;
+        }
+
+        .journey-item {
+            position: relative;
+            margin-bottom: 32px;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .journey-item::before {
+            content: "";
+            position: absolute;
+            left: -33px;
+            top: 28px;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        .journey-item h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .journey-item p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* CTA Box */
+        .cta-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .cta-box h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .cta-box p {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Hobby Pills */
+        .hobby-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 24px 0;
+        }
+
+        .hobby-pill {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4f46e5;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hobby-pill::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 50px;
+            z-index: -1;
+        }
+
+        .hobby-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);
+        }
+
+        .hobby-pill span {
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="../index.html" class="site-logo">Stock Insights</a>
+                <p class="site-tagline">전문 주식 분석</p>
+            </div>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">메뉴</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <header class="site-header">
+                <div class="header-content">
+                    <h1 class="header-title">라이프스타일</h1>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <article class="article-page">
+                    <header class="article-header hobby-hero">
+                        <div class="article-header-content">
+                            <div class="breadcrumb">
+                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 라이프스타일
+                            </div>
+                            <span class="article-category-badge hobby-badge">라이프스타일</span>
+                            <h1 class="article-main-title">취미의 재발견: 그것은 단순한 여가가 아니다</h1>
+                            <div class="article-header-meta">
+                                <span>2024년 12월 1일</span>
+                                <span>12분 읽기</span>
+                                <span>Stock Insights 리서치</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="article-body-wrapper">
+                        <div class="article-body">
+                            <p class="lead">
+                                글을 쓰고, 산을 오르고, 악기를 연주합니다.
+                                이 행위들은 분명 생산성과 거리가 멀어 보이지만,
+                                왜 우리는 끊임없이 이런 활동에 끌리는 걸까요?
+                                취미는 단순한 '시간 때우기'가 아닙니다.
+                                그것은 인간이 온전히 인간다워지는 순간입니다.
+                            </p>
+
+                            <div class="floating-icons">
+                                <div class="float-icon">✍️</div>
+                                <div class="float-icon">🏔️</div>
+                                <div class="float-icon">🎸</div>
+                                <div class="float-icon">📚</div>
+                                <div class="float-icon">🎨</div>
+                                <div class="float-icon">🎹</div>
+                            </div>
+
+                            <h2 class="gradient-text">왜 우리는 취미가 필요한가</h2>
+
+                            <p>
+                                현대인의 삶은 <strong>목적 지향적</strong>입니다.
+                                출근해서 일하고, 퇴근해서 쉬고, 주말에 밀린 집안일을 처리합니다.
+                                모든 시간이 '무언가를 위한' 시간입니다.
+                                그런데 취미는 다릅니다.
+                            </p>
+
+                            <div class="fancy-quote">
+                                <p>
+                                    취미는 '위한 것'이 아니라 '그 자체로' 가치 있는 활동이다.
+                                    글을 써서 돈을 벌려는 게 아니고, 등산해서 건강해지려는 것만도 아니다.
+                                    그 순간, 그 행위 자체가 목적이 되는 드문 경험이다.
+                                </p>
+                                <div class="author">— 철학자 아리스토텔레스의 '목적 없는 활동' 개념에서</div>
+                            </div>
+
+                            <h2>취미가 뇌에 미치는 영향</h2>
+
+                            <p>
+                                "취미가 말초신경을 자극한다"는 말은 사실이지만,
+                                그것은 빙산의 일각에 불과합니다.
+                                신경과학 연구에 따르면, 취미 활동은 뇌의 다양한 영역을
+                                <strong>동시다발적으로 활성화</strong>시킵니다.
+                            </p>
+
+                            <div class="brain-section">
+                                <h3>🧠 취미 활동 시 뇌에서 일어나는 일</h3>
+                                <div class="neural-grid">
+                                    <div class="neural-item">
+                                        <h5>도파민 분비</h5>
+                                        <p>성취감과 즐거움을 느끼며 보상 회로가 활성화됩니다</p>
+                                    </div>
+                                    <div class="neural-item">
+                                        <h5>전두엽 활성화</h5>
+                                        <p>창의적 사고와 문제 해결 능력이 강화됩니다</p>
+                                    </div>
+                                    <div class="neural-item">
+                                        <h5>코르티솔 감소</h5>
+                                        <p>스트레스 호르몬이 줄어들며 심신이 이완됩니다</p>
+                                    </div>
+                                    <div class="neural-item">
+                                        <h5>신경가소성 촉진</h5>
+                                        <p>새로운 신경 연결이 형성되어 뇌가 젊어집니다</p>
+                                    </div>
+                                    <div class="neural-item">
+                                        <h5>해마 성장</h5>
+                                        <p>기억과 학습을 담당하는 영역이 활성화됩니다</p>
+                                    </div>
+                                    <div class="neural-item">
+                                        <h5>디폴트 모드 전환</h5>
+                                        <p>무의식적 사고가 활성화되어 통찰이 떠오릅니다</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>공부와 취미, 무엇이 다른가</h2>
+
+                            <p>
+                                공부도 뇌를 자극합니다. 새로운 것을 배우면 신경 연결이 생기죠.
+                                그런데 왜 취미와 공부의 경험은 질적으로 다를까요?
+                            </p>
+
+                            <div class="modern-comparison">
+                                <div class="comparison-header">
+                                    <div>📖 공부</div>
+                                    <div>🎨 취미</div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div>외부에서 주어진 목표</div>
+                                    <div>내가 스스로 선택한 활동</div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div>평가와 결과가 따라옴</div>
+                                    <div>과정 자체가 보상</div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div>해야 하는 의무감</div>
+                                    <div>하고 싶은 자발성</div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div>정답이 있는 경우가 많음</div>
+                                    <div>나만의 방식이 정답</div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div>인지적 영역 중심</div>
+                                    <div>인지 + 감각 + 정서 통합</div>
+                                </div>
+                            </div>
+
+                            <p>
+                                결정적 차이는 <strong>'자기결정성'</strong>입니다.
+                                취미는 내가 선택하고, 내 방식대로 하며,
+                                잘하든 못하든 누구도 평가하지 않습니다.
+                                이 자유로움이 뇌에 완전히 다른 신호를 보냅니다.
+                            </p>
+
+                            <h2>각 취미가 가진 고유한 가치</h2>
+
+                            <div class="hobby-showcase">
+                                <div class="hobby-card-3d">
+                                    <div class="hobby-card-icon">✍️</div>
+                                    <h4>글쓰기</h4>
+                                    <p>
+                                        생각을 언어로 옮기는 과정에서 내면이 정리됩니다.
+                                        일기, 에세이, 소설 등 형식은 다양하지만
+                                        모두 '나를 객관화하는' 치유적 효과가 있습니다.
+                                    </p>
+                                    <div class="benefits">
+                                        <span class="benefit-tag">자기 이해</span>
+                                        <span class="benefit-tag">감정 정화</span>
+                                        <span class="benefit-tag">논리력</span>
+                                    </div>
+                                </div>
+
+                                <div class="hobby-card-3d">
+                                    <div class="hobby-card-icon">🏔️</div>
+                                    <h4>등산</h4>
+                                    <p>
+                                        한 발 한 발 정상을 향해 나아가는 과정은
+                                        삶의 메타포가 됩니다. 자연 속에서 인간은
+                                        자신의 작음과 위대함을 동시에 깨닫습니다.
+                                    </p>
+                                    <div class="benefits">
+                                        <span class="benefit-tag">인내심</span>
+                                        <span class="benefit-tag">자연 교감</span>
+                                        <span class="benefit-tag">성취감</span>
+                                    </div>
+                                </div>
+
+                                <div class="hobby-card-3d">
+                                    <div class="hobby-card-icon">🎸</div>
+                                    <h4>악기 연주</h4>
+                                    <p>
+                                        손끝의 움직임이 소리가 되고, 소리가 감정이 됩니다.
+                                        언어로 표현할 수 없는 내면을 음악은 표현합니다.
+                                        연습 과정 자체가 명상이 됩니다.
+                                    </p>
+                                    <div class="benefits">
+                                        <span class="benefit-tag">감성 표현</span>
+                                        <span class="benefit-tag">집중력</span>
+                                        <span class="benefit-tag">소근육</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hobby-pills">
+                                <div class="hobby-pill"><span>📷</span> 사진</div>
+                                <div class="hobby-pill"><span>🏃</span> 달리기</div>
+                                <div class="hobby-pill"><span>🧘</span> 요가</div>
+                                <div class="hobby-pill"><span>🎣</span> 낚시</div>
+                                <div class="hobby-pill"><span>🌱</span> 원예</div>
+                                <div class="hobby-pill"><span>🍳</span> 요리</div>
+                                <div class="hobby-pill"><span>♟️</span> 체스</div>
+                                <div class="hobby-pill"><span>🎮</span> 게임</div>
+                            </div>
+
+                            <h2>취미가 가져다주는 것들</h2>
+
+                            <div class="animated-stats">
+                                <div class="anim-stat">
+                                    <div class="number">32%</div>
+                                    <div class="label">스트레스 감소</div>
+                                </div>
+                                <div class="anim-stat">
+                                    <div class="number">45%</div>
+                                    <div class="label">창의성 향상</div>
+                                </div>
+                                <div class="anim-stat">
+                                    <div class="number">28%</div>
+                                    <div class="label">업무 효율 증가</div>
+                                </div>
+                                <div class="anim-stat">
+                                    <div class="number">67%</div>
+                                    <div class="label">삶의 만족도 상승</div>
+                                </div>
+                            </div>
+
+                            <h2>취미를 통한 성장의 여정</h2>
+
+                            <div class="journey-timeline">
+                                <div class="journey-item">
+                                    <h4>1단계: 호기심</h4>
+                                    <p>"재밌어 보인다" — 새로운 것에 끌리는 순간. 아직 잘 모르지만 뭔가 끌리는 감각이 있습니다.</p>
+                                </div>
+                                <div class="journey-item">
+                                    <h4>2단계: 서툰 시작</h4>
+                                    <p>못해도 괜찮습니다. 처음엔 누구나 서툽니다. 이 어색함을 즐기는 것도 취미의 일부입니다.</p>
+                                </div>
+                                <div class="journey-item">
+                                    <h4>3단계: 몰입의 발견</h4>
+                                    <p>어느 순간 시간이 사라지는 경험을 합니다. '플로우' 상태에 진입하면 그 자체로 행복합니다.</p>
+                                </div>
+                                <div class="journey-item">
+                                    <h4>4단계: 정체성의 확장</h4>
+                                    <p>"나는 글 쓰는 사람이다", "나는 산을 좋아하는 사람이다" — 취미가 나의 일부가 됩니다.</p>
+                                </div>
+                                <div class="journey-item">
+                                    <h4>5단계: 삶의 풍요</h4>
+                                    <p>일과 취미, 휴식이 조화를 이루며 삶 전체가 더 풍성해집니다. 번아웃에 대한 면역력이 생깁니다.</p>
+                                </div>
+                            </div>
+
+                            <h2>취미가 어려운 이유</h2>
+
+                            <p>
+                                많은 사람들이 "취미가 없다"고 말합니다.
+                                정확히 말하면, 취미를 가질 <strong>여유가 없다</strong>고 느끼는 것입니다.
+                            </p>
+
+                            <div class="info-card info-card-warning">
+                                <div class="info-card-icon">💭</div>
+                                <div class="info-card-content">
+                                    <h4>흔한 오해들</h4>
+                                    <p>
+                                        "취미도 잘해야 한다", "시간이 아깝다", "돈이 든다", "나이가 많다"
+                                        — 이런 생각들이 취미의 문턱을 높입니다.
+                                        하지만 취미의 본질은 <strong>'잘함'이 아니라 '즐김'</strong>입니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <h2>취미 시작하기</h2>
+
+                            <div class="strategy-section">
+                                <div class="strategy-card strategy-primary">
+                                    <div class="strategy-number">01</div>
+                                    <div class="strategy-content">
+                                        <h4>작게 시작하기</h4>
+                                        <p>
+                                            처음부터 "매주 3회 2시간씩" 같은 거창한 계획은 금물.
+                                            <strong>10분이라도 좋으니 꾸준히</strong>가 핵심입니다.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="strategy-card strategy-secondary">
+                                    <div class="strategy-number">02</div>
+                                    <div class="strategy-content">
+                                        <h4>결과에 집착하지 않기</h4>
+                                        <p>
+                                            SNS에 올릴 만한 결과물이 아니어도 괜찮습니다.
+                                            과정에서 느끼는 감정이 진짜 보상입니다.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="strategy-card strategy-tertiary">
+                                    <div class="strategy-number">03</div>
+                                    <div class="strategy-content">
+                                        <h4>죄책감 버리기</h4>
+                                        <p>
+                                            "이 시간에 뭔가 생산적인 걸 해야 하는데..."
+                                            취미 시간은 낭비가 아니라 <strong>투자</strong>입니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cta-box">
+                                <h3>오늘, 무엇을 해볼까요?</h3>
+                                <p>
+                                    완벽하지 않아도 됩니다. 잘 못해도 됩니다.
+                                    그냥 하고 싶은 것을 해보세요.
+                                    그 순간, 당신은 진짜 '살아있는' 것입니다.
+                                </p>
+                            </div>
+
+                            <div class="conclusion-box conclusion-blue">
+                                <p>
+                                    취미는 사치가 아닙니다.
+                                    그것은 인간이 기계와 다른 존재임을 확인하는 행위입니다.
+                                    효율성과 생산성으로 가득한 세상에서,
+                                    <strong>'쓸모없는' 일에 시간을 쓸 수 있는 것</strong>이야말로
+                                    인간다움의 증거입니다.
+                                </p>
+                                <p>
+                                    산 정상에서 바라보는 풍경, 완성된 글의 마지막 문장,
+                                    손끝에서 흘러나오는 멜로디 —
+                                    이 순간들이 모여 삶이 됩니다.
+                                    당신의 취미는 무엇인가요?
+                                </p>
+                            </div>
+
+                            <div class="sources-box sources-box-rounded">
+                                <h3>참고 자료</h3>
+                                <ul>
+                                    <li><a href="https://www.psychologytoday.com" target="_blank">Psychology Today - The Science of Hobbies</a></li>
+                                    <li><a href="https://www.health.harvard.edu" target="_blank">Harvard Health - Creative Activities and Mental Health</a></li>
+                                    <li><a href="https://www.nature.com" target="_blank">Nature - Neural Benefits of Leisure Activities</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <aside class="related-articles related-rounded">
+                            <h3>관련 글</h3>
+                            <a href="aging-40s-50s.html" class="related-link">
+                                <div>
+                                    <h4>40대에서 50대로: 몸의 변화</h4>
+                                    <p>현명한 대응 전략</p>
+                                </div>
+                            </a>
+                            <a href="worker-nutrition.html" class="related-link">
+                                <div>
+                                    <h4>직장인 영양 불균형 실태</h4>
+                                    <p>스마트한 대응 전략</p>
+                                </div>
+                            </a>
+                        </aside>
+                    </div>
+                </article>
+            </main>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">
+                        © 2024 Stock Insights. 인생을 풍요롭게 하는 인사이트.
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
