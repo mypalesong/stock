@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웃음의 기술: 4050대, 유머가 필요한 이유 | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        /* Custom Humor Article Theme - Warm & Playful */
+        .humor-hero {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #ec4899 100%);
+            position: relative;
+        }
+
+        .humor-hero::before {
+            content: "😄";
+            position: absolute;
+            right: 40px;
+            bottom: 20px;
+            font-size: 120px;
+            opacity: 0.15;
+        }
+
+        .humor-badge {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Emoji Parade */
+        .emoji-parade {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+
+        .emoji-bounce {
+            font-size: 48px;
+            animation: bounce 2s ease-in-out infinite;
+            cursor: default;
+        }
+
+        .emoji-bounce:nth-child(2) { animation-delay: 0.1s; }
+        .emoji-bounce:nth-child(3) { animation-delay: 0.2s; }
+        .emoji-bounce:nth-child(4) { animation-delay: 0.3s; }
+        .emoji-bounce:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Warm Gradient Text */
+        .warm-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Joke Card */
+        .joke-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 20px;
+            padding: 28px;
+            margin: 28px 0;
+            position: relative;
+            border: 2px dashed #f59e0b;
+        }
+
+        .joke-card::before {
+            content: "🎭";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 30px;
+            background: white;
+            padding: 0 8px;
+            border-radius: 50%;
+        }
+
+        .joke-card .setup {
+            font-size: 16px;
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+
+        .joke-card .punchline {
+            font-size: 18px;
+            font-weight: 700;
+            color: #78350f;
+        }
+
+        /* Science of Laughter */
+        .laughter-science {
+            background: linear-gradient(135deg, #fef9c3 0%, #fef3c7 100%);
+            border-radius: 24px;
+            padding: 36px;
+            margin: 32px 0;
+        }
+
+        .laughter-science h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hormone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .hormone-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .hormone-card:hover {
+            transform: translateY(-4px) rotate(2deg);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+        }
+
+        .hormone-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .hormone-card h5 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #b45309;
+            margin-bottom: 6px;
+        }
+
+        .hormone-card p {
+            font-size: 12px;
+            color: #78350f;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Age Wisdom Box */
+        .age-wisdom {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .wisdom-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid #fde68a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wisdom-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f59e0b, #ef4444, #ec4899);
+        }
+
+        .wisdom-card .age-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .wisdom-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .wisdom-card p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Quote Bubble */
+        .quote-bubble {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border-radius: 24px;
+            padding: 32px;
+            margin: 32px 0;
+            position: relative;
+            border: 1px solid #fed7aa;
+        }
+
+        .quote-bubble::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 40px;
+            border-width: 20px 15px 0;
+            border-style: solid;
+            border-color: #ffedd5 transparent transparent;
+        }
+
+        .quote-bubble p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #9a3412;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .quote-bubble .author {
+            margin-top: 16px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            color: #c2410c;
+        }
+
+        /* Humor Types */
+        .humor-types {
+            margin: 32px 0;
+        }
+
+        .humor-type-card {
+            display: flex;
+            gap: 20px;
+            padding: 24px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .humor-type-card:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.15);
+        }
+
+        .humor-type-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .humor-type-content h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .humor-type-content p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .humor-type-content .example {
+            margin-top: 12px;
+            padding: 12px;
+            background: #fef9c3;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #92400e;
+            font-style: italic;
+        }
+
+        /* Do & Don't */
+        .do-dont-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .do-card, .dont-card {
+            padding: 28px;
+            border-radius: 20px;
+        }
+
+        .do-card {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #10b981;
+        }
+
+        .dont-card {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 2px solid #ef4444;
+        }
+
+        .do-card h4, .dont-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .do-card h4 { color: #065f46; }
+        .dont-card h4 { color: #991b1b; }
+
+        .do-card ul, .dont-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .do-card li, .dont-card li {
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .do-card li { color: #047857; }
+        .dont-card li { color: #b91c1c; }
+
+        /* Smile Counter */
+        .smile-counter {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .smile-counter::before {
+            content: "😊 😂 🤣 😆 😁";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            opacity: 0.1;
+            white-space: nowrap;
+        }
+
+        .smile-counter h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        @media (max-width: 640px) {
+            .counter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .counter-item {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .counter-item .number {
+            font-size: 42px;
+            font-weight: 800;
+        }
+
+        .counter-item .label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        /* Situation Cards */
+        .situation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        .situation-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .situation-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .situation-card .emoji {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .situation-card h5 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .situation-card p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Final CTA */
+        .laugh-cta {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .laugh-cta h3 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #78350f;
+            margin-bottom: 12px;
+        }
+
+        .laugh-cta p {
+            font-size: 16px;
+            color: #92400e;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .laugh-cta .big-emoji {
+            font-size: 60px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="../index.html" class="site-logo">Stock Insights</a>
+                <p class="site-tagline">전문 주식 분석</p>
+            </div>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">메뉴</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <header class="site-header">
+                <div class="header-content">
+                    <h1 class="header-title">라이프스타일</h1>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <article class="article-page">
+                    <header class="article-header humor-hero">
+                        <div class="article-header-content">
+                            <div class="breadcrumb">
+                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 라이프스타일
+                            </div>
+                            <span class="article-category-badge humor-badge">라이프스타일</span>
+                            <h1 class="article-main-title">웃음의 기술: 4050대, 유머가 필요한 이유</h1>
+                            <div class="article-header-meta">
+                                <span>2024년 12월 1일</span>
+                                <span>10분 읽기</span>
+                                <span>Stock Insights 리서치</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="article-body-wrapper">
+                        <div class="article-body">
+                            <p class="lead">
+                                나이가 들수록 웃을 일이 줄어드는 것 같습니다.
+                                책임은 무거워지고, 몸은 예전 같지 않고, 걱정은 늘어만 갑니다.
+                                그런데 역설적으로, 바로 그렇기 때문에
+                                4050대에 유머는 더욱 필요합니다.
+                                웃음은 사치가 아니라 <strong>생존 전략</strong>입니다.
+                            </p>
+
+                            <div class="emoji-parade">
+                                <span class="emoji-bounce">😄</span>
+                                <span class="emoji-bounce">😂</span>
+                                <span class="emoji-bounce">🤣</span>
+                                <span class="emoji-bounce">😆</span>
+                                <span class="emoji-bounce">😁</span>
+                            </div>
+
+                            <h2 class="warm-gradient">웃음, 얼마나 웃고 계신가요?</h2>
+
+                            <p>
+                                연구에 따르면 어린아이는 하루에 평균 <strong>300~400번</strong> 웃습니다.
+                                그런데 성인이 되면? <strong>15~20번</strong>으로 급감합니다.
+                                40대 이후에는 그마저도 줄어들어, 많은 사람들이
+                                "요즘 진짜 웃을 일이 없다"고 말합니다.
+                            </p>
+
+                            <div class="smile-counter">
+                                <h3>하루 평균 웃음 횟수</h3>
+                                <div class="counter-grid">
+                                    <div class="counter-item">
+                                        <div class="number">300+</div>
+                                        <div class="label">어린아이</div>
+                                    </div>
+                                    <div class="counter-item">
+                                        <div class="number">15</div>
+                                        <div class="label">성인 평균</div>
+                                    </div>
+                                    <div class="counter-item">
+                                        <div class="number">??</div>
+                                        <div class="label">당신은?</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>웃음의 과학</h2>
+
+                            <p>
+                                웃음은 단순한 감정 표현이 아닙니다.
+                                웃을 때 우리 몸에서는 실제로 <strong>화학적 변화</strong>가 일어납니다.
+                            </p>
+
+                            <div class="laughter-science">
+                                <h3>🧪 웃을 때 몸에서 일어나는 일</h3>
+                                <div class="hormone-grid">
+                                    <div class="hormone-card">
+                                        <div class="hormone-icon">💫</div>
+                                        <h5>엔도르핀 분비</h5>
+                                        <p>천연 진통제이자 기분 좋아지는 호르몬</p>
+                                    </div>
+                                    <div class="hormone-card">
+                                        <div class="hormone-icon">📉</div>
+                                        <h5>코르티솔 감소</h5>
+                                        <p>스트레스 호르몬이 줄어듦</p>
+                                    </div>
+                                    <div class="hormone-card">
+                                        <div class="hormone-icon">❤️</div>
+                                        <h5>혈압 안정</h5>
+                                        <p>혈관이 이완되어 혈압 낮아짐</p>
+                                    </div>
+                                    <div class="hormone-card">
+                                        <div class="hormone-icon">🛡️</div>
+                                        <h5>면역력 강화</h5>
+                                        <p>NK세포(자연살해세포) 활성화</p>
+                                    </div>
+                                    <div class="hormone-card">
+                                        <div class="hormone-icon">🫁</div>
+                                        <h5>산소 공급 증가</h5>
+                                        <p>깊은 호흡으로 폐 환기</p>
+                                    </div>
+                                    <div class="hormone-card">
+                                        <div class="hormone-icon">🧠</div>
+                                        <h5>뇌 활성화</h5>
+                                        <p>양쪽 뇌가 동시에 활성화</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="joke-card">
+                                <div class="setup">의사: "하루에 5번 이상 웃으세요. 건강에 좋습니다."</div>
+                                <div class="punchline">환자: "선생님, 그럼 제 상사 좀 바꿔주세요." 😅</div>
+                            </div>
+
+                            <h2>왜 4050대에 특히 유머가 필요한가</h2>
+
+                            <div class="age-wisdom">
+                                <div class="wisdom-card">
+                                    <span class="age-badge">40대</span>
+                                    <h4>샌드위치 세대의 압박</h4>
+                                    <p>
+                                        위로는 부모님, 아래로는 자녀. 직장에서는 중간 관리자.
+                                        모든 방향에서 오는 압박을 유머로 환기하지 않으면
+                                        번아웃은 시간문제입니다.
+                                    </p>
+                                </div>
+                                <div class="wisdom-card">
+                                    <span class="age-badge">50대</span>
+                                    <h4>인생 2막을 위한 준비</h4>
+                                    <p>
+                                        은퇴를 앞두고, 정체성의 전환기를 맞습니다.
+                                        유머는 변화를 두려움 대신 기대로 바꾸는
+                                        마음의 유연성을 길러줍니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="quote-bubble">
+                                <p>
+                                    "유머 감각이 있다는 것은 인생의 역경을 바라보는
+                                    또 다른 창문이 있다는 뜻이다.
+                                    같은 상황도 어떤 창으로 보느냐에 따라
+                                    비극이 될 수도, 희극이 될 수도 있다."
+                                </p>
+                                <div class="author">— 빅터 프랭클, 『죽음의 수용소에서』</div>
+                            </div>
+
+                            <h2>4050대를 위한 유머의 종류</h2>
+
+                            <div class="humor-types">
+                                <div class="humor-type-card">
+                                    <div class="humor-type-icon">🪞</div>
+                                    <div class="humor-type-content">
+                                        <h4>자기비하 유머 (Self-deprecating)</h4>
+                                        <p>
+                                            자신의 약점이나 실수를 가볍게 웃어넘기는 유머.
+                                            겸손함을 보여주면서 분위기를 편하게 만듭니다.
+                                            단, 지나치면 자존감을 해칠 수 있으니 적당히.
+                                        </p>
+                                        <div class="example">
+                                            "요즘 기억력이 안 좋아서... 어? 뭘 말하려고 했더라?"
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="humor-type-card">
+                                    <div class="humor-type-icon">🎭</div>
+                                    <div class="humor-type-content">
+                                        <h4>상황 유머 (Situational)</h4>
+                                        <p>
+                                            일상의 불편함이나 아이러니를 포착하는 유머.
+                                            누구나 공감할 수 있는 상황을 재미있게 풀어냅니다.
+                                        </p>
+                                        <div class="example">
+                                            "다이어트 시작한 날, 회사에서 회식 공지가 떴다."
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="humor-type-card">
+                                    <div class="humor-type-icon">💡</div>
+                                    <div class="humor-type-content">
+                                        <h4>지혜의 유머 (Wise Humor)</h4>
+                                        <p>
+                                            인생 경험에서 우러나오는 통찰력 있는 유머.
+                                            4050대만이 할 수 있는, 깊이 있는 웃음을 선사합니다.
+                                        </p>
+                                        <div class="example">
+                                            "20대엔 인정받고 싶어서 야근했고, 40대엔 집에 가기 싫어서 야근한다."
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="humor-type-card">
+                                    <div class="humor-type-icon">🤝</div>
+                                    <div class="humor-type-content">
+                                        <h4>연대의 유머 (Bonding Humor)</h4>
+                                        <p>
+                                            같은 세대끼리 공감할 수 있는 유머.
+                                            "우리만 아는 이야기"로 동질감을 형성합니다.
+                                        </p>
+                                        <div class="example">
+                                            "요즘 아이돌 이름은 왜 다 외계어 같지? 우리 때는 H.O.T, 젝스키스..."
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>유머가 빛나는 순간들</h2>
+
+                            <div class="situation-grid">
+                                <div class="situation-card">
+                                    <div class="emoji">💼</div>
+                                    <h5>회의실에서</h5>
+                                    <p>긴장된 분위기를 깨는 한마디가 창의적 아이디어를 끌어냅니다</p>
+                                </div>
+                                <div class="situation-card">
+                                    <div class="emoji">🏠</div>
+                                    <h5>가족 모임에서</h5>
+                                    <p>세대 간 갈등을 웃음으로 녹이면 대화가 시작됩니다</p>
+                                </div>
+                                <div class="situation-card">
+                                    <div class="emoji">😰</div>
+                                    <h5>실패했을 때</h5>
+                                    <p>자신의 실수를 웃을 수 있으면 빨리 회복할 수 있습니다</p>
+                                </div>
+                                <div class="situation-card">
+                                    <div class="emoji">🍻</div>
+                                    <h5>친구들과</h5>
+                                    <p>오래된 친구와의 농담은 수십 년의 추억을 환기시킵니다</p>
+                                </div>
+                                <div class="situation-card">
+                                    <div class="emoji">💑</div>
+                                    <h5>배우자와</h5>
+                                    <p>오랜 결혼생활의 권태를 유머가 신선하게 만듭니다</p>
+                                </div>
+                                <div class="situation-card">
+                                    <div class="emoji">🩺</div>
+                                    <h5>건강 문제 앞에서</h5>
+                                    <p>가벼운 유머는 두려움을 줄이고 치유를 돕습니다</p>
+                                </div>
+                            </div>
+
+                            <h2>유머의 Do & Don't</h2>
+
+                            <div class="do-dont-section">
+                                <div class="do-card">
+                                    <h4>✅ 이런 유머는 OK</h4>
+                                    <ul>
+                                        <li>✓ 자신을 낮추되 비하하지 않는 유머</li>
+                                        <li>✓ 상황의 아이러니를 짚는 유머</li>
+                                        <li>✓ 모두가 공감할 수 있는 유머</li>
+                                        <li>✓ 타이밍을 아는 유머</li>
+                                        <li>✓ 상대를 배려하는 유머</li>
+                                        <li>✓ 웃고 나서 기분 좋은 유머</li>
+                                    </ul>
+                                </div>
+                                <div class="dont-card">
+                                    <h4>❌ 이런 유머는 NO</h4>
+                                    <ul>
+                                        <li>✗ 특정 집단을 비하하는 유머</li>
+                                        <li>✗ 상대의 약점을 건드리는 유머</li>
+                                        <li>✗ 자리와 맞지 않는 유머</li>
+                                        <li>✗ "나만 웃긴" 유머</li>
+                                        <li>✗ 반복되는 똑같은 농담</li>
+                                        <li>✗ 웃고 나서 불편한 유머</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h2>유머 감각을 기르는 방법</h2>
+
+                            <div class="strategy-section">
+                                <div class="strategy-card strategy-primary">
+                                    <div class="strategy-number">01</div>
+                                    <div class="strategy-content">
+                                        <h4>일상을 관찰하기</h4>
+                                        <p>
+                                            재미있는 상황은 멀리 있지 않습니다.
+                                            출퇴근길, 마트, 가족과의 대화에서
+                                            아이러니와 의외성을 발견하는 눈을 기르세요.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="strategy-card strategy-secondary">
+                                    <div class="strategy-number">02</div>
+                                    <div class="strategy-content">
+                                        <h4>다양한 유머 접하기</h4>
+                                        <p>
+                                            코미디 영화, 스탠드업, 유머 책 등을 통해
+                                            다양한 유머 스타일을 경험하세요.
+                                            좋은 유머는 배울 수 있습니다.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="strategy-card strategy-tertiary">
+                                    <div class="strategy-number">03</div>
+                                    <div class="strategy-content">
+                                        <h4>작은 것부터 시도하기</h4>
+                                        <p>
+                                            갑자기 개그맨이 될 필요 없습니다.
+                                            일상 대화에서 작은 농담을 시도하고,
+                                            반응을 보면서 감을 익히세요.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="joke-card">
+                                <div class="setup">친구: "요즘 스트레스가 너무 심해서 웃을 일이 없어."</div>
+                                <div class="punchline">나: "그러니까 웃어야지. 웃을 일이 없을 때 웃는 게 진짜 유머야." 😎</div>
+                            </div>
+
+                            <div class="laugh-cta">
+                                <div class="big-emoji">😊</div>
+                                <h3>오늘, 한 번 웃어볼까요?</h3>
+                                <p>
+                                    지금 이 글을 읽으면서 한 번이라도 웃으셨다면,
+                                    오늘 하루는 이미 성공입니다.
+                                    웃음은 전염됩니다. 당신의 웃음이
+                                    누군가의 하루를 바꿀 수 있습니다.
+                                </p>
+                            </div>
+
+                            <div class="conclusion-box conclusion-blue">
+                                <p>
+                                    4050대의 유머는 젊은 시절의 유머와 다릅니다.
+                                    그것은 인생의 <strong>쓴맛과 단맛을 모두 아는 사람</strong>만이
+                                    할 수 있는 깊이 있는 웃음입니다.
+                                </p>
+                                <p>
+                                    삶의 무게가 무거울수록, 웃음의 가치는 더 커집니다.
+                                    유머는 현실을 회피하는 게 아니라,
+                                    현실과 <strong>함께 살아가는 방법</strong>입니다.
+                                    오늘 하루, 마음껏 웃으세요. 🙂
+                                </p>
+                            </div>
+
+                            <div class="sources-box sources-box-rounded">
+                                <h3>참고 자료</h3>
+                                <ul>
+                                    <li><a href="https://www.mayoclinic.org" target="_blank">Mayo Clinic - Stress relief from laughter</a></li>
+                                    <li><a href="https://www.psychologytoday.com" target="_blank">Psychology Today - The Benefits of Humor</a></li>
+                                    <li><a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank">PubMed - Laughter and Health Research</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <aside class="related-articles related-rounded">
+                            <h3>관련 글</h3>
+                            <a href="hobby-importance.html" class="related-link">
+                                <div>
+                                    <h4>취미의 재발견</h4>
+                                    <p>단순한 여가가 아니다</p>
+                                </div>
+                            </a>
+                            <a href="aging-40s-50s.html" class="related-link">
+                                <div>
+                                    <h4>40대에서 50대로</h4>
+                                    <p>몸의 변화와 대응 전략</p>
+                                </div>
+                            </a>
+                        </aside>
+                    </div>
+                </article>
+            </main>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">
+                        © 2024 Stock Insights. 웃으면 복이 와요 😄
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
