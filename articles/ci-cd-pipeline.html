@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Pipeline: 지속적 통합과 배포의 원리 | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        .article-body {
+            overflow-x: hidden;
+        }
+
+        /* Academic Orange Theme */
+        .article-hero {
+            background: linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #c2410c 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(251, 146, 60, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(253, 186, 116, 0.15) 0%, transparent 50%);
+        }
+
+        .paper-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .article-hero h1 {
+            color: #fff7ed;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-weight: 600;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            letter-spacing: -0.02em;
+        }
+
+        .article-hero .meta {
+            color: #fed7aa;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+        }
+
+        /* Paper Sections */
+        .paper-section {
+            margin: 2.5rem 0;
+        }
+
+        .section-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #9a3412;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f97316;
+        }
+
+        .subsection-title {
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #c2410c;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        /* Abstract Box */
+        .abstract-box {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border-left: 4px solid #f97316;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .abstract-box h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #9a3412;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .abstract-box p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #7c2d12;
+            text-align: justify;
+        }
+
+        .keywords {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #ea580c;
+        }
+
+        .keywords strong {
+            color: #9a3412;
+        }
+
+        /* Pipeline Diagram */
+        .pipeline-box {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-stages {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            min-width: max-content;
+        }
+
+        .pipeline-stage {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .pipeline-stage.ci { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .pipeline-stage.cd { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .pipeline-stage.deploy { background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%); }
+
+        .pipeline-arrow {
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+
+        .figure-caption {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-style: italic;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Concept Cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .concept-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .concept-card h4 {
+            color: #9a3412;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .concept-card p {
+            font-size: 0.9rem;
+            color: #c2410c;
+            margin: 0;
+        }
+
+        /* Tool Table */
+        .tool-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .tool-table th {
+            background: #9a3412;
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .tool-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: #374151;
+        }
+
+        .tool-table tr:nth-child(even) {
+            background: #fff7ed;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            background: #fed7aa;
+            color: #9a3412;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .code-block .comment { color: #64748b; }
+        .code-block .keyword { color: #f97316; }
+        .code-block .string { color: #a5f3fc; }
+        .code-block .key { color: #fbbf24; }
+        .code-block code { color: #e2e8f0; }
+
+        /* Practice Cards */
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .practice-card {
+            background: white;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+
+        .practice-card h4 {
+            color: #9a3412;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .practice-card p {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin: 0;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: #fff7ed;
+            border-left: 4px solid #fb923c;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .quote-box p {
+            font-style: italic;
+            color: #c2410c;
+            margin: 0;
+        }
+
+        .quote-box .author {
+            font-style: normal;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            color: #9a3412;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border: 1px solid #fdba74;
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+
+        .benefit-card h4 {
+            color: #9a3412;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .benefit-card p {
+            font-size: 0.9rem;
+            color: #c2410c;
+            margin: 0;
+        }
+
+        /* Stage Detail */
+        .stage-detail {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .stage-header {
+            background: #f97316;
+            color: white;
+            padding: 0.8rem 1rem;
+            font-weight: 600;
+        }
+
+        .stage-header.ci { background: #3b82f6; }
+        .stage-header.cd { background: #22c55e; }
+
+        .stage-content {
+            padding: 1rem;
+        }
+
+        .stage-content ul {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .stage-content li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* References */
+        .references {
+            background: #fff7ed;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .references h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            color: #9a3412;
+            margin-bottom: 1rem;
+        }
+
+        .references ol {
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+
+        .references li {
+            font-size: 0.85rem;
+            color: #c2410c;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="../index.html" class="header-title">
+                <span class="header-logo">Stock Insights</span>
+            </a>
+        </div>
+    </header>
+    <main class="article-page">
+        <article>
+            <header class="article-header">
+                <nav class="breadcrumb">
+                    <a href="../index.html">홈</a>
+                    <span>/</span>
+                    <a href="../index.html?category=tech">개발 방법론</a>
+                    <span>/</span>
+                    <span>CI/CD</span>
+                </nav>
+            </header>
+            <div class="article-body-wrapper">
+                <div class="article-body">
+                    <div class="article-hero">
+                        <div class="paper-icon">🔄</div>
+                        <h1>CI/CD Pipeline: 지속적 통합과 배포의 원리</h1>
+                        <p class="meta">Software Engineering Methodology Paper</p>
+                    </div>
+
+                    <div class="abstract-box">
+                        <h3>Abstract</h3>
+                        <p>
+                            CI/CD(Continuous Integration/Continuous Delivery/Deployment)는 현대 소프트웨어 개발의 핵심 실천법으로,
+                            코드 변경사항의 빌드, 테스트, 배포를 자동화하여 소프트웨어 출시 주기를 단축하고 품질을 향상시킨다.
+                            본 논문에서는 CI/CD의 이론적 배경과 핵심 원칙을 분석하고, 파이프라인 구성 요소와 주요 도구를 고찰한다.
+                            또한 성공적인 CI/CD 구축을 위한 모범 사례와 조직 문화 변화의 중요성을 논의한다.
+                        </p>
+                        <div class="keywords">
+                            <strong>Keywords:</strong> Continuous Integration, Continuous Delivery, Continuous Deployment, Pipeline, Automation, DevOps
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">1. Introduction</h2>
+                        <p>
+                            전통적인 소프트웨어 개발에서 통합(Integration)은 프로젝트 후반부에 수행되는 고통스러운 과정이었다.
+                            여러 개발자가 작업한 코드를 합치는 "통합 지옥(Integration Hell)"은 예측 불가능한 버그와
+                            일정 지연의 주요 원인이었다.
+                        </p>
+                        <p>
+                            2000년대 초 Martin Fowler와 Kent Beck 등이 제안한 지속적 통합(CI)은
+                            이러한 문제에 대한 해답으로, 개발자들이 코드를 자주 통합하고 자동화된 테스트를 수행하도록 권장했다.
+                        </p>
+
+                        <div class="quote-box">
+                            <p>"If it hurts, do it more frequently, and bring the pain forward."</p>
+                            <div class="author">— Martin Fowler, Continuous Integration 원칙</div>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">2. Core Concepts</h2>
+
+                        <div class="concept-grid">
+                            <div class="concept-card">
+                                <div class="icon">🔧</div>
+                                <h4>Continuous Integration (CI)</h4>
+                                <p>
+                                    개발자가 코드 변경사항을 공유 저장소에 자주 병합하고,
+                                    각 병합마다 자동화된 빌드와 테스트를 수행하는 실천법.
+                                    문제를 조기에 발견하고 수정 비용을 최소화한다.
+                                </p>
+                            </div>
+                            <div class="concept-card">
+                                <div class="icon">📦</div>
+                                <h4>Continuous Delivery (CD)</h4>
+                                <p>
+                                    CI의 확장으로, 코드 변경사항이 자동으로 테스트되고
+                                    프로덕션 환경에 배포할 준비가 된 상태로 유지됨.
+                                    실제 배포는 수동 승인 후 진행.
+                                </p>
+                            </div>
+                            <div class="concept-card">
+                                <div class="icon">🚀</div>
+                                <h4>Continuous Deployment</h4>
+                                <p>
+                                    Continuous Delivery의 확장으로,
+                                    모든 테스트를 통과한 변경사항이 자동으로
+                                    프로덕션 환경에 배포됨. 완전한 자동화.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">3. CI/CD Pipeline Architecture</h2>
+
+                        <div class="pipeline-box">
+                            <div class="pipeline-stages">
+                                <div class="pipeline-stage ci">Code</div>
+                                <span class="pipeline-arrow">→</span>
+                                <div class="pipeline-stage ci">Build</div>
+                                <span class="pipeline-arrow">→</span>
+                                <div class="pipeline-stage ci">Unit Test</div>
+                                <span class="pipeline-arrow">→</span>
+                                <div class="pipeline-stage cd">Integration Test</div>
+                                <span class="pipeline-arrow">→</span>
+                                <div class="pipeline-stage cd">Staging</div>
+                                <span class="pipeline-arrow">→</span>
+                                <div class="pipeline-stage deploy">Production</div>
+                            </div>
+                            <p class="figure-caption">Figure 1. Typical CI/CD Pipeline Stages</p>
+                        </div>
+
+                        <h3 class="subsection-title">3.1 CI 단계</h3>
+                        <div class="stage-detail">
+                            <div class="stage-header ci">Continuous Integration Stages</div>
+                            <div class="stage-content">
+                                <ul>
+                                    <li><strong>Code:</strong> 개발자가 코드 변경사항을 버전 관리 시스템에 커밋</li>
+                                    <li><strong>Build:</strong> 소스 코드 컴파일 및 아티팩트 생성</li>
+                                    <li><strong>Unit Test:</strong> 단위 테스트 실행으로 개별 컴포넌트 검증</li>
+                                    <li><strong>Static Analysis:</strong> 코드 품질, 보안 취약점 분석</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="subsection-title">3.2 CD 단계</h3>
+                        <div class="stage-detail">
+                            <div class="stage-header cd">Continuous Delivery/Deployment Stages</div>
+                            <div class="stage-content">
+                                <ul>
+                                    <li><strong>Integration Test:</strong> 컴포넌트 간 상호작용 검증</li>
+                                    <li><strong>Performance Test:</strong> 성능 기준 충족 여부 확인</li>
+                                    <li><strong>Staging Deploy:</strong> 프로덕션 유사 환경에 배포</li>
+                                    <li><strong>Acceptance Test:</strong> 사용자 인수 테스트</li>
+                                    <li><strong>Production Deploy:</strong> 실제 운영 환경 배포</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">4. CI/CD Tools</h2>
+
+                        <table class="tool-table">
+                            <thead>
+                                <tr>
+                                    <th>도구</th>
+                                    <th>유형</th>
+                                    <th>특징</th>
+                                    <th>적합한 환경</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Jenkins</strong></td>
+                                    <td><span class="tool-badge">Self-hosted</span></td>
+                                    <td>풍부한 플러그인 생태계, 높은 커스터마이징</td>
+                                    <td>엔터프라이즈, 복잡한 워크플로우</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GitHub Actions</strong></td>
+                                    <td><span class="tool-badge">Cloud</span></td>
+                                    <td>GitHub 통합, YAML 기반 워크플로우</td>
+                                    <td>GitHub 사용 프로젝트</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GitLab CI/CD</strong></td>
+                                    <td><span class="tool-badge">Both</span></td>
+                                    <td>GitLab 내장, Auto DevOps</td>
+                                    <td>GitLab 사용 조직</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CircleCI</strong></td>
+                                    <td><span class="tool-badge">Cloud</span></td>
+                                    <td>빠른 빌드, Docker 지원 우수</td>
+                                    <td>스타트업, 중소규모 팀</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ArgoCD</strong></td>
+                                    <td><span class="tool-badge">GitOps</span></td>
+                                    <td>Kubernetes 네이티브, 선언적 배포</td>
+                                    <td>Kubernetes 환경</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">5. Pipeline Configuration Example</h2>
+
+                        <p>다음은 GitHub Actions를 사용한 CI/CD 파이프라인 구성 예시이다:</p>
+
+                        <div class="code-block">
+                            <code>
+<span class="comment"># .github/workflows/ci-cd.yml</span>
+<span class="key">name:</span> <span class="string">CI/CD Pipeline</span>
+
+<span class="key">on:</span>
+  <span class="key">push:</span>
+    <span class="key">branches:</span> [ <span class="string">main</span>, <span class="string">develop</span> ]
+  <span class="key">pull_request:</span>
+    <span class="key">branches:</span> [ <span class="string">main</span> ]
+
+<span class="key">jobs:</span>
+  <span class="key">build-and-test:</span>
+    <span class="key">runs-on:</span> <span class="string">ubuntu-latest</span>
+    <span class="key">steps:</span>
+      - <span class="key">uses:</span> <span class="string">actions/checkout@v4</span>
+
+      - <span class="key">name:</span> <span class="string">Setup Node.js</span>
+        <span class="key">uses:</span> <span class="string">actions/setup-node@v4</span>
+        <span class="key">with:</span>
+          <span class="key">node-version:</span> <span class="string">'20'</span>
+
+      - <span class="key">name:</span> <span class="string">Install dependencies</span>
+        <span class="key">run:</span> <span class="string">npm ci</span>
+
+      - <span class="key">name:</span> <span class="string">Run tests</span>
+        <span class="key">run:</span> <span class="string">npm test</span>
+
+      - <span class="key">name:</span> <span class="string">Build</span>
+        <span class="key">run:</span> <span class="string">npm run build</span>
+
+  <span class="key">deploy:</span>
+    <span class="key">needs:</span> <span class="string">build-and-test</span>
+    <span class="key">if:</span> <span class="string">github.ref == 'refs/heads/main'</span>
+    <span class="key">runs-on:</span> <span class="string">ubuntu-latest</span>
+    <span class="key">steps:</span>
+      - <span class="key">name:</span> <span class="string">Deploy to production</span>
+        <span class="key">run:</span> <span class="string">./deploy.sh</span>
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">6. Best Practices</h2>
+
+                        <div class="practice-grid">
+                            <div class="practice-card">
+                                <h4>🔄 자주 통합하기</h4>
+                                <p>하루에 여러 번 코드를 통합하여 충돌과 통합 문제 최소화</p>
+                            </div>
+                            <div class="practice-card">
+                                <h4>🧪 테스트 자동화</h4>
+                                <p>포괄적인 자동화 테스트로 빠른 피드백 제공</p>
+                            </div>
+                            <div class="practice-card">
+                                <h4>⚡ 빌드 속도 최적화</h4>
+                                <p>빌드 시간 10분 이내 유지, 캐싱 활용</p>
+                            </div>
+                            <div class="practice-card">
+                                <h4>🔒 시크릿 관리</h4>
+                                <p>환경 변수와 시크릿 매니저로 민감 정보 보호</p>
+                            </div>
+                            <div class="practice-card">
+                                <h4>📊 모니터링</h4>
+                                <p>파이프라인 메트릭과 배포 상태 지속적 모니터링</p>
+                            </div>
+                            <div class="practice-card">
+                                <h4>🔙 롤백 전략</h4>
+                                <p>문제 발생 시 빠른 롤백을 위한 전략 수립</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">7. Benefits</h2>
+
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <h4>⚡ 빠른 출시</h4>
+                                <p>자동화된 파이프라인으로 배포 주기 단축</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>🎯 품질 향상</h4>
+                                <p>자동화된 테스트로 결함 조기 발견</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>🔄 피드백 루프</h4>
+                                <p>빠른 피드백으로 개발 방향 조기 조정</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>📉 리스크 감소</h4>
+                                <p>작은 변경사항의 빈번한 배포로 위험 분산</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>👥 협업 향상</h4>
+                                <p>투명한 프로세스로 팀 간 협업 강화</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>📈 생산성</h4>
+                                <p>반복 작업 자동화로 개발자 생산성 향상</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">8. Conclusion</h2>
+                        <p>
+                            CI/CD는 현대 소프트웨어 개발에서 필수적인 실천법으로 자리잡았다.
+                            자동화된 파이프라인을 통해 코드 변경사항을 신속하고 안정적으로 프로덕션에 전달함으로써,
+                            조직은 더 빠른 시장 출시와 높은 품질을 동시에 달성할 수 있다.
+                        </p>
+                        <p>
+                            성공적인 CI/CD 도입을 위해서는 도구의 선택뿐만 아니라
+                            팀 문화의 변화, 테스트 자동화 역량 강화, 지속적인 개선 노력이 필요하다.
+                            CI/CD는 기술적 실천을 넘어 DevOps 문화의 핵심 구성 요소로서,
+                            개발과 운영의 벽을 허물고 고객에게 더 나은 가치를 전달하는 기반이 된다.
+                        </p>
+                    </div>
+
+                    <div class="references">
+                        <h3>References</h3>
+                        <ol>
+                            <li>Fowler, M. (2006). <em>Continuous Integration</em>. martinfowler.com</li>
+                            <li>Humble, J., & Farley, D. (2010). <em>Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation</em>. Addison-Wesley.</li>
+                            <li>Kim, G., et al. (2016). <em>The DevOps Handbook</em>. IT Revolution Press.</li>
+                            <li>Forsgren, N., et al. (2018). <em>Accelerate: The Science of Lean Software and DevOps</em>. IT Revolution Press.</li>
+                            <li>Duvall, P. M. (2007). <em>Continuous Integration: Improving Software Quality and Reducing Risk</em>. Addison-Wesley.</li>
+                        </ol>
+                    </div>
+
+                    <div class="related-articles">
+                        <h3>관련 논문</h3>
+                        <div class="related-grid">
+                            <a href="devops-culture.html" class="related-card">
+                                <span class="related-icon">🛠️</span>
+                                <span class="related-title">DevOps 문화와 실천</span>
+                            </a>
+                            <a href="agile-scrum.html" class="related-card">
+                                <span class="related-icon">🔄</span>
+                                <span class="related-title">Agile과 Scrum</span>
+                            </a>
+                            <a href="integration-testing.html" class="related-card">
+                                <span class="related-icon">🔗</span>
+                                <span class="related-title">통합 테스트 전략</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="source-box">
+                        <p><strong>Article Info:</strong> Software Engineering Methodology Series<br>
+                        <strong>Classification:</strong> Development Practices / DevOps<br>
+                        <strong>Last Updated:</strong> 2024</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+    <footer class="site-footer">
+        <p>© 2024 Stock Insights. All rights reserved.</p>
+    </footer>
+</body>
+</html>
