@@ -7,47 +7,42 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #7f8c8d;
+            --text-color: #2c3e50;
+            --text-light: #5d6d7e;
+            --bg-light: #f8f9fa;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
         .article-body {
             overflow-x: hidden;
         }
 
-        /* Academic Amber Theme */
+        /* Professional Header */
         .article-hero {
-            background: linear-gradient(135deg, #78350f 0%, #92400e 50%, #b45309 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             position: relative;
             overflow: hidden;
-        }
-
-        .article-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 25% 45%, rgba(251, 191, 36, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 75% 55%, rgba(252, 211, 77, 0.15) 0%, transparent 50%);
-        }
-
-        .paper-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
+            padding: 3rem 2rem;
         }
 
         .article-hero h1 {
-            color: #fffbeb;
+            color: #ffffff;
             font-family: 'Georgia', 'Times New Roman', serif;
             font-weight: 600;
             font-size: clamp(1.5rem, 4vw, 2.2rem);
             letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
         }
 
         .article-hero .meta {
-            color: #fde68a;
+            color: #cbd5e1;
             font-family: 'Georgia', serif;
-            font-style: italic;
+            font-size: 0.95rem;
         }
 
         /* Paper Sections */
@@ -55,38 +50,44 @@
             margin: 2.5rem 0;
         }
 
+        .paper-section > p {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-color);
+        }
+
         .section-title {
             font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: #92400e;
+            color: var(--primary-color);
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #f59e0b;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .subsection-title {
             font-family: 'Georgia', serif;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            color: #b45309;
+            color: var(--secondary-color);
             margin: 1.5rem 0 0.8rem 0;
         }
 
         /* Abstract Box */
         .abstract-box {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            border-left: 4px solid #f59e0b;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
             padding: 1.5rem;
             margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            border-radius: 6px;
         }
 
         .abstract-box h3 {
             font-family: 'Georgia', serif;
             font-size: 1rem;
             font-weight: 700;
-            color: #92400e;
+            color: var(--primary-color);
             margin-bottom: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -95,18 +96,18 @@
         .abstract-box p {
             font-size: 0.95rem;
             line-height: 1.7;
-            color: #78350f;
+            color: var(--text-color);
             text-align: justify;
         }
 
         .keywords {
             margin-top: 1rem;
             font-size: 0.85rem;
-            color: #d97706;
+            color: var(--text-light);
         }
 
         .keywords strong {
-            color: #92400e;
+            color: var(--primary-color);
         }
 
         /* Technique Cards */
@@ -118,46 +119,44 @@
         }
 
         .technique-card {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            border: 1px solid #fcd34d;
-            border-radius: 12px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
         }
 
         .technique-card h4 {
-            color: #92400e;
+            color: var(--primary-color);
             font-size: 1.05rem;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .technique-card p {
             font-size: 0.9rem;
-            color: #b45309;
+            color: var(--text-light);
             margin: 0 0 0.8rem 0;
         }
 
         .technique-card .example {
             font-size: 0.8rem;
-            color: #78350f;
+            color: var(--secondary-color);
             font-style: italic;
-            background: rgba(251, 191, 36, 0.2);
+            background: var(--bg-card);
             padding: 0.5rem;
             border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
         /* Code Transformation */
         .transform-box {
-            background: #1e293b;
-            border-radius: 12px;
+            background: var(--secondary-color);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
 
         .transform-header {
-            color: #fbbf24;
+            color: #e2e8f0;
             font-weight: 600;
             font-size: 0.9rem;
             margin-bottom: 1rem;
@@ -180,10 +179,12 @@
         .transform-code .after { color: #86efac; }
         .transform-code .keyword { color: #c4b5fd; }
         .transform-code .function { color: #7dd3fc; }
+        .transform-code .string { color: #86efac; }
+        .transform-code .comment { color: #64748b; }
 
         .transform-arrow {
             font-size: 1.5rem;
-            color: #fbbf24;
+            color: #cbd5e1;
         }
 
         /* When to Refactor */
@@ -195,24 +196,21 @@
         }
 
         .when-card {
-            background: white;
-            border: 1px solid #fcd34d;
-            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.2rem;
         }
 
         .when-card h4 {
-            color: #92400e;
+            color: var(--primary-color);
             font-size: 1rem;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .when-card p {
             font-size: 0.85rem;
-            color: #64748b;
+            color: var(--text-light);
             margin: 0;
         }
 
@@ -225,7 +223,7 @@
         }
 
         .catalog-table th {
-            background: #92400e;
+            background: var(--primary-color);
             color: white;
             padding: 0.8rem;
             text-align: left;
@@ -234,36 +232,37 @@
 
         .catalog-table td {
             padding: 0.8rem;
-            border-bottom: 1px solid #e2e8f0;
-            color: #374151;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
         .catalog-table tr:nth-child(even) {
-            background: #fffbeb;
+            background: var(--bg-light);
         }
 
         .category-badge {
             display: inline-block;
-            background: #fef3c7;
-            color: #92400e;
+            background: var(--bg-light);
+            color: var(--primary-color);
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: 600;
+            border: 1px solid var(--border-color);
         }
 
         /* Quote Box */
         .quote-box {
-            background: #fffbeb;
-            border-left: 4px solid #fbbf24;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
             padding: 1.2rem;
             margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            border-radius: 6px;
         }
 
         .quote-box p {
             font-style: italic;
-            color: #b45309;
+            color: var(--text-light);
             margin: 0;
         }
 
@@ -271,14 +270,14 @@
             font-style: normal;
             font-weight: 600;
             margin-top: 0.5rem;
-            color: #92400e;
+            color: var(--primary-color);
         }
 
         /* Rule Box */
         .rule-box {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border: 1px solid #6ee7b7;
-            border-radius: 8px;
+            background: #ecfdf5;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
@@ -301,9 +300,9 @@
 
         /* Warning Box */
         .warning-box {
-            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-            border: 1px solid #fca5a5;
-            border-radius: 8px;
+            background: #fef2f2;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
@@ -333,31 +332,28 @@
         }
 
         .benefit-card {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            border: 1px solid #fcd34d;
-            border-radius: 8px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.2rem;
         }
 
         .benefit-card h4 {
-            color: #92400e;
+            color: var(--primary-color);
             font-size: 1rem;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .benefit-card p {
             font-size: 0.9rem;
-            color: #b45309;
+            color: var(--text-light);
             margin: 0;
         }
 
         /* References */
         .references {
-            background: #fffbeb;
-            border-radius: 8px;
+            background: var(--bg-light);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 2rem 0;
         }
@@ -365,7 +361,7 @@
         .references h3 {
             font-family: 'Georgia', serif;
             font-size: 1.1rem;
-            color: #92400e;
+            color: var(--primary-color);
             margin-bottom: 1rem;
         }
 
@@ -376,9 +372,22 @@
 
         .references li {
             font-size: 0.85rem;
-            color: #b45309;
+            color: var(--text-light);
             margin-bottom: 0.5rem;
             line-height: 1.5;
+        }
+
+        /* Desktop Layout */
+        @media (min-width: 1200px) {
+            .article-body-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+            .article-body {
+                max-width: 70%;
+                margin: 0 auto;
+            }
         }
     </style>
 </head>
@@ -404,9 +413,8 @@
             <div class="article-body-wrapper">
                 <div class="article-body">
                     <div class="article-hero">
-                        <div class="paper-icon">🔧</div>
                         <h1>Refactoring: 코드 리팩토링의 원칙과 기법</h1>
-                        <p class="meta">Software Engineering Methodology Paper</p>
+                        <p class="meta">Research Paper</p>
                     </div>
 
                     <div class="abstract-box">
@@ -444,27 +452,27 @@
 
                         <div class="when-grid">
                             <div class="when-card">
-                                <h4>🔁 Rule of Three</h4>
+                                <h4>Rule of Three</h4>
                                 <p>비슷한 코드를 세 번째 작성할 때 리팩토링하라. 세 번이면 패턴이다</p>
                             </div>
                             <div class="when-card">
-                                <h4>➕ 기능 추가 시</h4>
+                                <h4>기능 추가 시</h4>
                                 <p>새 기능을 추가하기 전에 기존 코드를 이해하기 쉽게 정리</p>
                             </div>
                             <div class="when-card">
-                                <h4>🐛 버그 수정 시</h4>
+                                <h4>버그 수정 시</h4>
                                 <p>버그를 찾기 어려웠다면, 그 코드는 리팩토링이 필요하다는 신호</p>
                             </div>
                             <div class="when-card">
-                                <h4>👁️ 코드 리뷰 시</h4>
+                                <h4>코드 리뷰 시</h4>
                                 <p>리뷰 중 발견된 코드 스멜을 즉시 개선</p>
                             </div>
                             <div class="when-card">
-                                <h4>👃 코드 스멜 발견 시</h4>
+                                <h4>코드 스멜 발견 시</h4>
                                 <p>중복, 긴 메서드, 큰 클래스 등의 스멜을 감지했을 때</p>
                             </div>
                             <div class="when-card">
-                                <h4>🧹 보이스카웃 규칙</h4>
+                                <h4>보이스카웃 규칙</h4>
                                 <p>코드를 떠날 때 왔을 때보다 깨끗하게</p>
                             </div>
                         </div>
@@ -475,32 +483,32 @@
 
                         <div class="technique-grid">
                             <div class="technique-card">
-                                <h4>📤 Extract Function</h4>
+                                <h4>Extract Function</h4>
                                 <p>코드 조각을 별도의 함수로 추출. 가장 흔히 사용되는 리팩토링</p>
                                 <div class="example">코드 블록 → function calculateTotal()</div>
                             </div>
                             <div class="technique-card">
-                                <h4>📥 Inline Function</h4>
+                                <h4>Inline Function</h4>
                                 <p>함수 본문이 함수 이름만큼 명확할 때, 호출부에 직접 삽입</p>
                                 <div class="example">isActive() { return age > 0; } → age > 0</div>
                             </div>
                             <div class="technique-card">
-                                <h4>✏️ Rename Variable/Function</h4>
+                                <h4>Rename Variable/Function</h4>
                                 <p>이름을 더 명확하게 변경. 이해하기 쉬운 코드의 시작</p>
                                 <div class="example">d → elapsedDays, fn → calculateTax</div>
                             </div>
                             <div class="technique-card">
-                                <h4>📦 Extract Class</h4>
+                                <h4>Extract Class</h4>
                                 <p>클래스가 너무 많은 책임을 가질 때 일부를 새 클래스로 분리</p>
                                 <div class="example">Person → Person + TelephoneNumber</div>
                             </div>
                             <div class="technique-card">
-                                <h4>🔀 Move Function</h4>
+                                <h4>Move Function</h4>
                                 <p>함수를 더 적절한 클래스로 이동. Feature Envy 해결</p>
                                 <div class="example">A.calculateFor(b) → B.calculate()</div>
                             </div>
                             <div class="technique-card">
-                                <h4>🔄 Replace Temp with Query</h4>
+                                <h4>Replace Temp with Query</h4>
                                 <p>임시 변수를 메서드 호출로 대체</p>
                                 <div class="example">let total = base * tax → getTotal()</div>
                             </div>
@@ -511,7 +519,7 @@
                         <h2 class="section-title">4. Refactoring Example</h2>
 
                         <div class="transform-box">
-                            <div class="transform-header">📝 Extract Function 예시</div>
+                            <div class="transform-header">Extract Function 예시</div>
                             <div class="transform-grid">
                                 <div class="transform-code">
 <span class="before">// Before</span>
@@ -600,7 +608,7 @@
                         <h2 class="section-title">6. Safe Refactoring</h2>
 
                         <div class="rule-box">
-                            <h4>✅ 안전한 리팩토링을 위한 규칙</h4>
+                            <h4>안전한 리팩토링을 위한 규칙</h4>
                             <ol>
                                 <li><strong>테스트 먼저:</strong> 리팩토링 전에 충분한 테스트 커버리지 확보</li>
                                 <li><strong>작은 단계:</strong> 한 번에 하나의 변경만. 각 단계 후 테스트 실행</li>
@@ -612,7 +620,7 @@
                         </div>
 
                         <div class="warning-box">
-                            <h4>⚠️ 리팩토링하지 말아야 할 때</h4>
+                            <h4>리팩토링하지 말아야 할 때</h4>
                             <ul>
                                 <li>테스트가 없고 추가할 수 없는 경우</li>
                                 <li>마감이 임박한 경우 (기술 부채로 기록)</li>
@@ -627,27 +635,27 @@
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
-                                <h4>📖 가독성 향상</h4>
+                                <h4>가독성 향상</h4>
                                 <p>의도가 명확한 코드로 이해 시간 단축</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🐛 버그 발견</h4>
+                                <h4>버그 발견</h4>
                                 <p>코드를 정리하면서 숨겨진 버그 발견</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>⚡ 개발 속도</h4>
+                                <h4>개발 속도</h4>
                                 <p>깨끗한 코드베이스에서 기능 추가가 더 빠름</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🏗️ 설계 개선</h4>
+                                <h4>설계 개선</h4>
                                 <p>점진적인 설계 개선으로 아키텍처 향상</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>💳 기술 부채 감소</h4>
+                                <h4>기술 부채 감소</h4>
                                 <p>지속적인 리팩토링으로 부채 축적 방지</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>📚 지식 공유</h4>
+                                <h4>지식 공유</h4>
                                 <p>명확한 코드가 팀 전체의 이해도 향상</p>
                             </div>
                         </div>

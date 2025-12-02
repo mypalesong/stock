@@ -7,47 +7,42 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #7f8c8d;
+            --text-color: #2c3e50;
+            --text-light: #5d6d7e;
+            --bg-light: #f8f9fa;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
         .article-body {
             overflow-x: hidden;
         }
 
-        /* Academic Rose Theme */
+        /* Professional Header */
         .article-hero {
-            background: linear-gradient(135deg, #881337 0%, #9f1239 50%, #be123c 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             position: relative;
             overflow: hidden;
-        }
-
-        .article-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 25% 45%, rgba(251, 113, 133, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 75% 55%, rgba(253, 164, 175, 0.15) 0%, transparent 50%);
-        }
-
-        .paper-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
+            padding: 3rem 2rem;
         }
 
         .article-hero h1 {
-            color: #fff1f2;
+            color: #ffffff;
             font-family: 'Georgia', 'Times New Roman', serif;
             font-weight: 600;
             font-size: clamp(1.5rem, 4vw, 2.2rem);
             letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
         }
 
         .article-hero .meta {
-            color: #fecdd3;
+            color: #cbd5e1;
             font-family: 'Georgia', serif;
-            font-style: italic;
+            font-size: 0.95rem;
         }
 
         /* Paper Sections */
@@ -55,38 +50,44 @@
             margin: 2.5rem 0;
         }
 
+        .paper-section > p {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-color);
+        }
+
         .section-title {
             font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: #9f1239;
+            color: var(--primary-color);
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #f43f5e;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .subsection-title {
             font-family: 'Georgia', serif;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            color: #be123c;
+            color: var(--secondary-color);
             margin: 1.5rem 0 0.8rem 0;
         }
 
         /* Abstract Box */
         .abstract-box {
-            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
-            border-left: 4px solid #f43f5e;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
             padding: 1.5rem;
             margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            border-radius: 6px;
         }
 
         .abstract-box h3 {
             font-family: 'Georgia', serif;
             font-size: 1rem;
             font-weight: 700;
-            color: #9f1239;
+            color: var(--primary-color);
             margin-bottom: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -95,18 +96,18 @@
         .abstract-box p {
             font-size: 0.95rem;
             line-height: 1.7;
-            color: #881337;
+            color: var(--text-color);
             text-align: justify;
         }
 
         .keywords {
             margin-top: 1rem;
             font-size: 0.85rem;
-            color: #e11d48;
+            color: var(--text-light);
         }
 
         .keywords strong {
-            color: #9f1239;
+            color: var(--primary-color);
         }
 
         /* Approach Cards */
@@ -118,26 +119,21 @@
         }
 
         .approach-card {
-            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
-            border: 1px solid #fecdd3;
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
         }
 
-        .approach-card .icon {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
-        }
-
         .approach-card h4 {
-            color: #9f1239;
+            color: var(--primary-color);
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
 
         .approach-card p {
             font-size: 0.9rem;
-            color: #be123c;
+            color: var(--text-light);
             margin: 0 0 0.8rem 0;
         }
 
@@ -150,8 +146,8 @@
 
         /* Strategy Diagram */
         .strategy-box {
-            background: #1e293b;
-            border-radius: 12px;
+            background: var(--secondary-color);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
@@ -170,7 +166,7 @@
 
         .strategy-label {
             width: 100px;
-            color: #94a3b8;
+            color: #cbd5e1;
             font-size: 0.8rem;
             text-align: right;
             flex-shrink: 0;
@@ -189,23 +185,23 @@
         }
 
         .strategy-bar.top-down {
-            background: linear-gradient(90deg, #f43f5e 0%, #fb7185 100%);
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--secondary-color) 100%);
             width: 30%;
         }
 
         .strategy-bar.bottom-up {
-            background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             width: 100%;
         }
 
         .strategy-bar.sandwich {
-            background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+            background: linear-gradient(90deg, var(--secondary-color) 0%, var(--accent-color) 100%);
             width: 65%;
         }
 
         .figure-caption {
             font-size: 0.85rem;
-            color: #94a3b8;
+            color: #cbd5e1;
             font-style: italic;
             text-align: center;
             margin-top: 1rem;
@@ -220,7 +216,7 @@
         }
 
         .test-table th {
-            background: #9f1239;
+            background: var(--primary-color);
             color: white;
             padding: 0.8rem;
             text-align: left;
@@ -229,12 +225,12 @@
 
         .test-table td {
             padding: 0.8rem;
-            border-bottom: 1px solid #e2e8f0;
-            color: #374151;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
         .test-table tr:nth-child(even) {
-            background: #fff1f2;
+            background: var(--bg-light);
         }
 
         /* Tool Grid */
@@ -246,34 +242,29 @@
         }
 
         .tool-card {
-            background: white;
-            border: 1px solid #fecdd3;
-            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1rem;
             text-align: center;
         }
 
-        .tool-card .icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
         .tool-card h4 {
-            color: #9f1239;
+            color: var(--primary-color);
             font-size: 0.95rem;
             margin-bottom: 0.3rem;
         }
 
         .tool-card p {
             font-size: 0.8rem;
-            color: #6b7280;
+            color: var(--text-light);
             margin: 0;
         }
 
         /* Code Block */
         .code-block {
             background: #1e293b;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 1.2rem;
             margin: 1.5rem 0;
             font-family: 'Consolas', 'Monaco', monospace;
@@ -283,24 +274,24 @@
         }
 
         .code-block .comment { color: #64748b; }
-        .code-block .keyword { color: #fb7185; }
-        .code-block .function { color: #38bdf8; }
-        .code-block .string { color: #a5f3fc; }
+        .code-block .keyword { color: #a78bfa; }
+        .code-block .function { color: #60a5fa; }
+        .code-block .string { color: #86efac; }
         .code-block .decorator { color: #fbbf24; }
         .code-block code { color: #e2e8f0; }
 
         /* Quote Box */
         .quote-box {
-            background: #fff1f2;
-            border-left: 4px solid #fb7185;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
             padding: 1.2rem;
             margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            border-radius: 6px;
         }
 
         .quote-box p {
             font-style: italic;
-            color: #be123c;
+            color: var(--text-light);
             margin: 0;
         }
 
@@ -308,7 +299,7 @@
             font-style: normal;
             font-weight: 600;
             margin-top: 0.5rem;
-            color: #9f1239;
+            color: var(--primary-color);
         }
 
         /* Challenge Cards */
@@ -320,24 +311,21 @@
         }
 
         .challenge-card {
-            background: white;
-            border: 1px solid #fda4af;
-            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.2rem;
         }
 
         .challenge-card h4 {
-            color: #9f1239;
+            color: var(--primary-color);
             font-size: 1rem;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .challenge-card p {
             font-size: 0.85rem;
-            color: #64748b;
+            color: var(--text-light);
             margin: 0 0 0.5rem 0;
         }
 
@@ -356,51 +344,48 @@
         }
 
         .benefit-card {
-            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
-            border: 1px solid #fda4af;
-            border-radius: 8px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.2rem;
         }
 
         .benefit-card h4 {
-            color: #9f1239;
+            color: var(--primary-color);
             font-size: 1rem;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .benefit-card p {
             font-size: 0.9rem;
-            color: #be123c;
+            color: var(--text-light);
             margin: 0;
         }
 
         /* Container Box */
         .container-box {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border: 1px solid #7dd3fc;
-            border-radius: 8px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
 
         .container-box h4 {
-            color: #0369a1;
+            color: var(--primary-color);
             margin-bottom: 1rem;
         }
 
         .container-box p {
             font-size: 0.9rem;
-            color: #0c4a6e;
+            color: var(--text-light);
             margin-bottom: 0.8rem;
         }
 
         .container-box ul {
             margin: 0;
             padding-left: 1.2rem;
-            color: #0369a1;
+            color: var(--text-light);
             font-size: 0.9rem;
         }
 
@@ -410,8 +395,8 @@
 
         /* References */
         .references {
-            background: #fff1f2;
-            border-radius: 8px;
+            background: var(--bg-light);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 2rem 0;
         }
@@ -419,7 +404,7 @@
         .references h3 {
             font-family: 'Georgia', serif;
             font-size: 1.1rem;
-            color: #9f1239;
+            color: var(--primary-color);
             margin-bottom: 1rem;
         }
 
@@ -430,9 +415,22 @@
 
         .references li {
             font-size: 0.85rem;
-            color: #be123c;
+            color: var(--text-light);
             margin-bottom: 0.5rem;
             line-height: 1.5;
+        }
+
+        /* Desktop Layout */
+        @media (min-width: 1200px) {
+            .article-body-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+            .article-body {
+                max-width: 70%;
+                margin: 0 auto;
+            }
         }
     </style>
 </head>
@@ -458,9 +456,8 @@
             <div class="article-body-wrapper">
                 <div class="article-body">
                     <div class="article-hero">
-                        <div class="paper-icon">🔗</div>
                         <h1>Integration Testing: 통합 테스트 전략과 접근법</h1>
-                        <p class="meta">Software Engineering Methodology Paper</p>
+                        <p class="meta">Research Paper</p>
                     </div>
 
                     <div class="abstract-box">
@@ -501,7 +498,6 @@
 
                         <div class="approach-grid">
                             <div class="approach-card">
-                                <div class="icon">💥</div>
                                 <h4>Big Bang</h4>
                                 <p>모든 모듈을 동시에 통합하여 테스트. 가장 단순하지만 결함 위치 파악 어려움</p>
                                 <div class="pros-cons">
@@ -510,7 +506,6 @@
                                 </div>
                             </div>
                             <div class="approach-card">
-                                <div class="icon">⬇️</div>
                                 <h4>Top-Down</h4>
                                 <p>상위 모듈부터 하위 모듈로 점진적 통합. Stub을 사용해 하위 모듈 대체</p>
                                 <div class="pros-cons">
@@ -519,7 +514,6 @@
                                 </div>
                             </div>
                             <div class="approach-card">
-                                <div class="icon">⬆️</div>
                                 <h4>Bottom-Up</h4>
                                 <p>하위 모듈부터 상위 모듈로 점진적 통합. Driver를 사용해 상위 모듈 대체</p>
                                 <div class="pros-cons">
@@ -528,7 +522,6 @@
                                 </div>
                             </div>
                             <div class="approach-card">
-                                <div class="icon">🥪</div>
                                 <h4>Sandwich (Hybrid)</h4>
                                 <p>Top-Down과 Bottom-Up을 결합. 상하 양방향에서 중간 계층으로 접근</p>
                                 <div class="pros-cons">
@@ -608,7 +601,7 @@
                         <h2 class="section-title">4. Testcontainers</h2>
 
                         <div class="container-box">
-                            <h4>🐳 Testcontainers란?</h4>
+                            <h4>Testcontainers란?</h4>
                             <p>
                                 Testcontainers는 Docker 컨테이너를 활용하여 통합 테스트에 필요한
                                 실제 인프라(데이터베이스, 메시지 브로커 등)를 일회용으로 제공하는 라이브러리이다.
@@ -656,32 +649,26 @@
 
                         <div class="tool-grid">
                             <div class="tool-card">
-                                <div class="icon">🐳</div>
                                 <h4>Testcontainers</h4>
                                 <p>Docker 기반 인프라 테스트</p>
                             </div>
                             <div class="tool-card">
-                                <div class="icon">🔌</div>
                                 <h4>WireMock</h4>
                                 <p>HTTP API 목킹/스터빙</p>
                             </div>
                             <div class="tool-card">
-                                <div class="icon">📝</div>
                                 <h4>Pact</h4>
                                 <p>Consumer-Driven Contract</p>
                             </div>
                             <div class="tool-card">
-                                <div class="icon">☁️</div>
                                 <h4>LocalStack</h4>
                                 <p>AWS 서비스 로컬 에뮬레이션</p>
                             </div>
                             <div class="tool-card">
-                                <div class="icon">📮</div>
                                 <h4>RestAssured</h4>
                                 <p>REST API 테스트 DSL</p>
                             </div>
                             <div class="tool-card">
-                                <div class="icon">🧪</div>
                                 <h4>MockServer</h4>
                                 <p>HTTP/HTTPS 목 서버</p>
                             </div>
@@ -693,32 +680,32 @@
 
                         <div class="challenge-grid">
                             <div class="challenge-card">
-                                <h4>⏱️ 느린 실행 속도</h4>
+                                <h4>느린 실행 속도</h4>
                                 <p>외부 의존성으로 인한 테스트 실행 시간 증가</p>
                                 <div class="solution">→ 병렬 실행, 컨테이너 재사용, 테스트 범위 최적화</div>
                             </div>
                             <div class="challenge-card">
-                                <h4>🔄 테스트 격리</h4>
+                                <h4>테스트 격리</h4>
                                 <p>테스트 간 데이터 오염, 상태 의존성</p>
                                 <div class="solution">→ 트랜잭션 롤백, 테스트별 DB 초기화</div>
                             </div>
                             <div class="challenge-card">
-                                <h4>🌐 환경 일관성</h4>
+                                <h4>환경 일관성</h4>
                                 <p>로컬과 CI 환경 차이로 인한 불안정성</p>
                                 <div class="solution">→ Testcontainers, Docker Compose</div>
                             </div>
                             <div class="challenge-card">
-                                <h4>📡 네트워크 의존성</h4>
+                                <h4>네트워크 의존성</h4>
                                 <p>외부 API 호출의 불안정성</p>
                                 <div class="solution">→ WireMock, Mock Server로 대체</div>
                             </div>
                             <div class="challenge-card">
-                                <h4>🗃️ 테스트 데이터 관리</h4>
+                                <h4>테스트 데이터 관리</h4>
                                 <p>복잡한 테스트 데이터 설정</p>
                                 <div class="solution">→ Fixture, Factory 패턴 활용</div>
                             </div>
                             <div class="challenge-card">
-                                <h4>🎭 마이크로서비스 복잡성</h4>
+                                <h4>마이크로서비스 복잡성</h4>
                                 <p>다수 서비스 간 테스트 어려움</p>
                                 <div class="solution">→ Contract Testing, 서비스 경계 테스트</div>
                             </div>
@@ -743,27 +730,27 @@
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
-                                <h4>🔗 인터페이스 결함 발견</h4>
+                                <h4>인터페이스 결함 발견</h4>
                                 <p>컴포넌트 간 통신 문제를 프로덕션 전에 발견</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🗄️ 데이터 흐름 검증</h4>
+                                <h4>데이터 흐름 검증</h4>
                                 <p>시스템을 통과하는 데이터의 정확성 확인</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🔒 설정 오류 감지</h4>
+                                <h4>설정 오류 감지</h4>
                                 <p>환경 설정, 연결 문제 등 구성 오류 발견</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>📊 현실적인 시나리오</h4>
+                                <h4>현실적인 시나리오</h4>
                                 <p>실제 환경에 가까운 조건에서 테스트</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🚀 배포 자신감</h4>
+                                <h4>배포 자신감</h4>
                                 <p>통합 레벨 검증으로 배포 리스크 감소</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>📝 API 계약 검증</h4>
+                                <h4>API 계약 검증</h4>
                                 <p>서비스 간 API 호환성 보장</p>
                             </div>
                         </div>

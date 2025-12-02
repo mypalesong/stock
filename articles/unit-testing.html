@@ -7,13 +7,24 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #7f8c8d;
+            --text-color: #2c3e50;
+            --text-light: #5d6d7e;
+            --bg-light: #f8f9fa;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
         .article-body {
             overflow-x: hidden;
         }
 
-        /* Academic Indigo Theme */
+        /* Professional Header */
         .article-hero {
-            background: linear-gradient(135deg, #312e81 0%, #3730a3 50%, #4338ca 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             position: relative;
             overflow: hidden;
         }
@@ -26,18 +37,24 @@
             right: 0;
             bottom: 0;
             background:
-                radial-gradient(circle at 25% 45%, rgba(129, 140, 248, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 75% 55%, rgba(165, 180, 252, 0.15) 0%, transparent 50%);
+                radial-gradient(circle at 25% 45%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 55%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
         }
 
-        .paper-icon {
-            font-size: 3rem;
+        .paper-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: #e8eaf6;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
             margin-bottom: 1rem;
-            opacity: 0.9;
+            backdrop-filter: blur(10px);
         }
 
         .article-hero h1 {
-            color: #eef2ff;
+            color: #ffffff;
             font-family: 'Georgia', 'Times New Roman', serif;
             font-weight: 600;
             font-size: clamp(1.5rem, 4vw, 2.2rem);
@@ -45,9 +62,23 @@
         }
 
         .article-hero .meta {
-            color: #c7d2fe;
+            color: #b0bec5;
             font-family: 'Georgia', serif;
             font-style: italic;
+        }
+
+        /* Desktop Layout */
+        @media (min-width: 1200px) {
+            .article-body-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+
+            .article-body {
+                max-width: 70%;
+                margin: 0 auto;
+            }
         }
 
         /* Paper Sections */
@@ -55,38 +86,43 @@
             margin: 2.5rem 0;
         }
 
+        .paper-section > p {
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+
         .section-title {
             font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: #3730a3;
+            color: var(--primary-color);
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #6366f1;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .subsection-title {
             font-family: 'Georgia', serif;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            color: #4338ca;
+            color: var(--secondary-color);
             margin: 1.5rem 0 0.8rem 0;
         }
 
         /* Abstract Box */
         .abstract-box {
-            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-            border-left: 4px solid #6366f1;
-            padding: 1.5rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
             margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            border-radius: 6px;
         }
 
         .abstract-box h3 {
             font-family: 'Georgia', serif;
             font-size: 1rem;
             font-weight: 700;
-            color: #3730a3;
+            color: var(--primary-color);
             margin-bottom: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -95,25 +131,25 @@
         .abstract-box p {
             font-size: 0.95rem;
             line-height: 1.7;
-            color: #312e81;
+            color: var(--text-color);
             text-align: justify;
         }
 
         .keywords {
             margin-top: 1rem;
             font-size: 0.85rem;
-            color: #4f46e5;
+            color: var(--text-light);
         }
 
         .keywords strong {
-            color: #3730a3;
+            color: var(--primary-color);
         }
 
         /* Test Pyramid */
         .pyramid-box {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
             text-align: center;
@@ -152,15 +188,16 @@
 
         .figure-caption {
             font-size: 0.85rem;
-            color: #64748b;
+            color: var(--text-light);
             font-style: italic;
             margin-top: 0.8rem;
         }
 
         /* AAA Pattern Box */
         .aaa-box {
-            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-            border-radius: 12px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
@@ -173,7 +210,7 @@
         }
 
         .aaa-label {
-            background: #4338ca;
+            background: var(--primary-color);
             color: white;
             padding: 0.4rem 0.8rem;
             border-radius: 6px;
@@ -188,7 +225,7 @@
         }
 
         .aaa-content h4 {
-            color: #3730a3;
+            color: var(--primary-color);
             margin: 0 0 0.3rem 0;
             font-size: 1rem;
         }
@@ -196,13 +233,13 @@
         .aaa-content p {
             margin: 0;
             font-size: 0.9rem;
-            color: #4338ca;
+            color: var(--text-light);
         }
 
         /* Code Example */
         .code-block {
             background: #1e1e2e;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 1.2rem;
             margin: 1.5rem 0;
             font-family: 'Consolas', 'Monaco', monospace;
@@ -228,9 +265,9 @@
         }
 
         .first-card {
-            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-            border: 1px solid #c7d2fe;
-            border-radius: 8px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1rem;
             text-align: center;
         }
@@ -238,18 +275,18 @@
         .first-card .letter {
             font-size: 2rem;
             font-weight: 700;
-            color: #4338ca;
+            color: var(--primary-color);
         }
 
         .first-card h4 {
-            color: #3730a3;
+            color: var(--primary-color);
             font-size: 0.95rem;
             margin: 0.5rem 0;
         }
 
         .first-card p {
             font-size: 0.8rem;
-            color: #6366f1;
+            color: var(--text-light);
             margin: 0;
         }
 
@@ -262,7 +299,7 @@
         }
 
         .framework-table th {
-            background: #3730a3;
+            background: var(--primary-color);
             color: white;
             padding: 0.8rem;
             text-align: left;
@@ -271,22 +308,23 @@
 
         .framework-table td {
             padding: 0.8rem;
-            border-bottom: 1px solid #e2e8f0;
-            color: #374151;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
         .framework-table tr:nth-child(even) {
-            background: #eef2ff;
+            background: var(--bg-light);
         }
 
         .lang-badge {
             display: inline-block;
-            background: #c7d2fe;
-            color: #3730a3;
+            background: var(--bg-light);
+            color: var(--primary-color);
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: 600;
+            border: 1px solid var(--border-color);
         }
 
         /* Mock/Stub/Spy Box */
@@ -298,14 +336,14 @@
         }
 
         .double-card {
-            background: white;
-            border: 1px solid #c7d2fe;
-            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.2rem;
         }
 
         .double-card h4 {
-            color: #3730a3;
+            color: var(--primary-color);
             font-size: 1rem;
             margin-bottom: 0.5rem;
             display: flex;
@@ -315,21 +353,21 @@
 
         .double-card p {
             font-size: 0.9rem;
-            color: #64748b;
+            color: var(--text-light);
             margin: 0 0 0.5rem 0;
         }
 
         .double-card .example {
             font-size: 0.8rem;
-            color: #6366f1;
+            color: var(--accent-color);
             font-style: italic;
         }
 
         /* Coverage Box */
         .coverage-box {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            background: #f0fdf4;
             border: 1px solid #86efac;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
@@ -347,6 +385,7 @@
 
         .coverage-type {
             background: white;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 0.8rem;
         }
@@ -363,16 +402,16 @@
 
         /* Quote Box */
         .quote-box {
-            background: #eef2ff;
-            border-left: 4px solid #818cf8;
-            padding: 1.2rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 1.75rem 2rem;
             margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            border-radius: 6px;
         }
 
         .quote-box p {
             font-style: italic;
-            color: #4338ca;
+            color: var(--text-light);
             margin: 0;
         }
 
@@ -380,7 +419,7 @@
             font-style: normal;
             font-weight: 600;
             margin-top: 0.5rem;
-            color: #3730a3;
+            color: var(--primary-color);
         }
 
         /* Benefits Grid */
@@ -392,14 +431,14 @@
         }
 
         .benefit-card {
-            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-            border: 1px solid #a5b4fc;
-            border-radius: 8px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.2rem;
         }
 
         .benefit-card h4 {
-            color: #3730a3;
+            color: var(--primary-color);
             font-size: 1rem;
             margin-bottom: 0.5rem;
             display: flex;
@@ -409,15 +448,15 @@
 
         .benefit-card p {
             font-size: 0.9rem;
-            color: #4338ca;
+            color: var(--text-light);
             margin: 0;
         }
 
         /* Anti-pattern */
         .antipattern-box {
-            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            background: #fef2f2;
             border: 1px solid #fca5a5;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
@@ -440,8 +479,9 @@
 
         /* References */
         .references {
-            background: #eef2ff;
-            border-radius: 8px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
             margin: 2rem 0;
         }
@@ -449,7 +489,7 @@
         .references h3 {
             font-family: 'Georgia', serif;
             font-size: 1.1rem;
-            color: #3730a3;
+            color: var(--primary-color);
             margin-bottom: 1rem;
         }
 
@@ -460,7 +500,7 @@
 
         .references li {
             font-size: 0.85rem;
-            color: #4338ca;
+            color: var(--text-light);
             margin-bottom: 0.5rem;
             line-height: 1.5;
         }
@@ -488,7 +528,7 @@
             <div class="article-body-wrapper">
                 <div class="article-body">
                     <div class="article-hero">
-                        <div class="paper-icon">🧪</div>
+                        <div class="paper-badge">Research Paper</div>
                         <h1>Unit Testing: 단위 테스트 전략과 모범 사례</h1>
                         <p class="meta">Software Engineering Methodology Paper</p>
                     </div>
@@ -624,27 +664,27 @@
 
                         <div class="double-grid">
                             <div class="double-card">
-                                <h4>🎭 Mock</h4>
+                                <h4>Mock</h4>
                                 <p>기대되는 호출을 검증하는 객체. 행위(behavior) 검증에 사용</p>
                                 <div class="example">예: verify(emailService).send(any())</div>
                             </div>
                             <div class="double-card">
-                                <h4>📦 Stub</h4>
+                                <h4>Stub</h4>
                                 <p>미리 정의된 응답을 반환하는 객체. 상태(state) 테스트에 사용</p>
                                 <div class="example">예: when(repo.findById(1)).thenReturn(user)</div>
                             </div>
                             <div class="double-card">
-                                <h4>🕵️ Spy</h4>
+                                <h4>Spy</h4>
                                 <p>실제 객체를 감싸서 호출을 기록. 부분 Mock</p>
                                 <div class="example">예: spy(realService).methodCall()</div>
                             </div>
                             <div class="double-card">
-                                <h4>🎪 Fake</h4>
+                                <h4>Fake</h4>
                                 <p>단순화된 동작 구현체. 예: 인메모리 DB</p>
                                 <div class="example">예: InMemoryUserRepository</div>
                             </div>
                             <div class="double-card">
-                                <h4>🤖 Dummy</h4>
+                                <h4>Dummy</h4>
                                 <p>파라미터 채우기용 객체. 실제 사용되지 않음</p>
                                 <div class="example">예: new NullLogger()</div>
                             </div>
@@ -701,7 +741,7 @@
                         <h2 class="section-title">7. Code Coverage</h2>
 
                         <div class="coverage-box">
-                            <h4>📊 Coverage Types</h4>
+                            <h4>Coverage Types</h4>
                             <div class="coverage-types">
                                 <div class="coverage-type">
                                     <strong>Line Coverage</strong>
@@ -733,7 +773,7 @@
                         <h2 class="section-title">8. Anti-Patterns</h2>
 
                         <div class="antipattern-box">
-                            <h4>⚠️ 단위 테스트 안티패턴</h4>
+                            <h4>단위 테스트 안티패턴</h4>
                             <ul>
                                 <li><strong>The Liar:</strong> 항상 통과하지만 실제로 아무것도 검증하지 않는 테스트</li>
                                 <li><strong>The Giant:</strong> 너무 많은 것을 테스트하는 거대한 테스트</li>
@@ -751,27 +791,27 @@
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
-                                <h4>🐛 조기 결함 발견</h4>
+                                <h4>조기 결함 발견</h4>
                                 <p>개발 중 버그를 즉시 발견하여 수정 비용 최소화</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🔄 안전한 리팩토링</h4>
+                                <h4>안전한 리팩토링</h4>
                                 <p>테스트 스위트가 변경의 안전망 역할</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>📚 실행 가능한 문서</h4>
+                                <h4>실행 가능한 문서</h4>
                                 <p>테스트 코드가 사용법 예제 역할</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>📐 설계 개선</h4>
+                                <h4>설계 개선</h4>
                                 <p>테스트 용이성이 좋은 설계(낮은 결합도)로 유도</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🚀 배포 자신감</h4>
+                                <h4>배포 자신감</h4>
                                 <p>회귀 테스트로 배포 리스크 감소</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>⏱️ 디버깅 시간 단축</h4>
+                                <h4>디버깅 시간 단축</h4>
                                 <p>실패 테스트가 문제 위치를 정확히 지목</p>
                             </div>
                         </div>
