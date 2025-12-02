@@ -53,7 +53,63 @@ const searchInput = document.querySelector('.search-input');
 if (searchInput) {
     searchInput.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
-        // Search logic here
+        const cards = document.querySelectorAll('.article-card');
+        cards.forEach(card => {
+            const title = card.querySelector('.article-title')?.textContent.toLowerCase() || '';
+            const excerpt = card.querySelector('.article-excerpt')?.textContent.toLowerCase() || '';
+            const tags = card.querySelector('.article-tags')?.textContent.toLowerCase() || '';
+            if (title.includes(term) || excerpt.includes(term) || tags.includes(term)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Category Filter
+const categoryLinks = document.querySelectorAll('.category-link');
+const articleCards = document.querySelectorAll('.article-card');
+
+categoryLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const category = link.getAttribute('href').replace('#', '');
+
+        // Update active state
+        categoryLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        // Filter articles
+        articleCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            if (category === 'all' || cardCategory === category) {
+                card.style.display = '';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Scroll to articles section
+        const latestSection = document.getElementById('latest');
+        if (latestSection) {
+            latestSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Show All button (reset filter)
+const showAllLink = document.querySelector('.nav-link[href="#latest"]');
+if (showAllLink) {
+    showAllLink.addEventListener('click', (e) => {
+        categoryLinks.forEach(l => l.classList.remove('active'));
+        articleCards.forEach(card => {
+            card.style.display = '';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        });
     });
 }
 
