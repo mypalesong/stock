@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test-Driven Development: 테스트 주도 개발의 이론과 실제 | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        .article-body {
+            overflow-x: hidden;
+        }
+
+        /* Academic Navy Theme */
+        .article-hero {
+            background: linear-gradient(135deg, #0c1929 0%, #1a365d 50%, #1e3a5f 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(147, 197, 253, 0.08) 0%, transparent 50%);
+        }
+
+        .paper-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .article-hero h1 {
+            color: #e2e8f0;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-weight: 600;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            letter-spacing: -0.02em;
+        }
+
+        .article-hero .meta {
+            color: #94a3b8;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+        }
+
+        /* Paper Sections */
+        .paper-section {
+            margin: 2.5rem 0;
+            padding: 0;
+        }
+
+        .section-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .subsection-title {
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #334155;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        /* Abstract Box */
+        .abstract-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .abstract-box h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .abstract-box p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #475569;
+            text-align: justify;
+        }
+
+        /* Keywords */
+        .keywords {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .keywords strong {
+            color: #1e3a5f;
+        }
+
+        /* Figure/Diagram Box */
+        .figure-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .figure-box .diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .cycle-step {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 80px;
+        }
+
+        .cycle-step.red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .cycle-step.green { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .cycle-step.blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+
+        .cycle-arrow {
+            font-size: 1.5rem;
+            color: #94a3b8;
+        }
+
+        .figure-caption {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 0.8rem;
+        }
+
+        /* Code Example */
+        .code-example {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .code-example .comment { color: #64748b; }
+        .code-example .keyword { color: #f472b6; }
+        .code-example .function { color: #60a5fa; }
+        .code-example .string { color: #a5f3fc; }
+        .code-example .decorator { color: #fbbf24; }
+        .code-example code { color: #e2e8f0; }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .data-table th {
+            background: #1e3a5f;
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .quote-box p {
+            font-style: italic;
+            color: #92400e;
+            margin: 0;
+        }
+
+        .quote-box .author {
+            font-style: normal;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            color: #78350f;
+        }
+
+        /* Benefits List */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+
+        .benefit-card h4 {
+            color: #0369a1;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .benefit-card p {
+            font-size: 0.9rem;
+            color: #475569;
+            margin: 0;
+        }
+
+        /* References */
+        .references {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .references h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            color: #1e3a5f;
+            margin-bottom: 1rem;
+        }
+
+        .references ol {
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+
+        .references li {
+            font-size: 0.85rem;
+            color: #475569;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            margin: 1.5rem 0;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        .step-number {
+            background: #1e3a5f;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: #1e3a5f;
+            margin: 0 0 0.3rem 0;
+            font-size: 1rem;
+        }
+
+        .step-content p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="../index.html" class="header-title">
+                <span class="header-logo">Stock Insights</span>
+            </a>
+        </div>
+    </header>
+    <main class="article-page">
+        <article>
+            <header class="article-header">
+                <nav class="breadcrumb">
+                    <a href="../index.html">홈</a>
+                    <span>/</span>
+                    <a href="../index.html?category=tech">개발 방법론</a>
+                    <span>/</span>
+                    <span>TDD</span>
+                </nav>
+            </header>
+            <div class="article-body-wrapper">
+                <div class="article-body">
+                    <div class="article-hero">
+                        <div class="paper-icon">📋</div>
+                        <h1>Test-Driven Development: 테스트 주도 개발의 이론과 실제</h1>
+                        <p class="meta">Software Engineering Methodology Paper</p>
+                    </div>
+
+                    <div class="abstract-box">
+                        <h3>Abstract</h3>
+                        <p>
+                            테스트 주도 개발(Test-Driven Development, TDD)은 소프트웨어 개발 프로세스에서 테스트를 먼저 작성하고,
+                            해당 테스트를 통과하는 최소한의 코드를 구현한 후, 리팩토링을 수행하는 반복적인 개발 방법론이다.
+                            본 논문에서는 TDD의 핵심 원칙인 Red-Green-Refactor 사이클을 분석하고, 실제 프로젝트 적용 사례를 통해
+                            TDD가 코드 품질, 유지보수성, 개발 생산성에 미치는 영향을 고찰한다. 연구 결과, TDD를 적용한 프로젝트에서
+                            결함 밀도가 평균 40-80% 감소하였으며, 장기적 유지보수 비용이 현저히 절감됨을 확인하였다.
+                        </p>
+                        <div class="keywords">
+                            <strong>Keywords:</strong> Test-Driven Development, TDD, Unit Testing, Red-Green-Refactor, Software Quality, Agile Development
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">1. Introduction</h2>
+                        <p>
+                            전통적인 소프트웨어 개발 방법론에서 테스트는 개발 완료 후 수행되는 검증 단계로 여겨져 왔다.
+                            그러나 Kent Beck이 1999년 Extreme Programming(XP)의 핵심 실천법으로 TDD를 제안한 이후,
+                            테스트를 개발 프로세스의 중심에 두는 패러다임 전환이 이루어졌다.
+                        </p>
+                        <p>
+                            TDD는 "테스트 먼저(Test First)" 접근법을 통해 개발자가 코드를 작성하기 전에
+                            해당 코드의 기대 동작을 명확히 정의하도록 강제한다. 이는 요구사항에 대한 깊은 이해를 촉진하고,
+                            설계 결정을 테스트 가능성(Testability) 관점에서 재고하게 만든다.
+                        </p>
+
+                        <div class="quote-box">
+                            <p>"Clean code that works"</p>
+                            <div class="author">— Ron Jeffries, TDD의 목표 정의</div>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">2. Theoretical Background</h2>
+
+                        <h3 class="subsection-title">2.1 TDD의 정의와 기원</h3>
+                        <p>
+                            TDD는 1990년대 후반 Extreme Programming(XP) 방법론에서 체계화되었으나,
+                            그 근원은 1960년대 NASA의 Mercury 프로젝트까지 거슬러 올라간다.
+                            당시 개발자들은 punch card 기반 프로그래밍에서 테스트 케이스를 먼저 작성하는 방식을 사용했다.
+                        </p>
+
+                        <h3 class="subsection-title">2.2 Red-Green-Refactor 사이클</h3>
+                        <p>
+                            TDD의 핵심은 세 단계로 구성된 반복적 개발 사이클이다:
+                        </p>
+
+                        <div class="figure-box">
+                            <div class="diagram">
+                                <div class="cycle-step red">🔴 Red</div>
+                                <span class="cycle-arrow">→</span>
+                                <div class="cycle-step green">🟢 Green</div>
+                                <span class="cycle-arrow">→</span>
+                                <div class="cycle-step blue">🔵 Refactor</div>
+                                <span class="cycle-arrow">→</span>
+                            </div>
+                            <p class="figure-caption">Figure 1. TDD Red-Green-Refactor Cycle</p>
+                        </div>
+
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Red Phase - 실패하는 테스트 작성</h4>
+                                    <p>구현하고자 하는 기능에 대한 테스트를 먼저 작성한다. 아직 코드가 없으므로 테스트는 반드시 실패한다.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Green Phase - 테스트 통과를 위한 최소 코드 작성</h4>
+                                    <p>테스트를 통과시키는 가장 간단한 코드를 작성한다. 이 단계에서는 코드의 우아함보다 동작에 집중한다.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Refactor Phase - 코드 개선</h4>
+                                    <p>테스트가 통과하는 상태를 유지하면서 코드의 중복을 제거하고 구조를 개선한다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">3. Implementation Methodology</h2>
+
+                        <h3 class="subsection-title">3.1 테스트 케이스 작성 원칙</h3>
+                        <p>
+                            효과적인 TDD를 위해서는 FIRST 원칙을 준수하는 테스트 케이스 작성이 필수적이다:
+                        </p>
+
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>원칙</th>
+                                    <th>설명</th>
+                                    <th>적용 방법</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Fast</strong></td>
+                                    <td>테스트는 빠르게 실행되어야 한다</td>
+                                    <td>외부 의존성 Mock 처리, DB 접근 최소화</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Independent</strong></td>
+                                    <td>테스트 간 의존성이 없어야 한다</td>
+                                    <td>각 테스트는 독립적 setUp/tearDown</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Repeatable</strong></td>
+                                    <td>어떤 환경에서도 동일한 결과</td>
+                                    <td>환경 변수, 시간 의존성 제거</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Self-validating</strong></td>
+                                    <td>결과가 명확히 성공/실패로 판정</td>
+                                    <td>명확한 assertion 사용</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Timely</strong></td>
+                                    <td>프로덕션 코드 작성 직전에 테스트 작성</td>
+                                    <td>Red-Green-Refactor 사이클 준수</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="subsection-title">3.2 코드 예시</h3>
+                        <p>
+                            다음은 Python을 사용한 TDD 사이클의 실제 적용 예시이다:
+                        </p>
+
+                        <div class="code-example">
+                            <code>
+<span class="comment"># Step 1: Red - 실패하는 테스트 작성</span>
+<span class="keyword">import</span> pytest
+
+<span class="keyword">def</span> <span class="function">test_calculator_add</span>():
+    calculator = Calculator()
+    result = calculator.add(2, 3)
+    <span class="keyword">assert</span> result == 5  <span class="comment"># Calculator 클래스가 없으므로 실패</span>
+
+<span class="comment"># Step 2: Green - 최소 구현</span>
+<span class="keyword">class</span> <span class="function">Calculator</span>:
+    <span class="keyword">def</span> <span class="function">add</span>(self, a, b):
+        <span class="keyword">return</span> a + b  <span class="comment"># 테스트 통과를 위한 최소 코드</span>
+
+<span class="comment"># Step 3: Refactor - 필요시 구조 개선</span>
+<span class="keyword">class</span> <span class="function">Calculator</span>:
+    <span class="string">"""산술 연산을 수행하는 계산기 클래스"""</span>
+
+    <span class="keyword">def</span> <span class="function">add</span>(self, a: float, b: float) -> float:
+        <span class="string">"""두 수의 합을 반환한다."""</span>
+        <span class="keyword">return</span> a + b
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">4. Benefits and Outcomes</h2>
+
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <h4>📉 결함 밀도 감소</h4>
+                                <p>IBM, Microsoft 연구에 따르면 TDD 적용 시 결함이 40-80% 감소</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>📐 향상된 설계</h4>
+                                <p>테스트 용이성을 고려한 설계로 낮은 결합도와 높은 응집도 달성</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>📚 살아있는 문서화</h4>
+                                <p>테스트 코드가 시스템 동작을 설명하는 실행 가능한 문서 역할</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>🔄 안전한 리팩토링</h4>
+                                <p>포괄적인 테스트 스위트가 변경에 대한 안전망 제공</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>⏱️ 디버깅 시간 감소</h4>
+                                <p>작은 단위의 테스트로 문제 발생 지점을 즉시 파악</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>💡 명확한 요구사항</h4>
+                                <p>테스트 작성 과정에서 요구사항의 모호함을 사전에 발견</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">5. Challenges and Limitations</h2>
+                        <p>
+                            TDD의 효과에도 불구하고, 실제 적용에는 여러 도전 과제가 존재한다:
+                        </p>
+                        <ul>
+                            <li><strong>초기 학습 곡선:</strong> 테스트 먼저 사고방식에 적응하는 데 시간이 필요</li>
+                            <li><strong>단기적 개발 속도 저하:</strong> 초기에는 개발 시간이 15-35% 증가할 수 있음</li>
+                            <li><strong>레거시 코드 적용 어려움:</strong> 테스트를 고려하지 않은 기존 코드에 TDD 적용의 어려움</li>
+                            <li><strong>UI/비동기 테스트 복잡성:</strong> 사용자 인터페이스나 비동기 로직 테스트의 기술적 난이도</li>
+                            <li><strong>과도한 테스트:</strong> 불필요한 테스트 작성으로 인한 유지보수 부담 증가 가능성</li>
+                        </ul>
+                    </div>
+
+                    <div class="paper-section">
+                        <h2 class="section-title">6. Conclusion</h2>
+                        <p>
+                            Test-Driven Development는 소프트웨어 품질 향상과 유지보수성 개선에 효과적인 개발 방법론임이
+                            다양한 연구와 실무 사례를 통해 입증되었다. Red-Green-Refactor 사이클의 규율 있는 적용은
+                            개발자로 하여금 요구사항을 명확히 이해하고, 테스트 가능한 설계를 도출하며,
+                            지속적인 코드 개선을 수행하도록 이끈다.
+                        </p>
+                        <p>
+                            단기적으로는 개발 시간이 증가할 수 있으나, 장기적 관점에서 결함 수정 비용 감소,
+                            리팩토링 안전성 확보, 문서화 효과 등을 고려하면 TDD는 충분한 투자 가치가 있다.
+                            특히 복잡한 비즈니스 로직을 다루는 엔터프라이즈 애플리케이션에서 그 효과가 극대화된다.
+                        </p>
+                    </div>
+
+                    <div class="references">
+                        <h3>References</h3>
+                        <ol>
+                            <li>Beck, K. (2002). <em>Test-Driven Development: By Example</em>. Addison-Wesley Professional.</li>
+                            <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.</li>
+                            <li>Nagappan, N., et al. (2008). "Realizing quality improvement through test driven development." <em>Empirical Software Engineering</em>, 13(3), 289-302.</li>
+                            <li>Williams, L., et al. (2003). "Test-driven development as a defect-reduction practice." <em>IEEE International Symposium on Software Reliability Engineering</em>.</li>
+                            <li>Janzen, D., & Saiedian, H. (2005). "Test-driven development: Concepts, taxonomy, and future direction." <em>Computer</em>, 38(9), 43-50.</li>
+                        </ol>
+                    </div>
+
+                    <div class="related-articles">
+                        <h3>관련 논문</h3>
+                        <div class="related-grid">
+                            <a href="bdd-methodology.html" class="related-card">
+                                <span class="related-icon">📋</span>
+                                <span class="related-title">BDD: 행위 주도 개발</span>
+                            </a>
+                            <a href="unit-testing.html" class="related-card">
+                                <span class="related-icon">🧪</span>
+                                <span class="related-title">단위 테스트 전략</span>
+                            </a>
+                            <a href="clean-code.html" class="related-card">
+                                <span class="related-icon">✨</span>
+                                <span class="related-title">클린 코드 원칙</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="source-box">
+                        <p><strong>Article Info:</strong> Software Engineering Methodology Series<br>
+                        <strong>Classification:</strong> Development Practices / Testing Methodology<br>
+                        <strong>Last Updated:</strong> 2024</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+    <footer class="site-footer">
+        <p>© 2024 Stock Insights. All rights reserved.</p>
+    </footer>
+</body>
+</html>
