@@ -179,6 +179,16 @@ body {
     background-color: rgba(255,255,255,0.08);
 }
 
+.category-link.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.category-link.active .category-count {
+    background: rgba(255,255,255,0.25);
+}
+
 .category-count {
     background: rgba(255,255,255,0.15);
     padding: 2px 8px;
