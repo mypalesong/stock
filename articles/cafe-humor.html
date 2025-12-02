@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카페 생존기: 커피 한 잔의 모험 | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        /* Cafe Humor Theme - Coffee Brown */
+        .cafe-hero {
+            background: linear-gradient(135deg, #78350f 0%, #92400e 50%, #a16207 100%);
+            position: relative;
+        }
+
+        .cafe-hero::before {
+            content: "☕";
+            position: absolute;
+            right: 30px;
+            bottom: 15px;
+            font-size: 130px;
+            opacity: 0.15;
+        }
+
+        .cafe-badge {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Coffee Cup Animation */
+        .coffee-parade {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+
+        .coffee-item {
+            font-size: 42px;
+            animation: coffeeSteam 2s ease-in-out infinite;
+            cursor: default;
+        }
+
+        .coffee-item:nth-child(1) { animation-delay: 0s; }
+        .coffee-item:nth-child(2) { animation-delay: 0.2s; }
+        .coffee-item:nth-child(3) { animation-delay: 0.4s; }
+        .coffee-item:nth-child(4) { animation-delay: 0.6s; }
+        .coffee-item:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes coffeeSteam {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Brown Gradient Text */
+        .brown-gradient {
+            background: linear-gradient(135deg, #78350f 0%, #a16207 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scene Card */
+        .scene-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 20px;
+            padding: 28px;
+            margin: 28px 0;
+            border-left: 5px solid #92400e;
+            position: relative;
+        }
+
+        .scene-card .scene-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .scene-card .scene-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #78350f;
+            margin-bottom: 12px;
+            margin-top: 8px;
+        }
+
+        .scene-card .scene-content {
+            font-size: 15px;
+            color: #92400e;
+            line-height: 1.7;
+        }
+
+        .scene-card .punchline {
+            margin-top: 16px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #78350f;
+            border: 2px dashed #fbbf24;
+        }
+
+        /* Menu Board */
+        .menu-board {
+            background: #1c1917;
+            border-radius: 20px;
+            padding: 32px;
+            margin: 32px 0;
+            color: white;
+            position: relative;
+        }
+
+        .menu-board::before {
+            content: "MENU";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #78350f;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #44403c;
+            font-size: 15px;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-name {
+            color: #fef3c7;
+        }
+
+        .menu-joke {
+            color: #a8a29e;
+            font-size: 13px;
+        }
+
+        /* Character Cards */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .character-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            border: 2px solid #fef3c7;
+            transition: all 0.3s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-4px) rotate(1deg);
+            border-color: #92400e;
+            box-shadow: 0 12px 24px rgba(120, 53, 15, 0.15);
+        }
+
+        .character-emoji {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+        .character-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #78350f;
+            margin-bottom: 8px;
+        }
+
+        .character-card p {
+            font-size: 13px;
+            color: #92400e;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Order Complexity Meter */
+        .complexity-section {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 24px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .complexity-section h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #78350f;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .complexity-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .complexity-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #78350f;
+            min-width: 120px;
+        }
+
+        .complexity-meter {
+            flex: 1;
+            height: 20px;
+            background: #e7e5e4;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .complexity-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .complexity-fill.easy { width: 20%; background: #22c55e; }
+        .complexity-fill.medium { width: 50%; background: #f59e0b; }
+        .complexity-fill.hard { width: 75%; background: #f97316; }
+        .complexity-fill.extreme { width: 100%; background: #ef4444; }
+
+        /* Receipt Style */
+        .receipt-box {
+            background: #fffef0;
+            border: 2px dashed #d4d4d4;
+            border-radius: 4px;
+            padding: 24px;
+            margin: 28px 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .receipt-box::before {
+            content: "🧾";
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 30px;
+        }
+
+        .receipt-header {
+            text-align: center;
+            border-bottom: 1px dashed #999;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .receipt-header h4 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .receipt-total {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 2px solid #333;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Dialog Box */
+        .dialog-box {
+            margin: 28px 0;
+        }
+
+        .dialog-line {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+        .dialog-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            border: 2px solid #fbbf24;
+        }
+
+        .dialog-bubble {
+            background: #fef3c7;
+            border-radius: 18px;
+            padding: 14px 18px;
+            font-size: 14px;
+            color: #78350f;
+            position: relative;
+            max-width: 80%;
+        }
+
+        .dialog-bubble.barista {
+            background: #78350f;
+            color: white;
+        }
+
+        .dialog-bubble::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 14px;
+            border-width: 8px 8px 8px 0;
+            border-style: solid;
+            border-color: transparent #fef3c7 transparent transparent;
+        }
+
+        .dialog-bubble.barista::before {
+            border-color: transparent #78350f transparent transparent;
+        }
+
+        /* Coffee Level Gauge */
+        .coffee-gauge {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin: 28px 0;
+            border: 2px solid #fef3c7;
+        }
+
+        .gauge-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #78350f;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .gauge-container {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .gauge-cup {
+            width: 50px;
+            height: 60px;
+            background: #e7e5e4;
+            border-radius: 0 0 10px 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gauge-cup.filled {
+            background: linear-gradient(to top, #78350f 0%, #92400e 100%);
+        }
+
+        .gauge-cup::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 10px;
+            background: inherit;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .gauge-label {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 8px;
+            color: #78350f;
+        }
+
+        /* Survival Tips */
+        .survival-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .survival-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid #fef3c7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .survival-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #78350f, #92400e, #a16207);
+        }
+
+        .survival-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .survival-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #78350f;
+            margin-bottom: 10px;
+        }
+
+        .survival-card p {
+            font-size: 14px;
+            color: #92400e;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cafe-cta {
+            background: linear-gradient(135deg, #78350f 0%, #92400e 50%, #a16207 100%);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cafe-cta::before {
+            content: "☕ 🧁 🥐 🍰 ☕";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            opacity: 0.2;
+        }
+
+        .cafe-cta h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .cafe-cta p {
+            font-size: 16px;
+            opacity: 0.95;
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="../index.html" class="site-logo">Stock Insights</a>
+                <p class="site-tagline">Life & Business Insights</p>
+            </div>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">메뉴</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <header class="site-header">
+                <div class="header-content">
+                    <h1 class="header-title">유머</h1>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <article class="article-page">
+                    <header class="article-header cafe-hero">
+                        <div class="article-header-content">
+                            <div class="breadcrumb">
+                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 유머
+                            </div>
+                            <span class="article-category-badge cafe-badge">유머</span>
+                            <h1 class="article-main-title">카페 생존기: 커피 한 잔의 모험</h1>
+                            <div class="article-header-meta">
+                                <span>2024년 12월 2일</span>
+                                <span>7분 읽기</span>
+                                <span>Stock Insights 리서치</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="article-body-wrapper">
+                        <div class="article-body">
+                            <p class="lead">
+                                "아메리카노 한 잔이요"라고 말하면 끝날 줄 알았습니다.
+                                그런데 바리스타는 묻습니다. 사이즈는요? 온도는요? 샷 추가하시겠어요?
+                                카페는 단순한 커피숍이 아닙니다.
+                                그곳은 <strong>결정 장애 테스트 센터</strong>입니다.
+                            </p>
+
+                            <div class="coffee-parade">
+                                <span class="coffee-item">☕</span>
+                                <span class="coffee-item">🧁</span>
+                                <span class="coffee-item">🥐</span>
+                                <span class="coffee-item">🍰</span>
+                                <span class="coffee-item">☕</span>
+                            </div>
+
+                            <h2 class="brown-gradient">카페의 불변의 법칙들</h2>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #1</span>
+                                <div class="scene-title">☕ 주문의 법칙</div>
+                                <div class="scene-content">
+                                    앞에서 기다릴 때는 "아메리카노" 확고했는데,
+                                    막상 내 차례가 되면 갑자기 메뉴판이 새롭게 보입니다.
+                                    "저기... 이거 뭐예요?" 뒤에 줄이 10명.
+                                </div>
+                                <div class="punchline">
+                                    💡 결론: 결국 아메리카노 주문함. 근데 "아이스로 할까 핫으로 할까" 10초 고민.
+                                </div>
+                            </div>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #2</span>
+                                <div class="scene-title">🪑 자리의 법칙</div>
+                                <div class="scene-content">
+                                    카페에서 좋은 자리는 두 종류입니다:<br>
+                                    1) 내가 앉으려던 자리 - 방금 누가 앉음<br>
+                                    2) 내가 포기한 자리 - 다음 사람이 앉자마자 비어버림
+                                </div>
+                                <div class="punchline">
+                                    💡 콘센트 있는 자리는 전설 속에서만 존재합니다.
+                                </div>
+                            </div>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #3</span>
+                                <div class="scene-title">📱 노트북 사용자의 법칙</div>
+                                <div class="scene-content">
+                                    아메리카노 한 잔 시키고 6시간 자리 점령.
+                                    화장실 갈 때는 노트북에 "자리 있어요" 포스트잇 부착.
+                                    카페 사장님의 눈빛이 따갑습니다.
+                                </div>
+                                <div class="punchline">
+                                    💡 시간당 비용: 아메리카노 4,500원 ÷ 6시간 = 750원/시간.
+                                    웬만한 코워킹 스페이스보다 저렴!
+                                </div>
+                            </div>
+
+                            <h2>카페에서 만나는 캐릭터들</h2>
+
+                            <div class="character-grid">
+                                <div class="character-card">
+                                    <div class="character-emoji">💻</div>
+                                    <h4>만년 대학생</h4>
+                                    <p>오전 10시 출근, 오후 10시 퇴근. 카페가 집보다 편함. 바리스타와 눈인사.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">📸</div>
+                                    <h4>인스타그래머</h4>
+                                    <p>커피 오면 10분간 촬영 타임. 먹기 전에 50장 찍음. 커피 식어도 상관없음.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">📞</div>
+                                    <h4>통화의 달인</h4>
+                                    <p>"여보세요? 아 네네 그래서요..." 옆 테이블 모든 사람이 통화 내용 파악 중.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">📚</div>
+                                    <h4>공시생</h4>
+                                    <p>책 10권에 필기구 셋트. 눈에 다크서클. 커피가 수액입니다.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">👥</div>
+                                    <h4>수다쟁이 그룹</h4>
+                                    <p>4명이 테이블 2개 점령. 웃음소리 데시벨 측정 불가. 대화 주제 무한 확장.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">😴</div>
+                                    <h4>낮잠러</h4>
+                                    <p>커피 한 모금 마시고 숙면. 코골이 보너스. "손님, 저희 마감이에요."</p>
+                                </div>
+                            </div>
+
+                            <h2>주문의 복잡도</h2>
+
+                            <div class="complexity-section">
+                                <h3>☕ 주문 난이도 측정기</h3>
+                                <div class="complexity-bar">
+                                    <span class="complexity-label">아메리카노</span>
+                                    <div class="complexity-meter">
+                                        <div class="complexity-fill easy"></div>
+                                    </div>
+                                </div>
+                                <div class="complexity-bar">
+                                    <span class="complexity-label">바닐라 라떼</span>
+                                    <div class="complexity-meter">
+                                        <div class="complexity-fill medium"></div>
+                                    </div>
+                                </div>
+                                <div class="complexity-bar">
+                                    <span class="complexity-label">디카페인 아이스 오트밀크 바닐라 라떼 샷추가 시럽반</span>
+                                    <div class="complexity-meter">
+                                        <div class="complexity-fill hard"></div>
+                                    </div>
+                                </div>
+                                <div class="complexity-bar">
+                                    <span class="complexity-label">시즌 한정 신메뉴 커스터마이징</span>
+                                    <div class="complexity-meter">
+                                        <div class="complexity-fill extreme"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dialog-box">
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">👨</div>
+                                    <div class="dialog-bubble">
+                                        저... 아이스 아메리카노 한 잔이요.
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">👩‍🍳</div>
+                                    <div class="dialog-bubble barista">
+                                        사이즈 어떻게 해드릴까요? 톨, 그란데, 벤티 있어요.
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">👨</div>
+                                    <div class="dialog-bubble">
+                                        어... 중간이요. (뭐가 중간이지?)
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">👩‍🍳</div>
+                                    <div class="dialog-bubble barista">
+                                        샷 추가하시겠어요? 시럽 변경이나 추가도 가능해요.
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">👨</div>
+                                    <div class="dialog-bubble">
+                                        ... (멘탈 과부하) 그냥 기본으로요.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>카페 메뉴판의 진실</h2>
+
+                            <div class="menu-board">
+                                <div class="menu-item">
+                                    <div>
+                                        <span class="menu-name">아메리카노</span><br>
+                                        <span class="menu-joke">에스프레소 + 물 = 4,500원의 마법</span>
+                                    </div>
+                                    <span>4,500원</span>
+                                </div>
+                                <div class="menu-item">
+                                    <div>
+                                        <span class="menu-name">카페라떼</span><br>
+                                        <span class="menu-joke">우유 많이 들어간 건 비밀</span>
+                                    </div>
+                                    <span>5,000원</span>
+                                </div>
+                                <div class="menu-item">
+                                    <div>
+                                        <span class="menu-name">바닐라 라떼</span><br>
+                                        <span class="menu-joke">달달한 것을 커피라 부를 수 있을까</span>
+                                    </div>
+                                    <span>5,500원</span>
+                                </div>
+                                <div class="menu-item">
+                                    <div>
+                                        <span class="menu-name">시그니처 뭐시기</span><br>
+                                        <span class="menu-joke">이름 외우기 포기</span>
+                                    </div>
+                                    <span>7,000원</span>
+                                </div>
+                                <div class="menu-item">
+                                    <div>
+                                        <span class="menu-name">계절 한정 신메뉴</span><br>
+                                        <span class="menu-joke">인스타용, 맛은 보너스</span>
+                                    </div>
+                                    <span>8,500원</span>
+                                </div>
+                            </div>
+
+                            <h2>영수증의 진실</h2>
+
+                            <div class="receipt-box">
+                                <div class="receipt-header">
+                                    <h4>*** 별다방 카페 ***</h4>
+                                    <div>2024-12-02 14:32</div>
+                                </div>
+                                <div class="receipt-item">
+                                    <span>아이스 아메리카노 (원래 목적)</span>
+                                    <span>4,500원</span>
+                                </div>
+                                <div class="receipt-item">
+                                    <span>케이크 (눈에 들어와서)</span>
+                                    <span>6,800원</span>
+                                </div>
+                                <div class="receipt-item">
+                                    <span>마들렌 (케이크만 먹기 뭐해서)</span>
+                                    <span>3,200원</span>
+                                </div>
+                                <div class="receipt-item">
+                                    <span>물 (커피 마셨으니)</span>
+                                    <span>0원</span>
+                                </div>
+                                <div class="receipt-item">
+                                    <span>텀블러 (한정판이래서)</span>
+                                    <span>25,000원</span>
+                                </div>
+                                <div class="receipt-total">
+                                    <span>총 합계</span>
+                                    <span>39,500원</span>
+                                </div>
+                            </div>
+
+                            <p style="text-align: center; font-style: italic; color: #666;">
+                                원래 목적: 아메리카노 4,500원<br>
+                                실제 지출: 39,500원<br>
+                                <strong>순간의 유혹 지수: 878%</strong> 📈
+                            </p>
+
+                            <h2>커피 의존도 체크</h2>
+
+                            <div class="coffee-gauge">
+                                <div class="gauge-title">☕ 하루 커피 섭취량과 상태</div>
+                                <div class="gauge-container">
+                                    <div>
+                                        <div class="gauge-cup"></div>
+                                        <div class="gauge-label">0잔<br><small>좀비</small></div>
+                                    </div>
+                                    <div>
+                                        <div class="gauge-cup filled"></div>
+                                        <div class="gauge-label">1잔<br><small>인간</small></div>
+                                    </div>
+                                    <div>
+                                        <div class="gauge-cup filled"></div>
+                                        <div class="gauge-label">2잔<br><small>활력</small></div>
+                                    </div>
+                                    <div>
+                                        <div class="gauge-cup filled"></div>
+                                        <div class="gauge-label">3잔<br><small>과각성</small></div>
+                                    </div>
+                                    <div>
+                                        <div class="gauge-cup filled"></div>
+                                        <div class="gauge-label">4잔+<br><small>심장춤</small></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>카페 생존 가이드</h2>
+
+                            <div class="survival-grid">
+                                <div class="survival-card">
+                                    <div class="survival-icon">⏰</div>
+                                    <h4>피크 타임을 피하라</h4>
+                                    <p>점심시간, 오후 2-4시는 전쟁터입니다. 오전 10시나 저녁 7시 이후가 여유롭습니다. 물론 자리가 있다면.</p>
+                                </div>
+                                <div class="survival-card">
+                                    <div class="survival-icon">🔌</div>
+                                    <h4>충전기를 챙겨라</h4>
+                                    <p>콘센트 자리는 복권 당첨 확률입니다. 보조 배터리가 필수. 안 가져오면 노트북은 비싼 문진.</p>
+                                </div>
+                                <div class="survival-card">
+                                    <div class="survival-icon">🎧</div>
+                                    <h4>이어폰을 가져가라</h4>
+                                    <p>옆 테이블 통화 소리, 그룹 웃음 소리, BGM. 소음 속에서 집중하려면 노이즈캔슬링이 답입니다.</p>
+                                </div>
+                                <div class="survival-card">
+                                    <div class="survival-icon">💳</div>
+                                    <h4>앱을 미리 깔아라</h4>
+                                    <p>사이렌 오더, 스마트 오더. 줄 안 서고 픽업만 하면 됩니다. 현대 사회의 축복.</p>
+                                </div>
+                            </div>
+
+                            <div class="scene-card">
+                                <span class="scene-number">실화</span>
+                                <div class="scene-title">📍 자리 잡기의 기술</div>
+                                <div class="scene-content">
+                                    <strong>10:00</strong> - 카페 도착. 콘센트 자리 발견! 뛸듯이 기쁨.<br>
+                                    <strong>10:01</strong> - 주문하러 감.<br>
+                                    <strong>10:02</strong> - 돌아오니 누가 앉아있음.<br>
+                                    <strong>10:03</strong> - 구석 자리에 앉음. 콘센트 없음.<br>
+                                    <strong>10:04</strong> - 원래 자리 사람, 짐만 두고 나감.<br>
+                                    <strong>10:30</strong> - 아직 안 돌아옴.<br>
+                                </div>
+                                <div class="punchline">
+                                    💡 교훈: 먼저 자리 확보, 그 다음 주문. 이게 정답입니다.
+                                </div>
+                            </div>
+
+                            <div class="cafe-cta">
+                                <h3>☕ 오늘도 커피 한 잔 하셨나요?</h3>
+                                <p>
+                                    카페에서 벌어지는 소소한 해프닝들.
+                                    짜증날 수도 있지만, 돌이켜보면 다 웃음이 됩니다.
+                                    내일도 아메리카노 한 잔으로 시작해요! ☕
+                                </p>
+                            </div>
+
+                            <div class="conclusion-box conclusion-blue">
+                                <p>
+                                    카페는 단순히 커피를 마시는 곳이 아닙니다.
+                                    누군가에게는 작업실, 누군가에게는 데이트 장소,
+                                    누군가에게는 도피처입니다.
+                                </p>
+                                <p>
+                                    그리고 그 모든 사람들이 한 공간에 모여
+                                    각자의 이야기를 만들어갑니다.
+                                    오늘 당신의 카페 스토리는 어떠셨나요? 😊
+                                </p>
+                            </div>
+
+                            <div class="sources-box sources-box-rounded">
+                                <h3>면책 조항</h3>
+                                <ul>
+                                    <li>본 글은 100% 유머 목적이며, 어떤 카페도 비하하려는 의도가 없습니다</li>
+                                    <li>카페에서 6시간 버티기는 작성자의 경험담입니다 🙈</li>
+                                    <li>커피 의존도 체크는 의학적 근거가 전혀 없습니다</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <aside class="related-articles related-rounded">
+                            <h3>관련 글</h3>
+                            <a href="supermarket-humor.html" class="related-link">
+                                <div>
+                                    <h4>슈퍼마켓 생존기</h4>
+                                    <p>장보기의 숨겨진 코미디</p>
+                                </div>
+                            </a>
+                            <a href="humor-in-life.html" class="related-link">
+                                <div>
+                                    <h4>웃음의 기술</h4>
+                                    <p>4050대, 유머가 필요한 이유</p>
+                                </div>
+                            </a>
+                        </aside>
+                    </div>
+                </article>
+            </main>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">
+                        © 2024 Stock Insights. 오늘도 커피 한 잔의 여유를! ☕
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

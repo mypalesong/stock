@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온라인쇼핑 생존기: 장바구니의 유혹 | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        /* Online Shopping Humor Theme - Purple */
+        .shopping-hero {
+            background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
+            position: relative;
+        }
+
+        .shopping-hero::before {
+            content: "🛍️";
+            position: absolute;
+            right: 30px;
+            bottom: 15px;
+            font-size: 130px;
+            opacity: 0.15;
+        }
+
+        .shopping-badge {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Shopping Animation */
+        .shopping-parade {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+
+        .shopping-item {
+            font-size: 42px;
+            animation: shopBounce 1.5s ease-in-out infinite;
+            cursor: default;
+        }
+
+        .shopping-item:nth-child(1) { animation-delay: 0s; }
+        .shopping-item:nth-child(2) { animation-delay: 0.2s; }
+        .shopping-item:nth-child(3) { animation-delay: 0.4s; }
+        .shopping-item:nth-child(4) { animation-delay: 0.6s; }
+        .shopping-item:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes shopBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+        }
+
+        /* Purple Gradient Text */
+        .purple-gradient {
+            background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scene Card */
+        .scene-card {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border-radius: 20px;
+            padding: 28px;
+            margin: 28px 0;
+            border-left: 5px solid #8b5cf6;
+            position: relative;
+        }
+
+        .scene-card .scene-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .scene-card .scene-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 12px;
+            margin-top: 8px;
+        }
+
+        .scene-card .scene-content {
+            font-size: 15px;
+            color: #7c3aed;
+            line-height: 1.7;
+        }
+
+        .scene-card .punchline {
+            margin-top: 16px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #5b21b6;
+            border: 2px dashed #c4b5fd;
+        }
+
+        /* Character Cards */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .character-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            border: 2px solid #ede9fe;
+            transition: all 0.3s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-4px) rotate(1deg);
+            border-color: #8b5cf6;
+            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.15);
+        }
+
+        .character-emoji {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+        .character-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 8px;
+        }
+
+        .character-card p {
+            font-size: 13px;
+            color: #7c3aed;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Cart Section */
+        .cart-section {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            margin: 32px 0;
+            border: 2px solid #ede9fe;
+        }
+
+        .cart-section h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #f5f3ff;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #5b21b6;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-reason {
+            font-size: 12px;
+            color: #8b5cf6;
+        }
+
+        .cart-item-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #7c3aed;
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 2px dashed #c4b5fd;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 700;
+            color: #5b21b6;
+        }
+
+        /* Sale Banner */
+        .sale-section {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            border-radius: 24px;
+            padding: 32px;
+            margin: 32px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .sale-section h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .sale-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .sale-card {
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .sale-card h5 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .sale-percent {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .sale-note {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        /* Review Section */
+        .review-section {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border-radius: 24px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .review-section h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .review-vs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .review-box {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .review-box h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .review-box.photo h4 { color: #16a34a; }
+        .review-box.real h4 { color: #dc2626; }
+
+        .review-box p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #6b7280;
+        }
+
+        @media (max-width: 640px) {
+            .review-vs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dialog Box */
+        .dialog-box {
+            margin: 28px 0;
+        }
+
+        .dialog-line {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+        .dialog-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            border: 2px solid #c4b5fd;
+        }
+
+        .dialog-bubble {
+            background: #f5f3ff;
+            border-radius: 18px;
+            padding: 14px 18px;
+            font-size: 14px;
+            color: #5b21b6;
+            position: relative;
+            max-width: 80%;
+        }
+
+        .dialog-bubble.regret {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .dialog-bubble::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 14px;
+            border-width: 8px 8px 8px 0;
+            border-style: solid;
+            border-color: transparent #f5f3ff transparent transparent;
+        }
+
+        .dialog-bubble.regret::before {
+            border-color: transparent #fef2f2 transparent transparent;
+        }
+
+        /* Survival Tips */
+        .survival-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .survival-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid #ede9fe;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .survival-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #7c3aed, #8b5cf6, #a78bfa);
+        }
+
+        .survival-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .survival-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #5b21b6;
+            margin-bottom: 10px;
+        }
+
+        .survival-card p {
+            font-size: 14px;
+            color: #7c3aed;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .shopping-cta {
+            background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shopping-cta::before {
+            content: "🛍️ 💳 📦 ⭐ 🎁";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            opacity: 0.2;
+        }
+
+        .shopping-cta h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .shopping-cta p {
+            font-size: 16px;
+            opacity: 0.95;
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="../index.html" class="site-logo">Stock Insights</a>
+                <p class="site-tagline">Life & Business Insights</p>
+            </div>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">메뉴</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <header class="site-header">
+                <div class="header-content">
+                    <h1 class="header-title">유머</h1>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <article class="article-page">
+                    <header class="article-header shopping-hero">
+                        <div class="article-header-content">
+                            <div class="breadcrumb">
+                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 유머
+                            </div>
+                            <span class="article-category-badge shopping-badge">유머</span>
+                            <h1 class="article-main-title">온라인쇼핑 생존기: 장바구니의 유혹</h1>
+                            <div class="article-header-meta">
+                                <span>2024년 12월 2일</span>
+                                <span>7분 읽기</span>
+                                <span>Stock Insights 리서치</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="article-body-wrapper">
+                        <div class="article-body">
+                            <p class="lead">
+                                "구경만 할 거야" → 장바구니 47개.
+                                "필요한 것만 살 거야" → 결제 금액 15만원.
+                                "이건 진짜 필요해" → 아직 개봉 안 함.
+                                온라인쇼핑은 단순한 구매가 아닙니다.
+                                그것은 <strong>자기 합리화의 예술</strong>입니다.
+                            </p>
+
+                            <div class="shopping-parade">
+                                <span class="shopping-item">🛍️</span>
+                                <span class="shopping-item">💳</span>
+                                <span class="shopping-item">📦</span>
+                                <span class="shopping-item">⭐</span>
+                                <span class="shopping-item">🎁</span>
+                            </div>
+
+                            <h2 class="purple-gradient">온라인쇼핑의 불변의 법칙들</h2>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #1</span>
+                                <div class="scene-title">🛒 장바구니의 법칙</div>
+                                <div class="scene-content">
+                                    장바구니에 담으면 일단 샀다는 느낌.<br>
+                                    "나중에 사야지" → 그 나중은 오늘 새벽 2시.<br>
+                                    장바구니 비우기 = 결제하기.
+                                </div>
+                                <div class="punchline">
+                                    💡 장바구니는 위시리스트가 아닙니다. 결제 대기 목록입니다.
+                                </div>
+                            </div>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #2</span>
+                                <div class="scene-title">💰 할인의 법칙</div>
+                                <div class="scene-content">
+                                    50% 할인 = "안 사면 손해!"<br>
+                                    무료배송 2만원 이상 = 1만 8천원짜리 + 아무거나 추가<br>
+                                    결국 원래보다 더 많이 지출.
+                                </div>
+                                <div class="punchline">
+                                    💡 "할인받았다" = "원래 안 살 거 샀다"
+                                </div>
+                            </div>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #3</span>
+                                <div class="scene-title">⭐ 리뷰의 법칙</div>
+                                <div class="scene-content">
+                                    별 5개 리뷰만 100개: "이거 사야 돼!"<br>
+                                    별 1개 리뷰 1개 발견: "음... 좀 불안한데?"<br>
+                                    결국 한 시간 리뷰 정독 후 결제.
+                                </div>
+                                <div class="punchline">
+                                    💡 리뷰 읽는 시간 > 실제 사용 시간
+                                </div>
+                            </div>
+
+                            <h2>온라인쇼핑 유형들</h2>
+
+                            <div class="character-grid">
+                                <div class="character-card">
+                                    <div class="character-emoji">🌙</div>
+                                    <h4>새벽 쇼퍼</h4>
+                                    <p>새벽 2시 판단력 0%. 다음날 "내가 왜 이걸 샀지?" 후회.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">📊</div>
+                                    <h4>비교 분석가</h4>
+                                    <p>10개 사이트 가격 비교. 100원 차이에 30분 고민. 결국 첫 번째 사이트에서 구매.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">⭐</div>
+                                    <h4>리뷰 중독자</h4>
+                                    <p>리뷰 500개 정독. 모든 사진 확대. 구매 결정 3일 소요.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">🏃</div>
+                                    <h4>충동 구매러</h4>
+                                    <p>"품절 임박!" 보면 바로 결제. 생각은 나중에. 반품도 나중에.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">💳</div>
+                                    <h4>포인트 헌터</h4>
+                                    <p>포인트 적립에 진심. 포인트 쓰려고 더 구매. 본말전도.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">📦</div>
+                                    <h4>무료배송 집착러</h4>
+                                    <p>"3만원 이상 무료배송" → 2만 5천원 + 필요 없는 5천원 상품 추가.</p>
+                                </div>
+                            </div>
+
+                            <h2>장바구니의 진실</h2>
+
+                            <div class="cart-section">
+                                <h3>🛒 나의 장바구니 현황</h3>
+                                <div class="cart-item">
+                                    <div class="cart-item-image">👕</div>
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">예쁜 셔츠</div>
+                                        <div class="cart-item-reason">"언젠간 입을 날이 오겠지"</div>
+                                    </div>
+                                    <div class="cart-item-price">39,000원</div>
+                                </div>
+                                <div class="cart-item">
+                                    <div class="cart-item-image">📱</div>
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">스마트폰 액세서리</div>
+                                        <div class="cart-item-reason">"5천원 모자라서 무료배송 채우기"</div>
+                                    </div>
+                                    <div class="cart-item-price">5,900원</div>
+                                </div>
+                                <div class="cart-item">
+                                    <div class="cart-item-image">🧴</div>
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">화장품 세트</div>
+                                        <div class="cart-item-reason">"리뷰가 좋았어"</div>
+                                    </div>
+                                    <div class="cart-item-price">45,000원</div>
+                                </div>
+                                <div class="cart-item">
+                                    <div class="cart-item-image">🎮</div>
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">게임기 액세서리</div>
+                                        <div class="cart-item-reason">"할인 끝나기 전에!"</div>
+                                    </div>
+                                    <div class="cart-item-price">28,000원</div>
+                                </div>
+                                <div class="cart-total">
+                                    <span>예상 결제 금액</span>
+                                    <span>117,900원</span>
+                                </div>
+                                <p style="text-align: center; margin-top: 12px; font-size: 13px; color: #9ca3af;">
+                                    원래 필요했던 것: 무료배송 채우기용 5,900원짜리 😂
+                                </p>
+                            </div>
+
+                            <h2>세일의 함정</h2>
+
+                            <div class="sale-section">
+                                <h3>🔥 특가 세일 🔥</h3>
+                                <p style="opacity: 0.9;">오늘만! 놓치면 후회!</p>
+                                <div class="sale-grid">
+                                    <div class="sale-card">
+                                        <h5>시즌오프</h5>
+                                        <div class="sale-percent">70%</div>
+                                        <div class="sale-note">원래 가격 뻥튀기</div>
+                                    </div>
+                                    <div class="sale-card">
+                                        <h5>타임딜</h5>
+                                        <div class="sale-percent">50%</div>
+                                        <div class="sale-note">내일도 있음</div>
+                                    </div>
+                                    <div class="sale-card">
+                                        <h5>브랜드위크</h5>
+                                        <div class="sale-percent">30%</div>
+                                        <div class="sale-note">매달 함</div>
+                                    </div>
+                                    <div class="sale-card">
+                                        <h5>깜짝특가</h5>
+                                        <div class="sale-percent">80%</div>
+                                        <div class="sale-note">재고 떨이</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>상품 사진 vs 실물</h2>
+
+                            <div class="review-section">
+                                <h3>📸 기대 vs 현실</h3>
+                                <div class="review-vs">
+                                    <div class="review-box photo">
+                                        <h4>📸 상품 사진</h4>
+                                        <p>
+                                            ✨ 조명 완벽<br>
+                                            ✨ 모델이 입으면 예쁨<br>
+                                            ✨ 색감 화사<br>
+                                            ✨ 사이즈 여유로워 보임<br>
+                                            ✨ 고급스러운 질감
+                                        </p>
+                                    </div>
+                                    <div class="review-box real">
+                                        <h4>📦 실물</h4>
+                                        <p>
+                                            😭 색이 다름<br>
+                                            😭 나한테는 안 어울림<br>
+                                            😭 사이즈가 이상함<br>
+                                            😭 천이 얇음<br>
+                                            😭 사진에서 못 본 디테일
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dialog-box">
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">😊</div>
+                                    <div class="dialog-bubble">
+                                        오늘은 진짜 필요한 것만 살 거야.
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">📱</div>
+                                    <div class="dialog-bubble">
+                                        (앱 켬) 오, 오늘만 50% 세일이네?
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">🤔</div>
+                                    <div class="dialog-bubble">
+                                        이건 언젠간 필요하겠지... 장바구니에.
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">💳</div>
+                                    <div class="dialog-bubble">
+                                        (1시간 후) 결제 완료!
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">😱</div>
+                                    <div class="dialog-bubble regret">
+                                        ...15만원...? 나 뭐 샀더라?
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>온라인쇼핑 생존 가이드</h2>
+
+                            <div class="survival-grid">
+                                <div class="survival-card">
+                                    <div class="survival-icon">⏰</div>
+                                    <h4>24시간 룰을 지켜라</h4>
+                                    <p>장바구니에 담고 24시간 기다리기. 다음날 보면 "이게 필요했나?" 싶은 것들이 있습니다.</p>
+                                </div>
+                                <div class="survival-card">
+                                    <div class="survival-icon">📝</div>
+                                    <h4>쇼핑 리스트를 만들어라</h4>
+                                    <p>필요한 것만 미리 적기. 리스트에 없으면 안 사기. 생각보다 효과 있음.</p>
+                                </div>
+                                <div class="survival-card">
+                                    <div class="survival-icon">💤</div>
+                                    <h4>새벽에 쇼핑하지 마라</h4>
+                                    <p>새벽 판단력은 최악. 다음날 후회 확률 200%. 졸릴 땐 자세요.</p>
+                                </div>
+                                <div class="survival-card">
+                                    <div class="survival-icon">🚫</div>
+                                    <h4>세일 알림을 꺼라</h4>
+                                    <p>"타임세일!" "마감 임박!" 알림은 지갑의 적. 푸시 알림 OFF 추천.</p>
+                                </div>
+                            </div>
+
+                            <div class="scene-card">
+                                <span class="scene-number">실화</span>
+                                <div class="scene-title">📦 택배 박스 산</div>
+                                <div class="scene-content">
+                                    <strong>월요일:</strong> "오늘 택배 3개 온다!"<br>
+                                    <strong>화요일:</strong> "또 왔네, 이건 뭐지?"<br>
+                                    <strong>수요일:</strong> "이건 언제 시킨 거지...?"<br>
+                                    <strong>목요일:</strong> "아직 안 뜯은 박스가 5개..."<br>
+                                    <strong>금요일:</strong> "이번 달 카드값이..."<br>
+                                    <strong>토요일:</strong> "다음 달부턴 안 사야지" (검색 시작)<br>
+                                </div>
+                                <div class="punchline">
+                                    💡 택배 개수 = 이번 달 충동구매 횟수
+                                </div>
+                            </div>
+
+                            <div class="shopping-cta">
+                                <h3>🛍️ 오늘도 쇼핑하셨나요?</h3>
+                                <p>
+                                    장바구니를 비우는 가장 좋은 방법은?
+                                    결제하는 것... 이 아니라 새벽에 안 보는 것!
+                                    현명한 소비 하세요! 💜
+                                </p>
+                            </div>
+
+                            <div class="conclusion-box conclusion-blue">
+                                <p>
+                                    온라인쇼핑은 편리하지만 위험합니다.
+                                    클릭 몇 번에 통장이 텅텅.
+                                    장바구니는 위시리스트가 아닙니다.
+                                </p>
+                                <p>
+                                    그래도 가끔은 <strong>나를 위한 소비</strong>도 괜찮습니다.
+                                    단, 예산 안에서! 그게 핵심이죠. 💜
+                                </p>
+                            </div>
+
+                            <div class="sources-box sources-box-rounded">
+                                <h3>면책 조항</h3>
+                                <ul>
+                                    <li>본 글은 100% 유머 목적이며, 어떤 쇼핑몰도 비하하려는 의도가 없습니다</li>
+                                    <li>새벽 2시 결제는 작성자의 실화입니다 🙈</li>
+                                    <li>택배 박스 산도 실화입니다... 반성 중</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <aside class="related-articles related-rounded">
+                            <h3>관련 글</h3>
+                            <a href="delivery-humor.html" class="related-link">
+                                <div>
+                                    <h4>택배 생존기</h4>
+                                    <p>기다림의 미학</p>
+                                </div>
+                            </a>
+                            <a href="diet-humor.html" class="related-link">
+                                <div>
+                                    <h4>다이어트 생존기</h4>
+                                    <p>내일부터의 전설</p>
+                                </div>
+                            </a>
+                        </aside>
+                    </div>
+                </article>
+            </main>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">
+                        © 2024 Stock Insights. 현명한 소비 하세요! 🛍️
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
