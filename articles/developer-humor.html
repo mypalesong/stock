@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개발자 생존기: 코드와 커피 사이에서 | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        /* 오버플로우 방지 */
+        .article-body {
+            overflow-x: hidden;
+        }
+
+        /* 개발자 테마 - 다크 에디터 컬러 */
+        .article-hero {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 50%, #0d1117 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 24px,
+                    rgba(255,255,255,0.02) 24px,
+                    rgba(255,255,255,0.02) 25px
+                );
+        }
+
+        .code-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .article-hero h1 {
+            color: #58a6ff;
+            text-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        .article-hero .meta {
+            color: #8b949e;
+            font-family: monospace;
+        }
+
+        /* 코드 블록 스타일 */
+        .code-block {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            border: 1px solid #30363d;
+        }
+
+        .code-block .comment { color: #8b949e; }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .function { color: #d2a8ff; }
+        .code-block .variable { color: #ffa657; }
+        .code-block .number { color: #79c0ff; }
+
+        /* 터미널 스타일 박스 */
+        .terminal-box {
+            background: #1e1e1e;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .terminal-header {
+            background: #323232;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #27ca40; }
+
+        .terminal-body {
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #0f0;
+            line-height: 1.6;
+        }
+
+        .terminal-body .prompt { color: #58a6ff; }
+        .terminal-body .error { color: #f85149; }
+        .terminal-body .success { color: #3fb950; }
+        .terminal-body .warning { color: #d29922; }
+
+        /* 개발자 캐릭터 카드 */
+        .dev-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .dev-card {
+            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 1px solid #30363d;
+            transition: all 0.3s ease;
+        }
+
+        .dev-card:hover {
+            border-color: #58a6ff;
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.1);
+        }
+
+        .dev-card .icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .dev-card h4 {
+            color: #58a6ff;
+            margin-bottom: 0.4rem;
+            font-family: monospace;
+        }
+
+        .dev-card .subtitle {
+            color: #8b949e;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .dev-card p {
+            color: #c9d1d9;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Git 커밋 스타일 */
+        .commit-log {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid #30363d;
+        }
+
+        .commit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #21262d;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        .commit-item:last-child {
+            border-bottom: none;
+        }
+
+        .commit-hash {
+            color: #58a6ff;
+            flex-shrink: 0;
+        }
+
+        .commit-msg {
+            color: #c9d1d9;
+        }
+
+        .commit-time {
+            color: #8b949e;
+            font-size: 0.75rem;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        /* 에러 메시지 박스 */
+        .error-box {
+            background: linear-gradient(135deg, #3d1a1a 0%, #2d1515 100%);
+            border-left: 4px solid #f85149;
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .error-box .error-title {
+            color: #f85149;
+            font-family: monospace;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-box .error-msg {
+            color: #f0f0f0;
+            font-size: 0.9rem;
+        }
+
+        /* 스택 오버플로우 스타일 */
+        .stackoverflow-card {
+            background: #fdf7e2;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #f48024;
+        }
+
+        .stackoverflow-card .question {
+            color: #0077cc;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .stackoverflow-card .answer {
+            color: #3b4045;
+            font-size: 0.9rem;
+        }
+
+        .stackoverflow-card .votes {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #5eba7d;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        /* 미팅 타임라인 */
+        .meeting-hell {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            color: white;
+        }
+
+        .meeting-hell h3 {
+            color: #e94560;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .meeting-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .meeting-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .meeting-time {
+            color: #58a6ff;
+            font-family: monospace;
+            min-width: 60px;
+        }
+
+        .meeting-name {
+            color: #c9d1d9;
+        }
+
+        .meeting-status {
+            margin-left: auto;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .meeting-status.required { background: #f85149; }
+        .meeting-status.optional { background: #3fb950; }
+        .meeting-status.conflict { background: #d29922; }
+
+        /* 버그 라이프사이클 */
+        .bug-lifecycle {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .bug-stage {
+            background: #21262d;
+            color: #c9d1d9;
+            padding: 0.6rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .bug-stage .arrow {
+            color: #8b949e;
+        }
+
+        /* 커피 게이지 */
+        .coffee-gauge {
+            background: #161b22;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border: 1px solid #30363d;
+        }
+
+        .coffee-gauge h4 {
+            color: #c9d1d9;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .gauge-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .gauge-label {
+            color: #8b949e;
+            font-size: 0.85rem;
+            min-width: 80px;
+        }
+
+        .gauge-bar {
+            flex: 1;
+            height: 20px;
+            background: #21262d;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            font-size: 0.75rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .gauge-fill.low { background: linear-gradient(90deg, #3fb950, #238636); }
+        .gauge-fill.medium { background: linear-gradient(90deg, #d29922, #9e6a03); }
+        .gauge-fill.high { background: linear-gradient(90deg, #f85149, #da3633); }
+        .gauge-fill.critical { background: linear-gradient(90deg, #8957e5, #6e40c9); }
+
+        /* 키보드 단축키 */
+        .keyboard-shortcuts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+
+        .kbd {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #c9d1d9;
+            box-shadow: 0 2px 0 #0d1117;
+        }
+
+        .kbd .plus {
+            color: #8b949e;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="../index.html" class="site-logo">Stock Insights</a>
+                <p class="site-tagline">Life & Business Insights</p>
+            </div>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">메뉴</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <main class="main-content">
+                <article class="article-container">
+                    <header class="article-hero">
+                        <div class="code-icon">👨‍💻</div>
+                        <h1>개발자 생존기: 코드와 커피 사이에서</h1>
+                        <div class="meta">
+                            <span>// 2024.12.02</span>
+                            <span>|</span>
+                            <span>category: "유머"</span>
+                            <span>|</span>
+                            <span>readTime: "10분"</span>
+                        </div>
+                    </header>
+
+                    <div class="article-body">
+                        <p class="lead">
+                            "일단 돌아가게 만들어 놓고 나중에 리팩토링하자"라는 말을 하고
+                            3년이 지났습니다. 그 코드는 아직도 프로덕션에서 돌아가고 있고,
+                            아무도 손대지 않습니다. 이것이 <strong>개발자의 삶</strong>입니다.
+                        </p>
+
+                        <h2>💻 개발자의 하루</h2>
+
+                        <div class="terminal-box">
+                            <div class="terminal-header">
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                            </div>
+                            <div class="terminal-body">
+                                <span class="prompt">$</span> echo "오늘 할 일"<br>
+                                <span class="success">→ 버그 수정 1개</span><br><br>
+                                <span class="prompt">$</span> git status<br>
+                                <span class="warning">→ 수정된 파일: 47개</span><br>
+                                <span class="error">→ 새로운 버그: 3개 발견</span><br><br>
+                                <span class="prompt">$</span> echo "퇴근 가능?"<br>
+                                <span class="error">Permission denied: 야근 필수</span>
+                            </div>
+                        </div>
+
+                        <h2>🐛 버그의 라이프사이클</h2>
+
+                        <p>
+                            모든 버그에게는 고유한 생애 주기가 있습니다.
+                            슬프게도 대부분 개발자의 퇴근 시간과 반비례합니다.
+                        </p>
+
+                        <div class="bug-lifecycle">
+                            <div class="bug-stage">🥚 발견</div>
+                            <div class="bug-stage"><span class="arrow">→</span> 🔍 분석</div>
+                            <div class="bug-stage"><span class="arrow">→</span> 😤 "왜 이러지?"</div>
+                            <div class="bug-stage"><span class="arrow">→</span> 🤯 원인 파악</div>
+                            <div class="bug-stage"><span class="arrow">→</span> 💡 수정</div>
+                            <div class="bug-stage"><span class="arrow">→</span> 🐛 새 버그 2개</div>
+                            <div class="bug-stage"><span class="arrow">→</span> 🔄 반복</div>
+                        </div>
+
+                        <div class="error-box">
+                            <div class="error-title">Error: BugFixException</div>
+                            <div class="error-msg">
+                                버그 1개를 수정하면 버그 2개가 나타납니다.<br>
+                                이것은 버그가 아니라 Feature입니다.
+                            </div>
+                        </div>
+
+                        <h2>👥 개발자 유형 도감</h2>
+
+                        <div class="dev-cards">
+                            <div class="dev-card">
+                                <div class="icon">🏃</div>
+                                <h4>Speed Runner</h4>
+                                <div class="subtitle">"일단 배포하고 보자"</div>
+                                <p>
+                                    테스트? 그게 뭔가요? 프로덕션이 최고의 테스트 환경이라고
+                                    믿는 개발자. 핫픽스 배포 속도가 빠른 건 덤.
+                                </p>
+                            </div>
+
+                            <div class="dev-card">
+                                <div class="icon">📚</div>
+                                <h4>문서화 덕후</h4>
+                                <div class="subtitle">"이건 문서에 있어요"</div>
+                                <p>
+                                    코드보다 문서가 더 긴 개발자.
+                                    README가 소설 수준.
+                                    사실 본인도 그 문서 안 읽음.
+                                </p>
+                            </div>
+
+                            <div class="dev-card">
+                                <div class="icon">🔧</div>
+                                <h4>리팩토링 중독자</h4>
+                                <div class="subtitle">"이거 좀 정리할게요"</div>
+                                <p>
+                                    잘 돌아가는 코드도 못 참고 손대는 개발자.
+                                    "더 좋은 방법이 있어요"가 입버릇.
+                                    가끔 잘 되던 걸 망가뜨림.
+                                </p>
+                            </div>
+
+                            <div class="dev-card">
+                                <div class="icon">🌙</div>
+                                <h4>야행성 코더</h4>
+                                <div class="subtitle">"새벽에 집중이 잘 돼요"</div>
+                                <p>
+                                    오후 2시에 출근해서 새벽 2시에 퇴근.
+                                    커피가 혈액의 40%.
+                                    햇빛은 모니터 화면에서만 봄.
+                                </p>
+                            </div>
+
+                            <div class="dev-card">
+                                <div class="icon">🔎</div>
+                                <h4>스택오버플로우 전사</h4>
+                                <div class="subtitle">"검색하면 나와요"</div>
+                                <p>
+                                    모든 문제의 해답은 스택오버플로우에 있다고 믿음.
+                                    복붙의 달인. "왜 되는지는 모르겠지만 됨"
+                                </p>
+                            </div>
+
+                            <div class="dev-card">
+                                <div class="icon">⚙️</div>
+                                <h4>설정 최적화 장인</h4>
+                                <div class="subtitle">"IDE 세팅만 3일째"</div>
+                                <p>
+                                    개발환경 세팅에 일주일을 쓰는 개발자.
+                                    vim vs emacs 논쟁 1시간 가능.
+                                    정작 코드는 10줄 작성.
+                                </p>
+                            </div>
+                        </div>
+
+                        <h2>📝 Git 커밋 메시지의 진화</h2>
+
+                        <div class="commit-log">
+                            <div class="commit-item">
+                                <span class="commit-hash">a1b2c3d</span>
+                                <span class="commit-msg">feat: 로그인 기능 구현</span>
+                                <span class="commit-time">월요일 오전</span>
+                            </div>
+                            <div class="commit-item">
+                                <span class="commit-hash">e4f5g6h</span>
+                                <span class="commit-msg">fix: 로그인 버그 수정</span>
+                                <span class="commit-time">월요일 오후</span>
+                            </div>
+                            <div class="commit-item">
+                                <span class="commit-hash">i7j8k9l</span>
+                                <span class="commit-msg">fix: 진짜 수정</span>
+                                <span class="commit-time">월요일 저녁</span>
+                            </div>
+                            <div class="commit-item">
+                                <span class="commit-hash">m0n1o2p</span>
+                                <span class="commit-msg">fix: 제발 되라</span>
+                                <span class="commit-time">월요일 밤</span>
+                            </div>
+                            <div class="commit-item">
+                                <span class="commit-hash">q3r4s5t</span>
+                                <span class="commit-msg">...</span>
+                                <span class="commit-time">월요일 새벽</span>
+                            </div>
+                            <div class="commit-item">
+                                <span class="commit-hash">u6v7w8x</span>
+                                <span class="commit-msg">asdfasdf</span>
+                                <span class="commit-time">화요일 새벽 3시</span>
+                            </div>
+                        </div>
+
+                        <h2>☕ 커피 섭취량 vs 코드 품질</h2>
+
+                        <div class="coffee-gauge">
+                            <h4>일일 커피 섭취량에 따른 개발자 상태</h4>
+                            <div class="gauge-item">
+                                <span class="gauge-label">1잔</span>
+                                <div class="gauge-bar">
+                                    <div class="gauge-fill low" style="width: 25%;">😴 아직 부팅 중</div>
+                                </div>
+                            </div>
+                            <div class="gauge-item">
+                                <span class="gauge-label">2~3잔</span>
+                                <div class="gauge-bar">
+                                    <div class="gauge-fill medium" style="width: 50%;">😊 정상 가동</div>
+                                </div>
+                            </div>
+                            <div class="gauge-item">
+                                <span class="gauge-label">4~5잔</span>
+                                <div class="gauge-bar">
+                                    <div class="gauge-fill high" style="width: 75%;">🚀 초집중 모드</div>
+                                </div>
+                            </div>
+                            <div class="gauge-item">
+                                <span class="gauge-label">6잔+</span>
+                                <div class="gauge-bar">
+                                    <div class="gauge-fill critical" style="width: 100%;">💀 손이 떨림</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>📅 미팅 지옥</h2>
+
+                        <div class="meeting-hell">
+                            <h3>📆 어느 개발자의 수요일</h3>
+                            <div class="meeting-item">
+                                <span class="meeting-time">09:00</span>
+                                <span class="meeting-name">데일리 스크럼</span>
+                                <span class="meeting-status required">필수</span>
+                            </div>
+                            <div class="meeting-item">
+                                <span class="meeting-time">10:00</span>
+                                <span class="meeting-name">스프린트 플래닝</span>
+                                <span class="meeting-status required">필수</span>
+                            </div>
+                            <div class="meeting-item">
+                                <span class="meeting-time">11:00</span>
+                                <span class="meeting-name">기술 공유 세션</span>
+                                <span class="meeting-status optional">선택</span>
+                            </div>
+                            <div class="meeting-item">
+                                <span class="meeting-time">14:00</span>
+                                <span class="meeting-name">코드 리뷰 미팅</span>
+                                <span class="meeting-status required">필수</span>
+                            </div>
+                            <div class="meeting-item">
+                                <span class="meeting-time">15:00</span>
+                                <span class="meeting-name">장애 회고</span>
+                                <span class="meeting-status conflict">긴급</span>
+                            </div>
+                            <div class="meeting-item">
+                                <span class="meeting-time">16:00</span>
+                                <span class="meeting-name">팀 미팅</span>
+                                <span class="meeting-status required">필수</span>
+                            </div>
+                            <div class="meeting-item">
+                                <span class="meeting-time">17:00~</span>
+                                <span class="meeting-name">드디어 코딩할 시간!</span>
+                                <span class="meeting-status optional">😭</span>
+                            </div>
+                        </div>
+
+                        <h2>🔍 스택오버플로우 사용법</h2>
+
+                        <div class="stackoverflow-card">
+                            <div class="question">
+                                Q: [해결됨] 왜 이 코드가 안 되나요?
+                            </div>
+                            <div class="answer">
+                                A: "해결했습니다" (해결 방법 안 적음)
+                            </div>
+                            <div class="votes">✓ 답변 채택됨 | 👍 2,847</div>
+                        </div>
+
+                        <div class="stackoverflow-card">
+                            <div class="question">
+                                Q: 이 에러 어떻게 해결하나요?
+                            </div>
+                            <div class="answer">
+                                A: "왜 그렇게 하려고 하세요?
+                                그건 잘못된 접근입니다.
+                                제가 생각하는 더 좋은 방법은..."<br>
+                                <span style="color: #8b949e; font-size: 0.85rem;">(질문에 대한 답변은 없음)</span>
+                            </div>
+                            <div class="votes">👍 156</div>
+                        </div>
+
+                        <h2>⌨️ 개발자의 진짜 단축키</h2>
+
+                        <div class="keyboard-shortcuts">
+                            <div class="kbd">Ctrl <span class="plus">+</span> C</div>
+                            <div class="kbd">Ctrl <span class="plus">+</span> V</div>
+                            <div class="kbd">Ctrl <span class="plus">+</span> Z</div>
+                            <div class="kbd">Ctrl <span class="plus">+</span> Shift <span class="plus">+</span> Z</div>
+                            <div class="kbd">Ctrl <span class="plus">+</span> S (강박적으로)</div>
+                        </div>
+
+                        <p style="text-align: center; color: #8b949e; font-size: 0.9rem; margin-top: 1rem;">
+                            * 실제 개발의 80%는 위 단축키로 이루어집니다
+                        </p>
+
+                        <h2>🎭 개발자가 자주 하는 거짓말</h2>
+
+                        <div class="code-block">
+                            <span class="comment">// 개발자가 자주 하는 말 (translation included)</span><br><br>
+                            <span class="keyword">const</span> <span class="variable">lies</span> = [<br>
+                            &nbsp;&nbsp;<span class="string">"금방 될 거예요"</span>, <span class="comment">// 3일 후</span><br>
+                            &nbsp;&nbsp;<span class="string">"거의 다 됐어요"</span>, <span class="comment">// 50% 완료</span><br>
+                            &nbsp;&nbsp;<span class="string">"제 컴에서는 돼요"</span>, <span class="comment">// 국룰</span><br>
+                            &nbsp;&nbsp;<span class="string">"간단한 수정이에요"</span>, <span class="comment">// 야근 확정</span><br>
+                            &nbsp;&nbsp;<span class="string">"나중에 리팩토링 할게요"</span>, <span class="comment">// 절대 안 함</span><br>
+                            &nbsp;&nbsp;<span class="string">"주석 달아놓을게요"</span>, <span class="comment">// ???</span><br>
+                            ];<br><br>
+                            <span class="comment">// TODO: 나중에 정리 (2019년 작성)</span>
+                        </div>
+
+                        <h2>🤔 결론: 그래도 개발이 좋다</h2>
+
+                        <p>
+                            버그와 싸우고, 미팅에 시달리고, 야근을 밥 먹듯 하지만...
+                            코드가 드디어 돌아가는 그 순간의 쾌감은 무엇과도 바꿀 수 없습니다.
+                        </p>
+
+                        <p>
+                            새벽 3시에 찾은 세미콜론 하나의 감동,
+                            "Build Successful"이 뜰 때의 안도감,
+                            사용자가 "좋아요"라고 할 때의 뿌듯함.
+                        </p>
+
+                        <p>
+                            그래서 내일도 우리는 또 코딩합니다.
+                            커피를 마시며, 스택오버플로우를 뒤지며,
+                            "이번엔 진짜 깔끔하게 짜야지"라고 다짐하면서요.
+                        </p>
+
+                        <div class="terminal-box">
+                            <div class="terminal-header">
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                            </div>
+                            <div class="terminal-body">
+                                <span class="prompt">$</span> echo "개발자의 좌우명"<br><br>
+                                <span class="success">"버그 없는 코드는 아직 실행 안 된 코드다"</span><br><br>
+                                <span class="prompt">$</span> exit<br>
+                                <span class="warning">퇴근이 거부되었습니다. 배포가 남았습니다.</span>
+                            </div>
+                        </div>
+
+                        <p style="text-align: center; margin-top: 2rem; font-size: 1.5rem;">
+                            { code && coffee && 🖥️ }
+                        </p>
+                    </div>
+                </article>
+            </main>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">© 2024 Stock Insights. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
