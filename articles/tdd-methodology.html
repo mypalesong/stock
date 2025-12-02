@@ -7,15 +7,41 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #7f8c8d;
+            --text-color: #2c3e50;
+            --text-light: #5d6d7e;
+            --bg-light: #f8f9fa;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+            --border-light: #f0f0f0;
+        }
+
         .article-body {
             overflow-x: hidden;
         }
 
-        /* Academic Navy Theme */
+        /* Desktop Layout */
+        @media (min-width: 1200px) {
+            .article-body-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+
+            .article-body {
+                max-width: 70%;
+                margin: 0 auto;
+            }
+        }
+
+        /* Professional Header */
         .article-hero {
-            background: linear-gradient(135deg, #0c1929 0%, #1a365d 50%, #1e3a5f 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 3rem 2rem;
             position: relative;
-            overflow: hidden;
         }
 
         .article-hero::before {
@@ -25,29 +51,39 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background:
-                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(147, 197, 253, 0.08) 0%, transparent 50%);
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
-        .paper-icon {
-            font-size: 3rem;
+        .paper-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.35rem 0.75rem;
+            border-radius: 3px;
             margin-bottom: 1rem;
-            opacity: 0.9;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .article-hero h1 {
-            color: #e2e8f0;
+            color: #ffffff;
             font-family: 'Georgia', 'Times New Roman', serif;
-            font-weight: 600;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            letter-spacing: -0.02em;
+            font-weight: 400;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            position: relative;
         }
 
         .article-hero .meta {
             color: #94a3b8;
-            font-family: 'Georgia', serif;
-            font-style: italic;
+            font-size: 0.9rem;
+            font-weight: 400;
         }
 
         /* Paper Sections */
@@ -56,68 +92,87 @@
             padding: 0;
         }
 
+        .paper-section > p,
+        .paper-section > ul {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-color);
+            margin-bottom: 1.25rem;
+        }
+
+        .paper-section > ul {
+            padding-left: 1.5rem;
+        }
+
+        .paper-section > ul li {
+            margin-bottom: 0.75rem;
+        }
+
         .section-title {
             font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: #1e3a5f;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #3b82f6;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .subsection-title {
             font-family: 'Georgia', serif;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            color: #334155;
-            margin: 1.5rem 0 0.8rem 0;
+            color: var(--secondary-color);
+            margin: 2rem 0 1rem 0;
         }
 
-        /* Abstract Box */
+        /* Abstract Box - No left border */
         .abstract-box {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-left: 4px solid #3b82f6;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            background: var(--bg-light);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
         }
 
         .abstract-box h3 {
             font-family: 'Georgia', serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1e3a5f;
-            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         .abstract-box p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #475569;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-color);
             text-align: justify;
         }
 
         /* Keywords */
         .keywords {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: #64748b;
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
         .keywords strong {
-            color: #1e3a5f;
+            color: var(--secondary-color);
+            font-weight: 600;
         }
 
         /* Figure/Diagram Box */
         .figure-box {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 2rem;
+            margin: 2rem 0;
             text-align: center;
         }
 
@@ -125,147 +180,188 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
 
         .cycle-step {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: white;
-            padding: 1rem 1.2rem;
-            border-radius: 8px;
+            background: var(--bg-light);
+            color: var(--text-color);
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
             font-weight: 600;
-            font-size: 0.9rem;
-            min-width: 80px;
+            font-size: 0.95rem;
+            min-width: 100px;
+            border: 1px solid var(--border-color);
         }
 
-        .cycle-step.red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
-        .cycle-step.green { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
-        .cycle-step.blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+        .cycle-step.red {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+        .cycle-step.green {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+        .cycle-step.blue {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+            color: #1e40af;
+        }
 
         .cycle-arrow {
-            font-size: 1.5rem;
-            color: #94a3b8;
+            font-size: 1.25rem;
+            color: var(--accent-color);
         }
 
         .figure-caption {
-            font-size: 0.85rem;
-            color: #64748b;
-            font-style: italic;
-            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 1rem;
         }
 
         /* Code Example */
         .code-example {
-            background: #1e293b;
-            border-radius: 8px;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.85rem;
+            background: #1e1e1e;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
             overflow-x: auto;
-            border: 1px solid #334155;
+            border: 1px solid #333;
         }
 
-        .code-example .comment { color: #64748b; }
-        .code-example .keyword { color: #f472b6; }
-        .code-example .function { color: #60a5fa; }
-        .code-example .string { color: #a5f3fc; }
-        .code-example .decorator { color: #fbbf24; }
-        .code-example code { color: #e2e8f0; }
+        .code-example .comment { color: #6a9955; }
+        .code-example .keyword { color: #c586c0; }
+        .code-example .function { color: #dcdcaa; }
+        .code-example .string { color: #ce9178; }
+        .code-example .decorator { color: #d7ba7d; }
+        .code-example code { color: #d4d4d4; line-height: 1.6; }
 
         /* Table */
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
+            margin: 2rem 0;
+            font-size: 0.95rem;
         }
 
         .data-table th {
-            background: #1e3a5f;
+            background: var(--primary-color);
             color: white;
-            padding: 0.8rem;
+            padding: 1rem;
             text-align: left;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .data-table td {
-            padding: 0.8rem;
-            border-bottom: 1px solid #e2e8f0;
-            color: #475569;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+            line-height: 1.5;
         }
 
         .data-table tr:nth-child(even) {
-            background: #f8fafc;
+            background: var(--bg-light);
         }
 
-        /* Quote Box */
+        .data-table tr:hover {
+            background: #f1f5f9;
+        }
+
+        /* Quote Box - No left border */
         .quote-box {
-            background: #fffbeb;
-            border-left: 4px solid #f59e0b;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            background: var(--bg-light);
+            padding: 1.75rem 2rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 0.5rem;
+            left: 1rem;
+            font-size: 3rem;
+            color: var(--border-color);
+            font-family: Georgia, serif;
+            line-height: 1;
         }
 
         .quote-box p {
             font-style: italic;
-            color: #92400e;
+            color: var(--text-color);
             margin: 0;
+            padding-left: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
         .quote-box .author {
             font-style: normal;
-            font-weight: 600;
-            margin-top: 0.5rem;
-            color: #78350f;
+            font-weight: 500;
+            margin-top: 0.75rem;
+            padding-left: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
 
-        /* Benefits List */
+        /* Benefits Grid */
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
         }
 
         .benefit-card {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border: 1px solid #bae6fd;
-            border-radius: 8px;
-            padding: 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .benefit-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .benefit-card h4 {
-            color: #0369a1;
+            color: var(--primary-color);
             font-size: 1rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .benefit-card p {
-            font-size: 0.9rem;
-            color: #475569;
+            font-size: 0.95rem;
+            color: var(--text-light);
             margin: 0;
+            line-height: 1.6;
         }
 
         /* References */
         .references {
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            background: var(--bg-light);
+            border-radius: 6px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border: 1px solid var(--border-color);
         }
 
         .references h3 {
             font-family: 'Georgia', serif;
-            font-size: 1.1rem;
-            color: #1e3a5f;
-            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
         }
 
         .references ol {
@@ -274,50 +370,125 @@
         }
 
         .references li {
-            font-size: 0.85rem;
-            color: #475569;
-            margin-bottom: 0.5rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
         }
 
         /* Process Steps */
         .process-steps {
-            margin: 1.5rem 0;
+            margin: 2rem 0;
         }
 
         .process-step {
             display: flex;
-            gap: 1rem;
+            gap: 1.25rem;
             margin-bottom: 1rem;
-            padding: 1rem;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .process-step:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .step-number {
-            background: #1e3a5f;
+            background: var(--primary-color);
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
+            font-weight: 600;
+            font-size: 0.9rem;
             flex-shrink: 0;
         }
 
         .step-content h4 {
-            color: #1e3a5f;
-            margin: 0 0 0.3rem 0;
-            font-size: 1rem;
+            color: var(--primary-color);
+            margin: 0 0 0.4rem 0;
+            font-size: 1.05rem;
+            font-weight: 600;
         }
 
         .step-content p {
             margin: 0;
-            font-size: 0.9rem;
-            color: #64748b;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Related Articles */
+        .related-articles {
+            margin: 2.5rem 0;
+        }
+
+        .related-articles h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .related-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .related-icon {
+            font-size: 1.25rem;
+            opacity: 0.7;
+        }
+
+        .related-title {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Source Box */
+        .source-box {
+            background: var(--bg-light);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .source-box p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .source-box strong {
+            color: var(--secondary-color);
         }
     </style>
 </head>
@@ -343,9 +514,9 @@
             <div class="article-body-wrapper">
                 <div class="article-body">
                     <div class="article-hero">
-                        <div class="paper-icon">📋</div>
+                        <span class="paper-badge">Research Paper</span>
                         <h1>Test-Driven Development: 테스트 주도 개발의 이론과 실제</h1>
-                        <p class="meta">Software Engineering Methodology Paper</p>
+                        <p class="meta">Software Engineering Methodology Series</p>
                     </div>
 
                     <div class="abstract-box">
@@ -376,7 +547,7 @@
                         </p>
 
                         <div class="quote-box">
-                            <p>"Clean code that works"</p>
+                            <p>Clean code that works</p>
                             <div class="author">— Ron Jeffries, TDD의 목표 정의</div>
                         </div>
                     </div>
@@ -398,11 +569,11 @@
 
                         <div class="figure-box">
                             <div class="diagram">
-                                <div class="cycle-step red">🔴 Red</div>
+                                <div class="cycle-step red">Red</div>
                                 <span class="cycle-arrow">→</span>
-                                <div class="cycle-step green">🟢 Green</div>
+                                <div class="cycle-step green">Green</div>
                                 <span class="cycle-arrow">→</span>
-                                <div class="cycle-step blue">🔵 Refactor</div>
+                                <div class="cycle-step blue">Refactor</div>
                                 <span class="cycle-arrow">→</span>
                             </div>
                             <p class="figure-caption">Figure 1. TDD Red-Green-Refactor Cycle</p>
@@ -412,21 +583,21 @@
                             <div class="process-step">
                                 <div class="step-number">1</div>
                                 <div class="step-content">
-                                    <h4>Red Phase - 실패하는 테스트 작성</h4>
+                                    <h4>Red Phase — 실패하는 테스트 작성</h4>
                                     <p>구현하고자 하는 기능에 대한 테스트를 먼저 작성한다. 아직 코드가 없으므로 테스트는 반드시 실패한다.</p>
                                 </div>
                             </div>
                             <div class="process-step">
                                 <div class="step-number">2</div>
                                 <div class="step-content">
-                                    <h4>Green Phase - 테스트 통과를 위한 최소 코드 작성</h4>
+                                    <h4>Green Phase — 테스트 통과를 위한 최소 코드 작성</h4>
                                     <p>테스트를 통과시키는 가장 간단한 코드를 작성한다. 이 단계에서는 코드의 우아함보다 동작에 집중한다.</p>
                                 </div>
                             </div>
                             <div class="process-step">
                                 <div class="step-number">3</div>
                                 <div class="step-content">
-                                    <h4>Refactor Phase - 코드 개선</h4>
+                                    <h4>Refactor Phase — 코드 개선</h4>
                                     <p>테스트가 통과하는 상태를 유지하면서 코드의 중복을 제거하고 구조를 개선한다.</p>
                                 </div>
                             </div>
@@ -514,27 +685,27 @@
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
-                                <h4>📉 결함 밀도 감소</h4>
+                                <h4>결함 밀도 감소</h4>
                                 <p>IBM, Microsoft 연구에 따르면 TDD 적용 시 결함이 40-80% 감소</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>📐 향상된 설계</h4>
+                                <h4>향상된 설계</h4>
                                 <p>테스트 용이성을 고려한 설계로 낮은 결합도와 높은 응집도 달성</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>📚 살아있는 문서화</h4>
+                                <h4>살아있는 문서화</h4>
                                 <p>테스트 코드가 시스템 동작을 설명하는 실행 가능한 문서 역할</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🔄 안전한 리팩토링</h4>
+                                <h4>안전한 리팩토링</h4>
                                 <p>포괄적인 테스트 스위트가 변경에 대한 안전망 제공</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>⏱️ 디버깅 시간 감소</h4>
+                                <h4>디버깅 시간 감소</h4>
                                 <p>작은 단위의 테스트로 문제 발생 지점을 즉시 파악</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>💡 명확한 요구사항</h4>
+                                <h4>명확한 요구사항</h4>
                                 <p>테스트 작성 과정에서 요구사항의 모호함을 사전에 발견</p>
                             </div>
                         </div>
@@ -584,15 +755,12 @@
                         <h3>관련 논문</h3>
                         <div class="related-grid">
                             <a href="bdd-methodology.html" class="related-card">
-                                <span class="related-icon">📋</span>
                                 <span class="related-title">BDD: 행위 주도 개발</span>
                             </a>
                             <a href="unit-testing.html" class="related-card">
-                                <span class="related-icon">🧪</span>
                                 <span class="related-title">단위 테스트 전략</span>
                             </a>
                             <a href="clean-code.html" class="related-card">
-                                <span class="related-icon">✨</span>
                                 <span class="related-title">클린 코드 원칙</span>
                             </a>
                         </div>

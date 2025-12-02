@@ -7,15 +7,39 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #7f8c8d;
+            --text-color: #2c3e50;
+            --text-light: #5d6d7e;
+            --bg-light: #f8f9fa;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+            --border-light: #f0f0f0;
+        }
+
         .article-body {
             overflow-x: hidden;
         }
 
-        /* Academic Green Theme */
+        @media (min-width: 1200px) {
+            .article-body-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+
+            .article-body {
+                max-width: 70%;
+                margin: 0 auto;
+            }
+        }
+
         .article-hero {
-            background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 3rem 2rem;
             position: relative;
-            overflow: hidden;
         }
 
         .article-hero::before {
@@ -25,137 +49,168 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background:
-                radial-gradient(circle at 25% 45%, rgba(52, 211, 153, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 75% 55%, rgba(110, 231, 183, 0.1) 0%, transparent 50%);
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
-        .paper-icon {
-            font-size: 3rem;
+        .paper-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.35rem 0.75rem;
+            border-radius: 3px;
             margin-bottom: 1rem;
-            opacity: 0.9;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .article-hero h1 {
-            color: #ecfdf5;
+            color: #ffffff;
             font-family: 'Georgia', 'Times New Roman', serif;
-            font-weight: 600;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
-            letter-spacing: -0.02em;
+            font-weight: 400;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            position: relative;
         }
 
         .article-hero .meta {
-            color: #a7f3d0;
-            font-family: 'Georgia', serif;
-            font-style: italic;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 400;
         }
 
-        /* Paper Sections */
         .paper-section {
             margin: 2.5rem 0;
+            padding: 0;
+        }
+
+        .paper-section > p,
+        .paper-section > ul {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-color);
+            margin-bottom: 1.25rem;
+        }
+
+        .paper-section > ul {
+            padding-left: 1.5rem;
+        }
+
+        .paper-section > ul li {
+            margin-bottom: 0.75rem;
         }
 
         .section-title {
             font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            color: #065f46;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #10b981;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .subsection-title {
             font-family: 'Georgia', serif;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            color: #047857;
-            margin: 1.5rem 0 0.8rem 0;
+            color: var(--secondary-color);
+            margin: 2rem 0 1rem 0;
         }
 
-        /* Abstract Box */
         .abstract-box {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border-left: 4px solid #10b981;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+            background: var(--bg-light);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
         }
 
         .abstract-box h3 {
             font-family: 'Georgia', serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #065f46;
-            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         .abstract-box p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #064e3b;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-color);
             text-align: justify;
         }
 
         .keywords {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: #059669;
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
         .keywords strong {
-            color: #065f46;
+            color: var(--secondary-color);
+            font-weight: 600;
         }
 
         /* Manifesto Box */
         .manifesto-box {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border: 2px solid #86efac;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 2rem;
+            margin: 2rem 0;
         }
 
         .manifesto-box h3 {
-            color: #065f46;
+            color: var(--primary-color);
             font-family: 'Georgia', serif;
             font-size: 1.1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             text-align: center;
+            font-weight: 600;
         }
 
         .manifesto-item {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            margin: 0.8rem 0;
+            gap: 0.75rem;
+            margin: 1rem 0;
             flex-wrap: wrap;
+            font-size: 0.95rem;
         }
 
         .manifesto-value {
-            font-weight: 700;
-            color: #047857;
+            font-weight: 600;
+            color: var(--primary-color);
         }
 
         .manifesto-over {
-            color: #6b7280;
+            color: var(--text-light);
         }
 
         .manifesto-vs {
-            color: #9ca3af;
+            color: var(--accent-color);
             font-style: italic;
+            font-size: 0.85rem;
         }
 
         /* Sprint Cycle */
         .sprint-cycle {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 2rem;
+            margin: 2rem 0;
         }
 
         .sprint-diagram {
@@ -163,206 +218,270 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.3rem;
-            margin: 1rem 0;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
         }
 
         .sprint-step {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: var(--primary-color);
             color: white;
-            padding: 0.6rem 0.8rem;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.8rem;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.85rem;
             text-align: center;
         }
 
-        .sprint-step.planning { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .sprint-step.daily { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .sprint-step.review { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
-        .sprint-step.retro { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+        .sprint-step.planning { background: #2563eb; }
+        .sprint-step.daily { background: #d97706; }
+        .sprint-step.review { background: #7c3aed; }
+        .sprint-step.retro { background: #be185d; }
 
         .sprint-arrow {
-            color: #94a3b8;
+            color: var(--accent-color);
             font-size: 1rem;
         }
 
         .figure-caption {
-            font-size: 0.85rem;
-            color: #64748b;
-            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--text-light);
             text-align: center;
-            margin-top: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: var(--bg-light);
+            padding: 1.75rem 2rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 0.5rem;
+            left: 1rem;
+            font-size: 3rem;
+            color: var(--border-color);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .quote-box p {
+            font-style: italic;
+            color: var(--text-color);
+            margin: 0;
+            padding-left: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .quote-box .author {
+            font-style: normal;
+            font-weight: 500;
+            margin-top: 0.75rem;
+            padding-left: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
 
         /* Role Cards */
         .role-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
         }
 
         .role-card {
-            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-            border: 1px solid #a7f3d0;
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             padding: 1.5rem;
+            transition: box-shadow 0.2s ease;
         }
 
-        .role-card .icon {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
+        .role-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .role-card h4 {
-            color: #065f46;
+            color: var(--primary-color);
             font-size: 1.1rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .role-card ul {
             margin: 0;
-            padding-left: 1.2rem;
+            padding-left: 1.25rem;
             font-size: 0.9rem;
-            color: #047857;
+            color: var(--text-light);
         }
 
         .role-card li {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
         }
 
         /* Ceremony Table */
         .ceremony-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
+            margin: 2rem 0;
+            font-size: 0.95rem;
         }
 
         .ceremony-table th {
-            background: #065f46;
+            background: var(--primary-color);
             color: white;
-            padding: 0.8rem;
+            padding: 1rem;
             text-align: left;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .ceremony-table td {
-            padding: 0.8rem;
-            border-bottom: 1px solid #e2e8f0;
-            color: #374151;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+            line-height: 1.5;
         }
 
         .ceremony-table tr:nth-child(even) {
-            background: #f0fdf4;
+            background: var(--bg-light);
+        }
+
+        .ceremony-table tr:hover {
+            background: #f1f5f9;
         }
 
         /* Artifact Cards */
         .artifact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
         }
 
         .artifact-card {
-            background: white;
-            border: 1px solid #d1fae5;
-            border-radius: 8px;
-            padding: 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
             text-align: center;
+            transition: box-shadow 0.2s ease;
         }
 
-        .artifact-card .icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        .artifact-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .artifact-card h4 {
-            color: #065f46;
+            color: var(--primary-color);
             font-size: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
         }
 
         .artifact-card p {
-            font-size: 0.85rem;
-            color: #6b7280;
+            font-size: 0.9rem;
+            color: var(--text-light);
             margin: 0;
+            line-height: 1.6;
         }
 
-        /* Quote Box */
-        .quote-box {
-            background: #f0fdf4;
-            border-left: 4px solid #34d399;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .quote-box p {
-            font-style: italic;
-            color: #047857;
-            margin: 0;
-        }
-
-        .quote-box .author {
-            font-style: normal;
-            font-weight: 600;
-            margin-top: 0.5rem;
-            color: #065f46;
-        }
-
-        /* Comparison Table */
+        /* Comparison Grid */
         .comparison-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 1.25rem;
+            margin: 2rem 0;
         }
 
         .comparison-card {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             overflow: hidden;
         }
 
         .comparison-card h4 {
-            background: #065f46;
+            background: var(--primary-color);
             color: white;
-            padding: 0.8rem;
+            padding: 1rem;
             margin: 0;
             font-size: 1rem;
+            font-weight: 500;
         }
 
         .comparison-card.waterfall h4 {
-            background: #6b7280;
+            background: var(--accent-color);
         }
 
         .comparison-card ul {
-            padding: 1rem 1rem 1rem 2rem;
+            padding: 1.25rem 1.25rem 1.25rem 2.25rem;
             margin: 0;
             font-size: 0.9rem;
-            color: #475569;
+            color: var(--text-light);
         }
 
         .comparison-card li {
             margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .benefit-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .benefit-card h4 {
+            color: var(--primary-color);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.6;
         }
 
         /* References */
         .references {
-            background: #f0fdf4;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            background: var(--bg-light);
+            border-radius: 6px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border: 1px solid var(--border-color);
         }
 
         .references h3 {
             font-family: 'Georgia', serif;
-            font-size: 1.1rem;
-            color: #065f46;
-            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
         }
 
         .references ol {
@@ -371,40 +490,72 @@
         }
 
         .references li {
-            font-size: 0.85rem;
-            color: #047857;
-            margin-bottom: 0.5rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
         }
 
-        /* Benefits Grid */
-        .benefits-grid {
+        /* Related Articles */
+        .related-articles {
+            margin: 2.5rem 0;
+        }
+
+        .related-articles h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+        }
+
+        .related-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
-            margin: 1.5rem 0;
         }
 
-        .benefit-card {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border: 1px solid #a7f3d0;
-            border-radius: 8px;
-            padding: 1.2rem;
-        }
-
-        .benefit-card h4 {
-            color: #065f46;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+        .related-card {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
         }
 
-        .benefit-card p {
-            font-size: 0.9rem;
-            color: #047857;
+        .related-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .related-title {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Source Box */
+        .source-box {
+            background: var(--bg-light);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .source-box p {
+            font-size: 0.875rem;
+            color: var(--text-light);
             margin: 0;
+            line-height: 1.7;
+        }
+
+        .source-box strong {
+            color: var(--secondary-color);
         }
     </style>
 </head>
@@ -430,9 +581,9 @@
             <div class="article-body-wrapper">
                 <div class="article-body">
                     <div class="article-hero">
-                        <div class="paper-icon">🔄</div>
+                        <span class="paper-badge">Research Paper</span>
                         <h1>Agile과 Scrum: 애자일 소프트웨어 개발 방법론 연구</h1>
-                        <p class="meta">Software Engineering Methodology Paper</p>
+                        <p class="meta">Software Engineering Methodology Series</p>
                     </div>
 
                     <div class="abstract-box">
@@ -458,7 +609,7 @@
                         </p>
 
                         <div class="manifesto-box">
-                            <h3>📜 Agile Manifesto (애자일 선언문)</h3>
+                            <h3>Agile Manifesto (애자일 선언문)</h3>
                             <div class="manifesto-item">
                                 <span class="manifesto-value">개인과 상호작용</span>
                                 <span class="manifesto-vs">over</span>
@@ -482,7 +633,7 @@
                         </div>
 
                         <div class="quote-box">
-                            <p>"우리는 소프트웨어를 개발하고 다른 사람들이 개발하는 것을 도와주면서 더 나은 방법을 찾고 있다."</p>
+                            <p>우리는 소프트웨어를 개발하고 다른 사람들이 개발하는 것을 도와주면서 더 나은 방법을 찾고 있다.</p>
                             <div class="author">— Agile Manifesto 서문</div>
                         </div>
                     </div>
@@ -520,7 +671,6 @@
 
                         <div class="role-grid">
                             <div class="role-card">
-                                <div class="icon">👤</div>
                                 <h4>Product Owner</h4>
                                 <ul>
                                     <li>제품 비전 정의 및 전달</li>
@@ -531,7 +681,6 @@
                                 </ul>
                             </div>
                             <div class="role-card">
-                                <div class="icon">🎯</div>
                                 <h4>Scrum Master</h4>
                                 <ul>
                                     <li>스크럼 프로세스 촉진 및 코칭</li>
@@ -542,7 +691,6 @@
                                 </ul>
                             </div>
                             <div class="role-card">
-                                <div class="icon">👥</div>
                                 <h4>Development Team</h4>
                                 <ul>
                                     <li>자기 조직화(Self-organizing) 팀</li>
@@ -601,17 +749,14 @@
 
                         <div class="artifact-grid">
                             <div class="artifact-card">
-                                <div class="icon">📋</div>
                                 <h4>Product Backlog</h4>
                                 <p>제품에 필요한 모든 기능, 개선사항, 수정사항의 우선순위 목록</p>
                             </div>
                             <div class="artifact-card">
-                                <div class="icon">📝</div>
                                 <h4>Sprint Backlog</h4>
                                 <p>현재 스프린트에서 완료할 Product Backlog 항목과 계획</p>
                             </div>
                             <div class="artifact-card">
-                                <div class="icon">📦</div>
                                 <h4>Increment</h4>
                                 <p>스프린트 종료 시 "완료" 정의를 충족하는 출시 가능한 제품 버전</p>
                             </div>
@@ -637,7 +782,7 @@
 
                         <div class="comparison-grid">
                             <div class="comparison-card">
-                                <h4>🔄 Agile</h4>
+                                <h4>Agile</h4>
                                 <ul>
                                     <li>반복적, 점진적 개발</li>
                                     <li>변화 수용 및 적응</li>
@@ -648,7 +793,7 @@
                                 </ul>
                             </div>
                             <div class="comparison-card waterfall">
-                                <h4>⬇️ Waterfall</h4>
+                                <h4>Waterfall</h4>
                                 <ul>
                                     <li>순차적, 단계별 개발</li>
                                     <li>초기 계획 준수</li>
@@ -666,27 +811,27 @@
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
-                                <h4>⚡ 빠른 가치 전달</h4>
+                                <h4>빠른 가치 전달</h4>
                                 <p>짧은 스프린트 주기로 조기에 가치 있는 기능 제공</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🔄 변화 대응력</h4>
+                                <h4>변화 대응력</h4>
                                 <p>시장 변화나 요구사항 변경에 유연하게 대응</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🎯 리스크 감소</h4>
+                                <h4>리스크 감소</h4>
                                 <p>지속적인 피드백으로 프로젝트 리스크 조기 발견</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>👥 팀 사기 향상</h4>
+                                <h4>팀 사기 향상</h4>
                                 <p>자율성과 책임감으로 팀 동기부여 강화</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>📊 투명성</h4>
+                                <h4>투명성</h4>
                                 <p>번다운 차트, 스프린트 보드로 진행 상황 가시화</p>
                             </div>
                             <div class="benefit-card">
-                                <h4>🔧 지속적 개선</h4>
+                                <h4>지속적 개선</h4>
                                 <p>회고를 통한 프로세스 및 팀 역량 개선</p>
                             </div>
                         </div>
@@ -722,15 +867,12 @@
                         <h3>관련 논문</h3>
                         <div class="related-grid">
                             <a href="tdd-methodology.html" class="related-card">
-                                <span class="related-icon">📋</span>
                                 <span class="related-title">TDD: 테스트 주도 개발</span>
                             </a>
                             <a href="ci-cd-pipeline.html" class="related-card">
-                                <span class="related-icon">🔄</span>
                                 <span class="related-title">CI/CD 파이프라인</span>
                             </a>
                             <a href="devops-culture.html" class="related-card">
-                                <span class="related-icon">🛠️</span>
                                 <span class="related-title">DevOps 문화와 실천</span>
                             </a>
                         </div>
