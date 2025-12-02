@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헬스장 생존기: 운동과 굴욕 사이 | Stock Insights</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/article.css">
+    <style>
+        /* Gym Humor Theme - Energetic Orange */
+        .gym-hero {
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #b91c1c 100%);
+            position: relative;
+        }
+
+        .gym-hero::before {
+            content: "🏋️";
+            position: absolute;
+            right: 30px;
+            bottom: 15px;
+            font-size: 130px;
+            opacity: 0.15;
+        }
+
+        .gym-badge {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Dumbbell Animation */
+        .gym-parade {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+
+        .gym-item {
+            font-size: 42px;
+            animation: gymBounce 1s ease-in-out infinite;
+            cursor: default;
+        }
+
+        .gym-item:nth-child(1) { animation-delay: 0s; }
+        .gym-item:nth-child(2) { animation-delay: 0.15s; }
+        .gym-item:nth-child(3) { animation-delay: 0.3s; }
+        .gym-item:nth-child(4) { animation-delay: 0.45s; }
+        .gym-item:nth-child(5) { animation-delay: 0.6s; }
+
+        @keyframes gymBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+
+        /* Orange Gradient Text */
+        .orange-gradient {
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scene Card */
+        .scene-card {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-radius: 20px;
+            padding: 28px;
+            margin: 28px 0;
+            border-left: 5px solid #ea580c;
+            position: relative;
+        }
+
+        .scene-card .scene-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .scene-card .scene-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #c2410c;
+            margin-bottom: 12px;
+            margin-top: 8px;
+        }
+
+        .scene-card .scene-content {
+            font-size: 15px;
+            color: #ea580c;
+            line-height: 1.7;
+        }
+
+        .scene-card .punchline {
+            margin-top: 16px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #c2410c;
+            border: 2px dashed #fdba74;
+        }
+
+        /* Character Cards */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .character-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            border: 2px solid #fed7aa;
+            transition: all 0.3s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-4px) rotate(1deg);
+            border-color: #ea580c;
+            box-shadow: 0 12px 24px rgba(234, 88, 12, 0.15);
+        }
+
+        .character-emoji {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+        .character-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #c2410c;
+            margin-bottom: 8px;
+        }
+
+        .character-card p {
+            font-size: 13px;
+            color: #ea580c;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Workout Progress */
+        .workout-section {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border-radius: 24px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .workout-section h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #c2410c;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .workout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 16px;
+        }
+
+        .workout-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .workout-day {
+            display: inline-block;
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            color: white;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .workout-card h5 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #c2410c;
+            margin-bottom: 6px;
+        }
+
+        .workout-card p {
+            font-size: 12px;
+            color: #ea580c;
+            margin: 0;
+        }
+
+        /* Muscle Meter */
+        .muscle-meter {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin: 28px 0;
+            border: 2px solid #fed7aa;
+        }
+
+        .meter-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #c2410c;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .meter-bar {
+            background: #e7e5e4;
+            border-radius: 12px;
+            height: 30px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .meter-fill {
+            height: 100%;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .meter-fill.motivation { width: 90%; background: linear-gradient(90deg, #22c55e, #16a34a); }
+        .meter-fill.reality { width: 15%; background: linear-gradient(90deg, #ea580c, #dc2626); }
+
+        .meter-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #78716c;
+        }
+
+        /* Equipment Guide */
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .equipment-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid #fed7aa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .equipment-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ea580c, #dc2626, #b91c1c);
+        }
+
+        .equipment-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .equipment-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #c2410c;
+            margin-bottom: 8px;
+        }
+
+        .equipment-card .expect {
+            font-size: 13px;
+            color: #16a34a;
+            margin-bottom: 4px;
+        }
+
+        .equipment-card .reality {
+            font-size: 13px;
+            color: #dc2626;
+        }
+
+        /* Dialog Box */
+        .dialog-box {
+            margin: 28px 0;
+        }
+
+        .dialog-line {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+        .dialog-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            border: 2px solid #fdba74;
+        }
+
+        .dialog-bubble {
+            background: #fff7ed;
+            border-radius: 18px;
+            padding: 14px 18px;
+            font-size: 14px;
+            color: #c2410c;
+            position: relative;
+            max-width: 80%;
+        }
+
+        .dialog-bubble.trainer {
+            background: #ea580c;
+            color: white;
+        }
+
+        .dialog-bubble::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 14px;
+            border-width: 8px 8px 8px 0;
+            border-style: solid;
+            border-color: transparent #fff7ed transparent transparent;
+        }
+
+        .dialog-bubble.trainer::before {
+            border-color: transparent #ea580c transparent transparent;
+        }
+
+        /* CTA Section */
+        .gym-cta {
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #b91c1c 100%);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gym-cta::before {
+            content: "🏋️ 💪 🔥 🏃 🎯";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            opacity: 0.2;
+        }
+
+        .gym-cta h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .gym-cta p {
+            font-size: 16px;
+            opacity: 0.95;
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Membership Card */
+        .membership-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border-radius: 20px;
+            padding: 28px;
+            color: white;
+            margin: 28px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .membership-card::before {
+            content: "MEMBERSHIP";
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        .membership-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .membership-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #374151;
+            font-size: 14px;
+        }
+
+        .membership-item:last-child {
+            border-bottom: none;
+        }
+
+        .membership-item .label {
+            color: #9ca3af;
+        }
+
+        .membership-total {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 2px solid #fbbf24;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="site-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-section">
+                <a href="../index.html" class="site-logo">Stock Insights</a>
+                <p class="site-tagline">Life & Business Insights</p>
+            </div>
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">메뉴</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">홈</a></li>
+                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <header class="site-header">
+                <div class="header-content">
+                    <h1 class="header-title">유머</h1>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <article class="article-page">
+                    <header class="article-header gym-hero">
+                        <div class="article-header-content">
+                            <div class="breadcrumb">
+                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 유머
+                            </div>
+                            <span class="article-category-badge gym-badge">유머</span>
+                            <h1 class="article-main-title">헬스장 생존기: 운동과 굴욕 사이</h1>
+                            <div class="article-header-meta">
+                                <span>2024년 12월 2일</span>
+                                <span>8분 읽기</span>
+                                <span>Stock Insights 리서치</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="article-body-wrapper">
+                        <div class="article-body">
+                            <p class="lead">
+                                1월 1일, 결심했습니다. "올해는 진짜 운동한다!"
+                                1월 15일, 헬스장 등록했습니다.
+                                2월 1일, 헬스장 위치를 까먹었습니다.
+                                헬스장은 단순한 운동 시설이 아닙니다.
+                                그곳은 <strong>굴욕과 자존심의 전쟁터</strong>입니다.
+                            </p>
+
+                            <div class="gym-parade">
+                                <span class="gym-item">🏋️</span>
+                                <span class="gym-item">💪</span>
+                                <span class="gym-item">🔥</span>
+                                <span class="gym-item">🏃</span>
+                                <span class="gym-item">🎯</span>
+                            </div>
+
+                            <h2 class="orange-gradient">헬스장의 불변의 법칙들</h2>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #1</span>
+                                <div class="scene-title">💳 등록의 법칙</div>
+                                <div class="scene-content">
+                                    헬스장 등록은 항상 "이번이 마지막"이라며 합니다.
+                                    12개월 등록하면 3개월 다니고,
+                                    3개월 등록하면 1개월 다니고,
+                                    1개월 등록하면 3일 다닙니다.
+                                </div>
+                                <div class="punchline">
+                                    💡 결론: 등록 기간과 실제 출석률은 반비례합니다.
+                                    PT 횟수권은 "기부금"이라 읽습니다.
+                                </div>
+                            </div>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #2</span>
+                                <div class="scene-title">🪞 거울의 법칙</div>
+                                <div class="scene-content">
+                                    헬스장 거울: 왠지 몸이 좋아 보임<br>
+                                    집 거울: 원래 모습<br>
+                                    사진: 충격과 공포<br>
+                                    헬스장 조명은 마법입니다.
+                                </div>
+                                <div class="punchline">
+                                    💡 운동 직후 펌핑된 모습 = 인생 전성기 착각의 순간
+                                </div>
+                            </div>
+
+                            <div class="scene-card">
+                                <span class="scene-number">법칙 #3</span>
+                                <div class="scene-title">⚖️ 체중계의 법칙</div>
+                                <div class="scene-content">
+                                    운동 전: "오늘은 꼭 빠졌을 거야"<br>
+                                    체중계 탑승: 두근두근<br>
+                                    결과 확인: +0.5kg<br>
+                                    "근육이 늘었겠지..."라고 자기 위안.
+                                </div>
+                                <div class="punchline">
+                                    💡 체중 증가의 원인: 100% 근육 (믿고 싶음)
+                                </div>
+                            </div>
+
+                            <h2>헬스장에서 만나는 캐릭터들</h2>
+
+                            <div class="character-grid">
+                                <div class="character-card">
+                                    <div class="character-emoji">🦍</div>
+                                    <h4>짐크래셔</h4>
+                                    <p>200kg 들며 포효. 덤벨 내려놓을 때 지진 발생. 존재감 200%.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">📱</div>
+                                    <h4>셀카 마스터</h4>
+                                    <p>운동 3분, 사진 30분. 인스타 업로드 필수. 기구는 포토존.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">🗣️</div>
+                                    <h4>조언 마스터</h4>
+                                    <p>"자세가 그게 아닌데..." 안 물어봤지만 PT 시작. 선의의 간섭.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">👻</div>
+                                    <h4>유령 회원</h4>
+                                    <p>등록 후 실종. 3개월 만에 출현. "오랜만이죠?" 직원도 모름.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">🎧</div>
+                                    <h4>음악 중독자</h4>
+                                    <p>이어폰 소리 옆에서 들림. 운동 강도와 비트가 비례. 가끔 따라 부름.</p>
+                                </div>
+                                <div class="character-card">
+                                    <div class="character-emoji">🐢</div>
+                                    <h4>기구 점령자</h4>
+                                    <p>한 기구에서 1시간. 세트 사이 10분 휴식. "몇 세트 남았어요?" "5세트요"</p>
+                                </div>
+                            </div>
+
+                            <h2>운동 의지 vs 현실</h2>
+
+                            <div class="muscle-meter">
+                                <div class="meter-title">💪 운동 의지 측정기</div>
+                                <div style="margin-bottom: 16px;">
+                                    <div style="font-size: 13px; margin-bottom: 8px; color: #78716c;">등록 당일 의지</div>
+                                    <div class="meter-bar">
+                                        <div class="meter-fill motivation">화이팅!</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 13px; margin-bottom: 8px; color: #78716c;">2주 후 현실</div>
+                                    <div class="meter-bar">
+                                        <div class="meter-fill reality">...</div>
+                                    </div>
+                                </div>
+                                <div class="meter-label">
+                                    <span>포기</span>
+                                    <span>그럭저럭</span>
+                                    <span>열정 만수르</span>
+                                </div>
+                            </div>
+
+                            <h2>헬스장 출석 패턴</h2>
+
+                            <div class="workout-section">
+                                <h3>📅 한 달간의 운동 기록</h3>
+                                <div class="workout-grid">
+                                    <div class="workout-card">
+                                        <div class="workout-day">1주</div>
+                                        <h5>불타는 의지</h5>
+                                        <p>매일 출석, 전신 운동, SNS 인증</p>
+                                    </div>
+                                    <div class="workout-card">
+                                        <div class="workout-day">2주</div>
+                                        <h5>적당한 열정</h5>
+                                        <p>주 3회, 상체만, 근육통 핑계</p>
+                                    </div>
+                                    <div class="workout-card">
+                                        <div class="workout-day">3주</div>
+                                        <h5>흔들리는 마음</h5>
+                                        <p>주 1회, 런닝머신만, "바빠서"</p>
+                                    </div>
+                                    <div class="workout-card">
+                                        <div class="workout-day">4주</div>
+                                        <h5>유령 모드</h5>
+                                        <p>출석 0회, "다음 달부터..."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>기구 사용의 진실</h2>
+
+                            <div class="equipment-grid">
+                                <div class="equipment-card">
+                                    <div class="equipment-icon">🏃</div>
+                                    <h4>런닝머신</h4>
+                                    <p class="expect">✅ 기대: 10km 달리기</p>
+                                    <p class="reality">❌ 현실: 5분 걷기 후 핸드폰 보기</p>
+                                </div>
+                                <div class="equipment-card">
+                                    <div class="equipment-icon">🪑</div>
+                                    <h4>벤치프레스</h4>
+                                    <p class="expect">✅ 기대: 100kg 3세트</p>
+                                    <p class="reality">❌ 현실: 빈 봉 들다 옆사람 도움 요청</p>
+                                </div>
+                                <div class="equipment-card">
+                                    <div class="equipment-icon">🔄</div>
+                                    <h4>케이블 머신</h4>
+                                    <p class="expect">✅ 기대: 다양한 운동</p>
+                                    <p class="reality">❌ 현실: 어떻게 쓰는 건지 유튜브 검색 중</p>
+                                </div>
+                                <div class="equipment-card">
+                                    <div class="equipment-icon">🧘</div>
+                                    <h4>스트레칭 존</h4>
+                                    <p class="expect">✅ 기대: 유연성 향상</p>
+                                    <p class="reality">❌ 현실: 핸드폰 보며 앉아있기 최적 장소</p>
+                                </div>
+                            </div>
+
+                            <div class="dialog-box">
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">👨</div>
+                                    <div class="dialog-bubble">
+                                        저... 이 기구 어떻게 쓰는 거예요?
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">🏋️</div>
+                                    <div class="dialog-bubble trainer">
+                                        아, 이건 렛풀다운이에요. 여기 잡고 당기시면 돼요.
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">👨</div>
+                                    <div class="dialog-bubble">
+                                        (열심히 당김) 이렇게요?
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">🏋️</div>
+                                    <div class="dialog-bubble trainer">
+                                        아... 그건 다른 기구세요. 이쪽이에요.
+                                    </div>
+                                </div>
+                                <div class="dialog-line">
+                                    <div class="dialog-avatar">👨</div>
+                                    <div class="dialog-bubble">
+                                        (굴욕) 감사합니다... 하하...
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>헬스장 회원권의 진실</h2>
+
+                            <div class="membership-card">
+                                <h4>💳 나의 헬스장 투자 현황</h4>
+                                <div class="membership-item">
+                                    <span class="label">연간 회원권</span>
+                                    <span>480,000원</span>
+                                </div>
+                                <div class="membership-item">
+                                    <span class="label">PT 10회권</span>
+                                    <span>600,000원</span>
+                                </div>
+                                <div class="membership-item">
+                                    <span class="label">운동복 구매</span>
+                                    <span>150,000원</span>
+                                </div>
+                                <div class="membership-item">
+                                    <span class="label">운동화</span>
+                                    <span>180,000원</span>
+                                </div>
+                                <div class="membership-item">
+                                    <span class="label">보충제</span>
+                                    <span>90,000원</span>
+                                </div>
+                                <div class="membership-total">
+                                    <span>총 투자</span>
+                                    <span>1,500,000원</span>
+                                </div>
+                            </div>
+
+                            <p style="text-align: center; font-style: italic; color: #666;">
+                                실제 출석: 12회 / 365일<br>
+                                1회 운동 비용: 125,000원<br>
+                                <strong>가성비: 최악</strong> 📉<br>
+                                <small>차라리 동네 한 바퀴가 건강에 좋았을 것</small>
+                            </p>
+
+                            <div class="scene-card">
+                                <span class="scene-number">실화</span>
+                                <div class="scene-title">🙈 처음 헬스장 간 날</div>
+                                <div class="scene-content">
+                                    <strong>10:00</strong> - 자신만만하게 입장<br>
+                                    <strong>10:05</strong> - 런닝머신 버튼 못 찾아서 옆 사람 관찰<br>
+                                    <strong>10:20</strong> - 덤벨 들다가 거울에 비친 내 모습에 충격<br>
+                                    <strong>10:30</strong> - 웨이트 존 진입 실패 (무서움)<br>
+                                    <strong>10:35</strong> - 스트레칭 존에서 핸드폰 하다가<br>
+                                    <strong>11:00</strong> - "오늘은 가볍게 마무리" 귀가<br>
+                                </div>
+                                <div class="punchline">
+                                    💡 실제 운동 시간: 15분<br>
+                                    눈치 보는 시간: 45분
+                                </div>
+                            </div>
+
+                            <div class="gym-cta">
+                                <h3>💪 그래도 헬스장 가시나요?</h3>
+                                <p>
+                                    굴욕과 좌절의 연속이지만,
+                                    그래도 한 번쯤 땀 흘리면 뿌듯합니다.
+                                    오늘도 파이팅! (내일부터...)
+                                </p>
+                            </div>
+
+                            <div class="conclusion-box conclusion-blue">
+                                <p>
+                                    헬스장에서 우리 모두 처음엔 어색합니다.
+                                    기구 사용법 모르는 것도,
+                                    운동 안 한 티 나는 것도 다 자연스러운 일입니다.
+                                </p>
+                                <p>
+                                    중요한 건 <strong>꾸준함</strong>이지만...
+                                    그게 제일 어렵다는 게 함정이죠. 😅
+                                    그래도 오늘 이 글 읽은 김에, 한 번 가보시는 건 어떨까요?
+                                </p>
+                            </div>
+
+                            <div class="sources-box sources-box-rounded">
+                                <h3>면책 조항</h3>
+                                <ul>
+                                    <li>본 글은 100% 유머 목적이며, 헬스장 산업을 비하하려는 의도가 없습니다</li>
+                                    <li>12회 출석은 작성자의 부끄러운 실화입니다 🙈</li>
+                                    <li>PT 트레이너분들 존경합니다. 진심으로.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <aside class="related-articles related-rounded">
+                            <h3>관련 글</h3>
+                            <a href="cafe-humor.html" class="related-link">
+                                <div>
+                                    <h4>카페 생존기</h4>
+                                    <p>커피 한 잔의 모험</p>
+                                </div>
+                            </a>
+                            <a href="supermarket-humor.html" class="related-link">
+                                <div>
+                                    <h4>슈퍼마켓 생존기</h4>
+                                    <p>장보기의 숨겨진 코미디</p>
+                                </div>
+                            </a>
+                        </aside>
+                    </div>
+                </article>
+            </main>
+
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">
+                        © 2024 Stock Insights. 오늘도 운동 화이팅! 💪
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
