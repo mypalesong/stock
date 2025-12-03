@@ -7,286 +7,289 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
 </head>
-<body>
-    <div class="mobile-header">
+<body class="article-page" data-category="business">
+    <header class="mobile-header">
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         <div class="mobile-logo">Stock Insights</div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="site-wrapper">
         <aside class="sidebar" id="sidebar">
-            <div class="logo-section">
-                <a href="../index.html" class="site-logo">Stock Insights</a>
-                <p class="site-tagline">전문 주식 분석</p>
+            <div class="sidebar-header">
+                <a href="../index.html" class="site-logo"><span class="logo-icon">S</span>Stock Insights</a>
+                <p class="site-tagline">Life & Business Insights</p>
             </div>
             <nav class="sidebar-nav">
-                <h3 class="nav-title">메뉴</h3>
-                <ul class="nav-list">
-                    <li><a href="../index.html" class="nav-link">홈</a></li>
-                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
-                </ul>
+                <div class="nav-section">
+                    <h3 class="nav-title">메뉴</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link"><span class="nav-icon">🏠</span> 홈</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3 class="nav-title">카테고리</h3>
+                    <div class="categories-section">
+                        <a href="../index.html" class="category-link"><span>전체</span></a>
+                        <a href="../index.html" class="category-link"><span>기술 & 개발</span></a>
+                        <a href="../index.html" class="category-link active"><span>비즈니스</span></a>
+                    </div>
+                </div>
             </nav>
         </aside>
 
-        <div class="main-content-wrapper">
-            <header class="site-header">
-                <div class="header-content">
-                    <h1 class="header-title">시장 분석</h1>
-                </div>
-            </header>
-
-            <main class="main-content">
-                <article class="article-page">
-                    <header class="article-header">
-                        <div class="article-header-content">
-                            <div class="breadcrumb">
-                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 환율 동향
-                            </div>
-                            <span class="article-category-badge">외환 시장</span>
-                            <h1 class="article-main-title">환율의 이해와 2024년 급등 배경</h1>
-                            <div class="article-header-meta">
-                                <span>2024년 11월 28일</span>
-                                <span>7분 읽기</span>
-                                <span>Stock Insights 리서치</span>
-                            </div>
-                        </div>
-                    </header>
-
-                    <div class="article-body-wrapper">
-                        <div class="article-body">
-                            <p class="lead">
-                                2024년 11월 원/달러 환율이 1,400원대를 넘어 2년 만에 최고치를 기록하며
-                                금융시장의 주요 관심사로 떠올랐습니다. 환율의 기본 개념부터 최근 급등 배경까지
-                                심층 분석합니다.
-                            </p>
-
-                            <div class="insight-box">
-                                <h3>핵심 인사이트</h3>
-                                <ul class="checkmark-list">
-                                    <li>2024년 11월 환율 1,475원 돌파 (2년 만에 최고치)</li>
-                                    <li>미 달러 강세와 원화 약세 복합 작용</li>
-                                    <li>트럼프 재집권과 국내 정치 불안 영향</li>
-                                    <li>외국인 5개월 연속 국내 주식 순매도</li>
-                                </ul>
-                            </div>
-
-                            <h2>1. 환율의 기본 개념</h2>
-
-                            <h3>환율이란?</h3>
-                            <p>
-                                환율은 서로 다른 통화의 교환 비율을 의미합니다. 국가 간의 거래에서
-                                화폐의 교환이 먼저 이루어져야 거래가 가능하며, 이때 자국 화폐와
-                                타국 화폐의 교환 비율을 환율이라고 합니다.
-                            </p>
-                            <p>
-                                예를 들어 원/달러 환율이 1,400원이라는 것은 1달러를 사기 위해
-                                1,400원이 필요하다는 의미입니다. 환율이 상승(예: 1,400원 → 1,500원)하면
-                                달러 가치가 올라가고 원화 가치가 떨어진 것이며, 환율이 하락하면 그 반대입니다.
-                            </p>
-
-                            <h3>환율의 종류</h3>
-                            <div class="comparison-box">
-                                <div class="comparison-item">
-                                    <h4>명목환율</h4>
-                                    <p>외환시장에서 실제로 거래되는 환율로, 우리가 일반적으로 말하는 환율입니다.</p>
-                                </div>
-                                <div class="comparison-item">
-                                    <h4>실질환율</h4>
-                                    <p>물가 수준을 고려한 환율로, 실제 구매력을 반영합니다. 명목환율에 양국의 물가수준을 곱하여 산출합니다.</p>
-                                </div>
-                            </div>
-
-                            <h2>2. 환율 변동 요인</h2>
-
-                            <h3>장기적 요인</h3>
-                            <p>
-                                장기적으로 환율에 영향을 미치는 가장 근본적인 요인은 <strong>물가 수준</strong>입니다.
-                                한 나라의 물가가 다른 나라보다 빠르게 상승하면 그 나라의 통화 가치는 하락합니다.
-                            </p>
-                            <p>
-                                또한 <strong>생산성의 변화</strong>도 중요한 요소입니다. 한 나라의 생산성이
-                                다른 나라보다 빠르게 향상되면 자국 통화는 절상됩니다.
-                            </p>
-
-                            <h3>중기적 요인</h3>
-                            <div class="stats-highlight">
-                                <div class="stat-item">
-                                    <div class="stat-value">국제수지</div>
-                                    <div class="stat-label">흑자 시 환율 하락</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">통화정책</div>
-                                    <div class="stat-label">긴축 시 환율 하락</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">금리</div>
-                                    <div class="stat-label">상승 시 자국 통화 강세</div>
-                                </div>
-                            </div>
-                            <p>
-                                중기적으로는 <strong>대외거래</strong>와 <strong>거시경제정책</strong>이 주요 영향을 미칩니다.
-                                국제수지가 흑자를 보이면 외환 공급이 늘어나 환율은 하락합니다.
-                                통화정책을 긴축적으로 운용하면 통화 공급이 감소하여 환율이 하락합니다.
-                            </p>
-
-                            <h3>단기적 요인</h3>
-                            <p>
-                                단기적으로는 외환시장 참가자들의 <strong>기대심리</strong>, 주변국의 환율 변동,
-                                각종 <strong>뉴스</strong> 등에 따라 영향을 받습니다. 특히 정치적 정세가 불안할 때는
-                                해당국 통화를 기피하는 현상이 나타납니다.
-                            </p>
-
-                            <h2>3. 2024년 11월 환율 급등 분석</h2>
-
-                            <h3>주요 수치</h3>
-                            <div class="timeline-box">
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">11.07</div>
-                                    <div class="timeline-content">
-                                        <h4>1,462.2원</h4>
-                                        <p>11월 초 수준</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">11.13</div>
-                                    <div class="timeline-content">
-                                        <h4>1,470원 돌파</h4>
-                                        <p>심리적 저항선 돌파</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">11.21</div>
-                                    <div class="timeline-content">
-                                        <h4>1,475.9원</h4>
-                                        <p>2년 만에 최고치</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3>급등 원인 분석</h3>
-
-                            <h4>1) 미 달러 강세</h4>
-                            <p>
-                                트럼프 당선 이후 미국의 보호무역주의 정책 우려와 재정 확대 전망으로
-                                달러 인덱스가 강세를 보였습니다. 트럼프의 관세 정책은 인플레이션을
-                                자극할 수 있어 연준의 금리 인하 속도가 둔화될 것이라는 전망이
-                                달러 강세를 지지했습니다.
-                            </p>
-
-                            <h4>2) 국내 정치 불안</h4>
-                            <p>
-                                국내 정치 혼란이 원화 약세 요인으로 작용했습니다. 정치적 불확실성은
-                                외국인 투자자들의 위험 회피 심리를 자극하여 국내 자산에서 이탈하는
-                                흐름을 만들었습니다.
-                            </p>
-
-                            <h4>3) 외국인 자금 유출</h4>
-                            <div class="quote-box">
-                                "외국인 투자자들이 5개월 연속 KOSPI 순매도에 나서는 등
-                                투자 심리 위축이 환율 수급에 부담 요인으로 작용했습니다."
-                            </div>
-
-                            <h3>2024년 연간 맥락</h3>
-                            <p>
-                                2024년 평균 원/달러 환율은 1,363.18원이었습니다. 11월의 환율은
-                                이 평균보다 약 100원 이상 높은 수준을 기록하며 큰 변동성을 보였습니다.
-                            </p>
-
-                            <h2>4. 환율 변동의 영향</h2>
-
-                            <div class="outlook-grid">
-                                <div class="outlook-card positive">
-                                    <h4>원화 약세의 긍정적 영향</h4>
-                                    <ul>
-                                        <li>수출 기업의 가격 경쟁력 향상</li>
-                                        <li>환차익을 통한 수출 기업 실적 개선</li>
-                                        <li>외국인 관광객 증가 가능성</li>
-                                        <li>해외 송금 소득 증가</li>
-                                    </ul>
-                                </div>
-                                <div class="outlook-card caution">
-                                    <h4>원화 약세의 부정적 영향</h4>
-                                    <ul>
-                                        <li>수입 물가 상승 (인플레이션 압력)</li>
-                                        <li>원자재 수입 비용 증가</li>
-                                        <li>해외여행 및 유학 비용 증가</li>
-                                        <li>외화 부채 상환 부담 증가</li>
-                                        <li>국내 물가 상승 압력</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <h2>5. 전망</h2>
-
-                            <h3>단기 전망</h3>
-                            <p>
-                                전문가들은 단기적으로 환율의 높은 변동성이 지속될 것으로 예상합니다.
-                                미국의 통화정책 방향, 국내 정치 안정화 여부, 외국인 투자 심리 등이
-                                주요 변수가 될 것입니다.
-                            </p>
-
-                            <h3>중장기 전망</h3>
-                            <p>
-                                일부 전문가들은 2025년에는 환율이 점차 안정을 찾을 것으로 전망합니다.
-                                다만 트럼프 행정부의 정책 방향, 글로벌 경기 흐름, 한국 경제의
-                                펀더멘털 등에 따라 변동 폭이 달라질 수 있습니다.
-                            </p>
-
-                            <div class="conclusion-box">
-                                <p>
-                                    환율은 물가, 금리, 국제수지, 정치적 상황 등 다양한 요인에 의해
-                                    영향을 받는 복합적인 경제 지표입니다.
-                                </p>
-                                <p>
-                                    2024년 11월의 급등은 미 달러 강세와 국내 정치 불안, 외국인 자금 유출이
-                                    복합적으로 작용한 결과입니다. 투자자와 기업은 환율 변동성에 대비한
-                                    리스크 관리 전략을 수립할 필요가 있습니다.
-                                </p>
-                            </div>
-
-                            <div class="sources-box">
-                                <h3>출처</h3>
-                                <ul>
-                                    <li><a href="https://www.bok.or.kr/portal/main/contents.do?menuNo=200407" target="_blank">한국은행 - 외환시장과 환율</a></li>
-                                    <li><a href="https://eiec.kdi.re.kr/policy/domesticView.do?ac=0000184256" target="_blank">KDI - 최근 원/달러 환율상승 배경과 전망</a></li>
-                                    <li><a href="https://www.hankyung.com/article/2024121698496" target="_blank">한국경제 - 2년 만에 최고치 찍은 원·달러 환율</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <aside class="related-articles">
-                            <h3>관련 분석</h3>
-                            <a href="hynix-strengths.html" class="related-link">
-                                <div>
-                                    <h4>SK하이닉스 핵심 경쟁력</h4>
-                                    <p>AI 메모리 시장 지배력</p>
-                                </div>
-                            </a>
-                            <a href="samsung-strengths.html" class="related-link">
-                                <div>
-                                    <h4>삼성전자 핵심 경쟁력</h4>
-                                    <p>3nm 파운드리와 통합 AI 솔루션</p>
-                                </div>
-                            </a>
-                        </aside>
+        <main class="main-content">
+            <article class="article-hero">
+                <div class="article-hero-inner">
+                    <div class="breadcrumb">
+                        <a href="../index.html">홈</a><span>/</span><a href="#">비즈니스</a><span>/</span><span>환율 동향</span>
                     </div>
-                </article>
-            </main>
+                    <div class="article-hero-meta">
+                        <span class="article-category-badge">외환 시장</span>
+                        <span class="article-hero-date">2024년 11월 28일</span>
+                    </div>
+                    <h1 class="article-hero-title">환율의 이해와 2024년 급등 배경</h1>
+                    <p class="article-hero-subtitle">2024년 11월 원/달러 환율이 1,400원대를 넘어 2년 만에 최고치를 기록하며 금융시장의 주요 관심사로 떠올랐습니다. 환율의 기본 개념부터 최근 급등 배경까지 심층 분석합니다.</p>
+                </div>
+            </article>
+
+            <div class="article-content-wrapper">
+                <div class="article-content-inner">
+                    <div class="article-body">
+                        <div class="insight-box">
+                            <h3>핵심 인사이트</h3>
+                            <ul class="checkmark-list">
+                                <li>2024년 11월 환율 1,475원 돌파 (2년 만에 최고치)</li>
+                                <li>미 달러 강세와 원화 약세 복합 작용</li>
+                                <li>트럼프 재집권과 국내 정치 불안 영향</li>
+                                <li>외국인 5개월 연속 국내 주식 순매도</li>
+                            </ul>
+                        </div>
+
+                        <h2>1. 환율의 기본 개념</h2>
+
+                        <h3>환율이란?</h3>
+                        <p>
+                            환율은 서로 다른 통화의 교환 비율을 의미합니다. 국가 간의 거래에서
+                            화폐의 교환이 먼저 이루어져야 거래가 가능하며, 이때 자국 화폐와
+                            타국 화폐의 교환 비율을 환율이라고 합니다.
+                        </p>
+                        <p>
+                            예를 들어 원/달러 환율이 1,400원이라는 것은 1달러를 사기 위해
+                            1,400원이 필요하다는 의미입니다. 환율이 상승(예: 1,400원 → 1,500원)하면
+                            달러 가치가 올라가고 원화 가치가 떨어진 것이며, 환율이 하락하면 그 반대입니다.
+                        </p>
+
+                        <h3>환율의 종류</h3>
+                        <div class="comparison-box">
+                            <div class="comparison-item">
+                                <h4>명목환율</h4>
+                                <p>외환시장에서 실제로 거래되는 환율로, 우리가 일반적으로 말하는 환율입니다.</p>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>실질환율</h4>
+                                <p>물가 수준을 고려한 환율로, 실제 구매력을 반영합니다. 명목환율에 양국의 물가수준을 곱하여 산출합니다.</p>
+                            </div>
+                        </div>
+
+                        <h2>2. 환율 변동 요인</h2>
+
+                        <h3>장기적 요인</h3>
+                        <p>
+                            장기적으로 환율에 영향을 미치는 가장 근본적인 요인은 <strong>물가 수준</strong>입니다.
+                            한 나라의 물가가 다른 나라보다 빠르게 상승하면 그 나라의 통화 가치는 하락합니다.
+                        </p>
+                        <p>
+                            또한 <strong>생산성의 변화</strong>도 중요한 요소입니다. 한 나라의 생산성이
+                            다른 나라보다 빠르게 향상되면 자국 통화는 절상됩니다.
+                        </p>
+
+                        <h3>중기적 요인</h3>
+                        <div class="stats-highlight">
+                            <div class="stat-item">
+                                <div class="stat-value">국제수지</div>
+                                <div class="stat-label">흑자 시 환율 하락</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">통화정책</div>
+                                <div class="stat-label">긴축 시 환율 하락</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">금리</div>
+                                <div class="stat-label">상승 시 자국 통화 강세</div>
+                            </div>
+                        </div>
+                        <p>
+                            중기적으로는 <strong>대외거래</strong>와 <strong>거시경제정책</strong>이 주요 영향을 미칩니다.
+                            국제수지가 흑자를 보이면 외환 공급이 늘어나 환율은 하락합니다.
+                            통화정책을 긴축적으로 운용하면 통화 공급이 감소하여 환율이 하락합니다.
+                        </p>
+
+                        <h3>단기적 요인</h3>
+                        <p>
+                            단기적으로는 외환시장 참가자들의 <strong>기대심리</strong>, 주변국의 환율 변동,
+                            각종 <strong>뉴스</strong> 등에 따라 영향을 받습니다. 특히 정치적 정세가 불안할 때는
+                            해당국 통화를 기피하는 현상이 나타납니다.
+                        </p>
+
+                        <h2>3. 2024년 11월 환율 급등 분석</h2>
+
+                        <h3>주요 수치</h3>
+                        <div class="timeline-box">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">11.07</div>
+                                <div class="timeline-content">
+                                    <h4>1,462.2원</h4>
+                                    <p>11월 초 수준</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">11.13</div>
+                                <div class="timeline-content">
+                                    <h4>1,470원 돌파</h4>
+                                    <p>심리적 저항선 돌파</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">11.21</div>
+                                <div class="timeline-content">
+                                    <h4>1,475.9원</h4>
+                                    <p>2년 만에 최고치</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>급등 원인 분석</h3>
+
+                        <h4>1) 미 달러 강세</h4>
+                        <p>
+                            트럼프 당선 이후 미국의 보호무역주의 정책 우려와 재정 확대 전망으로
+                            달러 인덱스가 강세를 보였습니다. 트럼프의 관세 정책은 인플레이션을
+                            자극할 수 있어 연준의 금리 인하 속도가 둔화될 것이라는 전망이
+                            달러 강세를 지지했습니다.
+                        </p>
+
+                        <h4>2) 국내 정치 불안</h4>
+                        <p>
+                            국내 정치 혼란이 원화 약세 요인으로 작용했습니다. 정치적 불확실성은
+                            외국인 투자자들의 위험 회피 심리를 자극하여 국내 자산에서 이탈하는
+                            흐름을 만들었습니다.
+                        </p>
+
+                        <h4>3) 외국인 자금 유출</h4>
+                        <div class="quote-box">
+                            "외국인 투자자들이 5개월 연속 KOSPI 순매도에 나서는 등
+                            투자 심리 위축이 환율 수급에 부담 요인으로 작용했습니다."
+                        </div>
+
+                        <h3>2024년 연간 맥락</h3>
+                        <p>
+                            2024년 평균 원/달러 환율은 1,363.18원이었습니다. 11월의 환율은
+                            이 평균보다 약 100원 이상 높은 수준을 기록하며 큰 변동성을 보였습니다.
+                        </p>
+
+                        <h2>4. 환율 변동의 영향</h2>
+
+                        <div class="outlook-grid">
+                            <div class="outlook-card positive">
+                                <h4>원화 약세의 긍정적 영향</h4>
+                                <ul>
+                                    <li>수출 기업의 가격 경쟁력 향상</li>
+                                    <li>환차익을 통한 수출 기업 실적 개선</li>
+                                    <li>외국인 관광객 증가 가능성</li>
+                                    <li>해외 송금 소득 증가</li>
+                                </ul>
+                            </div>
+                            <div class="outlook-card caution">
+                                <h4>원화 약세의 부정적 영향</h4>
+                                <ul>
+                                    <li>수입 물가 상승 (인플레이션 압력)</li>
+                                    <li>원자재 수입 비용 증가</li>
+                                    <li>해외여행 및 유학 비용 증가</li>
+                                    <li>외화 부채 상환 부담 증가</li>
+                                    <li>국내 물가 상승 압력</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h2>5. 전망</h2>
+
+                        <h3>단기 전망</h3>
+                        <p>
+                            전문가들은 단기적으로 환율의 높은 변동성이 지속될 것으로 예상합니다.
+                            미국의 통화정책 방향, 국내 정치 안정화 여부, 외국인 투자 심리 등이
+                            주요 변수가 될 것입니다.
+                        </p>
+
+                        <h3>중장기 전망</h3>
+                        <p>
+                            일부 전문가들은 2025년에는 환율이 점차 안정을 찾을 것으로 전망합니다.
+                            다만 트럼프 행정부의 정책 방향, 글로벌 경기 흐름, 한국 경제의
+                            펀더멘털 등에 따라 변동 폭이 달라질 수 있습니다.
+                        </p>
+
+                        <div class="conclusion-box">
+                            <p>
+                                환율은 물가, 금리, 국제수지, 정치적 상황 등 다양한 요인에 의해
+                                영향을 받는 복합적인 경제 지표입니다.
+                            </p>
+                            <p>
+                                2024년 11월의 급등은 미 달러 강세와 국내 정치 불안, 외국인 자금 유출이
+                                복합적으로 작용한 결과입니다. 투자자와 기업은 환율 변동성에 대비한
+                                리스크 관리 전략을 수립할 필요가 있습니다.
+                            </p>
+                        </div>
+
+                        <div class="sources-box">
+                            <h3>출처</h3>
+                            <ul>
+                                <li><a href="https://www.bok.or.kr/portal/main/contents.do?menuNo=200407" target="_blank">한국은행 - 외환시장과 환율</a></li>
+                                <li><a href="https://eiec.kdi.re.kr/policy/domesticView.do?ac=0000184256" target="_blank">KDI - 최근 원/달러 환율상승 배경과 전망</a></li>
+                                <li><a href="https://www.hankyung.com/article/2024121698496" target="_blank">한국경제 - 2년 만에 최고치 찍은 원·달러 환율</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="article-footer-section">
+                        <div class="article-tags">
+                            <span class="article-tag">환율</span>
+                            <span class="article-tag">외환시장</span>
+                            <span class="article-tag">원/달러</span>
+                            <span class="article-tag">경제분석</span>
+                        </div>
+                        <div class="related-articles">
+                            <h3>관련 글</h3>
+                            <div class="related-grid">
+                                <a href="hynix-strengths.html" class="related-card">
+                                    <div class="related-card-title">SK하이닉스 핵심 경쟁력</div>
+                                </a>
+                                <a href="samsung-strengths.html" class="related-card">
+                                    <div class="related-card-title">삼성전자 핵심 경쟁력</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <footer class="site-footer">
                 <div class="footer-content">
-                    <p class="footer-text">
-                        © 2024 Stock Insights. 본 콘텐츠는 투자 참고 자료입니다.
-                    </p>
+                    <p class="footer-text">© 2024 Stock Insights</p>
                 </div>
             </footer>
-        </div>
+        </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
 </body>
 </html>

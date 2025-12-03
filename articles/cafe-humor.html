@@ -490,19 +490,16 @@
         }
     </style>
 </head>
-<body>
-    <div class="mobile-header">
+<body class="article-page" data-category="humor">
+    <header class="mobile-header">
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         <div class="mobile-logo">Stock Insights</div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="site-wrapper">
         <aside class="sidebar" id="sidebar">
-            <div class="logo-section">
+            <div class="sidebar-header">
                 <a href="../index.html" class="site-logo">Stock Insights</a>
                 <p class="site-tagline">Life & Business Insights</p>
             </div>
@@ -905,6 +902,17 @@
         </div>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
 </body>
 </html>

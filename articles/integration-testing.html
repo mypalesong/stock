@@ -5,1043 +5,313 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Integration Testing: 통합 테스트 전략과 접근법 | Stock Insights</title>
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
-            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --primary-color: #1a1a2e;
-            --secondary-color: #16213e;
-            --accent-color: #0f3460;
-            --text-color: #1e293b;
-            --text-muted: #64748b;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
-            --border-color: #e2e8f0;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            color: var(--text-color);
-            line-height: 1.7;
-            background: var(--bg-secondary);
-        }
-
-        /* Unified Content Container */
-        .content-wrapper {
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        @media (min-width: 1400px) {
-            .content-wrapper {
-                width: 80%;
-                min-width: 1200px;
-                max-width: 1400px;
-                padding: 0;
-            }
-        }
-
-        /* Compact Breadcrumb */
-        .breadcrumb-section {
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0.75rem 0;
-        }
-
-        .breadcrumb {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .breadcrumb a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--accent-color);
-        }
-
-        .breadcrumb span {
-            color: #cbd5e1;
-        }
-
-        /* Compact Hero Section */
-        .article-hero {
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
-            padding: 2.5rem 0;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .paper-category {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-        }
-
-        .article-hero h1 {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            font-size: 2rem;
-            color: #ffffff;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-        }
-
-        .article-hero .subtitle {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: #94a3b8;
-            font-weight: 400;
-        }
-
-        /* Main Content Area */
-        .article-main {
-            background: var(--bg-primary);
-            padding: 3rem 0;
-        }
-
-        .article-body {
-            max-width: 100%;
-        }
-
-        /* Abstract */
-        .abstract-box {
-            background: var(--bg-secondary);
-            padding: 1.75rem 2rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid var(--border-color);
-            border-left: 3px solid var(--accent-color);
-        }
-
-        .abstract-box .label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.75rem;
-        }
-
-        .abstract-box p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-color);
-            margin-bottom: 1rem;
-        }
-
-        .keywords {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .keywords strong {
-            color: var(--text-color);
-        }
-
-        /* Section Titles */
-        .section-title {
-            font-family: var(--font-sans);
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 2.5rem 0 1.25rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .section-title .num {
-            font-family: var(--font-mono);
-            color: var(--accent-color);
-            margin-right: 0.5rem;
-        }
-
-        .subsection-title {
-            font-family: var(--font-sans);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin: 2rem 0 0.75rem 0;
-        }
-
-        /* Body Text */
-        .paper-section {
-            margin: 1.5rem 0;
-        }
-
-        .paper-section > p {
-            font-size: 1rem;
-            line-height: 1.85;
-            color: var(--text-color);
-            margin-bottom: 1.25rem;
-        }
-
-        .paper-section > ul {
-            font-size: 1rem;
-            line-height: 1.75;
-            padding-left: 1.5rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .paper-section > ul li {
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        .paper-section > ul li strong {
-            color: var(--primary-color);
-        }
-
-        /* Quote Box */
-        .quote-box {
-            background: var(--bg-tertiary);
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            border-left: 3px solid var(--accent-color);
-        }
-
-        .quote-box p {
-            font-family: var(--font-sans);
-            font-size: 1.05rem;
-            font-style: italic;
-            color: var(--text-color);
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .quote-box .author {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            font-style: normal;
-            color: var(--text-muted);
-            margin-top: 0.75rem;
-        }
-
-        /* Approach Cards */
-        .approach-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .approach-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 1.25rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .approach-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
-        }
-
-        .approach-card h4 {
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .approach-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin: 0 0 0.85rem 0;
-            line-height: 1.5;
-        }
-
-        .approach-card .pros-cons {
-            font-size: 0.75rem;
-            line-height: 1.5;
-        }
-
-        .approach-card .pros {
-            color: #16a34a;
-            margin-bottom: 0.25rem;
-        }
-
-        .approach-card .cons {
-            color: #dc2626;
-        }
-
-        /* Strategy Diagram */
-        .strategy-box {
-            background: var(--secondary-color);
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .strategy-diagram {
-            display: flex;
-            flex-direction: column;
-            gap: 0.65rem;
-        }
-
-        .strategy-level {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-        }
-
-        .strategy-label {
-            font-family: var(--font-mono);
-            width: 100px;
-            color: #cbd5e1;
-            font-size: 0.75rem;
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .strategy-bar {
-            height: 40px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: var(--font-mono);
-            font-weight: 600;
-            font-size: 0.75rem;
-        }
-
-        .strategy-bar.top-down {
-            background: linear-gradient(90deg, var(--accent-color) 0%, var(--secondary-color) 100%);
-            width: 30%;
-        }
-
-        .strategy-bar.bottom-up {
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            width: 100%;
-        }
-
-        .strategy-bar.sandwich {
-            background: linear-gradient(90deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-            width: 65%;
-        }
-
-        .figure-caption {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: #cbd5e1;
-            text-align: center;
-            margin-top: 1.25rem;
-        }
-
-        /* Test Types Table */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            font-size: 0.9rem;
-        }
-
-        .data-table th {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            background: var(--primary-color);
-            color: white;
-            padding: 0.85rem 1rem;
-            text-align: left;
-        }
-
-        .data-table td {
-            padding: 0.85rem 1rem;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-color);
-            line-height: 1.5;
-        }
-
-        .data-table tr:nth-child(even) {
-            background: var(--bg-secondary);
-        }
-
-        /* Container Box */
-        .container-box {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-        }
-
-        .container-box h4 {
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .container-box p {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            margin-bottom: 0.85rem;
-            line-height: 1.6;
-        }
-
-        .container-box ul {
-            margin: 0;
-            padding-left: 1.5rem;
-            color: var(--text-color);
-            font-size: 0.85rem;
-        }
-
-        .container-box li {
-            margin-bottom: 0.4rem;
-            line-height: 1.5;
-        }
-
-        /* Code Example */
-        .code-example {
-            background: #0f172a;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            overflow-x: auto;
-            border: 1px solid #1e293b;
-        }
-
-        .code-example .comment { color: #64748b; }
-        .code-example .keyword { color: #c084fc; }
-        .code-example .function { color: #60a5fa; }
-        .code-example .string { color: #4ade80; }
-        .code-example .decorator { color: #fbbf24; }
-        .code-example code { color: #e2e8f0; line-height: 1.6; }
-
-        /* Tool Grid */
-        .tool-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        @media (max-width: 900px) {
-            .tool-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .tool-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 1.25rem;
-            text-align: center;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .tool-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
-        }
-
-        .tool-card h4 {
-            font-family: var(--font-sans);
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 0.35rem;
-        }
-
-        .tool-card p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.4;
-        }
-
-        /* Challenge Cards */
-        .challenge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .challenge-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 1.25rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .challenge-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
-        }
-
-        .challenge-card h4 {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .challenge-card p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin: 0 0 0.5rem 0;
-            line-height: 1.5;
-        }
-
-        .challenge-card .solution {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: #16a34a;
-            font-style: italic;
-        }
-
-        /* Benefits Grid */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        @media (max-width: 900px) {
-            .benefits-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .benefit-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 1.25rem;
-        }
-
-        .benefit-card h4 {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .benefit-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        /* References */
-        .references {
-            background: var(--bg-secondary);
-            padding: 1.5rem 2rem;
-            margin: 2.5rem 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .references h3 {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .references ol {
-            padding-left: 1.25rem;
-            margin: 0;
-        }
-
-        .references li {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            line-height: 1.5;
-        }
-
-        /* Related Articles */
-        .related-articles {
-            margin: 2.5rem 0;
-        }
-
-        .related-articles h3 {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .related-grid {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .related-card {
-            display: block;
-            padding: 0.75rem 1.25rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .related-card:hover {
-            border-color: var(--accent-color);
-            background: var(--bg-tertiary);
-        }
-
-        .related-title {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-color);
-        }
-
-        /* Source Box */
-        .source-box {
-            background: var(--bg-tertiary);
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .source-box p {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        .source-box strong {
-            color: var(--text-color);
-        }
-
-        /* Footer */
-        .site-footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 1.5rem 0;
-            text-align: center;
-        }
-
-        .site-footer p {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="../styles/article.css">
 </head>
-<body>
-    <nav class="breadcrumb-section">
-        <div class="content-wrapper">
-            <div class="breadcrumb">
-                <a href="../index.html">홈</a>
-                <span>/</span>
-                <a href="../index.html?category=tech">개발 방법론</a>
-                <span>/</span>
-                <span>Integration Testing</span>
-            </div>
+<body class="article-page" data-category="tech">
+    <!-- Mobile Header (Hamburger on LEFT) -->
+    <header class="mobile-header">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-    </nav>
-
-    <header class="article-hero">
-        <div class="content-wrapper">
-            <div class="hero-content">
-                <span class="paper-category">Software Engineering · Research Paper</span>
-                <h1>Integration Testing: 통합 테스트 전략과 접근법</h1>
-                <p class="subtitle">Methodology Series Vol.4</p>
-            </div>
-        </div>
+        <div class="mobile-logo">Stock Insights</div>
     </header>
 
-    <main class="article-main">
-        <div class="content-wrapper">
-            <article class="article-body">
-                <div class="abstract-box">
-                    <div class="label">Abstract</div>
-                    <p>
-                        통합 테스트(Integration Testing)는 개별적으로 테스트된 소프트웨어 모듈들이 함께 동작할 때
-                        발생하는 결함을 발견하기 위한 테스트 단계이다. 본 논문에서는 Big Bang, Top-Down, Bottom-Up,
-                        Sandwich 등 다양한 통합 테스트 전략을 분석하고, 현대적인 마이크로서비스 아키텍처에서의
-                        통합 테스트 접근법을 고찰한다. 또한 Testcontainers, WireMock 등의 도구를 활용한
-                        효과적인 통합 테스트 구현 방법을 제시한다.
-                    </p>
-                    <div class="keywords">
-                        <strong>Keywords:</strong> Integration Testing, Test Strategy, API Testing, Contract Testing, Testcontainers
-                    </div>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="site-wrapper">
+        <!-- Left Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="../index.html" class="sidebar-logo">Stock Insights</a>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">카테고리</div>
+                    <a href="../index.html?category=market" class="nav-item">시장 분석</a>
+                    <a href="../index.html?category=invest" class="nav-item">투자 전략</a>
+                    <a href="../index.html?category=econ" class="nav-item">경제 이슈</a>
+                    <a href="../index.html?category=tech" class="nav-item active">기술 & 개발</a>
+                    <a href="../index.html?category=humor" class="nav-item">유머</a>
                 </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">인기 글</div>
+                    <a href="unit-testing.html" class="nav-item">단위 테스트</a>
+                    <a href="tdd-methodology.html" class="nav-item">TDD 방법론</a>
+                    <a href="devops-culture.html" class="nav-item">DevOps</a>
+                </div>
+            </nav>
+        </aside>
 
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
-                    <p>
-                        단위 테스트가 개별 컴포넌트의 정확성을 검증한다면, 통합 테스트는 이러한 컴포넌트들이
-                        함께 작동할 때 발생하는 인터페이스 결함, 데이터 흐름 문제, 통신 오류 등을 발견한다.
-                    </p>
+        <!-- Main Content -->
+        <main class="main-content">
+            <article class="article-hero">
+                <div class="breadcrumb">
+                    <a href="../index.html">홈</a>
+                    <span class="separator">/</span>
+                    <a href="../index.html?category=tech">기술 & 개발</a>
+                    <span class="separator">/</span>
+                    <span>Integration Testing</span>
+                </div>
+                <div class="article-meta">
+                    <span class="category">Software Engineering</span>
+                    <span class="date">2024</span>
+                </div>
+                <h1 class="article-title">Integration Testing: 통합 테스트 전략과 접근법</h1>
+                <p class="article-subtitle">Methodology Series Vol.4</p>
+            </article>
 
-                    <div class="quote-box">
-                        <p>Integration testing is the phase in software testing in which individual
-                        software modules are combined and tested as a group.</p>
-                        <div class="author">— IEEE Standard 610.12</div>
-                    </div>
+            <div class="article-content-wrapper">
+                <div class="article-content-inner">
+                    <div class="article-body">
+                        <div class="lead">
+                            통합 테스트(Integration Testing)는 개별적으로 테스트된 소프트웨어 모듈들이 함께 동작할 때
+                            발생하는 결함을 발견하기 위한 테스트 단계이다. 본 논문에서는 Big Bang, Top-Down, Bottom-Up,
+                            Sandwich 등 다양한 통합 테스트 전략을 분석하고, 현대적인 마이크로서비스 아키텍처에서의
+                            통합 테스트 접근법을 고찰한다. 또한 Testcontainers, WireMock 등의 도구를 활용한
+                            효과적인 통합 테스트 구현 방법을 제시한다.
+                        </div>
 
-                    <p>
-                        통합 테스트는 단위 테스트보다 범위가 넓고 E2E 테스트보다 빠르며,
-                        컴포넌트 간 상호작용에서 발생하는 문제를 효과적으로 발견할 수 있다.
-                    </p>
-                </section>
+                        <div class="highlight-box">
+                            <strong>Keywords:</strong> Integration Testing, Test Strategy, API Testing, Contract Testing, Testcontainers
+                        </div>
 
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">2.</span> Integration Test Strategies</h2>
+                        <h2>1. Introduction</h2>
+                        <p>
+                            단위 테스트가 개별 컴포넌트의 정확성을 검증한다면, 통합 테스트는 이러한 컴포넌트들이
+                            함께 작동할 때 발생하는 인터페이스 결함, 데이터 흐름 문제, 통신 오류 등을 발견한다.
+                        </p>
 
-                    <div class="approach-grid">
-                        <div class="approach-card">
-                            <h4>Big Bang</h4>
-                            <p>모든 모듈을 동시에 통합하여 테스트. 가장 단순하지만 결함 위치 파악 어려움</p>
-                            <div class="pros-cons">
-                                <div class="pros">✓ 빠른 통합</div>
-                                <div class="cons">✗ 디버깅 어려움, 높은 리스크</div>
+                        <blockquote class="quote-box">
+                            <p>Integration testing is the phase in software testing in which individual
+                            software modules are combined and tested as a group.</p>
+                            <footer>— IEEE Standard 610.12</footer>
+                        </blockquote>
+
+                        <h2>2. Integration Test Strategies</h2>
+                        <div class="card-grid">
+                            <div class="benefit-card">
+                                <h4>Big Bang</h4>
+                                <p>모든 모듈을 동시에 통합. 빠르지만 디버깅 어려움</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Top-Down</h4>
+                                <p>상위→하위 모듈 순. Stub 사용</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Bottom-Up</h4>
+                                <p>하위→상위 모듈 순. Driver 사용</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Sandwich (Hybrid)</h4>
+                                <p>Top-Down과 Bottom-Up 결합</p>
                             </div>
                         </div>
-                        <div class="approach-card">
-                            <h4>Top-Down</h4>
-                            <p>상위 모듈부터 하위 모듈로 점진적 통합. Stub을 사용해 하위 모듈 대체</p>
-                            <div class="pros-cons">
-                                <div class="pros">✓ 주요 기능 조기 검증</div>
-                                <div class="cons">✗ 많은 Stub 필요</div>
-                            </div>
-                        </div>
-                        <div class="approach-card">
-                            <h4>Bottom-Up</h4>
-                            <p>하위 모듈부터 상위 모듈로 점진적 통합. Driver를 사용해 상위 모듈 대체</p>
-                            <div class="pros-cons">
-                                <div class="pros">✓ 하위 레벨 철저한 테스트</div>
-                                <div class="cons">✗ UI 테스트 지연</div>
-                            </div>
-                        </div>
-                        <div class="approach-card">
-                            <h4>Sandwich (Hybrid)</h4>
-                            <p>Top-Down과 Bottom-Up을 결합. 상하 양방향에서 중간 계층으로 접근</p>
-                            <div class="pros-cons">
-                                <div class="pros">✓ 양쪽 장점 결합</div>
-                                <div class="cons">✗ 복잡한 관리</div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="strategy-box">
-                        <div class="strategy-diagram">
-                            <div class="strategy-level">
-                                <span class="strategy-label">Top-Down</span>
-                                <div class="strategy-bar top-down">UI → Logic → Data</div>
-                            </div>
-                            <div class="strategy-level">
-                                <span class="strategy-label">Sandwich</span>
-                                <div class="strategy-bar sandwich">UI ↔ Logic ↔ Data</div>
-                            </div>
-                            <div class="strategy-level">
-                                <span class="strategy-label">Bottom-Up</span>
-                                <div class="strategy-bar bottom-up">Data → Logic → UI</div>
-                            </div>
-                        </div>
-                        <p class="figure-caption">Figure 1. Integration Test Strategy Approaches</p>
-                    </div>
-                </section>
+                        <h2>3. Types of Integration Tests</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>유형</th>
+                                    <th>범위</th>
+                                    <th>목적</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Component Integration</strong></td>
+                                    <td>서비스 내부</td>
+                                    <td>내부 모듈 간 상호작용</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>API Integration</strong></td>
+                                    <td>서비스 간</td>
+                                    <td>REST/gRPC API 계약 검증</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Database Integration</strong></td>
+                                    <td>데이터 레이어</td>
+                                    <td>DB 스키마, 쿼리 정확성</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Message Integration</strong></td>
+                                    <td>비동기 통신</td>
+                                    <td>메시지 브로커 연동</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Contract Testing</strong></td>
+                                    <td>서비스 경계</td>
+                                    <td>Provider-Consumer 계약</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">3.</span> Types of Integration Tests</h2>
-
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>유형</th>
-                                <th>범위</th>
-                                <th>목적</th>
-                                <th>예시</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Component Integration</strong></td>
-                                <td>서비스 내부</td>
-                                <td>내부 모듈 간 상호작용</td>
-                                <td>Service → Repository → DB</td>
-                            </tr>
-                            <tr>
-                                <td><strong>API Integration</strong></td>
-                                <td>서비스 간</td>
-                                <td>REST/gRPC API 계약 검증</td>
-                                <td>HTTP 클라이언트 ↔ 서버</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Database Integration</strong></td>
-                                <td>데이터 레이어</td>
-                                <td>DB 스키마, 쿼리 정확성</td>
-                                <td>Repository → PostgreSQL</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Message Integration</strong></td>
-                                <td>비동기 통신</td>
-                                <td>메시지 브로커 연동</td>
-                                <td>Producer → Kafka → Consumer</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Contract Testing</strong></td>
-                                <td>서비스 경계</td>
-                                <td>Provider-Consumer 계약 준수</td>
-                                <td>Pact, Spring Cloud Contract</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">4.</span> Testcontainers</h2>
-
-                    <div class="container-box">
-                        <h4>Testcontainers란?</h4>
+                        <h2>4. Testcontainers</h2>
                         <p>
                             Testcontainers는 Docker 컨테이너를 활용하여 통합 테스트에 필요한
                             실제 인프라(데이터베이스, 메시지 브로커 등)를 일회용으로 제공하는 라이브러리이다.
                         </p>
                         <ul>
-                            <li>실제 데이터베이스(PostgreSQL, MySQL, MongoDB 등)로 테스트</li>
+                            <li>실제 데이터베이스(PostgreSQL, MySQL, MongoDB)로 테스트</li>
                             <li>Kafka, RabbitMQ 등 메시지 브로커 테스트</li>
                             <li>Redis, Elasticsearch 등 외부 서비스 테스트</li>
                             <li>테스트 격리 보장 - 매 테스트마다 깨끗한 환경</li>
                         </ul>
+
+                        <h2>5. Testing Tools</h2>
+                        <div class="card-grid">
+                            <div class="benefit-card">
+                                <h4>Testcontainers</h4>
+                                <p>Docker 기반 인프라 테스트</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>WireMock</h4>
+                                <p>HTTP API 목킹/스터빙</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Pact</h4>
+                                <p>Consumer-Driven Contract</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>LocalStack</h4>
+                                <p>AWS 서비스 로컬 에뮬레이션</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>RestAssured</h4>
+                                <p>REST API 테스트 DSL</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>MockServer</h4>
+                                <p>HTTP/HTTPS 목 서버</p>
+                            </div>
+                        </div>
+
+                        <h2>6. Challenges and Solutions</h2>
+                        <ul>
+                            <li><strong>느린 실행 속도:</strong> 병렬 실행, 컨테이너 재사용, 테스트 범위 최적화</li>
+                            <li><strong>테스트 격리:</strong> 트랜잭션 롤백, 테스트별 DB 초기화</li>
+                            <li><strong>환경 일관성:</strong> Testcontainers, Docker Compose 활용</li>
+                            <li><strong>네트워크 의존성:</strong> WireMock, Mock Server로 대체</li>
+                            <li><strong>테스트 데이터 관리:</strong> Fixture, Factory 패턴 활용</li>
+                        </ul>
+
+                        <h2>7. Best Practices</h2>
+                        <ul>
+                            <li><strong>테스트 범위 명확화:</strong> 단위 테스트와 E2E 테스트 사이의 적절한 범위 설정</li>
+                            <li><strong>실제 의존성 사용:</strong> 가능하면 Mock보다 Testcontainers로 실제 인프라 테스트</li>
+                            <li><strong>테스트 격리:</strong> 각 테스트는 독립적으로 실행 가능해야 함</li>
+                            <li><strong>빠른 피드백:</strong> 느린 테스트는 별도 테스트 스위트로 분리</li>
+                            <li><strong>CI 통합:</strong> 모든 통합 테스트가 CI 파이프라인에서 실행</li>
+                            <li><strong>Contract Testing:</strong> 마이크로서비스 간 계약 검증으로 통합 문제 사전 방지</li>
+                        </ul>
+
+                        <h2>8. Benefits</h2>
+                        <div class="card-grid">
+                            <div class="benefit-card">
+                                <h4>인터페이스 결함 발견</h4>
+                                <p>컴포넌트 간 통신 문제를 프로덕션 전에 발견</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>데이터 흐름 검증</h4>
+                                <p>시스템을 통과하는 데이터의 정확성 확인</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>설정 오류 감지</h4>
+                                <p>환경 설정, 연결 문제 등 구성 오류 발견</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>현실적인 시나리오</h4>
+                                <p>실제 환경에 가까운 조건에서 테스트</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>배포 자신감</h4>
+                                <p>통합 레벨 검증으로 배포 리스크 감소</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>API 계약 검증</h4>
+                                <p>서비스 간 API 호환성 보장</p>
+                            </div>
+                        </div>
+
+                        <h2>9. Conclusion</h2>
+                        <p>
+                            통합 테스트는 단위 테스트가 발견할 수 없는 컴포넌트 간 상호작용 문제를 검출하는
+                            핵심 테스트 단계이다. Testcontainers와 같은 현대적 도구의 등장으로
+                            실제 인프라를 활용한 안정적인 통합 테스트가 가능해졌다.
+                        </p>
+                        <p>
+                            효과적인 통합 테스트 전략은 테스트 피라미드의 원칙을 준수하면서,
+                            핵심 통합 지점에 집중하고, 테스트 실행 속도와 안정성을 균형 있게 관리해야 한다.
+                        </p>
+
+                        <div class="reference-box">
+                            <h3>References</h3>
+                            <ol>
+                                <li>Fowler, M. (2012). "Integration Testing." <em>martinfowler.com</em>.</li>
+                                <li>Vocke, H. (2018). "The Practical Test Pyramid." <em>martinfowler.com</em>.</li>
+                                <li>Clemson, T. (2014). "Testing Strategies in a Microservice Architecture." <em>martinfowler.com</em>.</li>
+                                <li>Freeman, S., & Pryce, N. (2009). <em>Growing Object-Oriented Software, Guided by Tests</em>. Addison-Wesley.</li>
+                                <li>Testcontainers. (2024). <em>Official Documentation</em>. testcontainers.org</li>
+                            </ol>
+                        </div>
                     </div>
 
-                    <div class="code-example">
-                        <code>
-<span class="decorator">@Testcontainers</span>
-<span class="keyword">class</span> <span class="function">UserRepositoryIntegrationTest</span> {
+                    <div class="article-footer-section">
+                        <div class="article-tags">
+                            <span class="tag">Integration Testing</span>
+                            <span class="tag">API Testing</span>
+                            <span class="tag">Testing</span>
+                            <span class="tag">Quality</span>
+                        </div>
 
-    <span class="decorator">@Container</span>
-    <span class="keyword">static</span> PostgreSQLContainer<?> postgres =
-        <span class="keyword">new</span> PostgreSQLContainer<>(<span class="string">"postgres:15"</span>)
-            .withDatabaseName(<span class="string">"testdb"</span>)
-            .withUsername(<span class="string">"test"</span>)
-            .withPassword(<span class="string">"test"</span>);
-
-    <span class="decorator">@Test</span>
-    <span class="keyword">void</span> <span class="function">shouldSaveAndFindUser</span>() {
-        <span class="comment">// Given</span>
-        User user = <span class="keyword">new</span> User(<span class="string">"john@example.com"</span>, <span class="string">"John Doe"</span>);
-
-        <span class="comment">// When</span>
-        userRepository.save(user);
-        Optional<User> found = userRepository.findByEmail(<span class="string">"john@example.com"</span>);
-
-        <span class="comment">// Then</span>
-        assertThat(found).isPresent();
-        assertThat(found.get().getName()).isEqualTo(<span class="string">"John Doe"</span>);
-    }
-}
-                        </code>
-                    </div>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">5.</span> Testing Tools</h2>
-
-                    <div class="tool-grid">
-                        <div class="tool-card">
-                            <h4>Testcontainers</h4>
-                            <p>Docker 기반 인프라 테스트</p>
+                        <div class="related-articles">
+                            <h3>관련 글</h3>
+                            <div class="related-grid">
+                                <a href="unit-testing.html" class="related-card">
+                                    <span class="related-category">Testing</span>
+                                    <h4>단위 테스트 전략</h4>
+                                    <p>AAA 패턴과 FIRST 원칙</p>
+                                </a>
+                                <a href="devops-culture.html" class="related-card">
+                                    <span class="related-category">DevOps</span>
+                                    <h4>DevOps 문화와 실천</h4>
+                                    <p>CI/CD 파이프라인 구축</p>
+                                </a>
+                                <a href="tdd-methodology.html" class="related-card">
+                                    <span class="related-category">Methodology</span>
+                                    <h4>TDD: 테스트 주도 개발</h4>
+                                    <p>Red-Green-Refactor</p>
+                                </a>
+                            </div>
                         </div>
-                        <div class="tool-card">
-                            <h4>WireMock</h4>
-                            <p>HTTP API 목킹/스터빙</p>
-                        </div>
-                        <div class="tool-card">
-                            <h4>Pact</h4>
-                            <p>Consumer-Driven Contract</p>
-                        </div>
-                        <div class="tool-card">
-                            <h4>LocalStack</h4>
-                            <p>AWS 서비스 로컬 에뮬레이션</p>
-                        </div>
-                        <div class="tool-card">
-                            <h4>RestAssured</h4>
-                            <p>REST API 테스트 DSL</p>
-                        </div>
-                        <div class="tool-card">
-                            <h4>MockServer</h4>
-                            <p>HTTP/HTTPS 목 서버</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">6.</span> Challenges and Solutions</h2>
-
-                    <div class="challenge-grid">
-                        <div class="challenge-card">
-                            <h4>느린 실행 속도</h4>
-                            <p>외부 의존성으로 인한 테스트 실행 시간 증가</p>
-                            <div class="solution">→ 병렬 실행, 컨테이너 재사용, 테스트 범위 최적화</div>
-                        </div>
-                        <div class="challenge-card">
-                            <h4>테스트 격리</h4>
-                            <p>테스트 간 데이터 오염, 상태 의존성</p>
-                            <div class="solution">→ 트랜잭션 롤백, 테스트별 DB 초기화</div>
-                        </div>
-                        <div class="challenge-card">
-                            <h4>환경 일관성</h4>
-                            <p>로컬과 CI 환경 차이로 인한 불안정성</p>
-                            <div class="solution">→ Testcontainers, Docker Compose</div>
-                        </div>
-                        <div class="challenge-card">
-                            <h4>네트워크 의존성</h4>
-                            <p>외부 API 호출의 불안정성</p>
-                            <div class="solution">→ WireMock, Mock Server로 대체</div>
-                        </div>
-                        <div class="challenge-card">
-                            <h4>테스트 데이터 관리</h4>
-                            <p>복잡한 테스트 데이터 설정</p>
-                            <div class="solution">→ Fixture, Factory 패턴 활용</div>
-                        </div>
-                        <div class="challenge-card">
-                            <h4>마이크로서비스 복잡성</h4>
-                            <p>다수 서비스 간 테스트 어려움</p>
-                            <div class="solution">→ Contract Testing, 서비스 경계 테스트</div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">7.</span> Best Practices</h2>
-
-                    <ul>
-                        <li><strong>테스트 범위 명확화:</strong> 단위 테스트와 E2E 테스트 사이의 적절한 범위 설정</li>
-                        <li><strong>실제 의존성 사용:</strong> 가능하면 Mock보다 Testcontainers로 실제 인프라 테스트</li>
-                        <li><strong>테스트 격리:</strong> 각 테스트는 독립적으로 실행 가능해야 함</li>
-                        <li><strong>빠른 피드백:</strong> 느린 테스트는 별도 테스트 스위트로 분리</li>
-                        <li><strong>CI 통합:</strong> 모든 통합 테스트가 CI 파이프라인에서 실행</li>
-                        <li><strong>Contract Testing:</strong> 마이크로서비스 간 계약 검증으로 통합 문제 사전 방지</li>
-                    </ul>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">8.</span> Benefits</h2>
-
-                    <div class="benefits-grid">
-                        <div class="benefit-card">
-                            <h4>인터페이스 결함 발견</h4>
-                            <p>컴포넌트 간 통신 문제를 프로덕션 전에 발견</p>
-                        </div>
-                        <div class="benefit-card">
-                            <h4>데이터 흐름 검증</h4>
-                            <p>시스템을 통과하는 데이터의 정확성 확인</p>
-                        </div>
-                        <div class="benefit-card">
-                            <h4>설정 오류 감지</h4>
-                            <p>환경 설정, 연결 문제 등 구성 오류 발견</p>
-                        </div>
-                        <div class="benefit-card">
-                            <h4>현실적인 시나리오</h4>
-                            <p>실제 환경에 가까운 조건에서 테스트</p>
-                        </div>
-                        <div class="benefit-card">
-                            <h4>배포 자신감</h4>
-                            <p>통합 레벨 검증으로 배포 리스크 감소</p>
-                        </div>
-                        <div class="benefit-card">
-                            <h4>API 계약 검증</h4>
-                            <p>서비스 간 API 호환성 보장</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">9.</span> Conclusion</h2>
-                    <p>
-                        통합 테스트는 단위 테스트가 발견할 수 없는 컴포넌트 간 상호작용 문제를 검출하는
-                        핵심 테스트 단계이다. Testcontainers와 같은 현대적 도구의 등장으로
-                        실제 인프라를 활용한 안정적인 통합 테스트가 가능해졌다.
-                    </p>
-                    <p>
-                        효과적인 통합 테스트 전략은 테스트 피라미드의 원칙을 준수하면서,
-                        핵심 통합 지점에 집중하고, 테스트 실행 속도와 안정성을 균형 있게 관리해야 한다.
-                        특히 마이크로서비스 아키텍처에서는 Contract Testing을 통해
-                        서비스 간 계약을 검증하는 것이 필수적이다.
-                    </p>
-                </section>
-
-                <div class="references">
-                    <h3>References</h3>
-                    <ol>
-                        <li>Fowler, M. (2012). "Integration Testing." <em>martinfowler.com</em>.</li>
-                        <li>Vocke, H. (2018). "The Practical Test Pyramid." <em>martinfowler.com</em>.</li>
-                        <li>Clemson, T. (2014). "Testing Strategies in a Microservice Architecture." <em>martinfowler.com</em>.</li>
-                        <li>Freeman, S., & Pryce, N. (2009). <em>Growing Object-Oriented Software, Guided by Tests</em>. Addison-Wesley.</li>
-                        <li>Testcontainers. (2024). <em>Official Documentation</em>. testcontainers.org</li>
-                    </ol>
-                </div>
-
-                <div class="related-articles">
-                    <h3>Related Papers</h3>
-                    <div class="related-grid">
-                        <a href="unit-testing.html" class="related-card">
-                            <span class="related-title">단위 테스트 전략</span>
-                        </a>
-                        <a href="ci-cd-pipeline.html" class="related-card">
-                            <span class="related-title">CI/CD 파이프라인</span>
-                        </a>
-                        <a href="tdd-methodology.html" class="related-card">
-                            <span class="related-title">TDD: 테스트 주도 개발</span>
-                        </a>
                     </div>
                 </div>
+            </div>
 
-                <div class="source-box">
-                    <p><strong>Classification:</strong> Development Practices / Testing Methodology<br>
-                    <strong>Series:</strong> Software Engineering Methodology<br>
-                    <strong>Last Updated:</strong> 2024</p>
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">© 2024 Stock Insights</p>
                 </div>
-            </article>
-        </div>
-    </main>
+            </footer>
+        </main>
+    </div>
 
-    <footer class="site-footer">
-        <div class="content-wrapper">
-            <p>© 2024 Stock Insights. All rights reserved.</p>
-        </div>
-    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    </script>
 </body>
 </html>

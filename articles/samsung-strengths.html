@@ -7,210 +7,220 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
 </head>
-<body>
-    <div class="mobile-header">
+<body class="article-page" data-category="business">
+    <header class="mobile-header">
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         <div class="mobile-logo">Stock Insights</div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="site-wrapper">
         <aside class="sidebar" id="sidebar">
-            <div class="logo-section">
-                <a href="../index.html" class="site-logo">Stock Insights</a>
-                <p class="site-tagline">전문 주식 분석</p>
+            <div class="sidebar-header">
+                <a href="../index.html" class="site-logo"><span class="logo-icon">S</span>Stock Insights</a>
+                <p class="site-tagline">Life & Business Insights</p>
             </div>
             <nav class="sidebar-nav">
-                <h3 class="nav-title">메뉴</h3>
-                <ul class="nav-list">
-                    <li><a href="../index.html" class="nav-link">홈</a></li>
-                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
-                </ul>
+                <div class="nav-section">
+                    <h3 class="nav-title">메뉴</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link"><span class="nav-icon">🏠</span> 홈</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3 class="nav-title">카테고리</h3>
+                    <div class="categories-section">
+                        <a href="../index.html" class="category-link"><span>전체</span></a>
+                        <a href="../index.html" class="category-link"><span>기술 & 개발</span></a>
+                        <a href="../index.html" class="category-link active"><span>비즈니스</span></a>
+                    </div>
+                </div>
             </nav>
         </aside>
 
-        <div class="main-content-wrapper">
-            <header class="site-header">
-                <div class="header-content">
-                    <h1 class="header-title">기업 분석</h1>
+        <main class="main-content">
+            <article class="article-hero">
+                <div class="article-hero-inner">
+                    <div class="breadcrumb">
+                        <a href="../index.html">홈</a><span>/</span><a href="#">비즈니스</a><span>/</span><span>삼성전자</span>
+                    </div>
+                    <div class="article-hero-meta">
+                        <span class="article-category-badge">파운드리</span>
+                        <span class="article-hero-date">2024년 11월 28일</span>
+                    </div>
+                    <h1 class="article-hero-title">삼성전자: 통합 반도체 전략</h1>
+                    <p class="article-hero-subtitle">2024년 주가 부진에도 불구하고, 삼성전자는 세계 최초 3nm GAA 파운드리 양산과 통합 AI 솔루션을 통해 시스템 반도체 시장에서 차별화된 경쟁력을 구축하고 있습니다.</p>
                 </div>
-            </header>
+            </article>
 
-            <main class="main-content">
-                <article class="article-page">
-                    <header class="article-header">
-                        <div class="article-header-content">
-                            <div class="breadcrumb">
-                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 삼성전자
+            <div class="article-content-wrapper">
+                <div class="article-content-inner">
+                    <div class="article-body">
+                        <div class="insight-box">
+                            <h3>핵심 인사이트</h3>
+                            <ul class="checkmark-list">
+                                <li>세계 최초 3nm GAA 파운드리 양산 (2022년)</li>
+                                <li>파운드리 + 메모리 + 패키징 통합</li>
+                                <li>턴키 서비스로 개발 시간 20% 단축</li>
+                                <li>2nm BSPDN 공정 2027년 목표</li>
+                            </ul>
+                        </div>
+
+                        <h2>1. 통합 반도체 솔루션</h2>
+                        <p>
+                            TSMC와 달리, 삼성전자는 메모리 반도체, 파운드리, 첨단 패키징 역량을 모두 보유한
+                            유일한 기업입니다. 이를 통해 고객사는 각 업체를 따로 이용할 때보다
+                            개발 및 생산 기간을 대폭 단축할 수 있습니다.
+                        </p>
+
+                        <div class="stats-highlight">
+                            <div class="stat-item">
+                                <div class="stat-value">20%</div>
+                                <div class="stat-label">개발 시간 단축</div>
                             </div>
-                            <span class="article-category-badge">파운드리</span>
-                            <h1 class="article-main-title">삼성전자: 통합 반도체 전략</h1>
-                            <div class="article-header-meta">
-                                <span>2024년 11월 28일</span>
-                                <span>5분 읽기</span>
-                                <span>Stock Insights 리서치</span>
+                            <div class="stat-item">
+                                <div class="stat-value">171조원</div>
+                                <div class="stat-label">시스템반도체 투자</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">8.1%</div>
+                                <div class="stat-label">파운드리 점유율</div>
                             </div>
                         </div>
-                    </header>
 
-                    <div class="article-body-wrapper">
-                        <div class="article-body">
-                            <p class="lead">
-                                2024년 주가 부진에도 불구하고, 삼성전자는 세계 최초 3nm GAA 파운드리 양산과 
-                                통합 AI 솔루션을 통해 시스템 반도체 시장에서 차별화된 경쟁력을 구축하고 있습니다.
-                            </p>
+                        <h2>2. 세계 최초 3nm GAA 파운드리</h2>
+                        <p>
+                            삼성전자는 2022년 세계 최초로 3nm GAA(Gate-All-Around) 파운드리 양산에 성공했습니다.
+                            게이트가 채널을 완전히 둘러싸는 GAA 기술은 FinFET 대비
+                            전력 효율과 성능을 크게 향상시킵니다.
+                        </p>
 
-                            <div class="insight-box">
-                                <h3>핵심 인사이트</h3>
-                                <ul class="checkmark-list">
-                                    <li>세계 최초 3nm GAA 파운드리 양산 (2022년)</li>
-                                    <li>파운드리 + 메모리 + 패키징 통합</li>
-                                    <li>턴키 서비스로 개발 시간 20% 단축</li>
-                                    <li>2nm BSPDN 공정 2027년 목표</li>
+                        <div class="comparison-box">
+                            <div class="comparison-item success">
+                                <h4>삼성전자 GAA 기술</h4>
+                                <ul>
+                                    <li>게이트가 채널을 완전히 감싸는 구조</li>
+                                    <li>전력 누설 최소화, 성능 향상</li>
+                                    <li>2세대 3nm 공정 순조</li>
                                 </ul>
                             </div>
-
-                            <h2>1. 통합 반도체 솔루션</h2>
-                            <p>
-                                TSMC와 달리, 삼성전자는 메모리 반도체, 파운드리, 첨단 패키징 역량을 모두 보유한 
-                                유일한 기업입니다. 이를 통해 고객사는 각 업체를 따로 이용할 때보다 
-                                개발 및 생산 기간을 대폭 단축할 수 있습니다.
-                            </p>
-
-                            <div class="stats-highlight">
-                                <div class="stat-item">
-                                    <div class="stat-value">20%</div>
-                                    <div class="stat-label">개발 시간 단축</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">171조원</div>
-                                    <div class="stat-label">시스템반도체 투자</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">8.1%</div>
-                                    <div class="stat-label">파운드리 점유율</div>
-                                </div>
-                            </div>
-
-                            <h2>2. 세계 최초 3nm GAA 파운드리</h2>
-                            <p>
-                                삼성전자는 2022년 세계 최초로 3nm GAA(Gate-All-Around) 파운드리 양산에 성공했습니다. 
-                                게이트가 채널을 완전히 둘러싸는 GAA 기술은 FinFET 대비 
-                                전력 효율과 성능을 크게 향상시킵니다.
-                            </p>
-
-                            <div class="comparison-box">
-                                <div class="comparison-item success">
-                                    <h4>삼성전자 GAA 기술</h4>
-                                    <ul>
-                                        <li>게이트가 채널을 완전히 감싸는 구조</li>
-                                        <li>전력 누설 최소화, 성능 향상</li>
-                                        <li>2세대 3nm 공정 순조</li>
-                                    </ul>
-                                </div>
-                                <div class="comparison-item">
-                                    <h4>기존 FinFET</h4>
-                                    <ul>
-                                        <li>3면 접촉 방식</li>
-                                        <li>미세화 한계 도달</li>
-                                        <li>전력 누설 문제</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <h2>3. 차세대 2nm 개발</h2>
-                            <p>
-                                삼성전자는 BSPDN(후면전력공급) 기술을 적용한 2nm 공정(SF2Z)을 2027년까지 개발할 계획입니다. 
-                                일본 프리퍼드 네트웍스(PFN)의 2nm 기반 AI 가속기 수주로 기술력을 인정받았습니다.
-                            </p>
-
-                            <div class="timeline-box">
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">2022</div>
-                                    <div class="timeline-content">
-                                        <h4>3nm GAA 양산</h4>
-                                        <p>세계 최초 3nm 파운드리 양산</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">2024</div>
-                                    <div class="timeline-content">
-                                        <h4>PFN 계약 체결</h4>
-                                        <p>2nm 기반 AI 가속기 반도체</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">2027</div>
-                                    <div class="timeline-content">
-                                        <h4>2nm BSPDN 목표</h4>
-                                        <p>후면 전력 공급 기술</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h2>전망</h2>
-                            <div class="outlook-grid">
-                                <div class="outlook-card positive">
-                                    <h4>긍정적 요인</h4>
-                                    <ul>
-                                        <li>3nm GAA 기술 선도</li>
-                                        <li>2nm 공정 개발 진행</li>
-                                        <li>통합 AI 솔루션 차별화</li>
-                                        <li>턴키 서비스 강점</li>
-                                        <li>주요 수주 성과</li>
-                                    </ul>
-                                </div>
-                                <div class="outlook-card caution">
-                                    <h4>리스크 요인</h4>
-                                    <ul>
-                                        <li>HBM 경쟁력 회복 필요</li>
-                                        <li>TSMC와의 격차 축소 과제</li>
-                                        <li>파운드리 수율 안정화 필수</li>
-                                        <li>외국인 매도세 지속</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <h2>결론</h2>
-                            <div class="conclusion-box">
-                                <p>
-                                    삼성전자는 세계 최초 3nm GAA 생산, 통합 AI 솔루션, 
-                                    2nm 공정 개발로 시스템 반도체 시장 경쟁력을 구축하고 있습니다.
-                                </p>
-                                <p>
-                                    2024년 주가 부진은 단기 실적 우려에서 비롯되었지만, 
-                                    파운드리·메모리·패키징을 모두 보유한 종합 반도체 기업으로서의 
-                                    차별화된 가치는 여전히 유효합니다.
-                                </p>
+                            <div class="comparison-item">
+                                <h4>기존 FinFET</h4>
+                                <ul>
+                                    <li>3면 접촉 방식</li>
+                                    <li>미세화 한계 도달</li>
+                                    <li>전력 누설 문제</li>
+                                </ul>
                             </div>
                         </div>
 
-                        <aside class="related-articles">
-                            <h3>관련 분석</h3>
-                            <a href="hynix-strengths.html" class="related-link">
-                                <div>
-                                    <h4>SK하이닉스 핵심 경쟁력</h4>
-                                    <p>HBM3E와 AI 메모리 시장 지배력</p>
+                        <h2>3. 차세대 2nm 개발</h2>
+                        <p>
+                            삼성전자는 BSPDN(후면전력공급) 기술을 적용한 2nm 공정(SF2Z)을 2027년까지 개발할 계획입니다.
+                            일본 프리퍼드 네트웍스(PFN)의 2nm 기반 AI 가속기 수주로 기술력을 인정받았습니다.
+                        </p>
+
+                        <div class="timeline-box">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">2022</div>
+                                <div class="timeline-content">
+                                    <h4>3nm GAA 양산</h4>
+                                    <p>세계 최초 3nm 파운드리 양산</p>
                                 </div>
-                            </a>
-                        </aside>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">2024</div>
+                                <div class="timeline-content">
+                                    <h4>PFN 계약 체결</h4>
+                                    <p>2nm 기반 AI 가속기 반도체</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">2027</div>
+                                <div class="timeline-content">
+                                    <h4>2nm BSPDN 목표</h4>
+                                    <p>후면 전력 공급 기술</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>전망</h2>
+                        <div class="outlook-grid">
+                            <div class="outlook-card positive">
+                                <h4>긍정적 요인</h4>
+                                <ul>
+                                    <li>3nm GAA 기술 선도</li>
+                                    <li>2nm 공정 개발 진행</li>
+                                    <li>통합 AI 솔루션 차별화</li>
+                                    <li>턴키 서비스 강점</li>
+                                    <li>주요 수주 성과</li>
+                                </ul>
+                            </div>
+                            <div class="outlook-card caution">
+                                <h4>리스크 요인</h4>
+                                <ul>
+                                    <li>HBM 경쟁력 회복 필요</li>
+                                    <li>TSMC와의 격차 축소 과제</li>
+                                    <li>파운드리 수율 안정화 필수</li>
+                                    <li>외국인 매도세 지속</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h2>결론</h2>
+                        <div class="conclusion-box">
+                            <p>
+                                삼성전자는 세계 최초 3nm GAA 생산, 통합 AI 솔루션,
+                                2nm 공정 개발로 시스템 반도체 시장 경쟁력을 구축하고 있습니다.
+                            </p>
+                            <p>
+                                2024년 주가 부진은 단기 실적 우려에서 비롯되었지만,
+                                파운드리·메모리·패키징을 모두 보유한 종합 반도체 기업으로서의
+                                차별화된 가치는 여전히 유효합니다.
+                            </p>
+                        </div>
                     </div>
-                </article>
-            </main>
+                    <div class="article-footer-section">
+                        <div class="article-tags">
+                            <span class="article-tag">삼성전자</span>
+                            <span class="article-tag">파운드리</span>
+                            <span class="article-tag">3nm GAA</span>
+                            <span class="article-tag">반도체</span>
+                        </div>
+                        <div class="related-articles">
+                            <h3>관련 글</h3>
+                            <div class="related-grid">
+                                <a href="hynix-strengths.html" class="related-card">
+                                    <div class="related-card-title">SK하이닉스 핵심 경쟁력</div>
+                                </a>
+                                <a href="exchange-rate.html" class="related-card">
+                                    <div class="related-card-title">환율의 이해</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <footer class="site-footer">
                 <div class="footer-content">
-                    <p class="footer-text">
-                        © 2024 Stock Insights. 본 콘텐츠는 투자 참고 자료입니다.
-                    </p>
+                    <p class="footer-text">© 2024 Stock Insights</p>
                 </div>
             </footer>
-        </div>
+        </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
 </body>
 </html>

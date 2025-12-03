@@ -7,334 +7,339 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
 </head>
-<body>
-    <div class="mobile-header">
+<body class="article-page" data-category="lifestyle">
+    <header class="mobile-header">
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         <div class="mobile-logo">Stock Insights</div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="site-wrapper">
         <aside class="sidebar" id="sidebar">
-            <div class="logo-section">
-                <a href="../index.html" class="site-logo">Stock Insights</a>
-                <p class="site-tagline">전문 주식 분석</p>
+            <div class="sidebar-header">
+                <a href="../index.html" class="site-logo"><span class="logo-icon">S</span>Stock Insights</a>
+                <p class="site-tagline">Life & Business Insights</p>
             </div>
             <nav class="sidebar-nav">
-                <h3 class="nav-title">메뉴</h3>
-                <ul class="nav-list">
-                    <li><a href="../index.html" class="nav-link">홈</a></li>
-                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
-                </ul>
+                <div class="nav-section">
+                    <h3 class="nav-title">메뉴</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link"><span class="nav-icon">🏠</span> 홈</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3 class="nav-title">카테고리</h3>
+                    <div class="categories-section">
+                        <a href="../index.html" class="category-link"><span>전체</span></a>
+                        <a href="../index.html" class="category-link active"><span>라이프스타일</span></a>
+                        <a href="../index.html" class="category-link"><span>건강</span></a>
+                    </div>
+                </div>
             </nav>
         </aside>
 
-        <div class="main-content-wrapper">
-            <header class="site-header">
-                <div class="header-content">
-                    <h1 class="header-title">역사 분석</h1>
-                </div>
-            </header>
-
-            <main class="main-content">
-                <article class="article-page">
-                    <header class="article-header">
-                        <div class="article-header-content">
-                            <div class="breadcrumb">
-                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 교통 인프라
-                            </div>
-                            <span class="article-category-badge">역사 & 인프라</span>
-                            <h1 class="article-main-title">한국 지하철의 역사: 근대화와 함께 달려온 50년</h1>
-                            <div class="article-header-meta">
-                                <span>2024년 12월 1일</span>
-                                <span>10분 읽기</span>
-                                <span>Stock Insights 리서치</span>
-                            </div>
-                        </div>
-                    </header>
-
-                    <div class="article-body-wrapper">
-                        <div class="article-body">
-                            <p class="lead">
-                                1974년 서울 지하철 1호선 개통부터 2024년 현재까지, 한국의 지하철은
-                                단순한 교통수단을 넘어 대한민국 근대화의 상징이자 경제성장의 동반자로
-                                자리매김했습니다. 한국 지하철 50년의 역사를 조명합니다.
-                            </p>
-
-                            <div class="insight-box">
-                                <h3>핵심 인사이트</h3>
-                                <ul class="checkmark-list">
-                                    <li>1974년 서울 지하철 1호선 개통 - 아시아 8번째 도시철도</li>
-                                    <li>2024년 기준 전국 6개 도시 지하철 운영 (서울, 부산, 대구, 광주, 대전, 인천)</li>
-                                    <li>서울 지하철 일일 평균 이용객 약 700만 명</li>
-                                    <li>세계 최고 수준의 정시율과 안전성 확보</li>
-                                </ul>
-                            </div>
-
-                            <h2>1. 한국 지하철의 탄생 배경</h2>
-
-                            <h3>1960년대: 급격한 도시화와 교통난</h3>
-                            <p>
-                                1960년대 한국은 경제개발 5개년 계획과 함께 급속한 산업화를 추진하면서
-                                서울로의 인구 집중 현상이 심화되었습니다. 1960년 약 245만 명이던 서울 인구는
-                                1970년에는 543만 명으로 두 배 이상 증가했습니다.
-                            </p>
-                            <p>
-                                인구 급증은 심각한 교통난으로 이어졌습니다. 당시 서울의 주요 교통수단이던
-                                버스와 전차만으로는 폭발적으로 늘어나는 통행 수요를 감당할 수 없었고,
-                                도심 도로는 만성적인 정체에 시달렸습니다.
-                            </p>
-
-                            <h3>지하철 건설 결정</h3>
-                            <p>
-                                1970년 박정희 정부는 서울의 교통 문제를 근본적으로 해결하기 위해
-                                지하철 건설을 결정했습니다. 당시 한국의 1인당 GDP는 약 279달러로,
-                                선진국에 비해 현저히 낮은 수준이었지만, 정부는 미래 성장을 위한
-                                인프라 투자의 중요성을 인식하고 과감한 결단을 내렸습니다.
-                            </p>
-
-                            <div class="quote-box">
-                                "지하철은 단순한 교통수단이 아니라 대한민국 근대화의 상징이며,
-                                국민들에게 선진국으로 나아가고 있다는 희망을 주는 프로젝트였습니다."
-                            </div>
-
-                            <h2>2. 서울 지하철 1호선: 역사적인 첫 운행</h2>
-
-                            <h3>건설 과정 (1971-1974)</h3>
-                            <div class="timeline-box">
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">1971.04</div>
-                                    <div class="timeline-content">
-                                        <h4>착공</h4>
-                                        <p>서울역~청량리 구간 7.8km 공사 시작</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">1973.09</div>
-                                    <div class="timeline-content">
-                                        <h4>터널 관통</h4>
-                                        <p>전 구간 터널 굴착 완료</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item">
-                                    <div class="timeline-marker">1974.08.15</div>
-                                    <div class="timeline-content">
-                                        <h4>개통</h4>
-                                        <p>광복절 기념 서울역~청량리 구간 개통</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p>
-                                1호선 건설에는 일본의 기술과 차관이 활용되었습니다. 총 공사비는
-                                약 330억 원으로, 당시 국가 예산의 상당 부분을 차지하는 대규모 투자였습니다.
-                                건설 기간 동안 연인원 약 800만 명의 인력이 동원되었습니다.
-                            </p>
-
-                            <h3>1호선 개통의 역사적 의미</h3>
-                            <p>
-                                1974년 8월 15일, 광복절을 기념하여 서울 지하철 1호선이 개통되었습니다.
-                                이는 한국 최초의 도시철도이자, 일본(1927년), 중국(1969년)에 이어
-                                아시아에서 8번째로 건설된 지하철이었습니다.
-                            </p>
-
-                            <div class="stats-highlight">
-                                <div class="stat-item">
-                                    <div class="stat-value">7.8km</div>
-                                    <div class="stat-label">1호선 최초 개통 구간</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">9개역</div>
-                                    <div class="stat-label">서울역~청량리</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">330억원</div>
-                                    <div class="stat-label">총 건설비용</div>
-                                </div>
-                            </div>
-
-                            <h2>3. 지하철 네트워크의 확장</h2>
-
-                            <h3>1980년대: 2·3·4호선 시대</h3>
-                            <p>
-                                1호선의 성공적인 운영을 바탕으로 서울시는 지하철 네트워크 확장을
-                                가속화했습니다. 1980년대에는 서울의 급속한 팽창에 맞춰
-                                2호선(1984년), 3호선(1985년), 4호선(1985년)이 연이어 개통되었습니다.
-                            </p>
-                            <p>
-                                특히 <strong>2호선 순환선</strong>은 서울의 주요 업무지구와 주거지역을
-                                연결하며 서울 지하철의 핵심 축으로 자리 잡았습니다. 강남 개발과
-                                맞물려 2호선은 서울 강북과 강남을 잇는 대동맥 역할을 수행했습니다.
-                            </p>
-
-                            <h3>1990년대: 5·6·7·8호선과 수도권 확장</h3>
-                            <p>
-                                1990년대에는 서울 외곽 지역과 위성도시 연결을 위한 5호선(1995년),
-                                6호선(2000년), 7호선(1996년), 8호선(1996년)이 개통되었습니다.
-                                이 시기 지하철은 서울을 넘어 수도권 전체를 아우르는
-                                광역교통망으로 진화했습니다.
-                            </p>
-
-                            <h3>전국으로 확산되는 도시철도</h3>
-                            <div class="comparison-box">
-                                <div class="comparison-item">
-                                    <h4>부산 (1985년)</h4>
-                                    <p>서울에 이어 두 번째로 지하철 개통. 현재 5개 노선 운영.</p>
-                                </div>
-                                <div class="comparison-item">
-                                    <h4>대구 (1997년)</h4>
-                                    <p>1995년 지하철 공사 중 가스 폭발 사고라는 비극을 딛고 개통.</p>
-                                </div>
-                                <div class="comparison-item">
-                                    <h4>인천 (1999년)</h4>
-                                    <p>서울 지하철 7호선과 직결 운행으로 수도권 광역화 기여.</p>
-                                </div>
-                                <div class="comparison-item">
-                                    <h4>광주·대전 (2004년)</h4>
-                                    <p>지방 광역시까지 지하철 시대 개막.</p>
-                                </div>
-                            </div>
-
-                            <h2>4. 지하철과 한국 현대사의 교차점</h2>
-
-                            <h3>경제성장의 바로미터</h3>
-                            <p>
-                                한국 지하철의 발전사는 대한민국 경제성장사와 궤를 같이합니다.
-                                1974년 1호선 개통 당시 한국의 1인당 GDP는 약 560달러였으나,
-                                2024년 현재 약 33,000달러를 넘어섰습니다.
-                            </p>
-                            <p>
-                                지하철 네트워크의 확장은 부동산 시장, 상권 형성, 도시 구조에도
-                                막대한 영향을 미쳤습니다. "역세권"이라는 신조어가 등장할 정도로
-                                지하철역은 도시 발전의 핵심 거점이 되었습니다.
-                            </p>
-
-                            <h3>민주화 운동과 지하철</h3>
-                            <p>
-                                1980년대 민주화 운동 시기, 지하철역은 시위대의 주요 집결지이자
-                                이동 통로였습니다. 1987년 6월 민주항쟁 당시 수많은 시민들이
-                                지하철을 통해 도심으로 모여들었으며, 지하철역 광장은
-                                민주주의를 향한 열망이 분출되는 공간이었습니다.
-                            </p>
-
-                            <h3>IMF 외환위기와 지하철 건설</h3>
-                            <p>
-                                1997년 IMF 외환위기는 진행 중이던 지하철 건설에도 영향을 미쳤습니다.
-                                일부 노선의 건설이 지연되거나 계획이 축소되었지만, 정부는
-                                경기 부양과 고용 창출을 위해 지하철 건설을 지속했습니다.
-                                이는 위기 속에서도 인프라 투자의 중요성을 보여주는 사례였습니다.
-                            </p>
-
-                            <h2>5. 세계가 주목하는 한국 지하철</h2>
-
-                            <h3>기술 혁신의 선두주자</h3>
-                            <div class="outlook-grid">
-                                <div class="outlook-card positive">
-                                    <h4>세계 최초 도입 기술</h4>
-                                    <ul>
-                                        <li>지하철 내 무료 Wi-Fi 전 구간 제공</li>
-                                        <li>실시간 열차 위치 안내 시스템</li>
-                                        <li>교통카드 전국 호환 시스템</li>
-                                        <li>스크린도어 전 역사 설치</li>
-                                    </ul>
-                                </div>
-                                <div class="outlook-card caution">
-                                    <h4>주요 성과 지표</h4>
-                                    <ul>
-                                        <li>정시율 99.9% 이상</li>
-                                        <li>배차간격 2~3분 (출퇴근 시간대)</li>
-                                        <li>연간 이용객 약 27억 명 (서울)</li>
-                                        <li>세계 5위권 지하철 네트워크</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <h3>한국형 지하철의 수출</h3>
-                            <p>
-                                한국의 지하철 기술과 운영 노하우는 해외로도 수출되고 있습니다.
-                                현대로템, 한국철도기술연구원 등은 인도, 베트남, 이집트 등
-                                신흥국의 도시철도 건설에 참여하고 있으며, K-Metro는 새로운
-                                수출 동력으로 주목받고 있습니다.
-                            </p>
-
-                            <h2>6. 미래를 향한 도전</h2>
-
-                            <h3>GTX와 광역급행철도</h3>
-                            <p>
-                                수도권의 지속적인 확장에 따라 기존 지하철보다 빠른 광역급행철도(GTX)가
-                                추진되고 있습니다. GTX-A 노선이 2024년 부분 개통되었으며,
-                                완전 개통 시 파주에서 서울 삼성역까지 20분대 이동이 가능해집니다.
-                            </p>
-
-                            <h3>자율주행 열차와 스마트 역사</h3>
-                            <p>
-                                인천 2호선, 신분당선 등에서는 이미 무인 자동운전 시스템이 운영 중이며,
-                                AI 기반 열차 제어, 스마트 역사 관리 시스템 등 첨단 기술이
-                                지속적으로 도입되고 있습니다.
-                            </p>
-
-                            <h3>친환경 교통수단으로서의 역할</h3>
-                            <p>
-                                탄소중립 시대를 맞아 지하철은 친환경 교통수단으로서 그 중요성이
-                                더욱 부각되고 있습니다. 서울시는 2050년 탄소중립 달성을 위해
-                                지하철 중심의 대중교통 체계 강화를 핵심 전략으로 추진하고 있습니다.
-                            </p>
-
-                            <div class="conclusion-box">
-                                <p>
-                                    1974년 첫 운행을 시작한 한국 지하철은 50년간 대한민국과 함께
-                                    성장해왔습니다. 개발도상국의 야심 찬 인프라 프로젝트에서 출발하여,
-                                    오늘날 세계 최고 수준의 도시철도 시스템으로 발전했습니다.
-                                </p>
-                                <p>
-                                    지하철 역사 속에는 한국의 산업화, 민주화, 세계화의 여정이 고스란히
-                                    담겨 있습니다. 앞으로도 한국 지하철은 기술 혁신과 지속가능한 발전을
-                                    통해 미래 세대를 위한 교통 인프라로서 그 역할을 이어갈 것입니다.
-                                </p>
-                            </div>
-
-                            <div class="sources-box">
-                                <h3>출처</h3>
-                                <ul>
-                                    <li><a href="https://www.seoulmetro.co.kr" target="_blank">서울교통공사 - 서울 지하철 역사</a></li>
-                                    <li><a href="https://www.molit.go.kr" target="_blank">국토교통부 - 도시철도 현황</a></li>
-                                    <li><a href="https://www.archives.go.kr" target="_blank">국가기록원 - 지하철 건설 기록물</a></li>
-                                    <li><a href="https://www.korail.com" target="_blank">한국철도공사 - 수도권 전철 연혁</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <aside class="related-articles">
-                            <h3>관련 분석</h3>
-                            <a href="exchange-rate.html" class="related-link">
-                                <div>
-                                    <h4>환율의 이해와 2024년 급등 배경</h4>
-                                    <p>외환 시장 심층 분석</p>
-                                </div>
-                            </a>
-                            <a href="samsung-strengths.html" class="related-link">
-                                <div>
-                                    <h4>삼성전자 핵심 경쟁력</h4>
-                                    <p>3nm 파운드리와 통합 AI 솔루션</p>
-                                </div>
-                            </a>
-                        </aside>
+        <main class="main-content">
+            <article class="article-hero">
+                <div class="article-hero-inner">
+                    <div class="breadcrumb">
+                        <a href="../index.html">홈</a><span>/</span><span>라이프스타일</span><span>/</span><span>지하철의 역사</span>
                     </div>
-                </article>
-            </main>
-
-            <footer class="site-footer">
-                <div class="footer-content">
-                    <p class="footer-text">
-                        © 2024 Stock Insights. 본 콘텐츠는 투자 참고 자료입니다.
-                    </p>
+                    <div class="article-hero-meta">
+                        <span class="article-category-badge">라이프스타일</span>
+                        <span class="article-hero-date">2024년 12월 1일</span>
+                    </div>
+                    <h1 class="article-hero-title">한국 지하철의 역사: 근대화와 함께 달려온 50년</h1>
+                    <p class="article-hero-subtitle">대한민국 경제성장과 함께한 도시철도의 발전사</p>
                 </div>
-            </footer>
-        </div>
+            </article>
+
+            <div class="article-content-wrapper">
+                <div class="article-content-inner">
+                    <div class="article-body">
+                        <p class="lead">
+                            1974년 서울 지하철 1호선 개통부터 2024년 현재까지, 한국의 지하철은
+                            단순한 교통수단을 넘어 대한민국 근대화의 상징이자 경제성장의 동반자로
+                            자리매김했습니다. 한국 지하철 50년의 역사를 조명합니다.
+                        </p>
+
+                        <div class="insight-box">
+                            <h3>핵심 인사이트</h3>
+                            <ul class="checkmark-list">
+                                <li>1974년 서울 지하철 1호선 개통 - 아시아 8번째 도시철도</li>
+                                <li>2024년 기준 전국 6개 도시 지하철 운영 (서울, 부산, 대구, 광주, 대전, 인천)</li>
+                                <li>서울 지하철 일일 평균 이용객 약 700만 명</li>
+                                <li>세계 최고 수준의 정시율과 안전성 확보</li>
+                            </ul>
+                        </div>
+
+                        <h2>1. 한국 지하철의 탄생 배경</h2>
+
+                        <h3>1960년대: 급격한 도시화와 교통난</h3>
+                        <p>
+                            1960년대 한국은 경제개발 5개년 계획과 함께 급속한 산업화를 추진하면서
+                            서울로의 인구 집중 현상이 심화되었습니다. 1960년 약 245만 명이던 서울 인구는
+                            1970년에는 543만 명으로 두 배 이상 증가했습니다.
+                        </p>
+                        <p>
+                            인구 급증은 심각한 교통난으로 이어졌습니다. 당시 서울의 주요 교통수단이던
+                            버스와 전차만으로는 폭발적으로 늘어나는 통행 수요를 감당할 수 없었고,
+                            도심 도로는 만성적인 정체에 시달렸습니다.
+                        </p>
+
+                        <h3>지하철 건설 결정</h3>
+                        <p>
+                            1970년 박정희 정부는 서울의 교통 문제를 근본적으로 해결하기 위해
+                            지하철 건설을 결정했습니다. 당시 한국의 1인당 GDP는 약 279달러로,
+                            선진국에 비해 현저히 낮은 수준이었지만, 정부는 미래 성장을 위한
+                            인프라 투자의 중요성을 인식하고 과감한 결단을 내렸습니다.
+                        </p>
+
+                        <div class="quote-box">
+                            "지하철은 단순한 교통수단이 아니라 대한민국 근대화의 상징이며,
+                            국민들에게 선진국으로 나아가고 있다는 희망을 주는 프로젝트였습니다."
+                        </div>
+
+                        <h2>2. 서울 지하철 1호선: 역사적인 첫 운행</h2>
+
+                        <h3>건설 과정 (1971-1974)</h3>
+                        <div class="timeline-box">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">1971.04</div>
+                                <div class="timeline-content">
+                                    <h4>착공</h4>
+                                    <p>서울역~청량리 구간 7.8km 공사 시작</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">1973.09</div>
+                                <div class="timeline-content">
+                                    <h4>터널 관통</h4>
+                                    <p>전 구간 터널 굴착 완료</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">1974.08.15</div>
+                                <div class="timeline-content">
+                                    <h4>개통</h4>
+                                    <p>광복절 기념 서울역~청량리 구간 개통</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            1호선 건설에는 일본의 기술과 차관이 활용되었습니다. 총 공사비는
+                            약 330억 원으로, 당시 국가 예산의 상당 부분을 차지하는 대규모 투자였습니다.
+                            건설 기간 동안 연인원 약 800만 명의 인력이 동원되었습니다.
+                        </p>
+
+                        <h3>1호선 개통의 역사적 의미</h3>
+                        <p>
+                            1974년 8월 15일, 광복절을 기념하여 서울 지하철 1호선이 개통되었습니다.
+                            이는 한국 최초의 도시철도이자, 일본(1927년), 중국(1969년)에 이어
+                            아시아에서 8번째로 건설된 지하철이었습니다.
+                        </p>
+
+                        <div class="stats-highlight">
+                            <div class="stat-item">
+                                <div class="stat-value">7.8km</div>
+                                <div class="stat-label">1호선 최초 개통 구간</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">9개역</div>
+                                <div class="stat-label">서울역~청량리</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">330억원</div>
+                                <div class="stat-label">총 건설비용</div>
+                            </div>
+                        </div>
+
+                        <h2>3. 지하철 네트워크의 확장</h2>
+
+                        <h3>1980년대: 2·3·4호선 시대</h3>
+                        <p>
+                            1호선의 성공적인 운영을 바탕으로 서울시는 지하철 네트워크 확장을
+                            가속화했습니다. 1980년대에는 서울의 급속한 팽창에 맞춰
+                            2호선(1984년), 3호선(1985년), 4호선(1985년)이 연이어 개통되었습니다.
+                        </p>
+                        <p>
+                            특히 <strong>2호선 순환선</strong>은 서울의 주요 업무지구와 주거지역을
+                            연결하며 서울 지하철의 핵심 축으로 자리 잡았습니다. 강남 개발과
+                            맞물려 2호선은 서울 강북과 강남을 잇는 대동맥 역할을 수행했습니다.
+                        </p>
+
+                        <h3>1990년대: 5·6·7·8호선과 수도권 확장</h3>
+                        <p>
+                            1990년대에는 서울 외곽 지역과 위성도시 연결을 위한 5호선(1995년),
+                            6호선(2000년), 7호선(1996년), 8호선(1996년)이 개통되었습니다.
+                            이 시기 지하철은 서울을 넘어 수도권 전체를 아우르는
+                            광역교통망으로 진화했습니다.
+                        </p>
+
+                        <h3>전국으로 확산되는 도시철도</h3>
+                        <div class="comparison-box">
+                            <div class="comparison-item">
+                                <h4>부산 (1985년)</h4>
+                                <p>서울에 이어 두 번째로 지하철 개통. 현재 5개 노선 운영.</p>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>대구 (1997년)</h4>
+                                <p>1995년 지하철 공사 중 가스 폭발 사고라는 비극을 딛고 개통.</p>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>인천 (1999년)</h4>
+                                <p>서울 지하철 7호선과 직결 운행으로 수도권 광역화 기여.</p>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>광주·대전 (2004년)</h4>
+                                <p>지방 광역시까지 지하철 시대 개막.</p>
+                            </div>
+                        </div>
+
+                        <h2>4. 지하철과 한국 현대사의 교차점</h2>
+
+                        <h3>경제성장의 바로미터</h3>
+                        <p>
+                            한국 지하철의 발전사는 대한민국 경제성장사와 궤를 같이합니다.
+                            1974년 1호선 개통 당시 한국의 1인당 GDP는 약 560달러였으나,
+                            2024년 현재 약 33,000달러를 넘어섰습니다.
+                        </p>
+                        <p>
+                            지하철 네트워크의 확장은 부동산 시장, 상권 형성, 도시 구조에도
+                            막대한 영향을 미쳤습니다. "역세권"이라는 신조어가 등장할 정도로
+                            지하철역은 도시 발전의 핵심 거점이 되었습니다.
+                        </p>
+
+                        <h3>민주화 운동과 지하철</h3>
+                        <p>
+                            1980년대 민주화 운동 시기, 지하철역은 시위대의 주요 집결지이자
+                            이동 통로였습니다. 1987년 6월 민주항쟁 당시 수많은 시민들이
+                            지하철을 통해 도심으로 모여들었으며, 지하철역 광장은
+                            민주주의를 향한 열망이 분출되는 공간이었습니다.
+                        </p>
+
+                        <h3>IMF 외환위기와 지하철 건설</h3>
+                        <p>
+                            1997년 IMF 외환위기는 진행 중이던 지하철 건설에도 영향을 미쳤습니다.
+                            일부 노선의 건설이 지연되거나 계획이 축소되었지만, 정부는
+                            경기 부양과 고용 창출을 위해 지하철 건설을 지속했습니다.
+                            이는 위기 속에서도 인프라 투자의 중요성을 보여주는 사례였습니다.
+                        </p>
+
+                        <h2>5. 세계가 주목하는 한국 지하철</h2>
+
+                        <h3>기술 혁신의 선두주자</h3>
+                        <div class="outlook-grid">
+                            <div class="outlook-card positive">
+                                <h4>세계 최초 도입 기술</h4>
+                                <ul>
+                                    <li>지하철 내 무료 Wi-Fi 전 구간 제공</li>
+                                    <li>실시간 열차 위치 안내 시스템</li>
+                                    <li>교통카드 전국 호환 시스템</li>
+                                    <li>스크린도어 전 역사 설치</li>
+                                </ul>
+                            </div>
+                            <div class="outlook-card caution">
+                                <h4>주요 성과 지표</h4>
+                                <ul>
+                                    <li>정시율 99.9% 이상</li>
+                                    <li>배차간격 2~3분 (출퇴근 시간대)</li>
+                                    <li>연간 이용객 약 27억 명 (서울)</li>
+                                    <li>세계 5위권 지하철 네트워크</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>한국형 지하철의 수출</h3>
+                        <p>
+                            한국의 지하철 기술과 운영 노하우는 해외로도 수출되고 있습니다.
+                            현대로템, 한국철도기술연구원 등은 인도, 베트남, 이집트 등
+                            신흥국의 도시철도 건설에 참여하고 있으며, K-Metro는 새로운
+                            수출 동력으로 주목받고 있습니다.
+                        </p>
+
+                        <h2>6. 미래를 향한 도전</h2>
+
+                        <h3>GTX와 광역급행철도</h3>
+                        <p>
+                            수도권의 지속적인 확장에 따라 기존 지하철보다 빠른 광역급행철도(GTX)가
+                            추진되고 있습니다. GTX-A 노선이 2024년 부분 개통되었으며,
+                            완전 개통 시 파주에서 서울 삼성역까지 20분대 이동이 가능해집니다.
+                        </p>
+
+                        <h3>자율주행 열차와 스마트 역사</h3>
+                        <p>
+                            인천 2호선, 신분당선 등에서는 이미 무인 자동운전 시스템이 운영 중이며,
+                            AI 기반 열차 제어, 스마트 역사 관리 시스템 등 첨단 기술이
+                            지속적으로 도입되고 있습니다.
+                        </p>
+
+                        <h3>친환경 교통수단으로서의 역할</h3>
+                        <p>
+                            탄소중립 시대를 맞아 지하철은 친환경 교통수단으로서 그 중요성이
+                            더욱 부각되고 있습니다. 서울시는 2050년 탄소중립 달성을 위해
+                            지하철 중심의 대중교통 체계 강화를 핵심 전략으로 추진하고 있습니다.
+                        </p>
+
+                        <div class="conclusion-box">
+                            <p>
+                                1974년 첫 운행을 시작한 한국 지하철은 50년간 대한민국과 함께
+                                성장해왔습니다. 개발도상국의 야심 찬 인프라 프로젝트에서 출발하여,
+                                오늘날 세계 최고 수준의 도시철도 시스템으로 발전했습니다.
+                            </p>
+                            <p>
+                                지하철 역사 속에는 한국의 산업화, 민주화, 세계화의 여정이 고스란히
+                                담겨 있습니다. 앞으로도 한국 지하철은 기술 혁신과 지속가능한 발전을
+                                통해 미래 세대를 위한 교통 인프라로서 그 역할을 이어갈 것입니다.
+                            </p>
+                        </div>
+
+                        <div class="sources-box">
+                            <h3>출처</h3>
+                            <ul>
+                                <li><a href="https://www.seoulmetro.co.kr" target="_blank">서울교통공사 - 서울 지하철 역사</a></li>
+                                <li><a href="https://www.molit.go.kr" target="_blank">국토교통부 - 도시철도 현황</a></li>
+                                <li><a href="https://www.archives.go.kr" target="_blank">국가기록원 - 지하철 건설 기록물</a></li>
+                                <li><a href="https://www.korail.com" target="_blank">한국철도공사 - 수도권 전철 연혁</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="article-footer-section">
+                        <div class="article-tags">
+                            <span class="article-tag">지하철</span>
+                            <span class="article-tag">한국 역사</span>
+                            <span class="article-tag">교통</span>
+                            <span class="article-tag">인프라</span>
+                        </div>
+                        <div class="related-articles">
+                            <h3>관련 글</h3>
+                            <div class="related-grid">
+                                <a href="worker-nutrition.html" class="related-card">
+                                    <span class="related-card-title">직장인 영양 불균형 실태와 스마트한 대응 전략</span>
+                                </a>
+                                <a href="hobby-importance.html" class="related-card">
+                                    <span class="related-card-title">취미의 재발견: 그것은 단순한 여가가 아니다</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="site-footer"><div class="footer-content"><p class="footer-text">© 2024 Stock Insights</p></div></footer>
+        </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
 </body>
 </html>

@@ -7,63 +7,55 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
 </head>
-<body>
-    <div class="mobile-header">
+<body class="article-page" data-category="tech">
+    <header class="mobile-header">
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         <div class="mobile-logo">Stock Insights</div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="site-wrapper">
         <aside class="sidebar" id="sidebar">
-            <div class="logo-section">
-                <a href="../index.html" class="site-logo">Stock Insights</a>
-                <p class="site-tagline">전문 주식 분석</p>
+            <div class="sidebar-header">
+                <a href="../index.html" class="site-logo"><span class="logo-icon">S</span>Stock Insights</a>
+                <p class="site-tagline">Life & Business Insights</p>
             </div>
             <nav class="sidebar-nav">
-                <h3 class="nav-title">메뉴</h3>
-                <ul class="nav-list">
-                    <li><a href="../index.html" class="nav-link">홈</a></li>
-                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
-                </ul>
+                <div class="nav-section">
+                    <h3 class="nav-title">메뉴</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link"><span class="nav-icon">🏠</span> 홈</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3 class="nav-title">카테고리</h3>
+                    <div class="categories-section">
+                        <a href="../index.html" class="category-link"><span>전체</span></a>
+                        <a href="../index.html" class="category-link active"><span>기술 & 개발</span></a>
+                        <a href="../index.html" class="category-link"><span>비즈니스</span></a>
+                    </div>
+                </div>
             </nav>
         </aside>
 
-        <div class="main-content-wrapper">
-            <header class="site-header">
-                <div class="header-content">
-                    <h1 class="header-title">기술 분석</h1>
+        <main class="main-content">
+            <article class="article-hero">
+                <div class="article-hero-inner">
+                    <div class="breadcrumb">
+                        <a href="../index.html">홈</a><span>/</span><a href="#">기술 & 개발</a><span>/</span><span>CI/CD</span>
+                    </div>
+                    <div class="article-hero-meta">
+                        <span class="article-category-badge">DevOps</span>
+                        <span class="article-hero-date">2024년 12월 1일</span>
+                    </div>
+                    <h1 class="article-hero-title">CI/CD 파이프라인: 소프트웨어 배포 자동화의 핵심</h1>
+                    <p class="article-hero-subtitle">CI/CD(Continuous Integration/Continuous Deployment)는 현대 소프트웨어 개발의 근간을 이루는 핵심 프랙티스입니다. 코드 통합부터 프로덕션 배포까지 전 과정을 자동화하여 개발 생산성과 소프트웨어 품질을 동시에 향상시키는 방법을 분석합니다.</p>
                 </div>
-            </header>
+            </article>
 
-            <main class="main-content">
-                <article class="article-page">
-                    <header class="article-header">
-                        <div class="article-header-content">
-                            <div class="breadcrumb">
-                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / CI/CD
-                            </div>
-                            <span class="article-category-badge">DevOps</span>
-                            <h1 class="article-main-title">CI/CD 파이프라인: 소프트웨어 배포 자동화의 핵심</h1>
-                            <div class="article-header-meta">
-                                <span>2024년 12월 1일</span>
-                                <span>10분 읽기</span>
-                                <span>Stock Insights 리서치</span>
-                            </div>
-                        </div>
-                    </header>
-
-                    <div class="article-body-wrapper">
-                        <div class="article-body">
-                            <p class="lead">
-                                CI/CD(Continuous Integration/Continuous Deployment)는 현대 소프트웨어 개발의
-                                근간을 이루는 핵심 프랙티스입니다. 코드 통합부터 프로덕션 배포까지 전 과정을
-                                자동화하여 개발 생산성과 소프트웨어 품질을 동시에 향상시키는 방법을 분석합니다.
-                            </p>
-
+            <div class="article-content-wrapper">
+                <div class="article-content-inner">
+                    <div class="article-body">
                             <div class="insight-box">
                                 <h3>핵심 인사이트</h3>
                                 <ul class="checkmark-list">
@@ -363,36 +355,48 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <aside class="related-articles">
-                            <h3>관련 분석</h3>
-                            <a href="devops-importance.html" class="related-link">
-                                <div>
-                                    <h4>DevOps의 중요성</h4>
-                                    <p>현대 소프트웨어 개발의 핵심</p>
+                        <div class="article-footer-section">
+                            <div class="article-tags">
+                                <span class="article-tag">CI/CD</span>
+                                <span class="article-tag">DevOps</span>
+                                <span class="article-tag">자동화</span>
+                                <span class="article-tag">파이프라인</span>
+                            </div>
+                            <div class="related-articles">
+                                <h3>관련 글</h3>
+                                <div class="related-grid">
+                                    <a href="devops-importance.html" class="related-card">
+                                        <div class="related-card-title">DevOps의 중요성</div>
+                                    </a>
+                                    <a href="plagiarism-tech.html" class="related-card">
+                                        <div class="related-card-title">기술 논문 표절</div>
+                                    </a>
                                 </div>
-                            </a>
-                            <a href="samsung-strengths.html" class="related-link">
-                                <div>
-                                    <h4>삼성전자 핵심 경쟁력</h4>
-                                    <p>3nm 파운드리와 통합 AI 솔루션</p>
-                                </div>
-                            </a>
-                        </aside>
+                            </div>
+                        </div>
                     </div>
-                </article>
-            </main>
+                </div>
+            </div>
 
             <footer class="site-footer">
                 <div class="footer-content">
-                    <p class="footer-text">
-                        © 2024 Stock Insights. 본 콘텐츠는 투자 참고 자료입니다.
-                    </p>
+                    <p class="footer-text">© 2024 Stock Insights</p>
                 </div>
             </footer>
-        </div>
+        </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
 </body>
 </html>
