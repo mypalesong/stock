@@ -5,980 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clean Code: 클린 코드 원칙과 실천 | Stock Insights</title>
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
-            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --primary-color: #1a1a2e;
-            --secondary-color: #16213e;
-            --accent-color: #0f3460;
-            --text-color: #1e293b;
-            --text-muted: #64748b;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
-            --border-color: #e2e8f0;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            color: var(--text-color);
-            line-height: 1.7;
-            background: var(--bg-secondary);
-        }
-
-        /* Unified Content Container */
-        .content-wrapper {
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        @media (min-width: 1400px) {
-            .content-wrapper {
-                width: 80%;
-                min-width: 1200px;
-                max-width: 1400px;
-                padding: 0;
-            }
-        }
-
-        /* Compact Breadcrumb */
-        .breadcrumb-section {
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0.75rem 0;
-        }
-
-        .breadcrumb {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .breadcrumb a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--accent-color);
-        }
-
-        .breadcrumb span {
-            color: #cbd5e1;
-        }
-
-        /* Compact Hero Section */
-        .article-hero {
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
-            padding: 2.5rem 0;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .paper-category {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-        }
-
-        .article-hero h1 {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            font-size: 2rem;
-            color: #ffffff;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-        }
-
-        .article-hero .subtitle {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: #94a3b8;
-            font-weight: 400;
-        }
-
-        /* Main Content Area */
-        .article-main {
-            background: var(--bg-primary);
-            padding: 3rem 0;
-        }
-
-        .article-body {
-            max-width: 100%;
-        }
-
-        /* Abstract */
-        .abstract-box {
-            background: var(--bg-secondary);
-            padding: 1.75rem 2rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid var(--border-color);
-            border-left: 3px solid var(--accent-color);
-        }
-
-        .abstract-box .label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.75rem;
-        }
-
-        .abstract-box p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-color);
-            margin-bottom: 1rem;
-        }
-
-        .keywords {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .keywords strong {
-            color: var(--text-color);
-        }
-
-        /* Section Titles */
-        .section-title {
-            font-family: var(--font-sans);
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 2.5rem 0 1.25rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .section-title .num {
-            font-family: var(--font-mono);
-            color: var(--accent-color);
-            margin-right: 0.5rem;
-        }
-
-        .subsection-title {
-            font-family: var(--font-sans);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin: 2rem 0 0.75rem 0;
-        }
-
-        /* Body Text */
-        .paper-section {
-            margin: 1.5rem 0;
-        }
-
-        .paper-section > p {
-            font-size: 1rem;
-            line-height: 1.85;
-            color: var(--text-color);
-            margin-bottom: 1.25rem;
-        }
-
-        .paper-section > ul {
-            font-size: 1rem;
-            line-height: 1.75;
-            padding-left: 1.5rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .paper-section > ul li {
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        .paper-section > ul li strong {
-            color: var(--primary-color);
-        }
-
-        /* Quote Box */
-        .quote-box {
-            background: var(--bg-tertiary);
-            padding: 1.5rem 2rem;
-            margin: 1.5rem 0;
-            border-left: 3px solid var(--accent-color);
-        }
-
-        .quote-box p {
-            font-family: var(--font-sans);
-            font-size: 1.05rem;
-            font-style: italic;
-            color: var(--text-color);
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .quote-box .author {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            font-style: normal;
-            color: var(--text-muted);
-            margin-top: 0.75rem;
-        }
-
-        /* Data Table */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            font-size: 0.9rem;
-        }
-
-        .data-table th {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            background: var(--primary-color);
-            color: white;
-            padding: 0.85rem 1rem;
-            text-align: left;
-        }
-
-        .data-table td {
-            padding: 0.85rem 1rem;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-color);
-            line-height: 1.5;
-        }
-
-        .data-table tr:nth-child(even) {
-            background: var(--bg-secondary);
-        }
-
-        .data-table .bad { color: #dc2626; font-family: var(--font-mono); }
-        .data-table .good { color: #16a34a; font-family: var(--font-mono); }
-
-        /* Rule List Box */
-        .rule-list {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            padding: 2rem 2.5rem;
-            margin: 2rem 0;
-        }
-
-        .rule-list h4 {
-            font-family: var(--font-sans);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.25rem;
-        }
-
-        .rule-list ul {
-            margin: 0;
-            padding-left: 1.5rem;
-        }
-
-        .rule-list li {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            margin-bottom: 0.85rem;
-            line-height: 1.7;
-        }
-
-        .rule-list li strong {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        /* Code Comparison */
-        .code-comparison {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .code-box {
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-
-        .code-header {
-            font-family: var(--font-mono);
-            padding: 0.75rem 1.25rem;
-            font-weight: 600;
-            font-size: 0.8rem;
-            letter-spacing: 0.02em;
-        }
-
-        .code-box.bad .code-header {
-            background: #fecaca;
-            color: #991b1b;
-        }
-
-        .code-box.good .code-header {
-            background: #a7f3d0;
-            color: #047857;
-        }
-
-        .code-content {
-            background: #0f172a;
-            padding: 1.5rem;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            overflow-x: auto;
-            color: #e2e8f0;
-            line-height: 1.7;
-        }
-
-        .code-content .comment { color: #64748b; }
-        .code-content .keyword { color: #c084fc; }
-        .code-content .function { color: #60a5fa; }
-        .code-content .string { color: #4ade80; }
-
-        /* SOLID Grid */
-        .solid-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .solid-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .solid-card .letter {
-            font-family: var(--font-mono);
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .solid-card h4 {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin: 0.5rem 0;
-        }
-
-        .solid-card p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        /* Smell Cards */
-        .smell-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .smell-card {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            padding: 1.5rem;
-        }
-
-        .smell-card h4 {
-            font-family: var(--font-sans);
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #b91c1c;
-            margin-bottom: 0.5rem;
-        }
-
-        .smell-card p {
-            font-size: 0.9rem;
-            color: #991b1b;
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        /* Principle Cards */
-        .principle-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .principle-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 1.75rem;
-        }
-
-        .principle-card h4 {
-            font-family: var(--font-sans);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.75rem;
-        }
-
-        .principle-card p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        /* Practice Cards */
-        .practice-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2rem 0;
-        }
-
-        .practice-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 1.75rem;
-        }
-
-        .practice-card h4 {
-            font-family: var(--font-sans);
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.75rem;
-        }
-
-        .practice-card p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        /* Benefits Grid */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        @media (max-width: 900px) {
-            .benefits-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .benefit-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 1.25rem;
-        }
-
-        .benefit-card h4 {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .benefit-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        /* References */
-        .references {
-            background: var(--bg-secondary);
-            padding: 1.5rem 2rem;
-            margin: 2.5rem 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .references h3 {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .references ol {
-            padding-left: 1.25rem;
-            margin: 0;
-        }
-
-        .references li {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            line-height: 1.5;
-        }
-
-        /* Related Articles */
-        .related-articles {
-            margin: 2.5rem 0;
-        }
-
-        .related-articles h3 {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .related-grid {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .related-card {
-            display: block;
-            padding: 0.75rem 1.25rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .related-card:hover {
-            border-color: var(--accent-color);
-            background: var(--bg-tertiary);
-        }
-
-        .related-title {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-color);
-        }
-
-        /* Source Box */
-        .source-box {
-            background: var(--bg-tertiary);
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .source-box p {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        .source-box strong {
-            color: var(--text-color);
-        }
-
-        /* Footer */
-        .site-footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 1.5rem 0;
-            text-align: center;
-        }
-
-        .site-footer p {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="../styles/article.css">
 </head>
-<body>
-    <nav class="breadcrumb-section">
-        <div class="content-wrapper">
-            <div class="breadcrumb">
-                <a href="../index.html">홈</a>
-                <span>/</span>
-                <a href="../index.html?category=tech">개발 방법론</a>
-                <span>/</span>
-                <span>Clean Code</span>
-            </div>
+<body class="article-page" data-category="tech">
+    <!-- Mobile Header (Hamburger on LEFT) -->
+    <header class="mobile-header">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-    </nav>
-
-    <header class="article-hero">
-        <div class="content-wrapper">
-            <div class="hero-content">
-                <span class="paper-category">Software Engineering · Research Paper</span>
-                <h1>Clean Code: 클린 코드 원칙과 실천</h1>
-                <p class="subtitle">Methodology Series Vol.3</p>
-            </div>
-        </div>
+        <div class="mobile-logo">Stock Insights</div>
     </header>
 
-    <main class="article-main">
-        <div class="content-wrapper">
-            <article class="article-body">
-                <div class="abstract-box">
-                    <div class="label">Abstract</div>
-                    <p>
-                        클린 코드는 읽기 쉽고, 이해하기 쉽고, 변경하기 쉬운 코드를 작성하기 위한 원칙과 실천의 집합이다.
-                        Robert C. Martin(Uncle Bob)의 저서 "Clean Code"를 중심으로, 본 논문에서는 의미 있는 네이밍,
-                        함수 설계, SOLID 원칙, 코드 스멜 등 클린 코드의 핵심 개념을 분석한다.
-                        클린 코드는 단기적으로 시간이 더 걸릴 수 있으나, 장기적으로 유지보수 비용을 크게 절감하고
-                        소프트웨어의 수명을 연장한다.
-                    </p>
-                    <div class="keywords">
-                        <strong>Keywords:</strong> Clean Code, SOLID Principles, Code Smell, Refactoring, Naming, Software Craftsmanship
-                    </div>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="site-wrapper">
+        <!-- Left Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="../index.html" class="sidebar-logo">Stock Insights</a>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">카테고리</div>
+                    <a href="../index.html?category=market" class="nav-item">시장 분석</a>
+                    <a href="../index.html?category=invest" class="nav-item">투자 전략</a>
+                    <a href="../index.html?category=econ" class="nav-item">경제 이슈</a>
+                    <a href="../index.html?category=tech" class="nav-item active">기술 & 개발</a>
+                    <a href="../index.html?category=humor" class="nav-item">유머</a>
                 </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">인기 글</div>
+                    <a href="tdd-methodology.html" class="nav-item">TDD 방법론</a>
+                    <a href="code-review.html" class="nav-item">코드 리뷰</a>
+                    <a href="refactoring.html" class="nav-item">리팩토링</a>
+                </div>
+            </nav>
+        </aside>
 
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
-                    <p>
-                        코드는 쓰는 시간보다 읽는 시간이 10배 이상 많다. 따라서 읽기 쉬운 코드를 작성하는 것은
-                        개발 생산성에 직접적인 영향을 미친다. 클린 코드는 "작동하는 코드"를 넘어
-                        "유지보수 가능한 코드"를 목표로 한다.
-                    </p>
+        <!-- Main Content -->
+        <main class="main-content">
+            <article class="article-hero">
+                <div class="breadcrumb">
+                    <a href="../index.html">홈</a>
+                    <span class="separator">/</span>
+                    <a href="../index.html?category=tech">기술 & 개발</a>
+                    <span class="separator">/</span>
+                    <span>Clean Code</span>
+                </div>
+                <div class="article-meta">
+                    <span class="category">Software Engineering</span>
+                    <span class="date">2024</span>
+                </div>
+                <h1 class="article-title">Clean Code: 클린 코드 원칙과 실천</h1>
+                <p class="article-subtitle">Methodology Series Vol.3</p>
+            </article>
 
-                    <div class="quote-box">
-                        <p>Clean code is simple and direct. Clean code reads like well-written prose.</p>
-                        <div class="author">— Grady Booch</div>
-                    </div>
+            <div class="article-content-wrapper">
+                <div class="article-content-inner">
+                    <div class="article-body">
+                        <div class="lead">
+                            클린 코드는 읽기 쉽고, 이해하기 쉽고, 변경하기 쉬운 코드를 작성하기 위한 원칙과 실천의 집합이다.
+                            Robert C. Martin(Uncle Bob)의 저서 "Clean Code"를 중심으로, 본 논문에서는 의미 있는 네이밍,
+                            함수 설계, SOLID 원칙, 코드 스멜 등 클린 코드의 핵심 개념을 분석한다.
+                            클린 코드는 단기적으로 시간이 더 걸릴 수 있으나, 장기적으로 유지보수 비용을 크게 절감하고
+                            소프트웨어의 수명을 연장한다.
+                        </div>
 
-                    <div class="quote-box">
-                        <p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
-                        <div class="author">— Martin Fowler</div>
-                    </div>
-                </section>
+                        <div class="highlight-box">
+                            <strong>Keywords:</strong> Clean Code, SOLID Principles, Code Smell, Refactoring, Naming, Software Craftsmanship
+                        </div>
 
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">2.</span> Meaningful Names</h2>
+                        <h2>1. Introduction</h2>
+                        <p>
+                            코드는 쓰는 시간보다 읽는 시간이 10배 이상 많다. 따라서 읽기 쉬운 코드를 작성하는 것은
+                            개발 생산성에 직접적인 영향을 미친다. 클린 코드는 "작동하는 코드"를 넘어
+                            "유지보수 가능한 코드"를 목표로 한다.
+                        </p>
 
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>원칙</th>
-                                <th>나쁜 예</th>
-                                <th>좋은 예</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>의도를 분명히</strong></td>
-                                <td class="bad">int d; // elapsed days</td>
-                                <td class="good">int elapsedDays;</td>
-                            </tr>
-                            <tr>
-                                <td><strong>발음 가능한 이름</strong></td>
-                                <td class="bad">genymdhms</td>
-                                <td class="good">generationTimestamp</td>
-                            </tr>
-                            <tr>
-                                <td><strong>검색 가능한 이름</strong></td>
-                                <td class="bad">e, s, 7</td>
-                                <td class="good">WORK_DAYS_PER_WEEK</td>
-                            </tr>
-                            <tr>
-                                <td><strong>클래스명은 명사</strong></td>
-                                <td class="bad">Manager, Processor</td>
-                                <td class="good">Customer, Account</td>
-                            </tr>
-                            <tr>
-                                <td><strong>메서드명은 동사</strong></td>
-                                <td class="bad">data()</td>
-                                <td class="good">getData(), setName()</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+                        <blockquote class="quote-box">
+                            <p>Clean code is simple and direct. Clean code reads like well-written prose.</p>
+                            <footer>— Grady Booch</footer>
+                        </blockquote>
 
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">3.</span> Functions</h2>
+                        <blockquote class="quote-box">
+                            <p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
+                            <footer>— Martin Fowler</footer>
+                        </blockquote>
 
-                    <div class="rule-list">
-                        <h4>함수 작성 규칙</h4>
+                        <h2>2. Meaningful Names</h2>
+                        <p>좋은 이름은 코드의 의도를 명확히 드러낸다:</p>
                         <ul>
-                            <li><strong>작게 만들어라:</strong> 함수는 20줄 이내가 이상적. 한 화면에 들어와야 한다</li>
-                            <li><strong>한 가지만 해라:</strong> 함수는 하나의 작업만 수행해야 한다 (Single Responsibility)</li>
+                            <li><strong>의도를 분명히:</strong> int d; (나쁨) → int elapsedDays; (좋음)</li>
+                            <li><strong>발음 가능한 이름:</strong> genymdhms (나쁨) → generationTimestamp (좋음)</li>
+                            <li><strong>검색 가능한 이름:</strong> 7 (나쁨) → WORK_DAYS_PER_WEEK (좋음)</li>
+                            <li><strong>클래스명은 명사:</strong> Customer, Account (좋음)</li>
+                            <li><strong>메서드명은 동사:</strong> getData(), setName() (좋음)</li>
+                        </ul>
+
+                        <h2>3. Functions</h2>
+                        <p>함수 작성 규칙:</p>
+                        <ul>
+                            <li><strong>작게 만들어라:</strong> 함수는 20줄 이내가 이상적</li>
+                            <li><strong>한 가지만 해라:</strong> 함수는 하나의 작업만 수행 (Single Responsibility)</li>
                             <li><strong>함수 당 추상화 수준은 하나로:</strong> 한 함수 내에 추상화 수준을 섞지 마라</li>
-                            <li><strong>Switch문 피하기:</strong> 다형성으로 대체. 불가피한 경우 팩토리 내부에 숨기기</li>
-                            <li><strong>서술적 이름 사용:</strong> 함수 이름만으로 무엇을 하는지 알 수 있어야 한다</li>
-                            <li><strong>인수는 적게:</strong> 이상적으로는 0개(niladic), 최대 3개까지</li>
+                            <li><strong>서술적 이름 사용:</strong> 함수 이름만으로 무엇을 하는지 알 수 있어야</li>
+                            <li><strong>인수는 적게:</strong> 이상적으로는 0개, 최대 3개까지</li>
                             <li><strong>부수 효과 없애기:</strong> 함수 이름에 드러나지 않은 동작은 하지 마라</li>
                         </ul>
-                    </div>
 
-                    <div class="code-comparison">
-                        <div class="code-box bad">
-                            <div class="code-header">Bad: 여러 가지를 하는 함수</div>
-                            <div class="code-content">
-<span class="keyword">function</span> <span class="function">emailClients</span>(clients) {
-  clients.<span class="function">forEach</span>(client => {
-    <span class="keyword">const</span> record = database.<span class="function">find</span>(client);
-    <span class="keyword">if</span> (record.<span class="function">isActive</span>()) {
-      <span class="function">email</span>(client);
-    }
-  });
-}
+                        <h2>4. SOLID Principles</h2>
+                        <div class="card-grid">
+                            <div class="benefit-card">
+                                <h4>Single Responsibility</h4>
+                                <p>클래스는 하나의 변경 이유만 가져야 한다</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Open-Closed</h4>
+                                <p>확장에 열려있고 수정에 닫혀있어야 한다</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Liskov Substitution</h4>
+                                <p>하위 타입은 상위 타입을 대체할 수 있어야 한다</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Interface Segregation</h4>
+                                <p>클라이언트별 인터페이스를 분리하라</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Dependency Inversion</h4>
+                                <p>추상화에 의존하라, 구체화에 의존하지 마라</p>
                             </div>
                         </div>
-                        <div class="code-box good">
-                            <div class="code-header">Good: 한 가지만 하는 함수들</div>
-                            <div class="code-content">
-<span class="keyword">function</span> <span class="function">emailActiveClients</span>(clients) {
-  clients
-    .<span class="function">filter</span>(<span class="function">isActiveClient</span>)
-    .<span class="function">forEach</span>(<span class="function">email</span>);
-}
 
-<span class="keyword">function</span> <span class="function">isActiveClient</span>(client) {
-  <span class="keyword">const</span> record = database.<span class="function">find</span>(client);
-  <span class="keyword">return</span> record.<span class="function">isActive</span>();
-}
+                        <h2>5. Code Smells</h2>
+                        <ul>
+                            <li><strong>Duplicated Code:</strong> 동일하거나 유사한 코드가 여러 곳에 존재. DRY 원칙 위반</li>
+                            <li><strong>Long Method:</strong> 너무 긴 메서드. 하나 이상의 책임을 가질 가능성 높음</li>
+                            <li><strong>Large Class:</strong> 너무 많은 인스턴스 변수와 메서드를 가진 클래스</li>
+                            <li><strong>Long Parameter List:</strong> 3개 이상의 파라미터. 객체로 묶는 것을 고려</li>
+                            <li><strong>Divergent Change:</strong> 하나의 클래스가 여러 이유로 자주 변경됨</li>
+                            <li><strong>Feature Envy:</strong> 메서드가 자신의 클래스보다 다른 클래스의 데이터를 더 많이 사용</li>
+                        </ul>
+
+                        <h2>6. Comments</h2>
+                        <p>
+                            좋은 주석: 법적 주석, TODO 주석, 의도 설명, 경고, API 문서(Javadoc).
+                            단, 코드로 설명할 수 있다면 주석을 쓰지 마라.
+                        </p>
+                        <p>
+                            나쁜 주석: 주절거리는 주석, 중복 주석, 닫는 괄호 주석, 주석 처리된 코드,
+                            이력 주석, 있으나마나 한 주석.
+                        </p>
+
+                        <h2>7. Best Practices</h2>
+                        <div class="card-grid">
+                            <div class="benefit-card">
+                                <h4>DRY</h4>
+                                <p>Don't Repeat Yourself. 모든 지식은 시스템 내에서 단일하고 명확하게 표현</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>KISS</h4>
+                                <p>Keep It Simple, Stupid. 불필요한 복잡성을 피하고 단순하게 유지</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>YAGNI</h4>
+                                <p>You Aren't Gonna Need It. 필요할 때까지 기능을 추가하지 마라</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Fail Fast</h4>
+                                <p>오류는 가능한 빨리 발견하고 보고하라. 숨기지 마라</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Boy Scout Rule</h4>
+                                <p>"캠프장은 처음 왔을 때보다 깨끗이 하고 떠나라". 코드도 마찬가지</p>
+                            </div>
+                            <div class="benefit-card">
+                                <h4>Composition over Inheritance</h4>
+                                <p>상속보다 합성을 선호하라. 더 유연하고 덜 결합된 설계</p>
                             </div>
                         </div>
-                    </div>
-                </section>
 
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">4.</span> SOLID Principles</h2>
+                        <h2>8. Error Handling</h2>
+                        <ul>
+                            <li><strong>예외 사용:</strong> 오류 코드 반환 대신 예외를 사용하라</li>
+                            <li><strong>의미 있는 예외:</strong> 예외에 충분한 컨텍스트를 제공하라</li>
+                            <li><strong>null 반환 금지:</strong> null을 반환하거나 전달하지 마라. Optional, 빈 컬렉션, 특수 케이스 패턴을 사용</li>
+                        </ul>
 
-                    <div class="solid-grid">
-                        <div class="solid-card">
-                            <div class="letter">S</div>
-                            <h4>Single Responsibility</h4>
-                            <p>클래스는 하나의 변경 이유만 가져야 한다</p>
-                        </div>
-                        <div class="solid-card">
-                            <div class="letter">O</div>
-                            <h4>Open-Closed</h4>
-                            <p>확장에 열려있고 수정에 닫혀있어야 한다</p>
-                        </div>
-                        <div class="solid-card">
-                            <div class="letter">L</div>
-                            <h4>Liskov Substitution</h4>
-                            <p>하위 타입은 상위 타입을 대체할 수 있어야 한다</p>
-                        </div>
-                        <div class="solid-card">
-                            <div class="letter">I</div>
-                            <h4>Interface Segregation</h4>
-                            <p>클라이언트별 인터페이스를 분리하라</p>
-                        </div>
-                        <div class="solid-card">
-                            <div class="letter">D</div>
-                            <h4>Dependency Inversion</h4>
-                            <p>추상화에 의존하라, 구체화에 의존하지 마라</p>
-                        </div>
-                    </div>
-                </section>
+                        <h2>9. Conclusion</h2>
+                        <p>
+                            클린 코드는 단순히 "작동하는 코드"를 넘어 "읽기 좋은 코드", "변경하기 쉬운 코드"를 목표로 한다.
+                            의미 있는 네이밍, 작고 명확한 함수, SOLID 원칙 준수는 클린 코드의 핵심 요소이다.
+                        </p>
+                        <p>
+                            클린 코드 작성은 기술적 역량뿐 아니라 장인 정신(Software Craftsmanship)을 요구한다.
+                            지속적인 학습과 연습, 그리고 코드 리뷰를 통한 피드백이 클린 코드 역량을 향상시킨다.
+                            기술 부채를 줄이고 장기적인 소프트웨어 품질을 확보하기 위해 클린 코드는 필수적이다.
+                        </p>
 
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">5.</span> Code Smells</h2>
-
-                    <div class="smell-grid">
-                        <div class="smell-card">
-                            <h4>Duplicated Code</h4>
-                            <p>동일하거나 유사한 코드가 여러 곳에 존재. DRY 원칙 위반</p>
-                        </div>
-                        <div class="smell-card">
-                            <h4>Long Method</h4>
-                            <p>너무 긴 메서드. 하나 이상의 책임을 가질 가능성 높음</p>
-                        </div>
-                        <div class="smell-card">
-                            <h4>Large Class</h4>
-                            <p>너무 많은 인스턴스 변수와 메서드를 가진 클래스</p>
-                        </div>
-                        <div class="smell-card">
-                            <h4>Long Parameter List</h4>
-                            <p>3개 이상의 파라미터. 객체로 묶는 것을 고려</p>
-                        </div>
-                        <div class="smell-card">
-                            <h4>Divergent Change</h4>
-                            <p>하나의 클래스가 여러 이유로 자주 변경됨</p>
-                        </div>
-                        <div class="smell-card">
-                            <h4>Feature Envy</h4>
-                            <p>메서드가 자신의 클래스보다 다른 클래스의 데이터를 더 많이 사용</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">6.</span> Comments</h2>
-
-                    <div class="principle-grid">
-                        <div class="principle-card">
-                            <h4>좋은 주석</h4>
-                            <p>
-                                법적 주석, TODO 주석, 의도 설명, 경고, API 문서(Javadoc).
-                                단, 코드로 설명할 수 있다면 주석을 쓰지 마라.
-                            </p>
-                        </div>
-                        <div class="principle-card">
-                            <h4>나쁜 주석</h4>
-                            <p>
-                                주절거리는 주석, 중복 주석, 닫는 괄호 주석, 주석 처리된 코드,
-                                이력 주석, 있으나마나 한 주석.
-                            </p>
+                        <div class="reference-box">
+                            <h3>References</h3>
+                            <ol>
+                                <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.</li>
+                                <li>Martin, R. C. (2017). <em>Clean Architecture</em>. Prentice Hall.</li>
+                                <li>Fowler, M. (2018). <em>Refactoring: Improving the Design of Existing Code</em> (2nd ed.). Addison-Wesley.</li>
+                                <li>Hunt, A., & Thomas, D. (1999). <em>The Pragmatic Programmer</em>. Addison-Wesley.</li>
+                                <li>McConnell, S. (2004). <em>Code Complete</em> (2nd ed.). Microsoft Press.</li>
+                            </ol>
                         </div>
                     </div>
 
-                    <div class="code-comparison">
-                        <div class="code-box bad">
-                            <div class="code-header">Bad: 나쁜 주석</div>
-                            <div class="code-content">
-<span class="comment">// 월급날인지 확인</span>
-<span class="keyword">if</span> (date.getDay() == 15) {
-  <span class="comment">// 월급을 지급한다</span>
-  pay();
-}
+                    <div class="article-footer-section">
+                        <div class="article-tags">
+                            <span class="tag">Clean Code</span>
+                            <span class="tag">SOLID</span>
+                            <span class="tag">Best Practices</span>
+                            <span class="tag">Code Quality</span>
+                        </div>
+
+                        <div class="related-articles">
+                            <h3>관련 글</h3>
+                            <div class="related-grid">
+                                <a href="refactoring.html" class="related-card">
+                                    <span class="related-category">Best Practices</span>
+                                    <h4>리팩토링 전략</h4>
+                                    <p>코드 품질 개선 기법</p>
+                                </a>
+                                <a href="code-review.html" class="related-card">
+                                    <span class="related-category">Quality</span>
+                                    <h4>코드 리뷰 방법론</h4>
+                                    <p>효과적인 코드 리뷰 실천</p>
+                                </a>
+                                <a href="tdd-methodology.html" class="related-card">
+                                    <span class="related-category">Methodology</span>
+                                    <h4>TDD: 테스트 주도 개발</h4>
+                                    <p>Red-Green-Refactor 사이클</p>
+                                </a>
                             </div>
                         </div>
-                        <div class="code-box good">
-                            <div class="code-header">Good: 코드로 설명</div>
-                            <div class="code-content">
-<span class="keyword">if</span> (<span class="function">isPayday</span>(date)) {
-  <span class="function">paySalary</span>();
-}
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">7.</span> Best Practices</h2>
-
-                    <div class="practice-grid">
-                        <div class="practice-card">
-                            <h4>DRY</h4>
-                            <p>Don't Repeat Yourself. 모든 지식은 시스템 내에서 단일하고 명확하게 표현되어야 한다</p>
-                        </div>
-                        <div class="practice-card">
-                            <h4>KISS</h4>
-                            <p>Keep It Simple, Stupid. 불필요한 복잡성을 피하고 단순하게 유지하라</p>
-                        </div>
-                        <div class="practice-card">
-                            <h4>YAGNI</h4>
-                            <p>You Aren't Gonna Need It. 필요할 때까지 기능을 추가하지 마라</p>
-                        </div>
-                        <div class="practice-card">
-                            <h4>Fail Fast</h4>
-                            <p>오류는 가능한 빨리 발견하고 보고하라. 숨기지 마라</p>
-                        </div>
-                        <div class="practice-card">
-                            <h4>Boy Scout Rule</h4>
-                            <p>"캠프장은 처음 왔을 때보다 깨끗이 하고 떠나라". 코드도 마찬가지</p>
-                        </div>
-                        <div class="practice-card">
-                            <h4>Composition over Inheritance</h4>
-                            <p>상속보다 합성을 선호하라. 더 유연하고 덜 결합된 설계</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">8.</span> Error Handling</h2>
-
-                    <div class="principle-grid">
-                        <div class="principle-card">
-                            <h4>예외 사용</h4>
-                            <p>오류 코드 반환 대신 예외를 사용하라. 비즈니스 로직과 오류 처리를 분리할 수 있다.</p>
-                        </div>
-                        <div class="principle-card">
-                            <h4>의미 있는 예외</h4>
-                            <p>예외에 충분한 컨텍스트를 제공하라. 어떤 연산이 왜 실패했는지 알 수 있어야 한다.</p>
-                        </div>
-                        <div class="principle-card">
-                            <h4>null 반환 금지</h4>
-                            <p>null을 반환하거나 전달하지 마라. Optional, 빈 컬렉션, 특수 케이스 패턴을 사용하라.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="paper-section">
-                    <h2 class="section-title"><span class="num">9.</span> Conclusion</h2>
-                    <p>
-                        클린 코드는 단순히 "작동하는 코드"를 넘어 "읽기 좋은 코드", "변경하기 쉬운 코드"를 목표로 한다.
-                        의미 있는 네이밍, 작고 명확한 함수, SOLID 원칙 준수는 클린 코드의 핵심 요소이다.
-                    </p>
-                    <p>
-                        클린 코드 작성은 기술적 역량뿐 아니라 장인 정신(Software Craftsmanship)을 요구한다.
-                        지속적인 학습과 연습, 그리고 코드 리뷰를 통한 피드백이 클린 코드 역량을 향상시킨다.
-                        기술 부채를 줄이고 장기적인 소프트웨어 품질을 확보하기 위해 클린 코드는 필수적이다.
-                    </p>
-                </section>
-
-                <div class="references">
-                    <h3>References</h3>
-                    <ol>
-                        <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.</li>
-                        <li>Martin, R. C. (2017). <em>Clean Architecture</em>. Prentice Hall.</li>
-                        <li>Fowler, M. (2018). <em>Refactoring: Improving the Design of Existing Code</em> (2nd ed.). Addison-Wesley.</li>
-                        <li>Hunt, A., & Thomas, D. (1999). <em>The Pragmatic Programmer</em>. Addison-Wesley.</li>
-                        <li>McConnell, S. (2004). <em>Code Complete</em> (2nd ed.). Microsoft Press.</li>
-                    </ol>
-                </div>
-
-                <div class="related-articles">
-                    <h3>Related Papers</h3>
-                    <div class="related-grid">
-                        <a href="refactoring.html" class="related-card">
-                            <span class="related-title">리팩토링 전략</span>
-                        </a>
-                        <a href="code-review.html" class="related-card">
-                            <span class="related-title">코드 리뷰 방법론</span>
-                        </a>
-                        <a href="tdd-methodology.html" class="related-card">
-                            <span class="related-title">TDD: 테스트 주도 개발</span>
-                        </a>
                     </div>
                 </div>
+            </div>
 
-                <div class="source-box">
-                    <p><strong>Classification:</strong> Development Practices / Code Quality<br>
-                    <strong>Series:</strong> Software Engineering Methodology<br>
-                    <strong>Last Updated:</strong> 2024</p>
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <p class="footer-text">© 2024 Stock Insights</p>
                 </div>
-            </article>
-        </div>
-    </main>
+            </footer>
+        </main>
+    </div>
 
-    <footer class="site-footer">
-        <div class="content-wrapper">
-            <p>© 2024 Stock Insights. All rights reserved.</p>
-        </div>
-    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    </script>
 </body>
 </html>

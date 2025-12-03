@@ -494,56 +494,55 @@
         }
     </style>
 </head>
-<body>
-    <div class="mobile-header">
+<body class="article-page" data-category="humor">
+       <header class="mobile-header">
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         <div class="mobile-logo">Stock Insights</div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    </header>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="site-wrapper">
         <aside class="sidebar" id="sidebar">
-            <div class="logo-section">
-                <a href="../index.html" class="site-logo">Stock Insights</a>
+            <div class="sidebar-header">
+                <a href="../index.html" class="site-logo"><span class="logo-icon">S</span>Stock Insights</a>
                 <p class="site-tagline">Life & Business Insights</p>
             </div>
             <nav class="sidebar-nav">
-                <h3 class="nav-title">메뉴</h3>
-                <ul class="nav-list">
-                    <li><a href="../index.html" class="nav-link">홈</a></li>
-                    <li><a href="../index.html#latest" class="nav-link active">최신 분석</a></li>
-                </ul>
+                <div class="nav-section">
+                    <h3 class="nav-title">메뉴</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link"><span class="nav-icon">🏠</span> 홈</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3 class="nav-title">카테고리</h3>
+                    <div class="categories-section">
+                        <a href="../index.html" class="category-link"><span>전체</span></a>
+                        <a href="../index.html" class="category-link active"><span>유머</span></a>
+                    </div>
+                </div>
             </nav>
         </aside>
 
-        <div class="main-content-wrapper">
-            <header class="site-header">
-                <div class="header-content">
-                    <h1 class="header-title">유머</h1>
-                </div>
-            </header>
-
-            <main class="main-content">
-                <article class="article-page">
-                    <header class="article-header movie-hero">
-                        <div class="article-header-content">
+        <main class="main-content">
+            <article class="article-hero movie-hero">
+                <div class="article-hero-inner">
                             <div class="breadcrumb">
-                                <a href="../index.html">홈</a> / <a href="../index.html#latest">분석</a> / 유머
-                            </div>
-                            <span class="article-category-badge movie-badge">유머</span>
-                            <h1 class="article-main-title">영화관 생존기: 팝콘과 방광의 전쟁</h1>
-                            <div class="article-header-meta">
-                                <span>2024년 12월 2일</span>
-                                <span>8분 읽기</span>
-                                <span>Stock Insights 리서치</span>
-                            </div>
-                        </div>
-                    </header>
+                        <a href="../index.html">홈</a><span>/</span><span>유머</span><span>/</span><span>2024년 12월 2일</span>
+                    </div>
+                    <div class="article-hero-meta">
+                        <span class="article-category-badge">유머</span>
+                        <span class="article-hero-date">8분 읽기</span>
+                    </div>
+                    <h1 class="article-hero-title">2024년 12월 2일</h1>
+                    <p class="article-hero-subtitle">영화관은 단순한 관람 장소가 아닙니다. 그것은 인내력과 집중력의 극한 테스트입니다.</p>
+                </div>
+            </article>
 
-                    <div class="article-body-wrapper">
+            <div class="article-content-wrapper">
+                <div class="article-content-inner">
+
+                    
                         <div class="article-body">
                             <p class="lead">
                                 영화 시작 전 콜라 큰 사이즈 완료.
@@ -869,7 +868,9 @@
                             </div>
                         </div>
 
-                        <aside class="related-articles related-rounded">
+                        </div>
+                    <div class="article-footer-section">
+                        <div class="related-articles related-rounded">
                             <h3>관련 글</h3>
                             <a href="shopping-humor.html" class="related-link">
                                 <div>
@@ -883,21 +884,31 @@
                                     <p>커피 한 잔의 모험</p>
                                 </div>
                             </a>
-                        </aside>
+                        </div>
                     </div>
-                </article>
-            </main>
+                </div>
+            </div>
 
             <footer class="site-footer">
                 <div class="footer-content">
                     <p class="footer-text">
-                        © 2024 Stock Insights. 즐거운 영화 관람 되세요! 🎬
-                    </p>
+                        © 2024 Stock Insights. 즐거운 영화 관람 되세요! 🎬</p>
                 </div>
             </footer>
-        </div>
+        </main>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
 </body>
 </html>

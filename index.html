@@ -7,978 +7,446 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <!-- Mobile Header -->
-    <div class="mobile-header">
-        <div class="mobile-logo">Stock Insights</div>
+    <!-- Mobile Header (Hamburger on LEFT) -->
+    <header class="mobile-header">
         <div class="hamburger" id="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
-    </div>
+        <div class="mobile-logo">Stock Insights</div>
+        <div class="mobile-search-btn">🔍</div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="site-wrapper">
-        <!-- Sidebar -->
+        <!-- Left Sidebar -->
         <aside class="sidebar" id="sidebar">
-            <div class="logo-section">
-                <a href="index.html" class="site-logo">Stock Insights</a>
+            <div class="sidebar-header">
+                <a href="index.html" class="site-logo">
+                    <span class="logo-icon">S</span>
+                    Stock Insights
+                </a>
                 <p class="site-tagline">Life & Business Insights</p>
             </div>
 
             <nav class="sidebar-nav">
-                <h3 class="nav-title">메뉴</h3>
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link active">홈</a></li>
-                    <li><a href="#latest" class="nav-link">최신 분석</a></li>
-                    <li><a href="#market" class="nav-link">시장 동향</a></li>
-                    <li><a href="artifacts/index.html" class="nav-link">Artifact Gallery</a></li>
-                </ul>
+                <div class="nav-section">
+                    <h3 class="nav-title">메뉴</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link active">
+                                <span class="nav-icon">🏠</span> 홈
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#latest" class="nav-link">
+                                <span class="nav-icon">📰</span> 최신 글
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="artifacts/index.html" class="nav-link">
+                                <span class="nav-icon">🎨</span> Gallery
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-title">카테고리</h3>
+                    <div class="categories-section">
+                        <a href="#" class="category-link" data-category="all">
+                            <span>전체</span>
+                            <span class="category-count">34</span>
+                        </a>
+                        <a href="#" class="category-link" data-category="tech">
+                            <span>기술 & 개발</span>
+                            <span class="category-count">13</span>
+                        </a>
+                        <a href="#" class="category-link" data-category="lifestyle">
+                            <span>라이프스타일</span>
+                            <span class="category-count">4</span>
+                        </a>
+                        <a href="#" class="category-link" data-category="humor">
+                            <span>유머</span>
+                            <span class="category-count">13</span>
+                        </a>
+                        <a href="#" class="category-link" data-category="business">
+                            <span>비즈니스</span>
+                            <span class="category-count">3</span>
+                        </a>
+                        <a href="#" class="category-link" data-category="health">
+                            <span>건강</span>
+                            <span class="category-count">1</span>
+                        </a>
+                    </div>
+                </div>
             </nav>
 
-            <div class="categories-section">
-                <h3 class="nav-title">카테고리</h3>
-                <a href="#all" class="category-link">
-                    <span>전체</span>
-                    <span class="category-count">34</span>
-                </a>
-                <a href="#lifestyle" class="category-link">
-                    <span>건강 & 라이프</span>
-                    <span class="category-count">17</span>
-                </a>
-                <a href="#ethics" class="category-link">
-                    <span>연구 & 윤리</span>
-                    <span class="category-count">1</span>
-                </a>
-                <a href="#forex" class="category-link">
-                    <span>외환 & 금융</span>
-                    <span class="category-count">1</span>
-                </a>
-                <a href="#semiconductor" class="category-link">
-                    <span>반도체</span>
-                    <span class="category-count">2</span>
-                </a>
-                <a href="#ai" class="category-link">
-                    <span>AI & 기술</span>
-                    <span class="category-count">13</span>
-                </a>
+            <div class="sidebar-footer">
+                © 2024 Stock Insights
             </div>
         </aside>
 
         <!-- Main Content -->
-        <div class="main-content-wrapper">
+        <main class="main-content">
             <header class="site-header">
                 <div class="header-content">
                     <h1 class="header-title">최신 분석</h1>
                     <div class="search-box">
-                        <span class="search-icon">⌕</span>
-                        <input type="text" class="search-input" placeholder="검색...">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="검색..." id="searchInput">
                     </div>
                 </div>
             </header>
 
-            <main class="main-content">
-                <div class="content-container">
-                    <!-- Hero -->
-                    <section class="hero-section">
-                        <div class="hero-badge">Stock Insights</div>
-                        <h2 class="hero-title">더 나은 삶을 위한 인사이트</h2>
-                        <p class="hero-description">
-                            건강, 라이프스타일, 기술, 비즈니스까지 —
-                            4050대의 삶을 풍요롭게 하는 깊이 있는 콘텐츠를 만나보세요.
-                            웃음, 취미, 건강 관리부터 최신 기술 트렌드까지 다양한 인사이트를 제공합니다.
-                        </p>
-                    </section>
+            <div class="content-container">
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="hero-badge">Stock Insights</div>
+                    <h2 class="hero-title">더 나은 삶을 위한 인사이트</h2>
+                    <p class="hero-description">
+                        건강, 라이프스타일, 기술, 비즈니스까지 —
+                        4050대의 삶을 풍요롭게 하는 깊이 있는 콘텐츠를 만나보세요.
+                    </p>
+                </section>
 
-                    <!-- Articles -->
-                    <section id="latest">
-                        <div class="section-header">
-                            <h2 class="section-title">최신 분석</h2>
-                            <p class="section-subtitle">실시간 시장 데이터 및 심층 기업 리서치</p>
-                        </div>
+                <!-- Articles Section -->
+                <section id="latest">
+                    <div class="section-header">
+                        <h2 class="section-title">최신 분석</h2>
+                        <p class="section-subtitle">최신 인사이트와 심층 분석</p>
+                    </div>
 
-                        <div class="articles-grid">
-                            <!-- Refactoring Paper -->
-                            <a href="articles/refactoring.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="코드 리팩토링">
+                    <div class="articles-grid" id="articlesGrid">
+                        <!-- Tech/Dev Articles -->
+                        <a href="articles/refactoring.html" class="article-card" data-category="tech">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="코드 리팩토링" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">개발</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">Refactoring: 코드 리팩토링의 원칙과 기법</h3>
+                                <p class="article-excerpt">외부 동작을 유지하면서 내부 구조를 개선하는 리팩토링 기법과 Martin Fowler의 리팩토링 카탈로그를 분석합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">Refactoring</span>
+                                        <span class="tag">Code Smell</span>
                                     </div>
-                                    <h3 class="article-title">Refactoring: 코드 리팩토링의 원칙과 기법</h3>
-                                    <p class="article-excerpt">
-                                        외부 동작을 유지하면서 내부 구조를 개선하는 리팩토링 기법.
-                                        Martin Fowler의 리팩토링 카탈로그와 안전한 적용 방법을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">Refactoring</span>
-                                            <span class="tag">Code Smell</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Clean Code Paper -->
-                            <a href="articles/clean-code.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80" alt="클린 코드">
+                        <a href="articles/clean-code.html" class="article-card" data-category="tech">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80" alt="클린 코드" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">개발</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">Clean Code: 클린 코드 원칙과 실천</h3>
+                                <p class="article-excerpt">읽기 쉽고 유지보수하기 좋은 코드 작성 원칙. SOLID 원칙, 네이밍, 함수 설계 등 핵심 개념을 분석합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">Clean Code</span>
+                                        <span class="tag">SOLID</span>
                                     </div>
-                                    <h3 class="article-title">Clean Code: 클린 코드 원칙과 실천</h3>
-                                    <p class="article-excerpt">
-                                        읽기 쉽고 유지보수하기 좋은 코드 작성 원칙.
-                                        SOLID 원칙, 네이밍, 함수 설계 등 핵심 개념을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">Clean Code</span>
-                                            <span class="tag">SOLID</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- DevOps Culture Paper -->
-                            <a href="articles/devops-culture.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1607798748738-b15c40d33d57?w=800&q=80" alt="DevOps">
+                        <a href="articles/tdd-methodology.html" class="article-card" data-category="tech">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" alt="TDD" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">개발</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">TDD: 테스트 주도 개발의 이론과 실제</h3>
+                                <p class="article-excerpt">테스트를 먼저 작성하는 TDD 방법론. Red-Green-Refactor 사이클과 FIRST 원칙을 분석합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">TDD</span>
+                                        <span class="tag">Unit Test</span>
                                     </div>
-                                    <h3 class="article-title">DevOps Culture: 개발과 운영의 통합 문화</h3>
-                                    <p class="article-excerpt">
-                                        개발과 운영의 벽을 허무는 DevOps 문화.
-                                        Three Ways, CALMS 프레임워크, DORA 메트릭을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">DevOps</span>
-                                            <span class="tag">CALMS</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Integration Testing Paper -->
-                            <a href="articles/integration-testing.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="통합 테스트">
+                        <a href="articles/devops-culture.html" class="article-card" data-category="tech">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1607798748738-b15c40d33d57?w=800&q=80" alt="DevOps" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">개발</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">DevOps Culture: 개발과 운영의 통합 문화</h3>
+                                <p class="article-excerpt">개발과 운영의 벽을 허무는 DevOps 문화. Three Ways, CALMS 프레임워크를 분석합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">DevOps</span>
+                                        <span class="tag">CALMS</span>
                                     </div>
-                                    <h3 class="article-title">Integration Testing: 통합 테스트 전략</h3>
-                                    <p class="article-excerpt">
-                                        컴포넌트 간 상호작용을 검증하는 통합 테스트.
-                                        Testcontainers, WireMock 등 현대적 도구 활용법을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">Integration Test</span>
-                                            <span class="tag">Testcontainers</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Unit Testing Paper -->
-                            <a href="articles/unit-testing.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80" alt="단위 테스트">
+                        <a href="articles/ci-cd-pipeline.html" class="article-card" data-category="tech">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="CI/CD" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">개발</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">CI/CD Pipeline: 지속적 통합과 배포</h3>
+                                <p class="article-excerpt">코드 변경의 빌드, 테스트, 배포를 자동화하는 CI/CD 파이프라인 구성과 주요 도구를 분석합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">CI/CD</span>
+                                        <span class="tag">Jenkins</span>
                                     </div>
-                                    <h3 class="article-title">Unit Testing: 단위 테스트 전략과 모범 사례</h3>
-                                    <p class="article-excerpt">
-                                        소프트웨어 품질의 기초인 단위 테스트.
-                                        AAA 패턴, FIRST 원칙, 테스트 더블 활용법을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">Unit Test</span>
-                                            <span class="tag">Mock</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Code Review Paper -->
-                            <a href="articles/code-review.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="코드 리뷰">
+                        <a href="articles/agile-scrum.html" class="article-card" data-category="tech">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Agile Scrum" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">개발</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">Agile과 Scrum: 애자일 개발 방법론</h3>
+                                <p class="article-excerpt">변화에 유연하게 대응하는 애자일과 스크럼 프레임워크의 핵심을 분석합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">Agile</span>
+                                        <span class="tag">Scrum</span>
                                     </div>
-                                    <h3 class="article-title">Code Review: 효과적인 코드 리뷰 방법론</h3>
-                                    <p class="article-excerpt">
-                                        품질 향상과 지식 공유를 위한 코드 리뷰.
-                                        Pull Request 기반 리뷰와 모범 사례를 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">Code Review</span>
-                                            <span class="tag">PR</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- CI/CD Pipeline Paper -->
-                            <a href="articles/ci-cd-pipeline.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="CI/CD 파이프라인">
+                        <!-- Humor Articles -->
+                        <a href="articles/developer-humor.html" class="article-card" data-category="humor">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80" alt="개발자" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">유머</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">개발자 생존기: 코드와 커피 사이에서</h3>
+                                <p class="article-excerpt">버그의 라이프사이클, Git 커밋 메시지의 진화. 개발자라면 100% 공감할 IT업계 생존기.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">유머</span>
+                                        <span class="tag">개발자</span>
                                     </div>
-                                    <h3 class="article-title">CI/CD Pipeline: 지속적 통합과 배포</h3>
-                                    <p class="article-excerpt">
-                                        코드 변경의 빌드, 테스트, 배포를 자동화하는 CI/CD.
-                                        파이프라인 구성과 주요 도구를 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">CI/CD</span>
-                                            <span class="tag">Jenkins</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Agile Scrum Paper -->
-                            <a href="articles/agile-scrum.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Agile Scrum">
+                        <a href="articles/subway-humor.html" class="article-card" data-category="humor">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" alt="지하철" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">유머</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">전철 생존기: 출퇴근 전쟁의 법칙</h3>
+                                <p class="article-excerpt">매일 아침 벌어지는 좌석 쟁탈전, 전철 안 인간 도감. 출퇴근 전사들의 리얼한 생존기.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">유머</span>
+                                        <span class="tag">전철</span>
                                     </div>
-                                    <h3 class="article-title">Agile과 Scrum: 애자일 개발 방법론</h3>
-                                    <p class="article-excerpt">
-                                        변화에 유연하게 대응하는 애자일과 스크럼 프레임워크.
-                                        스프린트, 역할, 이벤트, 산출물을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">Agile</span>
-                                            <span class="tag">Scrum</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- BDD Paper -->
-                            <a href="articles/bdd-methodology.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="BDD">
+                        <a href="articles/cafe-humor.html" class="article-card" data-category="humor">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80" alt="카페" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">유머</span>
+                                    <span class="article-date">2024.12.02</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">카페 생존기: 커피 한 잔의 모험</h3>
+                                <p class="article-excerpt">주문의 복잡함, 콘센트 자리 쟁탈전, 6시간 버티기의 기술. 카페에서 벌어지는 일상의 코미디.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">유머</span>
+                                        <span class="tag">카페</span>
                                     </div>
-                                    <h3 class="article-title">BDD: 행위 주도 개발의 원리와 적용</h3>
-                                    <p class="article-excerpt">
-                                        비즈니스와 개발 간 협업을 위한 BDD.
-                                        Given-When-Then 패턴과 Gherkin 문법을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">BDD</span>
-                                            <span class="tag">Cucumber</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- TDD Paper -->
-                            <a href="articles/tdd-methodology.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" alt="TDD">
+                        <!-- Lifestyle Articles -->
+                        <a href="articles/worker-nutrition.html" class="article-card" data-category="lifestyle">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80" alt="건강한 식단" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">라이프</span>
+                                    <span class="article-date">2024.12.01</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">개발 방법론</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">직장인 영양 불균형 실태와 대응 전략</h3>
+                                <p class="article-excerpt">하루 세 끼를 외식으로 해결하는 직장인들의 영양 불균형 실태를 분석하고 현실적인 전략을 제시합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">영양</span>
+                                        <span class="tag">직장인</span>
                                     </div>
-                                    <h3 class="article-title">TDD: 테스트 주도 개발의 이론과 실제</h3>
-                                    <p class="article-excerpt">
-                                        테스트를 먼저 작성하는 TDD 방법론.
-                                        Red-Green-Refactor 사이클과 FIRST 원칙을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">TDD</span>
-                                            <span class="tag">Unit Test</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Movie Humor -->
-                            <a href="articles/movie-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80" alt="영화관">
+                        <a href="articles/hobby-importance.html" class="article-card" data-category="lifestyle">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&q=80" alt="취미" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">라이프</span>
+                                    <span class="article-date">2024.12.01</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">취미의 재발견: 그것은 단순한 여가가 아니다</h3>
+                                <p class="article-excerpt">글쓰기, 등산, 악기 연주... 취미가 뇌와 삶에 미치는 깊은 영향을 탐구합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">취미</span>
+                                        <span class="tag">웰빙</span>
                                     </div>
-                                    <h3 class="article-title">영화관 생존기: 팝콘과 방광의 전쟁</h3>
-                                    <p class="article-excerpt">
-                                        콜라 큰 사이즈의 유혹, 클라이맥스에 터질 것 같은 방광,
-                                        옆자리 민폐 관객까지. 영화 관람의 현실을 유쾌하게 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">영화관</span>
-                                            <span class="tag">팝콘</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Shopping Humor -->
-                            <a href="articles/shopping-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="온라인쇼핑">
+                        <a href="articles/aging-40s-50s.html" class="article-card" data-category="health">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80" alt="중년 건강" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">건강</span>
+                                    <span class="article-date">2024.12.01</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">40대에서 50대로: 몸의 변화와 대응 전략</h3>
+                                <p class="article-excerpt">운동을 해도 예전 같지 않은 몸. 근감소증, 호르몬 변화에 현명하게 대응하는 전략을 제시합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">노화</span>
+                                        <span class="tag">건강</span>
                                     </div>
-                                    <h3 class="article-title">온라인쇼핑 생존기: 장바구니의 유혹</h3>
-                                    <p class="article-excerpt">
-                                        "구경만 할 거야" → 결제 완료. 새벽 2시 충동구매의 후회와
-                                        무료배송을 위한 추가 구매의 덫. 온라인 쇼핑의 현실을 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">쇼핑</span>
-                                            <span class="tag">소비</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Driving Humor -->
-                            <a href="articles/driving-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80" alt="운전">
+                        <!-- Business Articles -->
+                        <a href="articles/samsung-strengths.html" class="article-card" data-category="business">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="삼성전자" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">비즈니스</span>
+                                    <span class="article-date">2024.11.28</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">삼성전자: 통합 반도체 전략</h3>
+                                <p class="article-excerpt">세계 최초 3nm GAA 파운드리 양산과 통합 AI 솔루션으로 차별화된 경쟁력을 구축하는 삼성전자를 분석합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">삼성</span>
+                                        <span class="tag">반도체</span>
                                     </div>
-                                    <h3 class="article-title">운전 생존기: 도로 위의 전쟁</h3>
-                                    <p class="article-excerpt">
-                                        차선 변경의 법칙, 네비의 배신, 주차장에서의 전쟁.
-                                        매일 반복되는 도로 위 전투를 유쾌하게 풀어봅니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">운전</span>
-                                            <span class="tag">주차</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Blinddate Humor -->
-                            <a href="articles/blinddate-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=800&q=80" alt="소개팅">
+                        <a href="articles/hynix-strengths.html" class="article-card" data-category="business">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80" alt="SK하이닉스" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">비즈니스</span>
+                                    <span class="article-date">2024.11.28</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">SK하이닉스: AI 메모리 시장 지배력</h3>
+                                <p class="article-excerpt">세계 최초 HBM3E 양산과 엔비디아 독점 공급으로 AI 반도체 시장에서 압도적 경쟁력을 확보한 SK하이닉스.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">HBM</span>
+                                        <span class="tag">AI</span>
                                     </div>
-                                    <h3 class="article-title">소개팅 생존기: 첫인상의 과학</h3>
-                                    <p class="article-excerpt">
-                                        프로필 사진과 실물의 괴리, 어색한 첫 대화,
-                                        "연락드릴게요"의 진짜 의미까지. 소개팅의 현실을 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">소개팅</span>
-                                            <span class="tag">연애</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
+                            </div>
+                        </a>
 
-                            <!-- Holiday Humor -->
-                            <a href="articles/holiday-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80" alt="명절">
+                        <a href="articles/exchange-rate.html" class="article-card" data-category="business">
+                            <div class="article-image">
+                                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80" alt="환율" loading="lazy">
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-category">비즈니스</span>
+                                    <span class="article-date">2024.11.28</span>
                                 </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
+                                <h3 class="article-title">환율의 이해와 2024년 급등 배경</h3>
+                                <p class="article-excerpt">원/달러 환율이 2년 만에 최고치를 기록한 배경. 환율의 기본 개념부터 변동 요인까지 심층 분석합니다.</p>
+                                <div class="article-footer">
+                                    <div class="article-tags">
+                                        <span class="tag">환율</span>
+                                        <span class="tag">외환</span>
                                     </div>
-                                    <h3 class="article-title">명절 생존기: 친척과의 전쟁</h3>
-                                    <p class="article-excerpt">
-                                        피할 수 없는 질문 폭격, 9시간 귀성길, 음식 강요의 향연.
-                                        명절마다 반복되는 생존 전쟁을 유쾌하게 풀어봅니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">명절</span>
-                                            <span class="tag">가족</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
+                                    <span class="read-more">읽기 →</span>
                                 </div>
-                            </a>
-
-                            <!-- Diet Humor -->
-                            <a href="articles/diet-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80" alt="다이어트">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
-                                    </div>
-                                    <h3 class="article-title">다이어트 생존기: 내일부터의 전설</h3>
-                                    <p class="article-excerpt">
-                                        "내일부터 진짜 한다!" 매일 반복되는 다짐과 실패,
-                                        치팅데이의 무한 확장. 다이어트의 현실을 유쾌하게 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">다이어트</span>
-                                            <span class="tag">건강</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Delivery Humor -->
-                            <a href="articles/delivery-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80" alt="택배">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
-                                    </div>
-                                    <h3 class="article-title">택배 생존기: 기다림의 미학</h3>
-                                    <p class="article-excerpt">
-                                        "배송 중" 3일째, 부재중 방문의 미스터리,
-                                        경비실에 없는 택배의 행방. 현대인의 택배 생존기를 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">택배</span>
-                                            <span class="tag">배송</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Meeting Humor -->
-                            <a href="articles/meeting-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="회의">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
-                                    </div>
-                                    <h3 class="article-title">회의 생존기: 이메일로 될 일을</h3>
-                                    <p class="article-excerpt">
-                                        30분 예정 → 2시간 소요. 결론은 다음 회의에서.
-                                        직장인이라면 100% 공감할 회의의 현실을 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">회의</span>
-                                            <span class="tag">직장</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Gym Humor -->
-                            <a href="articles/gym-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="헬스장">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
-                                    </div>
-                                    <h3 class="article-title">헬스장 생존기: 운동과 굴욕 사이</h3>
-                                    <p class="article-excerpt">
-                                        등록의 법칙, 기구 사용법 모르는 굴욕, 유령 회원의 진실.
-                                        헬스장에서 벌어지는 생존 전쟁을 유쾌하게 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">헬스</span>
-                                            <span class="tag">운동</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Cafe Humor -->
-                            <a href="articles/cafe-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80" alt="카페">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
-                                    </div>
-                                    <h3 class="article-title">카페 생존기: 커피 한 잔의 모험</h3>
-                                    <p class="article-excerpt">
-                                        주문의 복잡함, 콘센트 자리 쟁탈전, 6시간 버티기의 기술.
-                                        카페에서 벌어지는 일상의 코미디를 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">카페</span>
-                                            <span class="tag">커피</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Developer Humor -->
-                            <a href="articles/developer-humor.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80" alt="개발자 코딩">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
-                                    </div>
-                                    <h3 class="article-title">개발자 생존기: 코드와 커피 사이에서</h3>
-                                    <p class="article-excerpt">
-                                        버그의 라이프사이클, Git 커밋 메시지의 진화, 스택오버플로우 사용법까지.
-                                        개발자라면 100% 공감할 IT업계 생존기를 담았습니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">개발자</span>
-                                            <span class="tag">IT</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Subway Humor -->
-                            <a href="articles/subway-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" alt="지하철 전철">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
-                                    </div>
-                                    <h3 class="article-title">전철 생존기: 출퇴근 전쟁의 법칙</h3>
-                                    <p class="article-excerpt">
-                                        매일 아침 벌어지는 좌석 쟁탈전, 시간대별 혼잡도, 전철 안 인간 도감까지.
-                                        출퇴근 전사들의 리얼한 생존기를 유쾌하게 풀어봅니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">전철</span>
-                                            <span class="tag">출퇴근</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Supermarket Humor -->
-                            <a href="articles/supermarket-humor.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&q=80" alt="슈퍼마켓 쇼핑">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">유머</span>
-                                        <span class="article-date">2024.12.02</span>
-                                    </div>
-                                    <h3 class="article-title">슈퍼마켓 생존기: 장바구니의 법칙</h3>
-                                    <p class="article-excerpt">
-                                        매주 반복되는 슈퍼마켓 원정. 계획대로 된 적이 단 한 번도 없는 이유와
-                                        우리 모두가 공감할 슈퍼마켓의 숨겨진 법칙들을 유쾌하게 풀어봅니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">슈퍼마켓</span>
-                                            <span class="tag">일상</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Humor in Life -->
-                            <a href="articles/humor-in-life.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=800&q=80" alt="웃음과 유머">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">라이프스타일</span>
-                                        <span class="article-date">2024.12.01</span>
-                                    </div>
-                                    <h3 class="article-title">웃음의 기술: 4050대, 유머가 필요한 이유</h3>
-                                    <p class="article-excerpt">
-                                        나이가 들수록 웃을 일이 줄어드는 것 같지만, 그래서 더 유머가 필요합니다.
-                                        4050대를 위한 유머의 과학과 실천법을 알아봅니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">유머</span>
-                                            <span class="tag">웃음</span>
-                                            <span class="tag">4050대</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Hobby Importance -->
-                            <a href="articles/hobby-importance.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&q=80" alt="취미와 악기 연주">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">라이프스타일</span>
-                                        <span class="article-date">2024.12.01</span>
-                                    </div>
-                                    <h3 class="article-title">취미의 재발견: 그것은 단순한 여가가 아니다</h3>
-                                    <p class="article-excerpt">
-                                        글쓰기, 등산, 악기 연주... 이 활동들은 왜 공부 이상의 의미가 있을까요?
-                                        취미가 뇌와 삶에 미치는 깊은 영향을 탐구합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">취미</span>
-                                            <span class="tag">자기계발</span>
-                                            <span class="tag">웰빙</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Aging 40s-50s -->
-                            <a href="articles/aging-40s-50s.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80" alt="중년 건강과 운동">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">건강 & 라이프</span>
-                                        <span class="article-date">2024.12.01</span>
-                                    </div>
-                                    <h3 class="article-title">40대에서 50대로: 몸의 변화와 현명한 대응 전략</h3>
-                                    <p class="article-excerpt">
-                                        운동을 해도 예전 같지 않은 몸, 이것은 자연스러운 노화입니다.
-                                        근감소증, 호르몬 변화, 회복력 저하에 현명하게 대응하는 전략을 제시합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">노화</span>
-                                            <span class="tag">운동</span>
-                                            <span class="tag">건강</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Worker Nutrition -->
-                            <a href="articles/worker-nutrition.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80" alt="건강한 식단과 영양">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">건강 & 라이프</span>
-                                        <span class="article-date">2024.12.01</span>
-                                    </div>
-                                    <h3 class="article-title">직장인 영양 불균형 실태와 스마트한 대응 전략</h3>
-                                    <p class="article-excerpt">
-                                        하루 세 끼를 외식으로 해결하는 직장인들의 영양 불균형 실태를 분석하고,
-                                        비용과 시간을 절약하면서도 건강을 챙길 수 있는 현실적인 전략을 제시합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">영양</span>
-                                            <span class="tag">직장인</span>
-                                            <span class="tag">외식</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Plagiarism -->
-                            <a href="articles/plagiarism-tech.html" class="article-card" data-category="ethics">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&q=80" alt="논문 작성 연구">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">연구 윤리</span>
-                                        <span class="article-date">2024.11.28</span>
-                                    </div>
-                                    <h3 class="article-title">기술 논문 표절: 그레이존과 해결의 딜레마</h3>
-                                    <p class="article-excerpt">
-                                        명백한 표절부터 그레이존까지, 표절 문제가 제기되었을 때의 해결 과정과
-                                        누가 승자가 되는지 현실적인 관점에서 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">표절</span>
-                                            <span class="tag">연구윤리</span>
-                                            <span class="tag">학계</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Exchange Rate -->
-                            <a href="articles/exchange-rate.html" class="article-card" data-category="forex">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80" alt="환율 외환 시장">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">외환 시장</span>
-                                        <span class="article-date">2024.11.28</span>
-                                    </div>
-                                    <h3 class="article-title">환율의 이해와 2024년 급등 배경</h3>
-                                    <p class="article-excerpt">
-                                        원/달러 환율이 2년 만에 최고치를 기록한 배경을 분석합니다.
-                                        환율의 기본 개념부터 변동 요인, 최근 급등 원인까지 심층 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">환율</span>
-                                            <span class="tag">달러</span>
-                                            <span class="tag">외환</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- SK Hynix -->
-                            <a href="articles/hynix-strengths.html" class="article-card" data-category="semiconductor">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80" alt="SK하이닉스 HBM 메모리 칩">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">AI 반도체</span>
-                                        <span class="article-date">2024.11.28</span>
-                                    </div>
-                                    <h3 class="article-title">SK하이닉스: AI 메모리 시장 지배력</h3>
-                                    <p class="article-excerpt">
-                                        세계 최초 HBM3E 양산과 엔비디아 독점 공급을 통해 AI 반도체 시장에서
-                                        압도적 경쟁력을 확보한 SK하이닉스의 핵심 전략을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">HBM3E</span>
-                                            <span class="tag">엔비디아</span>
-                                            <span class="tag">AI</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Samsung -->
-                            <a href="articles/samsung-strengths.html" class="article-card" data-category="semiconductor">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="삼성전자 반도체 기술">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">파운드리</span>
-                                        <span class="article-date">2024.11.28</span>
-                                    </div>
-                                    <h3 class="article-title">삼성전자: 통합 반도체 전략</h3>
-                                    <p class="article-excerpt">
-                                        세계 최초 3nm GAA 파운드리 양산과 통합 AI 솔루션을 통해 시스템 반도체
-                                        시장에서 차별화된 경쟁력을 구축하는 삼성전자를 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">3nm GAA</span>
-                                            <span class="tag">파운드리</span>
-                                            <span class="tag">2nm</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- DevOps Importance -->
-                            <a href="articles/devops-importance.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80" alt="DevOps 개발운영">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">기술</span>
-                                        <span class="article-date">2024.11.30</span>
-                                    </div>
-                                    <h3 class="article-title">DevOps의 중요성: 현대 소프트웨어 개발의 핵심</h3>
-                                    <p class="article-excerpt">
-                                        개발과 운영의 경계를 허무는 DevOps 문화가 왜 현대 소프트웨어 개발에서
-                                        필수가 되었는지 그 배경과 핵심 원칙을 분석합니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">DevOps</span>
-                                            <span class="tag">개발</span>
-                                            <span class="tag">운영</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- CI/CD Automation -->
-                            <a href="articles/cicd-automation.html" class="article-card" data-category="ai">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&q=80" alt="CI/CD 자동화">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">기술</span>
-                                        <span class="article-date">2024.11.30</span>
-                                    </div>
-                                    <h3 class="article-title">CI/CD 자동화: 효율적인 소프트웨어 배포 전략</h3>
-                                    <p class="article-excerpt">
-                                        지속적 통합과 지속적 배포를 통해 개발 생산성을 극대화하고
-                                        안정적인 릴리즈를 달성하는 방법을 살펴봅니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">CI/CD</span>
-                                            <span class="tag">자동화</span>
-                                            <span class="tag">배포</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <!-- Subway History -->
-                            <a href="articles/subway-history.html" class="article-card" data-category="lifestyle">
-                                <div class="article-image">
-                                    <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" alt="한국 지하철">
-                                </div>
-                                <div class="article-content">
-                                    <div class="article-meta">
-                                        <span class="article-category">역사</span>
-                                        <span class="article-date">2024.11.29</span>
-                                    </div>
-                                    <h3 class="article-title">한국 지하철의 역사: 근대화와 함께 달려온 50년</h3>
-                                    <p class="article-excerpt">
-                                        1974년 서울 지하철 1호선 개통부터 현재까지, 한국 지하철이 걸어온
-                                        반세기의 역사와 발전 과정을 돌아봅니다.
-                                    </p>
-                                    <div class="article-footer">
-                                        <div class="article-tags">
-                                            <span class="tag">지하철</span>
-                                            <span class="tag">역사</span>
-                                            <span class="tag">교통</span>
-                                        </div>
-                                        <span class="read-more">읽기 →</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </section>
-                </div>
-            </main>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
 
             <footer class="site-footer">
                 <div class="footer-content">
                     <p class="footer-text">
-                        © 2024 Stock Insights. 본 콘텐츠는 투자 참고 자료이며, 투자 결과에 대한 책임은 투자자에게 있습니다.
+                        © 2024 Stock Insights. 본 콘텐츠는 참고 자료이며, 투자 결과에 대한 책임은 투자자에게 있습니다.
                     </p>
                     <div class="footer-links">
                         <a href="#" class="footer-link">면책조항</a>
@@ -987,9 +455,68 @@
                     </div>
                 </div>
             </footer>
-        </div>
+        </main>
     </div>
 
-    <script src="js/main.js"></script>
+    <script>
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        sidebarOverlay.addEventListener('click', toggleMenu);
+
+        // Category Filter
+        const categoryLinks = document.querySelectorAll('.category-link');
+        const articleCards = document.querySelectorAll('.article-card');
+
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = link.dataset.category;
+
+                // Update active state
+                categoryLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Filter articles
+                articleCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Close mobile menu if open
+                if (sidebar.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Search
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            articleCards.forEach(card => {
+                const title = card.querySelector('.article-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.article-excerpt').textContent.toLowerCase();
+                if (title.includes(query) || excerpt.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
