@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Behavior-Driven Development: 행위 주도 개발의 원리와 적용 | Stock Insights</title>
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/article.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
@@ -20,137 +19,144 @@
             --bg-secondary: #f8fafc;
             --bg-tertiary: #f1f5f9;
             --border-color: #e2e8f0;
-            --border-light: #f1f5f9;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: var(--font-sans);
             color: var(--text-color);
             line-height: 1.7;
+            background: var(--bg-secondary);
         }
 
-        /* Desktop Layout - 70% of viewport on large screens */
-        .article-body-wrapper {
+        /* Unified Content Container */
+        .content-wrapper {
             width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
             padding: 0 1.5rem;
         }
 
-        @media (min-width: 1200px) {
-            .article-body-wrapper {
-                width: 70%;
-                min-width: 900px;
-                max-width: 1100px;
-                margin: 0 auto;
-                padding: 0 3rem;
+        @media (min-width: 1400px) {
+            .content-wrapper {
+                width: 80%;
+                min-width: 1200px;
+                max-width: 1400px;
+                padding: 0;
             }
         }
 
-        /* Professional Header */
+        /* Compact Breadcrumb */
+        .breadcrumb-section {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+        }
+
+        .breadcrumb {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color);
+        }
+
+        .breadcrumb span {
+            color: #cbd5e1;
+        }
+
+        /* Compact Hero Section */
         .article-hero {
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%);
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            padding: 2.5rem 0;
         }
 
-        @media (min-width: 1200px) {
-            .article-hero {
-                padding: 5rem 4rem;
-            }
-        }
-
-        .article-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(15, 52, 96, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(26, 26, 46, 0.5) 0%, transparent 50%);
-        }
-
-        .article-hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-        }
-
-        @media (min-width: 1200px) {
-            .article-hero-content {
-                margin-left: 10%;
-            }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .paper-category {
-            display: inline-block;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
-            color: #94a3b8;
+            color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            letter-spacing: 0.12em;
         }
 
         .article-hero h1 {
             font-family: var(--font-sans);
             font-weight: 700;
-            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-size: 2rem;
             color: #ffffff;
-            line-height: 1.25;
-            margin-bottom: 1.25rem;
+            line-height: 1.3;
             letter-spacing: -0.02em;
         }
 
         .article-hero .subtitle {
             font-family: var(--font-mono);
-            font-size: 1rem;
-            color: #cbd5e1;
+            font-size: 0.85rem;
+            color: #94a3b8;
             font-weight: 400;
         }
 
-        /* Main Content */
-        .article-content {
+        /* Main Content Area */
+        .article-main {
+            background: var(--bg-primary);
             padding: 3rem 0;
+        }
+
+        .article-body {
+            max-width: 100%;
         }
 
         /* Abstract */
         .abstract-box {
             background: var(--bg-secondary);
-            padding: 2rem 2.5rem;
-            margin: 0 0 3rem 0;
-            border-radius: 8px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 2.5rem;
             border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-color);
         }
 
         .abstract-box .label {
             font-family: var(--font-mono);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--accent-color);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .abstract-box p {
-            font-size: 1rem;
-            line-height: 1.85;
+            font-size: 0.95rem;
+            line-height: 1.8;
             color: var(--text-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .keywords {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             padding-top: 1rem;
             border-top: 1px solid var(--border-color);
@@ -163,13 +169,12 @@
         /* Section Titles */
         .section-title {
             font-family: var(--font-sans);
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin: 3rem 0 1.5rem 0;
-            padding-bottom: 0.75rem;
+            margin: 2.5rem 0 1.25rem 0;
+            padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--border-color);
-            letter-spacing: -0.01em;
         }
 
         .section-title .num {
@@ -180,33 +185,33 @@
 
         .subsection-title {
             font-family: var(--font-sans);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--secondary-color);
-            margin: 2.5rem 0 1rem 0;
+            margin: 2rem 0 0.75rem 0;
         }
 
         /* Body Text */
         .paper-section {
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .paper-section > p {
-            font-size: 1.05rem;
-            line-height: 1.9;
+            font-size: 1rem;
+            line-height: 1.85;
             color: var(--text-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .paper-section > ul {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            padding-left: 1.75rem;
-            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.75;
+            padding-left: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .paper-section > ul li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: var(--text-color);
         }
 
@@ -217,68 +222,52 @@
         /* Quote Box */
         .quote-box {
             background: var(--bg-tertiary);
-            padding: 2rem 2.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .quote-box::before {
-            content: '"';
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            font-family: Georgia, serif;
-            font-size: 3rem;
-            color: var(--border-color);
-            line-height: 1;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--accent-color);
         }
 
         .quote-box p {
             font-family: var(--font-sans);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-style: italic;
             color: var(--text-color);
             margin: 0;
-            padding-left: 2rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .quote-box .author {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-style: normal;
             color: var(--text-muted);
-            margin-top: 1rem;
-            padding-left: 2rem;
+            margin-top: 0.75rem;
         }
 
         /* Three Amigos Grid */
         .amigos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2.5rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .amigos-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .amigo-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.75rem;
+            padding: 1.5rem;
             text-align: center;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .amigo-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
         }
 
         .amigo-card .icon {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: var(--accent-color);
             text-transform: uppercase;
@@ -288,59 +277,79 @@
 
         .amigo-card h4 {
             font-family: var(--font-sans);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary-color);
             margin-bottom: 0.75rem;
         }
 
         .amigo-card p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* Given-When-Then Box */
         .gwt-box {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
             overflow: hidden;
         }
 
         .gwt-step {
-            padding: 1.5rem 2rem;
+            padding: 1.25rem 1.5rem;
             display: flex;
             align-items: flex-start;
-            gap: 1.25rem;
+            gap: 1rem;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .gwt-step:last-child { border-bottom: none; }
+        .gwt-step:last-child {
+            border-bottom: none;
+        }
 
-        .gwt-step.given { background: #fffbeb; }
-        .gwt-step.when { background: #eff6ff; }
-        .gwt-step.then { background: #f0fdf4; }
+        .gwt-step.given {
+            background: #fffbeb;
+        }
+
+        .gwt-step.when {
+            background: #eff6ff;
+        }
+
+        .gwt-step.then {
+            background: #f0fdf4;
+        }
 
         .gwt-label {
             font-family: var(--font-mono);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             padding: 0.5rem 1rem;
-            border-radius: 6px;
+            border-radius: 4px;
             flex-shrink: 0;
             min-width: 80px;
             text-align: center;
         }
 
-        .gwt-step.given .gwt-label { background: #d97706; color: white; }
-        .gwt-step.when .gwt-label { background: #2563eb; color: white; }
-        .gwt-step.then .gwt-label { background: #16a34a; color: white; }
+        .gwt-step.given .gwt-label {
+            background: #d97706;
+            color: white;
+        }
+
+        .gwt-step.when .gwt-label {
+            background: #2563eb;
+            color: white;
+        }
+
+        .gwt-step.then .gwt-label {
+            background: #16a34a;
+            color: white;
+        }
 
         .gwt-content {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-color);
             line-height: 1.6;
         }
@@ -348,80 +357,96 @@
         /* Gherkin Syntax Box */
         .gherkin-box {
             background: #0f172a;
-            border-radius: 8px;
-            padding: 1.75rem;
-            margin: 2.5rem 0;
+            padding: 1.5rem;
+            margin: 2rem 0;
             font-family: var(--font-mono);
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             overflow-x: auto;
             border: 1px solid #1e293b;
         }
 
-        .gherkin-box .keyword { color: #c084fc; font-weight: bold; }
-        .gherkin-box .text { color: #e2e8f0; }
-        .gherkin-box .param { color: #4ade80; }
-        .gherkin-box .comment { color: #64748b; }
-        .gherkin-box code { color: #e2e8f0; line-height: 1.7; }
+        .gherkin-box .keyword {
+            color: #c084fc;
+            font-weight: bold;
+        }
+
+        .gherkin-box .text {
+            color: #e2e8f0;
+        }
+
+        .gherkin-box .param {
+            color: #4ade80;
+        }
+
+        .gherkin-box .comment {
+            color: #64748b;
+        }
+
+        .gherkin-box code {
+            color: #e2e8f0;
+            line-height: 1.7;
+        }
 
         /* Comparison Table */
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 2.5rem 0;
-            font-size: 0.95rem;
+            margin: 2rem 0;
+            font-size: 0.9rem;
         }
 
         .comparison-table th {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             background: var(--primary-color);
             color: white;
-            padding: 1rem 1.25rem;
+            padding: 0.85rem 1rem;
             text-align: left;
         }
 
         .comparison-table td {
-            padding: 1rem 1.25rem;
+            padding: 0.85rem 1rem;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .comparison-table tr:nth-child(even) {
             background: var(--bg-secondary);
         }
 
-        .comparison-table tr:hover {
-            background: var(--bg-tertiary);
-        }
-
         /* Framework Cards */
         .framework-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2.5rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .framework-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @media (max-width: 600px) {
+                .framework-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
         }
 
         .framework-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.75rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .framework-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
+            padding: 1.25rem;
         }
 
         .framework-card h4 {
             font-family: var(--font-sans);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary-color);
             margin-bottom: 0.5rem;
@@ -432,7 +457,7 @@
 
         .framework-card .lang {
             font-family: var(--font-mono);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             background: var(--bg-secondary);
             color: var(--text-muted);
             padding: 0.2rem 0.5rem;
@@ -441,19 +466,18 @@
         }
 
         .framework-card p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* Figure Box */
         .figure-box {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2.5rem;
-            margin: 2.5rem 0;
+            padding: 2rem;
+            margin: 2rem 0;
             text-align: center;
         }
 
@@ -461,286 +485,296 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
         }
 
         .workflow-step {
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             background: var(--primary-color);
             color: white;
-            padding: 1rem 1.75rem;
-            border-radius: 6px;
-            min-width: 100px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            min-width: 90px;
         }
 
         .workflow-arrow {
-            font-size: 1.25rem;
+            font-size: 1rem;
             color: var(--text-muted);
         }
 
         .figure-caption {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
         /* Benefits Grid */
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2.5rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .benefit-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.75rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .benefit-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
+            padding: 1.25rem;
         }
 
         .benefit-card h4 {
             font-family: var(--font-sans);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .benefit-card p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* References */
         .references {
             background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 2rem 2.5rem;
-            margin: 3rem 0;
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
             border: 1px solid var(--border-color);
         }
 
         .references h3 {
-            font-family: var(--font-sans);
-            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
         }
 
         .references ol {
-            padding-left: 1.5rem;
+            padding-left: 1.25rem;
             margin: 0;
         }
 
         .references li {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 0.75rem;
-            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
         }
 
         /* Related Articles */
         .related-articles {
-            margin: 3rem 0;
+            margin: 2.5rem 0;
         }
 
         .related-articles h3 {
-            font-family: var(--font-sans);
-            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
         }
 
         .related-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .related-card {
             display: block;
-            padding: 1.25rem 1.5rem;
-            background: var(--bg-primary);
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             text-decoration: none;
             transition: all 0.2s ease;
         }
 
         .related-card:hover {
             border-color: var(--accent-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: var(--bg-tertiary);
         }
 
         .related-title {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             color: var(--text-color);
         }
 
         /* Source Box */
         .source-box {
             background: var(--bg-tertiary);
-            border-radius: 8px;
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.5rem;
             margin: 2rem 0;
             border: 1px solid var(--border-color);
         }
 
         .source-box p {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         .source-box strong {
             color: var(--text-color);
         }
+
+        /* Footer */
+        .site-footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-content">
-            <a href="../index.html" class="header-title">
-                <span class="header-logo">Stock Insights</span>
-            </a>
+    <nav class="breadcrumb-section">
+        <div class="content-wrapper">
+            <div class="breadcrumb">
+                <a href="../index.html">홈</a>
+                <span>/</span>
+                <a href="../index.html?category=tech">개발 방법론</a>
+                <span>/</span>
+                <span>BDD</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="article-hero">
+        <div class="content-wrapper">
+            <div class="hero-content">
+                <span class="paper-category">Software Engineering · Research Paper</span>
+                <h1>Behavior-Driven Development: 행위 주도 개발의 원리와 적용</h1>
+                <p class="subtitle">Methodology Series Vol.2</p>
+            </div>
         </div>
     </header>
-    <main class="article-page">
-        <article>
-            <header class="article-header">
-                <nav class="breadcrumb">
-                    <a href="../index.html">홈</a>
-                    <span>/</span>
-                    <a href="../index.html?category=tech">개발 방법론</a>
-                    <span>/</span>
-                    <span>BDD</span>
-                </nav>
-            </header>
 
-            <div class="article-hero">
-                <div class="article-hero-content">
-                    <span class="paper-category">Software Engineering · Research Paper</span>
-                    <h1>Behavior-Driven Development: 행위 주도 개발의 원리와 적용</h1>
-                    <p class="subtitle">Methodology Series Vol.2</p>
+    <main class="article-main">
+        <div class="content-wrapper">
+            <article class="article-body">
+                <div class="abstract-box">
+                    <div class="label">Abstract</div>
+                    <p>
+                        행위 주도 개발(Behavior-Driven Development, BDD)은 TDD(Test-Driven Development)에서 발전한
+                        소프트웨어 개발 방법론으로, 비즈니스 이해관계자와 개발자 간의 협업을 통해 시스템의 기대 동작을
+                        자연어에 가까운 형식으로 정의한다. 본 논문에서는 BDD의 핵심 원리인 Given-When-Then 패턴과
+                        유비쿼터스 언어(Ubiquitous Language)의 개념을 분석하고, Cucumber, SpecFlow 등의 도구를 활용한
+                        실제 적용 방법을 제시한다. BDD는 요구사항의 명확한 문서화, 개발과 비즈니스 간의 소통 개선,
+                        인수 테스트 자동화를 통해 소프트웨어 품질 향상에 기여한다.
+                    </p>
+                    <div class="keywords">
+                        <strong>Keywords:</strong> Behavior-Driven Development, BDD, Gherkin, Cucumber, Given-When-Then, Acceptance Testing
+                    </div>
                 </div>
-            </div>
 
-            <div class="article-body-wrapper">
-                <div class="article-content">
-                    <div class="abstract-box">
-                        <div class="label">Abstract</div>
-                        <p>
-                            행위 주도 개발(Behavior-Driven Development, BDD)은 TDD(Test-Driven Development)에서 발전한
-                            소프트웨어 개발 방법론으로, 비즈니스 이해관계자와 개발자 간의 협업을 통해 시스템의 기대 동작을
-                            자연어에 가까운 형식으로 정의한다. 본 논문에서는 BDD의 핵심 원리인 Given-When-Then 패턴과
-                            유비쿼터스 언어(Ubiquitous Language)의 개념을 분석하고, Cucumber, SpecFlow 등의 도구를 활용한
-                            실제 적용 방법을 제시한다. BDD는 요구사항의 명확한 문서화, 개발과 비즈니스 간의 소통 개선,
-                            인수 테스트 자동화를 통해 소프트웨어 품질 향상에 기여한다.
-                        </p>
-                        <div class="keywords">
-                            <strong>Keywords:</strong> Behavior-Driven Development, BDD, Gherkin, Cucumber, Given-When-Then, Acceptance Testing
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
+                    <p>
+                        2003년 Dan North는 TDD를 가르치면서 발견한 문제점들을 해결하기 위해 BDD 개념을 제안했다.
+                        TDD에서 개발자들이 겪는 주요 혼란—무엇을 테스트해야 하는가, 어디서부터 시작해야 하는가,
+                        얼마나 테스트해야 하는가—에 대한 해답으로 BDD가 탄생했다.
+                    </p>
+
+                    <div class="quote-box">
+                        <p>BDD is about implementing an application by describing its behavior
+                        from the perspective of its stakeholders.</p>
+                        <div class="author">— Dan North, BDD 창시자</div>
+                    </div>
+
+                    <p>
+                        BDD의 핵심 아이디어는 테스트를 "테스트"가 아닌 "행위 명세(Behavior Specification)"로
+                        재정의하는 것이다. 이를 통해 기술 팀과 비즈니스 팀 모두가 이해할 수 있는
+                        공통 언어로 시스템의 기대 동작을 기술할 수 있게 된다.
+                    </p>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">2.</span> Three Amigos Collaboration</h2>
+                    <p>
+                        BDD는 "Three Amigos" 미팅을 통해 다양한 관점을 통합한다.
+                        이 세 역할이 함께 요구사항을 분석하고 시나리오를 작성한다:
+                    </p>
+
+                    <div class="amigos-grid">
+                        <div class="amigo-card">
+                            <div class="icon">Business</div>
+                            <h4>Business (PO/BA)</h4>
+                            <p>비즈니스 가치와 요구사항 관점. "왜 이 기능이 필요한가?"를 설명</p>
+                        </div>
+                        <div class="amigo-card">
+                            <div class="icon">Dev</div>
+                            <h4>Developer</h4>
+                            <p>기술적 구현 관점. "어떻게 구현할 것인가?"를 고려</p>
+                        </div>
+                        <div class="amigo-card">
+                            <div class="icon">QA</div>
+                            <h4>Tester (QA)</h4>
+                            <p>품질과 엣지 케이스 관점. "무엇이 잘못될 수 있는가?"를 탐색</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">3.</span> Given-When-Then Pattern</h2>
+
+                    <h3 class="subsection-title">3.1 패턴의 구조</h3>
+                    <p>
+                        BDD 시나리오는 Given-When-Then 패턴을 사용하여 구조화된다.
+                        이 패턴은 Arrange-Act-Assert(AAA) 패턴과 유사하지만,
+                        비즈니스 관점에서 더 자연스럽게 읽힌다.
+                    </p>
+
+                    <div class="gwt-box">
+                        <div class="gwt-step given">
+                            <span class="gwt-label">Given</span>
+                            <span class="gwt-content">사전 조건 / 초기 컨텍스트 설정<br>시스템이 특정 상태에 있음을 명시</span>
+                        </div>
+                        <div class="gwt-step when">
+                            <span class="gwt-label">When</span>
+                            <span class="gwt-content">행위 / 이벤트 발생<br>사용자 또는 시스템이 수행하는 액션</span>
+                        </div>
+                        <div class="gwt-step then">
+                            <span class="gwt-label">Then</span>
+                            <span class="gwt-content">기대 결과 / 결과 검증<br>행위 후 시스템의 예상 상태</span>
                         </div>
                     </div>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
-                        <p>
-                            2003년 Dan North는 TDD를 가르치면서 발견한 문제점들을 해결하기 위해 BDD 개념을 제안했다.
-                            TDD에서 개발자들이 겪는 주요 혼란—무엇을 테스트해야 하는가, 어디서부터 시작해야 하는가,
-                            얼마나 테스트해야 하는가—에 대한 해답으로 BDD가 탄생했다.
-                        </p>
+                    <h3 class="subsection-title">3.2 Gherkin 문법 예시</h3>
+                    <p>
+                        Gherkin은 BDD 시나리오를 작성하기 위한 비즈니스 가독성이 높은 DSL(Domain-Specific Language)이다:
+                    </p>
 
-                        <div class="quote-box">
-                            <p>BDD is about implementing an application by describing its behavior
-                            from the perspective of its stakeholders.</p>
-                            <div class="author">— Dan North, BDD 창시자</div>
-                        </div>
-
-                        <p>
-                            BDD의 핵심 아이디어는 테스트를 "테스트"가 아닌 "행위 명세(Behavior Specification)"로
-                            재정의하는 것이다. 이를 통해 기술 팀과 비즈니스 팀 모두가 이해할 수 있는
-                            공통 언어로 시스템의 기대 동작을 기술할 수 있게 된다.
-                        </p>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">2.</span> Three Amigos Collaboration</h2>
-                        <p>
-                            BDD는 "Three Amigos" 미팅을 통해 다양한 관점을 통합한다.
-                            이 세 역할이 함께 요구사항을 분석하고 시나리오를 작성한다:
-                        </p>
-
-                        <div class="amigos-grid">
-                            <div class="amigo-card">
-                                <div class="icon">Business</div>
-                                <h4>Business (PO/BA)</h4>
-                                <p>비즈니스 가치와 요구사항 관점. "왜 이 기능이 필요한가?"를 설명</p>
-                            </div>
-                            <div class="amigo-card">
-                                <div class="icon">Dev</div>
-                                <h4>Developer</h4>
-                                <p>기술적 구현 관점. "어떻게 구현할 것인가?"를 고려</p>
-                            </div>
-                            <div class="amigo-card">
-                                <div class="icon">QA</div>
-                                <h4>Tester (QA)</h4>
-                                <p>품질과 엣지 케이스 관점. "무엇이 잘못될 수 있는가?"를 탐색</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">3.</span> Given-When-Then Pattern</h2>
-
-                        <h3 class="subsection-title">3.1 패턴의 구조</h3>
-                        <p>
-                            BDD 시나리오는 Given-When-Then 패턴을 사용하여 구조화된다.
-                            이 패턴은 Arrange-Act-Assert(AAA) 패턴과 유사하지만,
-                            비즈니스 관점에서 더 자연스럽게 읽힌다.
-                        </p>
-
-                        <div class="gwt-box">
-                            <div class="gwt-step given">
-                                <span class="gwt-label">Given</span>
-                                <span class="gwt-content">사전 조건 / 초기 컨텍스트 설정<br>시스템이 특정 상태에 있음을 명시</span>
-                            </div>
-                            <div class="gwt-step when">
-                                <span class="gwt-label">When</span>
-                                <span class="gwt-content">행위 / 이벤트 발생<br>사용자 또는 시스템이 수행하는 액션</span>
-                            </div>
-                            <div class="gwt-step then">
-                                <span class="gwt-label">Then</span>
-                                <span class="gwt-content">기대 결과 / 결과 검증<br>행위 후 시스템의 예상 상태</span>
-                            </div>
-                        </div>
-
-                        <h3 class="subsection-title">3.2 Gherkin 문법 예시</h3>
-                        <p>
-                            Gherkin은 BDD 시나리오를 작성하기 위한 비즈니스 가독성이 높은 DSL(Domain-Specific Language)이다:
-                        </p>
-
-                        <div class="gherkin-box">
-                            <code>
+                    <div class="gherkin-box">
+                        <code>
 <span class="keyword">Feature:</span> <span class="text">사용자 로그인</span>
   <span class="comment"># 사용자가 시스템에 안전하게 접근할 수 있도록</span>
 
@@ -759,196 +793,198 @@
     <span class="keyword">And</span> <span class="text">비밀번호에 </span><span class="param">"wrongpassword"</span><span class="text">를 입력한다</span>
     <span class="keyword">And</span> <span class="text">로그인 버튼을 클릭한다</span>
     <span class="keyword">Then</span> <span class="text">오류 메시지 </span><span class="param">"잘못된 자격 증명"</span><span class="text">이 표시되어야 한다</span>
-                            </code>
+                        </code>
+                    </div>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">4.</span> TDD vs BDD Comparison</h2>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>측면</th>
+                                <th>TDD</th>
+                                <th>BDD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>초점</strong></td>
+                                <td>코드 단위의 기술적 동작</td>
+                                <td>사용자/비즈니스 관점의 행위</td>
+                            </tr>
+                            <tr>
+                                <td><strong>언어</strong></td>
+                                <td>프로그래밍 언어 (코드)</td>
+                                <td>자연어 기반 DSL (Gherkin)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>참여자</strong></td>
+                                <td>개발자 중심</td>
+                                <td>개발자 + 비즈니스 + QA</td>
+                            </tr>
+                            <tr>
+                                <td><strong>테스트 수준</strong></td>
+                                <td>주로 단위 테스트</td>
+                                <td>주로 인수/통합 테스트</td>
+                            </tr>
+                            <tr>
+                                <td><strong>문서화</strong></td>
+                                <td>코드가 문서 역할</td>
+                                <td>실행 가능한 명세서 생성</td>
+                            </tr>
+                            <tr>
+                                <td><strong>출발점</strong></td>
+                                <td>기술 요구사항</td>
+                                <td>비즈니스 요구사항</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">5.</span> BDD Frameworks</h2>
+
+                    <div class="framework-grid">
+                        <div class="framework-card">
+                            <h4>Cucumber <span class="lang">Ruby/Java/JS</span></h4>
+                            <p>가장 널리 사용되는 BDD 프레임워크. Gherkin 문법 지원의 원조</p>
+                        </div>
+                        <div class="framework-card">
+                            <h4>SpecFlow <span class="lang">.NET</span></h4>
+                            <p>.NET 생태계를 위한 Cucumber 포팅. Visual Studio 통합 지원</p>
+                        </div>
+                        <div class="framework-card">
+                            <h4>Behave <span class="lang">Python</span></h4>
+                            <p>Python용 BDD 프레임워크. pytest와 함께 사용 가능</p>
+                        </div>
+                        <div class="framework-card">
+                            <h4>JBehave <span class="lang">Java</span></h4>
+                            <p>Java 최초의 BDD 프레임워크. Dan North가 개발</p>
+                        </div>
+                        <div class="framework-card">
+                            <h4>Jest-Cucumber <span class="lang">JavaScript</span></h4>
+                            <p>Jest 테스트 러너와 Cucumber 통합. React/Node.js에 적합</p>
+                        </div>
+                        <div class="framework-card">
+                            <h4>Reqnroll <span class="lang">.NET</span></h4>
+                            <p>SpecFlow의 후속 오픈소스 프로젝트. .NET 8+ 지원</p>
                         </div>
                     </div>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">4.</span> TDD vs BDD Comparison</h2>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">6.</span> BDD Workflow</h2>
 
-                        <table class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>측면</th>
-                                    <th>TDD</th>
-                                    <th>BDD</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>초점</strong></td>
-                                    <td>코드 단위의 기술적 동작</td>
-                                    <td>사용자/비즈니스 관점의 행위</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>언어</strong></td>
-                                    <td>프로그래밍 언어 (코드)</td>
-                                    <td>자연어 기반 DSL (Gherkin)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>참여자</strong></td>
-                                    <td>개발자 중심</td>
-                                    <td>개발자 + 비즈니스 + QA</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>테스트 수준</strong></td>
-                                    <td>주로 단위 테스트</td>
-                                    <td>주로 인수/통합 테스트</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>문서화</strong></td>
-                                    <td>코드가 문서 역할</td>
-                                    <td>실행 가능한 명세서 생성</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>출발점</strong></td>
-                                    <td>기술 요구사항</td>
-                                    <td>비즈니스 요구사항</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="figure-box">
+                        <div class="workflow-diagram">
+                            <div class="workflow-step">Discovery</div>
+                            <span class="workflow-arrow">→</span>
+                            <div class="workflow-step">Formulation</div>
+                            <span class="workflow-arrow">→</span>
+                            <div class="workflow-step">Automation</div>
+                            <span class="workflow-arrow">→</span>
+                            <div class="workflow-step">Execution</div>
+                        </div>
+                        <p class="figure-caption">Figure 1. BDD Implementation Workflow</p>
                     </div>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">5.</span> BDD Frameworks</h2>
+                    <p>
+                        BDD 워크플로우는 네 단계로 구성된다:
+                    </p>
+                    <ul>
+                        <li><strong>Discovery:</strong> Three Amigos 미팅을 통해 요구사항 탐색 및 예제 도출</li>
+                        <li><strong>Formulation:</strong> 도출된 예제를 Gherkin 시나리오로 문서화</li>
+                        <li><strong>Automation:</strong> Step Definition 코드를 작성하여 시나리오 자동화</li>
+                        <li><strong>Execution:</strong> 자동화된 테스트 실행 및 결과 검증</li>
+                    </ul>
+                </section>
 
-                        <div class="framework-grid">
-                            <div class="framework-card">
-                                <h4>Cucumber <span class="lang">Ruby/Java/JS</span></h4>
-                                <p>가장 널리 사용되는 BDD 프레임워크. Gherkin 문법 지원의 원조</p>
-                            </div>
-                            <div class="framework-card">
-                                <h4>SpecFlow <span class="lang">.NET</span></h4>
-                                <p>.NET 생태계를 위한 Cucumber 포팅. Visual Studio 통합 지원</p>
-                            </div>
-                            <div class="framework-card">
-                                <h4>Behave <span class="lang">Python</span></h4>
-                                <p>Python용 BDD 프레임워크. pytest와 함께 사용 가능</p>
-                            </div>
-                            <div class="framework-card">
-                                <h4>JBehave <span class="lang">Java</span></h4>
-                                <p>Java 최초의 BDD 프레임워크. Dan North가 개발</p>
-                            </div>
-                            <div class="framework-card">
-                                <h4>Jest-Cucumber <span class="lang">JavaScript</span></h4>
-                                <p>Jest 테스트 러너와 Cucumber 통합. React/Node.js에 적합</p>
-                            </div>
-                            <div class="framework-card">
-                                <h4>Reqnroll <span class="lang">.NET</span></h4>
-                                <p>SpecFlow의 후속 오픈소스 프로젝트. .NET 8+ 지원</p>
-                            </div>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">7.</span> Benefits of BDD</h2>
+
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <h4>협업 향상</h4>
+                            <p>비즈니스와 기술 팀 간의 공통 언어로 소통 장벽 해소</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>살아있는 문서</h4>
+                            <p>실행 가능한 명세서가 항상 최신 상태의 문서 역할</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>명확한 요구사항</h4>
+                            <p>구체적인 예제를 통해 모호한 요구사항을 명확히 정의</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>회귀 테스트</h4>
+                            <p>자동화된 인수 테스트로 기능 회귀 방지</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>사용자 중심</h4>
+                            <p>사용자 스토리 기반 개발로 실제 가치 전달에 집중</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>설계 개선</h4>
+                            <p>Outside-In 개발 방식으로 더 나은 API 설계 유도</p>
                         </div>
                     </div>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">6.</span> BDD Workflow</h2>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">8.</span> Conclusion</h2>
+                    <p>
+                        Behavior-Driven Development는 TDD의 기술적 실천을 비즈니스 가치 중심으로 확장한
+                        개발 방법론이다. Given-When-Then 패턴과 유비쿼터스 언어의 사용은
+                        이해관계자 간의 소통을 원활하게 하고, 요구사항을 실행 가능한 명세로 변환한다.
+                    </p>
+                    <p>
+                        BDD의 성공적인 도입을 위해서는 도구의 선택보다 협업 문화의 정착이 더 중요하다.
+                        Three Amigos 미팅을 통한 지속적인 대화와 Example Mapping 등의 기법을 활용하여
+                        모든 이해관계자가 시스템의 기대 동작에 대해 동일한 이해를 갖도록 해야 한다.
+                    </p>
+                </section>
 
-                        <div class="figure-box">
-                            <div class="workflow-diagram">
-                                <div class="workflow-step">Discovery</div>
-                                <span class="workflow-arrow">→</span>
-                                <div class="workflow-step">Formulation</div>
-                                <span class="workflow-arrow">→</span>
-                                <div class="workflow-step">Automation</div>
-                                <span class="workflow-arrow">→</span>
-                                <div class="workflow-step">Execution</div>
-                            </div>
-                            <p class="figure-caption">Figure 1. BDD Implementation Workflow</p>
-                        </div>
+                <div class="references">
+                    <h3>References</h3>
+                    <ol>
+                        <li>North, D. (2006). "Introducing BDD." <em>Better Software Magazine</em>.</li>
+                        <li>Wynne, M., & Hellesøy, A. (2017). <em>The Cucumber Book: Behaviour-Driven Development for Testers and Developers</em>. Pragmatic Bookshelf.</li>
+                        <li>Smart, J. F. (2014). <em>BDD in Action: Behavior-Driven Development for the Whole Software Lifecycle</em>. Manning Publications.</li>
+                        <li>Adzic, G. (2011). <em>Specification by Example</em>. Manning Publications.</li>
+                        <li>Chelimsky, D., et al. (2010). <em>The RSpec Book: Behaviour-Driven Development with RSpec, Cucumber, and Friends</em>. Pragmatic Bookshelf.</li>
+                    </ol>
+                </div>
 
-                        <p>
-                            BDD 워크플로우는 네 단계로 구성된다:
-                        </p>
-                        <ul>
-                            <li><strong>Discovery:</strong> Three Amigos 미팅을 통해 요구사항 탐색 및 예제 도출</li>
-                            <li><strong>Formulation:</strong> 도출된 예제를 Gherkin 시나리오로 문서화</li>
-                            <li><strong>Automation:</strong> Step Definition 코드를 작성하여 시나리오 자동화</li>
-                            <li><strong>Execution:</strong> 자동화된 테스트 실행 및 결과 검증</li>
-                        </ul>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">7.</span> Benefits of BDD</h2>
-
-                        <div class="benefits-grid">
-                            <div class="benefit-card">
-                                <h4>협업 향상</h4>
-                                <p>비즈니스와 기술 팀 간의 공통 언어로 소통 장벽 해소</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>살아있는 문서</h4>
-                                <p>실행 가능한 명세서가 항상 최신 상태의 문서 역할</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>명확한 요구사항</h4>
-                                <p>구체적인 예제를 통해 모호한 요구사항을 명확히 정의</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>회귀 테스트</h4>
-                                <p>자동화된 인수 테스트로 기능 회귀 방지</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>사용자 중심</h4>
-                                <p>사용자 스토리 기반 개발로 실제 가치 전달에 집중</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>설계 개선</h4>
-                                <p>Outside-In 개발 방식으로 더 나은 API 설계 유도</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">8.</span> Conclusion</h2>
-                        <p>
-                            Behavior-Driven Development는 TDD의 기술적 실천을 비즈니스 가치 중심으로 확장한
-                            개발 방법론이다. Given-When-Then 패턴과 유비쿼터스 언어의 사용은
-                            이해관계자 간의 소통을 원활하게 하고, 요구사항을 실행 가능한 명세로 변환한다.
-                        </p>
-                        <p>
-                            BDD의 성공적인 도입을 위해서는 도구의 선택보다 협업 문화의 정착이 더 중요하다.
-                            Three Amigos 미팅을 통한 지속적인 대화와 Example Mapping 등의 기법을 활용하여
-                            모든 이해관계자가 시스템의 기대 동작에 대해 동일한 이해를 갖도록 해야 한다.
-                        </p>
-                    </div>
-
-                    <div class="references">
-                        <h3>References</h3>
-                        <ol>
-                            <li>North, D. (2006). "Introducing BDD." <em>Better Software Magazine</em>.</li>
-                            <li>Wynne, M., & Hellesøy, A. (2017). <em>The Cucumber Book: Behaviour-Driven Development for Testers and Developers</em>. Pragmatic Bookshelf.</li>
-                            <li>Smart, J. F. (2014). <em>BDD in Action: Behavior-Driven Development for the Whole Software Lifecycle</em>. Manning Publications.</li>
-                            <li>Adzic, G. (2011). <em>Specification by Example</em>. Manning Publications.</li>
-                            <li>Chelimsky, D., et al. (2010). <em>The RSpec Book: Behaviour-Driven Development with RSpec, Cucumber, and Friends</em>. Pragmatic Bookshelf.</li>
-                        </ol>
-                    </div>
-
-                    <div class="related-articles">
-                        <h3>Related Papers</h3>
-                        <div class="related-grid">
-                            <a href="tdd-methodology.html" class="related-card">
-                                <span class="related-title">TDD: 테스트 주도 개발</span>
-                            </a>
-                            <a href="agile-scrum.html" class="related-card">
-                                <span class="related-title">Agile과 Scrum</span>
-                            </a>
-                            <a href="integration-testing.html" class="related-card">
-                                <span class="related-title">통합 테스트 전략</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="source-box">
-                        <p><strong>Classification:</strong> Development Practices / Testing Methodology<br>
-                        <strong>Series:</strong> Software Engineering Methodology<br>
-                        <strong>Last Updated:</strong> 2024</p>
+                <div class="related-articles">
+                    <h3>Related Papers</h3>
+                    <div class="related-grid">
+                        <a href="tdd-methodology.html" class="related-card">
+                            <span class="related-title">TDD: 테스트 주도 개발</span>
+                        </a>
+                        <a href="agile-scrum.html" class="related-card">
+                            <span class="related-title">Agile과 Scrum</span>
+                        </a>
+                        <a href="integration-testing.html" class="related-card">
+                            <span class="related-title">통합 테스트 전략</span>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </article>
+
+                <div class="source-box">
+                    <p><strong>Classification:</strong> Development Practices / Testing Methodology<br>
+                    <strong>Series:</strong> Software Engineering Methodology<br>
+                    <strong>Last Updated:</strong> 2024</p>
+                </div>
+            </article>
+        </div>
     </main>
+
     <footer class="site-footer">
-        <p>© 2024 Stock Insights. All rights reserved.</p>
+        <div class="content-wrapper">
+            <p>© 2024 Stock Insights. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>

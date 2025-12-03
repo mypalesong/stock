@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit Testing: 단위 테스트 전략과 모범 사례 | Stock Insights</title>
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/article.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
@@ -20,137 +19,144 @@
             --bg-secondary: #f8fafc;
             --bg-tertiary: #f1f5f9;
             --border-color: #e2e8f0;
-            --border-light: #f1f5f9;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: var(--font-sans);
             color: var(--text-color);
             line-height: 1.7;
+            background: var(--bg-secondary);
         }
 
-        /* Desktop Layout - 70% of viewport on large screens */
-        .article-body-wrapper {
+        /* Unified Content Container */
+        .content-wrapper {
             width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
             padding: 0 1.5rem;
         }
 
-        @media (min-width: 1200px) {
-            .article-body-wrapper {
-                width: 70%;
-                min-width: 900px;
-                max-width: 1100px;
-                margin: 0 auto;
-                padding: 0 3rem;
+        @media (min-width: 1400px) {
+            .content-wrapper {
+                width: 80%;
+                min-width: 1200px;
+                max-width: 1400px;
+                padding: 0;
             }
         }
 
-        /* Professional Header */
+        /* Compact Breadcrumb */
+        .breadcrumb-section {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+        }
+
+        .breadcrumb {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color);
+        }
+
+        .breadcrumb span {
+            color: #cbd5e1;
+        }
+
+        /* Compact Hero Section */
         .article-hero {
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%);
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            padding: 2.5rem 0;
         }
 
-        @media (min-width: 1200px) {
-            .article-hero {
-                padding: 5rem 4rem;
-            }
-        }
-
-        .article-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(15, 52, 96, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(26, 26, 46, 0.5) 0%, transparent 50%);
-        }
-
-        .article-hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-        }
-
-        @media (min-width: 1200px) {
-            .article-hero-content {
-                margin-left: 10%;
-            }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .paper-category {
-            display: inline-block;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
-            color: #94a3b8;
+            color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            letter-spacing: 0.12em;
         }
 
         .article-hero h1 {
             font-family: var(--font-sans);
             font-weight: 700;
-            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-size: 2rem;
             color: #ffffff;
-            line-height: 1.25;
-            margin-bottom: 1.25rem;
+            line-height: 1.3;
             letter-spacing: -0.02em;
         }
 
         .article-hero .subtitle {
             font-family: var(--font-mono);
-            font-size: 1rem;
-            color: #cbd5e1;
+            font-size: 0.85rem;
+            color: #94a3b8;
             font-weight: 400;
         }
 
-        /* Main Content */
-        .article-content {
+        /* Main Content Area */
+        .article-main {
+            background: var(--bg-primary);
             padding: 3rem 0;
+        }
+
+        .article-body {
+            max-width: 100%;
         }
 
         /* Abstract */
         .abstract-box {
             background: var(--bg-secondary);
-            padding: 2rem 2.5rem;
-            margin: 0 0 3rem 0;
-            border-radius: 8px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 2.5rem;
             border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-color);
         }
 
         .abstract-box .label {
             font-family: var(--font-mono);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--accent-color);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .abstract-box p {
-            font-size: 1rem;
-            line-height: 1.85;
+            font-size: 0.95rem;
+            line-height: 1.8;
             color: var(--text-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .keywords {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             padding-top: 1rem;
             border-top: 1px solid var(--border-color);
@@ -163,13 +169,12 @@
         /* Section Titles */
         .section-title {
             font-family: var(--font-sans);
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin: 3rem 0 1.5rem 0;
-            padding-bottom: 0.75rem;
+            margin: 2.5rem 0 1.25rem 0;
+            padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--border-color);
-            letter-spacing: -0.01em;
         }
 
         .section-title .num {
@@ -180,33 +185,33 @@
 
         .subsection-title {
             font-family: var(--font-sans);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--secondary-color);
-            margin: 2.5rem 0 1rem 0;
+            margin: 2rem 0 0.75rem 0;
         }
 
         /* Body Text */
         .paper-section {
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .paper-section > p {
-            font-size: 1.05rem;
-            line-height: 1.9;
+            font-size: 1rem;
+            line-height: 1.85;
             color: var(--text-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .paper-section > ul {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            padding-left: 1.75rem;
-            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.75;
+            padding-left: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .paper-section > ul li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: var(--text-color);
         }
 
@@ -217,50 +222,34 @@
         /* Quote Box */
         .quote-box {
             background: var(--bg-tertiary);
-            padding: 2rem 2.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .quote-box::before {
-            content: '"';
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            font-family: Georgia, serif;
-            font-size: 3rem;
-            color: var(--border-color);
-            line-height: 1;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--accent-color);
         }
 
         .quote-box p {
             font-family: var(--font-sans);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-style: italic;
             color: var(--text-color);
             margin: 0;
-            padding-left: 2rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .quote-box .author {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-style: normal;
             color: var(--text-muted);
-            margin-top: 1rem;
-            padding-left: 2rem;
+            margin-top: 0.75rem;
         }
 
         /* Test Pyramid */
         .pyramid-box {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2.5rem;
-            margin: 2.5rem 0;
+            padding: 2rem;
+            margin: 2rem 0;
             text-align: center;
         }
 
@@ -269,16 +258,16 @@
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            margin: 1.5rem 0;
+            margin: 1.25rem 0;
         }
 
         .pyramid-level {
-            padding: 1rem;
+            padding: 0.85rem;
             color: white;
             font-family: var(--font-mono);
             font-weight: 600;
-            font-size: 0.9rem;
-            border-radius: 6px;
+            font-size: 0.8rem;
+            border-radius: 4px;
         }
 
         .pyramid-level.e2e {
@@ -298,24 +287,23 @@
 
         .figure-caption {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 1.5rem;
+            margin-top: 1.25rem;
         }
 
         /* AAA Pattern Box */
         .aaa-box {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2.5rem 0;
+            padding: 1.5rem;
+            margin: 2rem 0;
         }
 
         .aaa-step {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
             align-items: flex-start;
         }
 
@@ -327,11 +315,11 @@
             font-family: var(--font-mono);
             background: var(--primary-color);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.4rem 0.85rem;
+            border-radius: 4px;
             font-weight: 600;
-            font-size: 0.85rem;
-            min-width: 90px;
+            font-size: 0.75rem;
+            min-width: 80px;
             text-align: center;
         }
 
@@ -341,27 +329,26 @@
 
         .aaa-content h4 {
             font-family: var(--font-sans);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary-color);
-            margin: 0 0 0.5rem 0;
+            margin: 0 0 0.35rem 0;
         }
 
         .aaa-content p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* Code Example */
         .code-example {
             background: #0f172a;
-            border-radius: 8px;
-            padding: 1.75rem;
-            margin: 2.5rem 0;
+            padding: 1.5rem;
+            margin: 2rem 0;
             font-family: var(--font-mono);
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             overflow-x: auto;
             border: 1px solid #1e293b;
         }
@@ -372,33 +359,38 @@
         .code-example .string { color: #4ade80; }
         .code-example .decorator { color: #fbbf24; }
         .code-example .assertion { color: #f38ba8; }
-        .code-example code { color: #e2e8f0; line-height: 1.7; }
+        .code-example code { color: #e2e8f0; line-height: 1.6; }
 
         /* FIRST Principle Cards */
         .first-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2.5rem 0;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .first-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .first-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
+            padding: 1.25rem;
             text-align: center;
             transition: box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .first-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             border-color: var(--accent-color);
         }
 
         .first-card .letter {
             font-family: var(--font-mono);
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--accent-color);
         }
@@ -406,57 +398,56 @@
         .first-card h4 {
             font-family: var(--font-sans);
             color: var(--primary-color);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            margin: 0.75rem 0 0.5rem 0;
+            margin: 0.5rem 0 0.35rem 0;
         }
 
         .first-card p {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         /* Test Doubles Grid */
         .double-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2.5rem 0;
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
         .double-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.75rem;
+            padding: 1.25rem;
             transition: box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .double-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             border-color: var(--accent-color);
         }
 
         .double-card h4 {
             font-family: var(--font-sans);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .double-card p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin: 0 0 0.75rem 0;
-            line-height: 1.6;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.5;
         }
 
         .double-card .example {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--accent-color);
             font-style: italic;
         }
@@ -465,35 +456,31 @@
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 2.5rem 0;
-            font-size: 0.95rem;
+            margin: 2rem 0;
+            font-size: 0.9rem;
         }
 
         .data-table th {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             background: var(--primary-color);
             color: white;
-            padding: 1rem 1.25rem;
+            padding: 0.85rem 1rem;
             text-align: left;
         }
 
         .data-table td {
-            padding: 1rem 1.25rem;
+            padding: 0.85rem 1rem;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .data-table tr:nth-child(even) {
             background: var(--bg-secondary);
-        }
-
-        .data-table tr:hover {
-            background: var(--bg-tertiary);
         }
 
         .lang-badge {
@@ -501,9 +488,9 @@
             font-family: var(--font-mono);
             background: var(--bg-tertiary);
             color: var(--accent-color);
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
             font-weight: 600;
             border: 1px solid var(--border-color);
         }
@@ -512,72 +499,70 @@
         .coverage-box {
             background: #f0fdf4;
             border: 1px solid #86efac;
-            border-radius: 8px;
-            padding: 2rem 2.5rem;
-            margin: 2.5rem 0;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
         }
 
         .coverage-box h4 {
             font-family: var(--font-sans);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #166534;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .coverage-types {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
-            gap: 1rem;
+            gap: 0.85rem;
         }
 
         .coverage-type {
             background: white;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1rem;
+            border-radius: 4px;
+            padding: 0.85rem;
         }
 
         .coverage-type strong {
             font-family: var(--font-sans);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #15803d;
         }
 
         .coverage-type p {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #166534;
-            margin: 0.5rem 0 0 0;
-            line-height: 1.5;
+            margin: 0.35rem 0 0 0;
+            line-height: 1.4;
         }
 
         /* Anti-pattern Box */
         .antipattern-box {
             background: #fef2f2;
             border: 1px solid #fca5a5;
-            border-radius: 8px;
-            padding: 2rem 2.5rem;
-            margin: 2.5rem 0;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
         }
 
         .antipattern-box h4 {
             font-family: var(--font-sans);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #b91c1c;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .antipattern-box ul {
             margin: 0;
-            padding-left: 1.75rem;
+            padding-left: 1.5rem;
             color: #991b1b;
         }
 
         .antipattern-box li {
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
         }
 
         .antipattern-box li strong {
@@ -587,239 +572,249 @@
         /* Benefits Grid */
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2.5rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .benefit-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.75rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .benefit-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
+            padding: 1.25rem;
         }
 
         .benefit-card h4 {
             font-family: var(--font-sans);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .benefit-card p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* References */
         .references {
             background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 2rem 2.5rem;
-            margin: 3rem 0;
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
             border: 1px solid var(--border-color);
         }
 
         .references h3 {
-            font-family: var(--font-sans);
-            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
         }
 
         .references ol {
-            padding-left: 1.5rem;
+            padding-left: 1.25rem;
             margin: 0;
         }
 
         .references li {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 0.75rem;
-            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
         }
 
         /* Related Articles */
         .related-articles {
-            margin: 3rem 0;
+            margin: 2.5rem 0;
         }
 
         .related-articles h3 {
-            font-family: var(--font-sans);
-            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
         }
 
         .related-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .related-card {
             display: block;
-            padding: 1.25rem 1.5rem;
-            background: var(--bg-primary);
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             text-decoration: none;
             transition: all 0.2s ease;
         }
 
         .related-card:hover {
             border-color: var(--accent-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: var(--bg-tertiary);
         }
 
         .related-title {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             color: var(--text-color);
         }
 
         /* Source Box */
         .source-box {
             background: var(--bg-tertiary);
-            border-radius: 8px;
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.5rem;
             margin: 2rem 0;
             border: 1px solid var(--border-color);
         }
 
         .source-box p {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         .source-box strong {
             color: var(--text-color);
         }
+
+        /* Footer */
+        .site-footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-content">
-            <a href="../index.html" class="header-title">
-                <span class="header-logo">Stock Insights</span>
-            </a>
+    <nav class="breadcrumb-section">
+        <div class="content-wrapper">
+            <div class="breadcrumb">
+                <a href="../index.html">홈</a>
+                <span>/</span>
+                <a href="../index.html?category=tech">개발 방법론</a>
+                <span>/</span>
+                <span>Unit Testing</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="article-hero">
+        <div class="content-wrapper">
+            <div class="hero-content">
+                <span class="paper-category">Software Engineering · Research Paper</span>
+                <h1>Unit Testing: 단위 테스트 전략과 모범 사례</h1>
+                <p class="subtitle">Methodology Series Vol.2</p>
+            </div>
         </div>
     </header>
-    <main class="article-page">
-        <article>
-            <header class="article-header">
-                <nav class="breadcrumb">
-                    <a href="../index.html">홈</a>
-                    <span>/</span>
-                    <a href="../index.html?category=tech">개발 방법론</a>
-                    <span>/</span>
-                    <span>Unit Testing</span>
-                </nav>
-            </header>
 
-            <div class="article-hero">
-                <div class="article-hero-content">
-                    <span class="paper-category">Software Engineering · Research Paper</span>
-                    <h1>Unit Testing: 단위 테스트 전략과 모범 사례</h1>
-                    <p class="subtitle">Methodology Series Vol.2</p>
+    <main class="article-main">
+        <div class="content-wrapper">
+            <article class="article-body">
+                <div class="abstract-box">
+                    <div class="label">Abstract</div>
+                    <p>
+                        단위 테스트(Unit Testing)는 소프트웨어의 가장 작은 테스트 가능한 부분을 독립적으로 검증하는
+                        테스트 기법이다. 본 논문에서는 단위 테스트의 이론적 기반과 AAA(Arrange-Act-Assert) 패턴,
+                        FIRST 원칙 등 효과적인 테스트 작성을 위한 방법론을 분석한다. 또한 Mock, Stub, Spy 등
+                        테스트 더블의 활용법과 주요 테스팅 프레임워크를 고찰한다.
+                        체계적인 단위 테스트는 회귀 버그 방지, 리팩토링 안전성 확보, 설계 개선에 기여한다.
+                    </p>
+                    <div class="keywords">
+                        <strong>Keywords:</strong> Unit Testing, Test Double, Mock, AAA Pattern, FIRST Principles, Test Coverage
+                    </div>
                 </div>
-            </div>
 
-            <div class="article-body-wrapper">
-                <div class="article-content">
-                    <div class="abstract-box">
-                        <div class="label">Abstract</div>
-                        <p>
-                            단위 테스트(Unit Testing)는 소프트웨어의 가장 작은 테스트 가능한 부분을 독립적으로 검증하는
-                            테스트 기법이다. 본 논문에서는 단위 테스트의 이론적 기반과 AAA(Arrange-Act-Assert) 패턴,
-                            FIRST 원칙 등 효과적인 테스트 작성을 위한 방법론을 분석한다. 또한 Mock, Stub, Spy 등
-                            테스트 더블의 활용법과 주요 테스팅 프레임워크를 고찰한다.
-                            체계적인 단위 테스트는 회귀 버그 방지, 리팩토링 안전성 확보, 설계 개선에 기여한다.
-                        </p>
-                        <div class="keywords">
-                            <strong>Keywords:</strong> Unit Testing, Test Double, Mock, AAA Pattern, FIRST Principles, Test Coverage
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
+                    <p>
+                        단위 테스트는 1990년대 Kent Beck의 SUnit(Smalltalk)에서 체계화되어
+                        JUnit(Java)을 거쳐 현대의 xUnit 프레임워크 계열로 발전했다.
+                        단위 테스트의 "단위(Unit)"는 언어와 맥락에 따라 함수, 메서드, 클래스, 모듈 등으로 정의된다.
+                    </p>
+
+                    <div class="quote-box">
+                        <p>A test is not a unit test if it talks to the database, communicates across
+                        the network, touches the file system, or can't run at the same time as any
+                        of your other unit tests.</p>
+                        <div class="author">— Michael Feathers, Working Effectively with Legacy Code</div>
+                    </div>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">2.</span> Test Pyramid</h2>
+
+                    <div class="pyramid-box">
+                        <div class="pyramid">
+                            <div class="pyramid-level e2e">E2E Tests (Few)</div>
+                            <div class="pyramid-level integration">Integration Tests (Some)</div>
+                            <div class="pyramid-level unit">Unit Tests (Many)</div>
+                        </div>
+                        <p class="figure-caption">Figure 1. Mike Cohn's Test Pyramid</p>
+                    </div>
+
+                    <p>
+                        테스트 피라미드는 단위 테스트를 가장 많이 작성하고, 통합 테스트는 적당히,
+                        E2E 테스트는 최소한으로 유지할 것을 권장한다. 이는 각 테스트 레벨의
+                        속도, 비용, 안정성 특성에 기반한다.
+                    </p>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">3.</span> AAA Pattern</h2>
+
+                    <div class="aaa-box">
+                        <div class="aaa-step">
+                            <span class="aaa-label">Arrange</span>
+                            <div class="aaa-content">
+                                <h4>준비 단계</h4>
+                                <p>테스트에 필요한 객체 생성, 의존성 설정, 초기 상태 구성</p>
+                            </div>
+                        </div>
+                        <div class="aaa-step">
+                            <span class="aaa-label">Act</span>
+                            <div class="aaa-content">
+                                <h4>실행 단계</h4>
+                                <p>테스트 대상 메서드/함수를 호출하여 실제 동작 수행</p>
+                            </div>
+                        </div>
+                        <div class="aaa-step">
+                            <span class="aaa-label">Assert</span>
+                            <div class="aaa-content">
+                                <h4>검증 단계</h4>
+                                <p>기대 결과와 실제 결과를 비교하여 테스트 통과 여부 판정</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
-                        <p>
-                            단위 테스트는 1990년대 Kent Beck의 SUnit(Smalltalk)에서 체계화되어
-                            JUnit(Java)을 거쳐 현대의 xUnit 프레임워크 계열로 발전했다.
-                            단위 테스트의 "단위(Unit)"는 언어와 맥락에 따라 함수, 메서드, 클래스, 모듈 등으로 정의된다.
-                        </p>
-
-                        <div class="quote-box">
-                            <p>A test is not a unit test if it talks to the database, communicates across
-                            the network, touches the file system, or can't run at the same time as any
-                            of your other unit tests.</p>
-                            <div class="author">— Michael Feathers, Working Effectively with Legacy Code</div>
-                        </div>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">2.</span> Test Pyramid</h2>
-
-                        <div class="pyramid-box">
-                            <div class="pyramid">
-                                <div class="pyramid-level e2e">E2E Tests (Few)</div>
-                                <div class="pyramid-level integration">Integration Tests (Some)</div>
-                                <div class="pyramid-level unit">Unit Tests (Many)</div>
-                            </div>
-                            <p class="figure-caption">Figure 1. Mike Cohn's Test Pyramid</p>
-                        </div>
-
-                        <p>
-                            테스트 피라미드는 단위 테스트를 가장 많이 작성하고, 통합 테스트는 적당히,
-                            E2E 테스트는 최소한으로 유지할 것을 권장한다. 이는 각 테스트 레벨의
-                            속도, 비용, 안정성 특성에 기반한다.
-                        </p>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">3.</span> AAA Pattern</h2>
-
-                        <div class="aaa-box">
-                            <div class="aaa-step">
-                                <span class="aaa-label">Arrange</span>
-                                <div class="aaa-content">
-                                    <h4>준비 단계</h4>
-                                    <p>테스트에 필요한 객체 생성, 의존성 설정, 초기 상태 구성</p>
-                                </div>
-                            </div>
-                            <div class="aaa-step">
-                                <span class="aaa-label">Act</span>
-                                <div class="aaa-content">
-                                    <h4>실행 단계</h4>
-                                    <p>테스트 대상 메서드/함수를 호출하여 실제 동작 수행</p>
-                                </div>
-                            </div>
-                            <div class="aaa-step">
-                                <span class="aaa-label">Assert</span>
-                                <div class="aaa-content">
-                                    <h4>검증 단계</h4>
-                                    <p>기대 결과와 실제 결과를 비교하여 테스트 통과 여부 판정</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="code-example">
-                            <code>
+                    <div class="code-example">
+                        <code>
 <span class="decorator">@Test</span>
 <span class="keyword">void</span> <span class="function">shouldCalculateDiscountedPrice</span>() {
     <span class="comment">// Arrange</span>
@@ -832,251 +827,253 @@
     <span class="comment">// Assert</span>
     <span class="assertion">assertEquals</span>(900.0, discountedPrice, 0.01);
 }
-                            </code>
+                        </code>
+                    </div>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">4.</span> FIRST Principles</h2>
+
+                    <div class="first-grid">
+                        <div class="first-card">
+                            <div class="letter">F</div>
+                            <h4>Fast</h4>
+                            <p>테스트는 빠르게 실행되어야 함 (ms 단위)</p>
+                        </div>
+                        <div class="first-card">
+                            <div class="letter">I</div>
+                            <h4>Independent</h4>
+                            <p>테스트 간 의존성 없이 독립 실행 가능</p>
+                        </div>
+                        <div class="first-card">
+                            <div class="letter">R</div>
+                            <h4>Repeatable</h4>
+                            <p>환경에 관계없이 동일한 결과</p>
+                        </div>
+                        <div class="first-card">
+                            <div class="letter">S</div>
+                            <h4>Self-validating</h4>
+                            <p>성공/실패가 자동 판정</p>
+                        </div>
+                        <div class="first-card">
+                            <div class="letter">T</div>
+                            <h4>Timely</h4>
+                            <p>프로덕션 코드 작성 직전에 테스트 작성</p>
                         </div>
                     </div>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">4.</span> FIRST Principles</h2>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">5.</span> Test Doubles</h2>
 
-                        <div class="first-grid">
-                            <div class="first-card">
-                                <div class="letter">F</div>
-                                <h4>Fast</h4>
-                                <p>테스트는 빠르게 실행되어야 함 (ms 단위)</p>
-                            </div>
-                            <div class="first-card">
-                                <div class="letter">I</div>
-                                <h4>Independent</h4>
-                                <p>테스트 간 의존성 없이 독립 실행 가능</p>
-                            </div>
-                            <div class="first-card">
-                                <div class="letter">R</div>
-                                <h4>Repeatable</h4>
-                                <p>환경에 관계없이 동일한 결과</p>
-                            </div>
-                            <div class="first-card">
-                                <div class="letter">S</div>
-                                <h4>Self-validating</h4>
-                                <p>성공/실패가 자동 판정</p>
-                            </div>
-                            <div class="first-card">
-                                <div class="letter">T</div>
-                                <h4>Timely</h4>
-                                <p>프로덕션 코드 작성 직전에 테스트 작성</p>
-                            </div>
+                    <div class="double-grid">
+                        <div class="double-card">
+                            <h4>Mock</h4>
+                            <p>기대되는 호출을 검증하는 객체. 행위(behavior) 검증에 사용</p>
+                            <div class="example">예: verify(emailService).send(any())</div>
+                        </div>
+                        <div class="double-card">
+                            <h4>Stub</h4>
+                            <p>미리 정의된 응답을 반환하는 객체. 상태(state) 테스트에 사용</p>
+                            <div class="example">예: when(repo.findById(1)).thenReturn(user)</div>
+                        </div>
+                        <div class="double-card">
+                            <h4>Spy</h4>
+                            <p>실제 객체를 감싸서 호출을 기록. 부분 Mock</p>
+                            <div class="example">예: spy(realService).methodCall()</div>
+                        </div>
+                        <div class="double-card">
+                            <h4>Fake</h4>
+                            <p>단순화된 동작 구현체. 예: 인메모리 DB</p>
+                            <div class="example">예: InMemoryUserRepository</div>
+                        </div>
+                        <div class="double-card">
+                            <h4>Dummy</h4>
+                            <p>파라미터 채우기용 객체. 실제 사용되지 않음</p>
+                            <div class="example">예: new NullLogger()</div>
                         </div>
                     </div>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">5.</span> Test Doubles</h2>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">6.</span> Testing Frameworks</h2>
 
-                        <div class="double-grid">
-                            <div class="double-card">
-                                <h4>Mock</h4>
-                                <p>기대되는 호출을 검증하는 객체. 행위(behavior) 검증에 사용</p>
-                                <div class="example">예: verify(emailService).send(any())</div>
-                            </div>
-                            <div class="double-card">
-                                <h4>Stub</h4>
-                                <p>미리 정의된 응답을 반환하는 객체. 상태(state) 테스트에 사용</p>
-                                <div class="example">예: when(repo.findById(1)).thenReturn(user)</div>
-                            </div>
-                            <div class="double-card">
-                                <h4>Spy</h4>
-                                <p>실제 객체를 감싸서 호출을 기록. 부분 Mock</p>
-                                <div class="example">예: spy(realService).methodCall()</div>
-                            </div>
-                            <div class="double-card">
-                                <h4>Fake</h4>
-                                <p>단순화된 동작 구현체. 예: 인메모리 DB</p>
-                                <div class="example">예: InMemoryUserRepository</div>
-                            </div>
-                            <div class="double-card">
-                                <h4>Dummy</h4>
-                                <p>파라미터 채우기용 객체. 실제 사용되지 않음</p>
-                                <div class="example">예: new NullLogger()</div>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>프레임워크</th>
+                                <th>언어</th>
+                                <th>특징</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>JUnit 5</strong></td>
+                                <td><span class="lang-badge">Java</span></td>
+                                <td>표준 테스팅 프레임워크, 어노테이션 기반, 확장 모델</td>
+                            </tr>
+                            <tr>
+                                <td><strong>pytest</strong></td>
+                                <td><span class="lang-badge">Python</span></td>
+                                <td>간결한 문법, fixture, 풍부한 플러그인 생태계</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jest</strong></td>
+                                <td><span class="lang-badge">JavaScript</span></td>
+                                <td>Zero config, 스냅샷 테스팅, 빠른 병렬 실행</td>
+                            </tr>
+                            <tr>
+                                <td><strong>xUnit</strong></td>
+                                <td><span class="lang-badge">.NET</span></td>
+                                <td>Fact/Theory 패턴, 병렬 실행, 모던 .NET 지원</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RSpec</strong></td>
+                                <td><span class="lang-badge">Ruby</span></td>
+                                <td>BDD 스타일, 가독성 높은 DSL</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Go testing</strong></td>
+                                <td><span class="lang-badge">Go</span></td>
+                                <td>표준 라이브러리, 테이블 드리븐 테스트</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">6.</span> Testing Frameworks</h2>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">7.</span> Code Coverage</h2>
 
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>프레임워크</th>
-                                    <th>언어</th>
-                                    <th>특징</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>JUnit 5</strong></td>
-                                    <td><span class="lang-badge">Java</span></td>
-                                    <td>표준 테스팅 프레임워크, 어노테이션 기반, 확장 모델</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>pytest</strong></td>
-                                    <td><span class="lang-badge">Python</span></td>
-                                    <td>간결한 문법, fixture, 풍부한 플러그인 생태계</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Jest</strong></td>
-                                    <td><span class="lang-badge">JavaScript</span></td>
-                                    <td>Zero config, 스냅샷 테스팅, 빠른 병렬 실행</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>xUnit</strong></td>
-                                    <td><span class="lang-badge">.NET</span></td>
-                                    <td>Fact/Theory 패턴, 병렬 실행, 모던 .NET 지원</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>RSpec</strong></td>
-                                    <td><span class="lang-badge">Ruby</span></td>
-                                    <td>BDD 스타일, 가독성 높은 DSL</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Go testing</strong></td>
-                                    <td><span class="lang-badge">Go</span></td>
-                                    <td>표준 라이브러리, 테이블 드리븐 테스트</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">7.</span> Code Coverage</h2>
-
-                        <div class="coverage-box">
-                            <h4>Coverage Types</h4>
-                            <div class="coverage-types">
-                                <div class="coverage-type">
-                                    <strong>Line Coverage</strong>
-                                    <p>실행된 코드 라인 비율</p>
-                                </div>
-                                <div class="coverage-type">
-                                    <strong>Branch Coverage</strong>
-                                    <p>조건문의 모든 분기 실행 비율</p>
-                                </div>
-                                <div class="coverage-type">
-                                    <strong>Function Coverage</strong>
-                                    <p>호출된 함수/메서드 비율</p>
-                                </div>
-                                <div class="coverage-type">
-                                    <strong>Statement Coverage</strong>
-                                    <p>실행된 명령문 비율</p>
-                                </div>
+                    <div class="coverage-box">
+                        <h4>Coverage Types</h4>
+                        <div class="coverage-types">
+                            <div class="coverage-type">
+                                <strong>Line Coverage</strong>
+                                <p>실행된 코드 라인 비율</p>
                             </div>
-                        </div>
-
-                        <p>
-                            높은 코드 커버리지가 곧 좋은 테스트를 의미하지는 않는다.
-                            80% 커버리지를 일반적인 목표로 삼되, 핵심 비즈니스 로직은 더 높은 커버리지를,
-                            단순 getter/setter는 낮은 커버리지를 허용할 수 있다.
-                        </p>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">8.</span> Anti-Patterns</h2>
-
-                        <div class="antipattern-box">
-                            <h4>단위 테스트 안티패턴</h4>
-                            <ul>
-                                <li><strong>The Liar:</strong> 항상 통과하지만 실제로 아무것도 검증하지 않는 테스트</li>
-                                <li><strong>The Giant:</strong> 너무 많은 것을 테스트하는 거대한 테스트</li>
-                                <li><strong>The Mockery:</strong> 과도한 Mocking으로 실제 동작과 괴리</li>
-                                <li><strong>The Inspector:</strong> 내부 구현을 직접 테스트 (캡슐화 위반)</li>
-                                <li><strong>The Slowpoke:</strong> 느린 테스트 (DB, 네트워크 호출 포함)</li>
-                                <li><strong>The Flickering:</strong> 간헐적으로 실패하는 불안정한 테스트</li>
-                                <li><strong>The Local Hero:</strong> 특정 환경에서만 동작하는 테스트</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">9.</span> Benefits</h2>
-
-                        <div class="benefits-grid">
-                            <div class="benefit-card">
-                                <h4>조기 결함 발견</h4>
-                                <p>개발 중 버그를 즉시 발견하여 수정 비용 최소화</p>
+                            <div class="coverage-type">
+                                <strong>Branch Coverage</strong>
+                                <p>조건문의 모든 분기 실행 비율</p>
                             </div>
-                            <div class="benefit-card">
-                                <h4>안전한 리팩토링</h4>
-                                <p>테스트 스위트가 변경에 대한 안전망 역할</p>
+                            <div class="coverage-type">
+                                <strong>Function Coverage</strong>
+                                <p>호출된 함수/메서드 비율</p>
                             </div>
-                            <div class="benefit-card">
-                                <h4>실행 가능한 문서</h4>
-                                <p>테스트 코드가 사용법 예제 역할</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>설계 개선</h4>
-                                <p>테스트 용이성이 좋은 설계(낮은 결합도)로 유도</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>배포 자신감</h4>
-                                <p>회귀 테스트로 배포 리스크 감소</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>디버깅 시간 단축</h4>
-                                <p>실패 테스트가 문제 위치를 정확히 지목</p>
+                            <div class="coverage-type">
+                                <strong>Statement Coverage</strong>
+                                <p>실행된 명령문 비율</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">10.</span> Conclusion</h2>
-                        <p>
-                            단위 테스트는 소프트웨어 품질 보증의 기초이자 TDD, 리팩토링, CI/CD의 필수 요소이다.
-                            FIRST 원칙을 준수하고 AAA 패턴을 활용한 체계적인 테스트 작성은
-                            장기적으로 개발 생산성과 코드 품질을 크게 향상시킨다.
-                        </p>
-                        <p>
-                            효과적인 단위 테스트를 위해서는 무엇을 테스트해야 하는지(비즈니스 로직 중심),
-                            어떻게 테스트해야 하는지(적절한 Test Double 사용),
-                            언제 테스트를 작성해야 하는지(가능한 빨리)를 이해하는 것이 중요하다.
-                        </p>
-                    </div>
+                    <p>
+                        높은 코드 커버리지가 곧 좋은 테스트를 의미하지는 않는다.
+                        80% 커버리지를 일반적인 목표로 삼되, 핵심 비즈니스 로직은 더 높은 커버리지를,
+                        단순 getter/setter는 낮은 커버리지를 허용할 수 있다.
+                    </p>
+                </section>
 
-                    <div class="references">
-                        <h3>References</h3>
-                        <ol>
-                            <li>Beck, K. (2002). <em>Test-Driven Development: By Example</em>. Addison-Wesley.</li>
-                            <li>Meszaros, G. (2007). <em>xUnit Test Patterns: Refactoring Test Code</em>. Addison-Wesley.</li>
-                            <li>Feathers, M. (2004). <em>Working Effectively with Legacy Code</em>. Prentice Hall.</li>
-                            <li>Osherove, R. (2013). <em>The Art of Unit Testing</em>. Manning Publications.</li>
-                            <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.</li>
-                        </ol>
-                    </div>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">8.</span> Anti-Patterns</h2>
 
-                    <div class="related-articles">
-                        <h3>Related Papers</h3>
-                        <div class="related-grid">
-                            <a href="tdd-methodology.html" class="related-card">
-                                <span class="related-title">TDD: 테스트 주도 개발</span>
-                            </a>
-                            <a href="integration-testing.html" class="related-card">
-                                <span class="related-title">통합 테스트 전략</span>
-                            </a>
-                            <a href="bdd-methodology.html" class="related-card">
-                                <span class="related-title">BDD: 행위 주도 개발</span>
-                            </a>
+                    <div class="antipattern-box">
+                        <h4>단위 테스트 안티패턴</h4>
+                        <ul>
+                            <li><strong>The Liar:</strong> 항상 통과하지만 실제로 아무것도 검증하지 않는 테스트</li>
+                            <li><strong>The Giant:</strong> 너무 많은 것을 테스트하는 거대한 테스트</li>
+                            <li><strong>The Mockery:</strong> 과도한 Mocking으로 실제 동작과 괴리</li>
+                            <li><strong>The Inspector:</strong> 내부 구현을 직접 테스트 (캡슐화 위반)</li>
+                            <li><strong>The Slowpoke:</strong> 느린 테스트 (DB, 네트워크 호출 포함)</li>
+                            <li><strong>The Flickering:</strong> 간헐적으로 실패하는 불안정한 테스트</li>
+                            <li><strong>The Local Hero:</strong> 특정 환경에서만 동작하는 테스트</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">9.</span> Benefits</h2>
+
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <h4>조기 결함 발견</h4>
+                            <p>개발 중 버그를 즉시 발견하여 수정 비용 최소화</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>안전한 리팩토링</h4>
+                            <p>테스트 스위트가 변경에 대한 안전망 역할</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>실행 가능한 문서</h4>
+                            <p>테스트 코드가 사용법 예제 역할</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>설계 개선</h4>
+                            <p>테스트 용이성이 좋은 설계(낮은 결합도)로 유도</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>배포 자신감</h4>
+                            <p>회귀 테스트로 배포 리스크 감소</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>디버깅 시간 단축</h4>
+                            <p>실패 테스트가 문제 위치를 정확히 지목</p>
                         </div>
                     </div>
+                </section>
 
-                    <div class="source-box">
-                        <p><strong>Classification:</strong> Development Practices / Testing Methodology<br>
-                        <strong>Series:</strong> Software Engineering Methodology<br>
-                        <strong>Last Updated:</strong> 2024</p>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">10.</span> Conclusion</h2>
+                    <p>
+                        단위 테스트는 소프트웨어 품질 보증의 기초이자 TDD, 리팩토링, CI/CD의 필수 요소이다.
+                        FIRST 원칙을 준수하고 AAA 패턴을 활용한 체계적인 테스트 작성은
+                        장기적으로 개발 생산성과 코드 품질을 크게 향상시킨다.
+                    </p>
+                    <p>
+                        효과적인 단위 테스트를 위해서는 무엇을 테스트해야 하는지(비즈니스 로직 중심),
+                        어떻게 테스트해야 하는지(적절한 Test Double 사용),
+                        언제 테스트를 작성해야 하는지(가능한 빨리)를 이해하는 것이 중요하다.
+                    </p>
+                </section>
+
+                <div class="references">
+                    <h3>References</h3>
+                    <ol>
+                        <li>Beck, K. (2002). <em>Test-Driven Development: By Example</em>. Addison-Wesley.</li>
+                        <li>Meszaros, G. (2007). <em>xUnit Test Patterns: Refactoring Test Code</em>. Addison-Wesley.</li>
+                        <li>Feathers, M. (2004). <em>Working Effectively with Legacy Code</em>. Prentice Hall.</li>
+                        <li>Osherove, R. (2013). <em>The Art of Unit Testing</em>. Manning Publications.</li>
+                        <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.</li>
+                    </ol>
+                </div>
+
+                <div class="related-articles">
+                    <h3>Related Papers</h3>
+                    <div class="related-grid">
+                        <a href="tdd-methodology.html" class="related-card">
+                            <span class="related-title">TDD: 테스트 주도 개발</span>
+                        </a>
+                        <a href="integration-testing.html" class="related-card">
+                            <span class="related-title">통합 테스트 전략</span>
+                        </a>
+                        <a href="bdd-methodology.html" class="related-card">
+                            <span class="related-title">BDD: 행위 주도 개발</span>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </article>
+
+                <div class="source-box">
+                    <p><strong>Classification:</strong> Development Practices / Testing Methodology<br>
+                    <strong>Series:</strong> Software Engineering Methodology<br>
+                    <strong>Last Updated:</strong> 2024</p>
+                </div>
+            </article>
+        </div>
     </main>
+
     <footer class="site-footer">
-        <p>© 2024 Stock Insights. All rights reserved.</p>
+        <div class="content-wrapper">
+            <p>© 2024 Stock Insights. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>

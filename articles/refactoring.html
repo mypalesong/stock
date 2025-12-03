@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refactoring: 코드 리팩토링의 원칙과 기법 | Stock Insights</title>
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/article.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
@@ -20,137 +19,144 @@
             --bg-secondary: #f8fafc;
             --bg-tertiary: #f1f5f9;
             --border-color: #e2e8f0;
-            --border-light: #f1f5f9;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: var(--font-sans);
             color: var(--text-color);
             line-height: 1.7;
+            background: var(--bg-secondary);
         }
 
-        /* Desktop Layout - 70% of viewport on large screens */
-        .article-body-wrapper {
+        /* Unified Content Container */
+        .content-wrapper {
             width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
             padding: 0 1.5rem;
         }
 
-        @media (min-width: 1200px) {
-            .article-body-wrapper {
-                width: 70%;
-                min-width: 900px;
-                max-width: 1100px;
-                margin: 0 auto;
-                padding: 0 3rem;
+        @media (min-width: 1400px) {
+            .content-wrapper {
+                width: 80%;
+                min-width: 1200px;
+                max-width: 1400px;
+                padding: 0;
             }
         }
 
-        /* Professional Header */
+        /* Compact Breadcrumb */
+        .breadcrumb-section {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+        }
+
+        .breadcrumb {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color);
+        }
+
+        .breadcrumb span {
+            color: #cbd5e1;
+        }
+
+        /* Compact Hero Section */
         .article-hero {
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%);
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            padding: 2.5rem 0;
         }
 
-        @media (min-width: 1200px) {
-            .article-hero {
-                padding: 5rem 4rem;
-            }
-        }
-
-        .article-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(15, 52, 96, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(26, 26, 46, 0.5) 0%, transparent 50%);
-        }
-
-        .article-hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-        }
-
-        @media (min-width: 1200px) {
-            .article-hero-content {
-                margin-left: 10%;
-            }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .paper-category {
-            display: inline-block;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
-            color: #94a3b8;
+            color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            letter-spacing: 0.12em;
         }
 
         .article-hero h1 {
             font-family: var(--font-sans);
             font-weight: 700;
-            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-size: 2rem;
             color: #ffffff;
-            line-height: 1.25;
-            margin-bottom: 1.25rem;
+            line-height: 1.3;
             letter-spacing: -0.02em;
         }
 
         .article-hero .subtitle {
             font-family: var(--font-mono);
-            font-size: 1rem;
-            color: #cbd5e1;
+            font-size: 0.85rem;
+            color: #94a3b8;
             font-weight: 400;
         }
 
-        /* Main Content */
-        .article-content {
+        /* Main Content Area */
+        .article-main {
+            background: var(--bg-primary);
             padding: 3rem 0;
+        }
+
+        .article-body {
+            max-width: 100%;
         }
 
         /* Abstract */
         .abstract-box {
             background: var(--bg-secondary);
-            padding: 2rem 2.5rem;
-            margin: 0 0 3rem 0;
-            border-radius: 8px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 2.5rem;
             border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-color);
         }
 
         .abstract-box .label {
             font-family: var(--font-mono);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--accent-color);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .abstract-box p {
-            font-size: 1rem;
-            line-height: 1.85;
+            font-size: 0.95rem;
+            line-height: 1.8;
             color: var(--text-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .keywords {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             padding-top: 1rem;
             border-top: 1px solid var(--border-color);
@@ -163,13 +169,12 @@
         /* Section Titles */
         .section-title {
             font-family: var(--font-sans);
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin: 3rem 0 1.5rem 0;
-            padding-bottom: 0.75rem;
+            margin: 2.5rem 0 1.25rem 0;
+            padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--border-color);
-            letter-spacing: -0.01em;
         }
 
         .section-title .num {
@@ -180,33 +185,33 @@
 
         .subsection-title {
             font-family: var(--font-sans);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--secondary-color);
-            margin: 2.5rem 0 1rem 0;
+            margin: 2rem 0 0.75rem 0;
         }
 
         /* Body Text */
         .paper-section {
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .paper-section > p {
-            font-size: 1.05rem;
-            line-height: 1.9;
+            font-size: 1rem;
+            line-height: 1.85;
             color: var(--text-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .paper-section > ul {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            padding-left: 1.75rem;
-            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.75;
+            padding-left: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .paper-section > ul li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: var(--text-color);
         }
 
@@ -217,41 +222,26 @@
         /* Quote Box */
         .quote-box {
             background: var(--bg-tertiary);
-            padding: 2rem 2.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .quote-box::before {
-            content: '"';
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            font-family: Georgia, serif;
-            font-size: 3rem;
-            color: var(--border-color);
-            line-height: 1;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--accent-color);
         }
 
         .quote-box p {
             font-family: var(--font-sans);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-style: italic;
             color: var(--text-color);
             margin: 0;
-            padding-left: 2rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .quote-box .author {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-style: normal;
             color: var(--text-muted);
-            margin-top: 1rem;
-            padding-left: 2rem;
+            margin-top: 0.75rem;
         }
 
         /* Technique Cards */
@@ -259,20 +249,13 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
             gap: 1.25rem;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
         .technique-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             padding: 1.75rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .technique-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
         }
 
         .technique-card h4 {
@@ -296,16 +279,14 @@
             color: var(--secondary-color);
             background: var(--bg-secondary);
             padding: 0.5rem;
-            border-radius: 4px;
             border: 1px solid var(--border-color);
         }
 
         /* Code Transformation */
         .transform-box {
             background: #0f172a;
-            border-radius: 8px;
             padding: 1.75rem;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
             border: 1px solid #1e293b;
         }
 
@@ -347,20 +328,13 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
             gap: 1.25rem;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
         .when-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             padding: 1.75rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .when-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
         }
 
         .when-card h4 {
@@ -382,35 +356,31 @@
         .catalog-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 2.5rem 0;
-            font-size: 0.95rem;
+            margin: 2rem 0;
+            font-size: 0.9rem;
         }
 
         .catalog-table th {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             background: var(--primary-color);
             color: white;
-            padding: 1rem 1.25rem;
+            padding: 0.85rem 1rem;
             text-align: left;
         }
 
         .catalog-table td {
-            padding: 1rem 1.25rem;
+            padding: 0.85rem 1rem;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .catalog-table tr:nth-child(even) {
             background: var(--bg-secondary);
-        }
-
-        .catalog-table tr:hover {
-            background: var(--bg-tertiary);
         }
 
         .category-badge {
@@ -429,9 +399,8 @@
         .rule-box {
             background: #f0fdf4;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             padding: 2rem 2.5rem;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
         .rule-box h4 {
@@ -462,9 +431,8 @@
         .warning-box {
             background: #fef2f2;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             padding: 2rem 2.5rem;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
         .warning-box h4 {
@@ -490,266 +458,276 @@
         /* Benefits Grid */
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-            gap: 1.25rem;
-            margin: 2.5rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .benefit-card {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.75rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .benefit-card:hover {
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            border-color: var(--accent-color);
+            padding: 1.25rem;
         }
 
         .benefit-card h4 {
             font-family: var(--font-sans);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .benefit-card p {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         /* References */
         .references {
             background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 2rem 2.5rem;
-            margin: 3rem 0;
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
             border: 1px solid var(--border-color);
         }
 
         .references h3 {
-            font-family: var(--font-sans);
-            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
         }
 
         .references ol {
-            padding-left: 1.5rem;
+            padding-left: 1.25rem;
             margin: 0;
         }
 
         .references li {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 0.75rem;
-            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
         }
 
         /* Related Articles */
         .related-articles {
-            margin: 3rem 0;
+            margin: 2.5rem 0;
         }
 
         .related-articles h3 {
-            font-family: var(--font-sans);
-            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
         }
 
         .related-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .related-card {
             display: block;
-            padding: 1.25rem 1.5rem;
-            background: var(--bg-primary);
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             text-decoration: none;
             transition: all 0.2s ease;
         }
 
         .related-card:hover {
             border-color: var(--accent-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: var(--bg-tertiary);
         }
 
         .related-title {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             color: var(--text-color);
         }
 
         /* Source Box */
         .source-box {
             background: var(--bg-tertiary);
-            border-radius: 8px;
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.5rem;
             margin: 2rem 0;
             border: 1px solid var(--border-color);
         }
 
         .source-box p {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             margin: 0;
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         .source-box strong {
             color: var(--text-color);
         }
+
+        /* Footer */
+        .site-footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-content">
-            <a href="../index.html" class="header-title">
-                <span class="header-logo">Stock Insights</span>
-            </a>
+    <nav class="breadcrumb-section">
+        <div class="content-wrapper">
+            <div class="breadcrumb">
+                <a href="../index.html">홈</a>
+                <span>/</span>
+                <a href="../index.html?category=tech">개발 방법론</a>
+                <span>/</span>
+                <span>Refactoring</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="article-hero">
+        <div class="content-wrapper">
+            <div class="hero-content">
+                <span class="paper-category">Software Engineering · Research Paper</span>
+                <h1>Refactoring: 코드 리팩토링의 원칙과 기법</h1>
+                <p class="subtitle">Methodology Series Vol.4</p>
+            </div>
         </div>
     </header>
-    <main class="article-page">
-        <article>
-            <header class="article-header">
-                <nav class="breadcrumb">
-                    <a href="../index.html">홈</a>
-                    <span>/</span>
-                    <a href="../index.html?category=tech">개발 방법론</a>
-                    <span>/</span>
-                    <span>Refactoring</span>
-                </nav>
-            </header>
 
-            <div class="article-hero">
-                <div class="article-hero-content">
-                    <span class="paper-category">Software Engineering · Research Paper</span>
-                    <h1>Refactoring: 코드 리팩토링의 원칙과 기법</h1>
-                    <p class="subtitle">Methodology Series Vol.2</p>
+    <main class="article-main">
+        <div class="content-wrapper">
+            <article class="article-body">
+                <div class="abstract-box">
+                    <div class="label">Abstract</div>
+                    <p>
+                        리팩토링은 외부 동작을 변경하지 않으면서 코드의 내부 구조를 개선하는 기법이다.
+                        Martin Fowler의 "Refactoring" 2판을 중심으로, 본 논문에서는 리팩토링의 정의와 목적,
+                        주요 리팩토링 기법 카탈로그, 리팩토링을 안전하게 수행하기 위한 원칙을 분석한다.
+                        테스트 주도 개발과 결합된 지속적인 리팩토링은 기술 부채를 관리하고
+                        소프트웨어의 장기적인 건강을 유지하는 핵심 실천법이다.
+                    </p>
+                    <div class="keywords">
+                        <strong>Keywords:</strong> Refactoring, Code Smell, Technical Debt, Clean Code, Design Patterns, Software Maintenance
+                    </div>
                 </div>
-            </div>
 
-            <div class="article-body-wrapper">
-                <div class="article-content">
-                    <div class="abstract-box">
-                        <div class="label">Abstract</div>
-                        <p>
-                            리팩토링은 외부 동작을 변경하지 않으면서 코드의 내부 구조를 개선하는 기법이다.
-                            Martin Fowler의 "Refactoring" 2판을 중심으로, 본 논문에서는 리팩토링의 정의와 목적,
-                            주요 리팩토링 기법 카탈로그, 리팩토링을 안전하게 수행하기 위한 원칙을 분석한다.
-                            테스트 주도 개발과 결합된 지속적인 리팩토링은 기술 부채를 관리하고
-                            소프트웨어의 장기적인 건강을 유지하는 핵심 실천법이다.
-                        </p>
-                        <div class="keywords">
-                            <strong>Keywords:</strong> Refactoring, Code Smell, Technical Debt, Clean Code, Design Patterns, Software Maintenance
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
+                    <p>
+                        리팩토링이라는 용어는 William Opdyke가 1992년 박사 논문에서 처음 사용했으며,
+                        Martin Fowler가 1999년 "Refactoring: Improving the Design of Existing Code"를 통해
+                        널리 알렸다. 리팩토링은 "기능은 그대로, 구조만 개선"이라는 원칙 하에
+                        코드의 가독성, 유지보수성, 확장성을 향상시킨다.
+                    </p>
+
+                    <div class="quote-box">
+                        <p>Refactoring is a disciplined technique for restructuring an existing body of code,
+                        altering its internal structure without changing its external behavior.</p>
+                        <div class="author">— Martin Fowler</div>
+                    </div>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">2.</span> When to Refactor</h2>
+
+                    <div class="when-grid">
+                        <div class="when-card">
+                            <h4>Rule of Three</h4>
+                            <p>비슷한 코드를 세 번째 작성할 때 리팩토링하라. 세 번이면 패턴이다</p>
+                        </div>
+                        <div class="when-card">
+                            <h4>기능 추가 시</h4>
+                            <p>새 기능을 추가하기 전에 기존 코드를 이해하기 쉽게 정리</p>
+                        </div>
+                        <div class="when-card">
+                            <h4>버그 수정 시</h4>
+                            <p>버그를 찾기 어려웠다면, 그 코드는 리팩토링이 필요하다는 신호</p>
+                        </div>
+                        <div class="when-card">
+                            <h4>코드 리뷰 시</h4>
+                            <p>리뷰 중 발견된 코드 스멜을 즉시 개선</p>
+                        </div>
+                        <div class="when-card">
+                            <h4>코드 스멜 발견 시</h4>
+                            <p>중복, 긴 메서드, 큰 클래스 등의 스멜을 감지했을 때</p>
+                        </div>
+                        <div class="when-card">
+                            <h4>보이스카웃 규칙</h4>
+                            <p>코드를 떠날 때 왔을 때보다 깨끗하게</p>
                         </div>
                     </div>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
-                        <p>
-                            리팩토링이라는 용어는 William Opdyke가 1992년 박사 논문에서 처음 사용했으며,
-                            Martin Fowler가 1999년 "Refactoring: Improving the Design of Existing Code"를 통해
-                            널리 알렸다. 리팩토링은 "기능은 그대로, 구조만 개선"이라는 원칙 하에
-                            코드의 가독성, 유지보수성, 확장성을 향상시킨다.
-                        </p>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">3.</span> Key Refactoring Techniques</h2>
 
-                        <div class="quote-box">
-                            <p>Refactoring is a disciplined technique for restructuring an existing body of code,
-                            altering its internal structure without changing its external behavior.</p>
-                            <div class="author">— Martin Fowler</div>
+                    <div class="technique-grid">
+                        <div class="technique-card">
+                            <h4>Extract Function</h4>
+                            <p>코드 조각을 별도의 함수로 추출. 가장 흔히 사용되는 리팩토링</p>
+                            <div class="example">코드 블록 → function calculateTotal()</div>
+                        </div>
+                        <div class="technique-card">
+                            <h4>Inline Function</h4>
+                            <p>함수 본문이 함수 이름만큼 명확할 때, 호출부에 직접 삽입</p>
+                            <div class="example">isActive() { return age > 0; } → age > 0</div>
+                        </div>
+                        <div class="technique-card">
+                            <h4>Rename Variable/Function</h4>
+                            <p>이름을 더 명확하게 변경. 이해하기 쉬운 코드의 시작</p>
+                            <div class="example">d → elapsedDays, fn → calculateTax</div>
+                        </div>
+                        <div class="technique-card">
+                            <h4>Extract Class</h4>
+                            <p>클래스가 너무 많은 책임을 가질 때 일부를 새 클래스로 분리</p>
+                            <div class="example">Person → Person + TelephoneNumber</div>
+                        </div>
+                        <div class="technique-card">
+                            <h4>Move Function</h4>
+                            <p>함수를 더 적절한 클래스로 이동. Feature Envy 해결</p>
+                            <div class="example">A.calculateFor(b) → B.calculate()</div>
+                        </div>
+                        <div class="technique-card">
+                            <h4>Replace Temp with Query</h4>
+                            <p>임시 변수를 메서드 호출로 대체</p>
+                            <div class="example">let total = base * tax → getTotal()</div>
                         </div>
                     </div>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">2.</span> When to Refactor</h2>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">4.</span> Refactoring Example</h2>
 
-                        <div class="when-grid">
-                            <div class="when-card">
-                                <h4>Rule of Three</h4>
-                                <p>비슷한 코드를 세 번째 작성할 때 리팩토링하라. 세 번이면 패턴이다</p>
-                            </div>
-                            <div class="when-card">
-                                <h4>기능 추가 시</h4>
-                                <p>새 기능을 추가하기 전에 기존 코드를 이해하기 쉽게 정리</p>
-                            </div>
-                            <div class="when-card">
-                                <h4>버그 수정 시</h4>
-                                <p>버그를 찾기 어려웠다면, 그 코드는 리팩토링이 필요하다는 신호</p>
-                            </div>
-                            <div class="when-card">
-                                <h4>코드 리뷰 시</h4>
-                                <p>리뷰 중 발견된 코드 스멜을 즉시 개선</p>
-                            </div>
-                            <div class="when-card">
-                                <h4>코드 스멜 발견 시</h4>
-                                <p>중복, 긴 메서드, 큰 클래스 등의 스멜을 감지했을 때</p>
-                            </div>
-                            <div class="when-card">
-                                <h4>보이스카웃 규칙</h4>
-                                <p>코드를 떠날 때 왔을 때보다 깨끗하게</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">3.</span> Key Refactoring Techniques</h2>
-
-                        <div class="technique-grid">
-                            <div class="technique-card">
-                                <h4>Extract Function</h4>
-                                <p>코드 조각을 별도의 함수로 추출. 가장 흔히 사용되는 리팩토링</p>
-                                <div class="example">코드 블록 → function calculateTotal()</div>
-                            </div>
-                            <div class="technique-card">
-                                <h4>Inline Function</h4>
-                                <p>함수 본문이 함수 이름만큼 명확할 때, 호출부에 직접 삽입</p>
-                                <div class="example">isActive() { return age > 0; } → age > 0</div>
-                            </div>
-                            <div class="technique-card">
-                                <h4>Rename Variable/Function</h4>
-                                <p>이름을 더 명확하게 변경. 이해하기 쉬운 코드의 시작</p>
-                                <div class="example">d → elapsedDays, fn → calculateTax</div>
-                            </div>
-                            <div class="technique-card">
-                                <h4>Extract Class</h4>
-                                <p>클래스가 너무 많은 책임을 가질 때 일부를 새 클래스로 분리</p>
-                                <div class="example">Person → Person + TelephoneNumber</div>
-                            </div>
-                            <div class="technique-card">
-                                <h4>Move Function</h4>
-                                <p>함수를 더 적절한 클래스로 이동. Feature Envy 해결</p>
-                                <div class="example">A.calculateFor(b) → B.calculate()</div>
-                            </div>
-                            <div class="technique-card">
-                                <h4>Replace Temp with Query</h4>
-                                <p>임시 변수를 메서드 호출로 대체</p>
-                                <div class="example">let total = base * tax → getTotal()</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">4.</span> Refactoring Example</h2>
-
-                        <div class="transform-box">
-                            <div class="transform-header">Extract Function 예시</div>
-                            <div class="transform-grid">
-                                <div class="transform-code">
+                    <div class="transform-box">
+                        <div class="transform-header">Extract Function 예시</div>
+                        <div class="transform-grid">
+                            <div class="transform-code">
 <span class="before">// Before</span>
 <span class="keyword">function</span> <span class="function">printBill</span>(invoice) {
   <span class="keyword">let</span> outstanding = 0;
@@ -763,9 +741,9 @@
   console.log(<span class="string">`name: ${invoice.customer}`</span>);
   console.log(<span class="string">`amount: ${outstanding}`</span>);
 }
-                                </div>
-                                <div class="transform-arrow">→</div>
-                                <div class="transform-code">
+                            </div>
+                            <div class="transform-arrow">→</div>
+                            <div class="transform-code">
 <span class="after">// After</span>
 <span class="keyword">function</span> <span class="function">printBill</span>(invoice) {
   <span class="keyword">const</span> outstanding = <span class="function">calculateOutstanding</span>(invoice);
@@ -781,166 +759,168 @@
   console.log(<span class="string">`name: ${invoice.customer}`</span>);
   console.log(<span class="string">`amount: ${outstanding}`</span>);
 }
-                                </div>
                             </div>
                         </div>
                     </div>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">5.</span> Refactoring Catalog</h2>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">5.</span> Refactoring Catalog</h2>
 
-                        <table class="catalog-table">
-                            <thead>
-                                <tr>
-                                    <th>카테고리</th>
-                                    <th>리팩토링 기법</th>
-                                    <th>목적</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><span class="category-badge">기본</span></td>
-                                    <td>Extract/Inline Function, Rename</td>
-                                    <td>가독성, 명확성 향상</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="category-badge">캡슐화</span></td>
-                                    <td>Encapsulate Variable/Collection</td>
-                                    <td>데이터 접근 제어</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="category-badge">이동</span></td>
-                                    <td>Move Function/Field, Extract Class</td>
-                                    <td>책임 분리, 응집도 향상</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="category-badge">조건부</span></td>
-                                    <td>Decompose/Consolidate Conditional</td>
-                                    <td>조건문 단순화</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="category-badge">API</span></td>
-                                    <td>Separate Query from Modifier</td>
-                                    <td>부수효과 제거</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="category-badge">상속</span></td>
-                                    <td>Pull Up/Push Down Method</td>
-                                    <td>상속 구조 정리</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="catalog-table">
+                        <thead>
+                            <tr>
+                                <th>카테고리</th>
+                                <th>리팩토링 기법</th>
+                                <th>목적</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="category-badge">기본</span></td>
+                                <td>Extract/Inline Function, Rename</td>
+                                <td>가독성, 명확성 향상</td>
+                            </tr>
+                            <tr>
+                                <td><span class="category-badge">캡슐화</span></td>
+                                <td>Encapsulate Variable/Collection</td>
+                                <td>데이터 접근 제어</td>
+                            </tr>
+                            <tr>
+                                <td><span class="category-badge">이동</span></td>
+                                <td>Move Function/Field, Extract Class</td>
+                                <td>책임 분리, 응집도 향상</td>
+                            </tr>
+                            <tr>
+                                <td><span class="category-badge">조건부</span></td>
+                                <td>Decompose/Consolidate Conditional</td>
+                                <td>조건문 단순화</td>
+                            </tr>
+                            <tr>
+                                <td><span class="category-badge">API</span></td>
+                                <td>Separate Query from Modifier</td>
+                                <td>부수효과 제거</td>
+                            </tr>
+                            <tr>
+                                <td><span class="category-badge">상속</span></td>
+                                <td>Pull Up/Push Down Method</td>
+                                <td>상속 구조 정리</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
 
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">6.</span> Safe Refactoring</h2>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">6.</span> Safe Refactoring</h2>
 
-                        <div class="rule-box">
-                            <h4>안전한 리팩토링을 위한 규칙</h4>
-                            <ol>
-                                <li><strong>테스트 먼저:</strong> 리팩토링 전에 충분한 테스트 커버리지 확보</li>
-                                <li><strong>작은 단계:</strong> 한 번에 하나의 변경만. 각 단계 후 테스트 실행</li>
-                                <li><strong>자주 커밋:</strong> 작은 변경마다 커밋하여 롤백 가능하게</li>
-                                <li><strong>동작 유지:</strong> 외부 동작이 변경되면 리팩토링이 아님</li>
-                                <li><strong>IDE 도구 활용:</strong> 자동화된 리팩토링 기능 사용</li>
-                                <li><strong>코드 리뷰:</strong> 리팩토링도 리뷰 대상</li>
-                            </ol>
-                        </div>
-
-                        <div class="warning-box">
-                            <h4>리팩토링하지 말아야 할 때</h4>
-                            <ul>
-                                <li>테스트가 없고 추가할 수 없는 경우</li>
-                                <li>마감이 임박한 경우 (기술 부채로 기록)</li>
-                                <li>코드를 완전히 재작성하는 것이 나은 경우</li>
-                                <li>리팩토링과 기능 변경을 동시에 하려는 경우</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">7.</span> Benefits</h2>
-
-                        <div class="benefits-grid">
-                            <div class="benefit-card">
-                                <h4>가독성 향상</h4>
-                                <p>의도가 명확한 코드로 이해 시간 단축</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>버그 발견</h4>
-                                <p>코드를 정리하면서 숨겨진 버그 발견</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>개발 속도</h4>
-                                <p>깨끗한 코드베이스에서 기능 추가가 더 빠름</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>설계 개선</h4>
-                                <p>점진적인 설계 개선으로 아키텍처 향상</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>기술 부채 감소</h4>
-                                <p>지속적인 리팩토링으로 부채 축적 방지</p>
-                            </div>
-                            <div class="benefit-card">
-                                <h4>지식 공유</h4>
-                                <p>명확한 코드가 팀 전체의 이해도 향상</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="paper-section">
-                        <h2 class="section-title"><span class="num">8.</span> Conclusion</h2>
-                        <p>
-                            리팩토링은 소프트웨어의 장기적인 건강을 유지하는 핵심 실천법이다.
-                            "작동하는 코드"에서 "깨끗하게 작동하는 코드"로의 전환은
-                            테스트와 함께 작은 단계로 진행되어야 한다.
-                        </p>
-                        <p>
-                            효과적인 리팩토링을 위해서는 코드 스멜을 인식하는 능력,
-                            적절한 리팩토링 기법을 선택하는 판단력, 그리고 테스트를 통한 안전망이 필요하다.
-                            지속적인 리팩토링 문화는 기술 부채를 관리하고 소프트웨어의 수명을 연장하며,
-                            개발팀의 생산성을 장기적으로 유지하는 기반이 된다.
-                        </p>
-                    </div>
-
-                    <div class="references">
-                        <h3>References</h3>
+                    <div class="rule-box">
+                        <h4>안전한 리팩토링을 위한 규칙</h4>
                         <ol>
-                            <li>Fowler, M. (2018). <em>Refactoring: Improving the Design of Existing Code</em> (2nd ed.). Addison-Wesley.</li>
-                            <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.</li>
-                            <li>Kerievsky, J. (2004). <em>Refactoring to Patterns</em>. Addison-Wesley.</li>
-                            <li>Feathers, M. (2004). <em>Working Effectively with Legacy Code</em>. Prentice Hall.</li>
-                            <li>Beck, K. (2002). <em>Test-Driven Development: By Example</em>. Addison-Wesley.</li>
+                            <li><strong>테스트 먼저:</strong> 리팩토링 전에 충분한 테스트 커버리지 확보</li>
+                            <li><strong>작은 단계:</strong> 한 번에 하나의 변경만. 각 단계 후 테스트 실행</li>
+                            <li><strong>자주 커밋:</strong> 작은 변경마다 커밋하여 롤백 가능하게</li>
+                            <li><strong>동작 유지:</strong> 외부 동작이 변경되면 리팩토링이 아님</li>
+                            <li><strong>IDE 도구 활용:</strong> 자동화된 리팩토링 기능 사용</li>
+                            <li><strong>코드 리뷰:</strong> 리팩토링도 리뷰 대상</li>
                         </ol>
                     </div>
 
-                    <div class="related-articles">
-                        <h3>Related Papers</h3>
-                        <div class="related-grid">
-                            <a href="clean-code.html" class="related-card">
-                                <span class="related-title">클린 코드 원칙</span>
-                            </a>
-                            <a href="tdd-methodology.html" class="related-card">
-                                <span class="related-title">TDD: 테스트 주도 개발</span>
-                            </a>
-                            <a href="code-review.html" class="related-card">
-                                <span class="related-title">코드 리뷰 방법론</span>
-                            </a>
+                    <div class="warning-box">
+                        <h4>리팩토링하지 말아야 할 때</h4>
+                        <ul>
+                            <li>테스트가 없고 추가할 수 없는 경우</li>
+                            <li>마감이 임박한 경우 (기술 부채로 기록)</li>
+                            <li>코드를 완전히 재작성하는 것이 나은 경우</li>
+                            <li>리팩토링과 기능 변경을 동시에 하려는 경우</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">7.</span> Benefits</h2>
+
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <h4>가독성 향상</h4>
+                            <p>의도가 명확한 코드로 이해 시간 단축</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>버그 발견</h4>
+                            <p>코드를 정리하면서 숨겨진 버그 발견</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>개발 속도</h4>
+                            <p>깨끗한 코드베이스에서 기능 추가가 더 빠름</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>설계 개선</h4>
+                            <p>점진적인 설계 개선으로 아키텍처 향상</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>기술 부채 감소</h4>
+                            <p>지속적인 리팩토링으로 부채 축적 방지</p>
+                        </div>
+                        <div class="benefit-card">
+                            <h4>지식 공유</h4>
+                            <p>명확한 코드가 팀 전체의 이해도 향상</p>
                         </div>
                     </div>
+                </section>
 
-                    <div class="source-box">
-                        <p><strong>Classification:</strong> Code Quality / Best Practices<br>
-                        <strong>Series:</strong> Software Engineering Methodology<br>
-                        <strong>Last Updated:</strong> 2024</p>
+                <section class="paper-section">
+                    <h2 class="section-title"><span class="num">8.</span> Conclusion</h2>
+                    <p>
+                        리팩토링은 소프트웨어의 장기적인 건강을 유지하는 핵심 실천법이다.
+                        "작동하는 코드"에서 "깨끗하게 작동하는 코드"로의 전환은
+                        테스트와 함께 작은 단계로 진행되어야 한다.
+                    </p>
+                    <p>
+                        효과적인 리팩토링을 위해서는 코드 스멜을 인식하는 능력,
+                        적절한 리팩토링 기법을 선택하는 판단력, 그리고 테스트를 통한 안전망이 필요하다.
+                        지속적인 리팩토링 문화는 기술 부채를 관리하고 소프트웨어의 수명을 연장하며,
+                        개발팀의 생산성을 장기적으로 유지하는 기반이 된다.
+                    </p>
+                </section>
+
+                <div class="references">
+                    <h3>References</h3>
+                    <ol>
+                        <li>Fowler, M. (2018). <em>Refactoring: Improving the Design of Existing Code</em> (2nd ed.). Addison-Wesley.</li>
+                        <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.</li>
+                        <li>Kerievsky, J. (2004). <em>Refactoring to Patterns</em>. Addison-Wesley.</li>
+                        <li>Feathers, M. (2004). <em>Working Effectively with Legacy Code</em>. Prentice Hall.</li>
+                        <li>Beck, K. (2002). <em>Test-Driven Development: By Example</em>. Addison-Wesley.</li>
+                    </ol>
+                </div>
+
+                <div class="related-articles">
+                    <h3>Related Papers</h3>
+                    <div class="related-grid">
+                        <a href="clean-code.html" class="related-card">
+                            <span class="related-title">클린 코드 원칙</span>
+                        </a>
+                        <a href="tdd-methodology.html" class="related-card">
+                            <span class="related-title">TDD: 테스트 주도 개발</span>
+                        </a>
+                        <a href="code-review.html" class="related-card">
+                            <span class="related-title">코드 리뷰 방법론</span>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </article>
+
+                <div class="source-box">
+                    <p><strong>Classification:</strong> Code Quality / Best Practices<br>
+                    <strong>Series:</strong> Software Engineering Methodology<br>
+                    <strong>Last Updated:</strong> 2024</p>
+                </div>
+            </article>
+        </div>
     </main>
+
     <footer class="site-footer">
-        <p>© 2024 Stock Insights. All rights reserved.</p>
+        <div class="content-wrapper">
+            <p>© 2024 Stock Insights. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>
