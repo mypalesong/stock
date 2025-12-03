@@ -6,42 +6,61 @@
     <title>Test-Driven Development: 테스트 주도 개발의 이론과 실제 | Stock Insights</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #7f8c8d;
-            --text-color: #2c3e50;
-            --text-light: #5d6d7e;
-            --bg-light: #f8f9fa;
-            --bg-card: #ffffff;
-            --border-color: #e5e7eb;
-            --border-light: #f0f0f0;
+            --font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
+            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --border-color: #e2e8f0;
+            --border-light: #f1f5f9;
         }
 
-        .article-body {
-            overflow-x: hidden;
+        * {
+            box-sizing: border-box;
         }
 
-        /* Desktop Layout */
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        /* Desktop Layout - 70% of viewport on large screens */
+        .article-body-wrapper {
+            width: 100%;
+            padding: 0 1.5rem;
+        }
+
         @media (min-width: 1200px) {
             .article-body-wrapper {
-                max-width: 1200px;
+                width: 70%;
+                min-width: 900px;
+                max-width: 1100px;
                 margin: 0 auto;
-                padding: 0 2rem;
-            }
-
-            .article-body {
-                max-width: 70%;
-                margin: 0 auto;
+                padding: 0 3rem;
             }
         }
 
         /* Professional Header */
         .article-hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%);
+            padding: 4rem 2rem;
             position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 1200px) {
+            .article-hero {
+                padding: 5rem 4rem;
+            }
         }
 
         .article-hero::before {
@@ -51,128 +70,197 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(15, 52, 96, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(26, 26, 46, 0.5) 0%, transparent 50%);
         }
 
-        .paper-badge {
+        .article-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        @media (min-width: 1200px) {
+            .article-hero-content {
+                margin-left: 10%;
+            }
+        }
+
+        .paper-category {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            color: #a0aec0;
+            font-family: var(--font-mono);
             font-size: 0.75rem;
             font-weight: 500;
-            padding: 0.35rem 0.75rem;
-            border-radius: 3px;
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
+            color: #94a3b8;
             text-transform: uppercase;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
         }
 
         .article-hero h1 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
             color: #ffffff;
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-weight: 400;
-            font-size: clamp(1.6rem, 4vw, 2.4rem);
-            letter-spacing: -0.01em;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            position: relative;
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
         }
 
-        .article-hero .meta {
-            color: #94a3b8;
-            font-size: 0.9rem;
+        .article-hero .subtitle {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: #cbd5e1;
             font-weight: 400;
         }
 
-        /* Paper Sections */
-        .paper-section {
-            margin: 2.5rem 0;
-            padding: 0;
+        /* Main Content */
+        .article-content {
+            padding: 3rem 0;
         }
 
-        .paper-section > p,
-        .paper-section > ul {
-            font-size: 1.05rem;
-            line-height: 1.85;
-            color: var(--text-color);
-            margin-bottom: 1.25rem;
-        }
-
-        .paper-section > ul {
-            padding-left: 1.5rem;
-        }
-
-        .paper-section > ul li {
-            margin-bottom: 0.75rem;
-        }
-
-        .section-title {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .subsection-title {
-            font-family: 'Georgia', serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin: 2rem 0 1rem 0;
-        }
-
-        /* Abstract Box - No left border */
+        /* Abstract */
         .abstract-box {
-            background: var(--bg-light);
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 6px;
+            background: var(--bg-secondary);
+            padding: 2rem 2.5rem;
+            margin: 0 0 3rem 0;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
         }
 
-        .abstract-box h3 {
-            font-family: 'Georgia', serif;
-            font-size: 0.9rem;
+        .abstract-box .label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
             font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
         }
 
         .abstract-box p {
             font-size: 1rem;
-            line-height: 1.8;
+            line-height: 1.85;
             color: var(--text-color);
-            text-align: justify;
+            margin-bottom: 1.5rem;
         }
 
-        /* Keywords */
         .keywords {
-            margin-top: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
             padding-top: 1rem;
             border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
-            color: var(--text-light);
         }
 
         .keywords strong {
-            color: var(--secondary-color);
-            font-weight: 600;
+            color: var(--text-color);
         }
 
-        /* Figure/Diagram Box */
-        .figure-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 2rem;
+        /* Section Titles */
+        .section-title {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            letter-spacing: -0.01em;
+        }
+
+        .section-title .num {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .subsection-title {
+            font-family: var(--font-sans);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin: 2.5rem 0 1rem 0;
+        }
+
+        /* Body Text */
+        .paper-section {
             margin: 2rem 0;
+        }
+
+        .paper-section > p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-section > ul {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            padding-left: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-section > ul li {
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+        }
+
+        .paper-section > ul li strong {
+            color: var(--primary-color);
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: var(--bg-tertiary);
+            padding: 2rem 2.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-family: Georgia, serif;
+            font-size: 3rem;
+            color: var(--border-color);
+            line-height: 1;
+        }
+
+        .quote-box p {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-color);
+            margin: 0;
+            padding-left: 2rem;
+            line-height: 1.7;
+        }
+
+        .quote-box .author {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-style: normal;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            padding-left: 2rem;
+        }
+
+        /* Figure Box */
+        .figure-box {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
             text-align: center;
         }
 
@@ -186,182 +274,199 @@
         }
 
         .cycle-step {
-            background: var(--bg-light);
-            color: var(--text-color);
-            padding: 1rem 1.5rem;
-            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
             font-weight: 600;
-            font-size: 0.95rem;
+            padding: 1rem 1.75rem;
+            border-radius: 6px;
             min-width: 100px;
-            border: 1px solid var(--border-color);
         }
 
         .cycle-step.red {
             background: #fef2f2;
-            border-color: #fecaca;
-            color: #991b1b;
+            color: #dc2626;
+            border: 1px solid #fecaca;
         }
+
         .cycle-step.green {
             background: #f0fdf4;
-            border-color: #bbf7d0;
-            color: #166534;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
         }
+
         .cycle-step.blue {
             background: #eff6ff;
-            border-color: #bfdbfe;
-            color: #1e40af;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
         }
 
         .cycle-arrow {
             font-size: 1.25rem;
-            color: var(--accent-color);
+            color: var(--text-muted);
         }
 
         .figure-caption {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            margin: 2.5rem 0;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .process-step:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-number {
+            font-family: var(--font-mono);
             font-size: 0.9rem;
-            color: var(--text-light);
-            margin-top: 1rem;
+            font-weight: 600;
+            background: var(--primary-color);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .step-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
         }
 
         /* Code Example */
         .code-example {
-            background: #1e1e1e;
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin: 2.5rem 0;
+            font-family: var(--font-mono);
             font-size: 0.875rem;
             overflow-x: auto;
-            border: 1px solid #333;
+            border: 1px solid #1e293b;
         }
 
-        .code-example .comment { color: #6a9955; }
-        .code-example .keyword { color: #c586c0; }
-        .code-example .function { color: #dcdcaa; }
-        .code-example .string { color: #ce9178; }
-        .code-example .decorator { color: #d7ba7d; }
-        .code-example code { color: #d4d4d4; line-height: 1.6; }
+        .code-example .comment { color: #64748b; }
+        .code-example .keyword { color: #c084fc; }
+        .code-example .function { color: #60a5fa; }
+        .code-example .string { color: #4ade80; }
+        .code-example .decorator { color: #fbbf24; }
+        .code-example code { color: #e2e8f0; line-height: 1.7; }
 
-        /* Table */
+        /* Data Table */
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             font-size: 0.95rem;
         }
 
         .data-table th {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             background: var(--primary-color);
             color: white;
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             text-align: left;
-            font-weight: 500;
-            font-size: 0.9rem;
         }
 
         .data-table td {
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-color);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .data-table tr:nth-child(even) {
-            background: var(--bg-light);
+            background: var(--bg-secondary);
         }
 
         .data-table tr:hover {
-            background: #f1f5f9;
-        }
-
-        /* Quote Box - No left border */
-        .quote-box {
-            background: var(--bg-light);
-            padding: 1.75rem 2rem;
-            margin: 2rem 0;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .quote-box::before {
-            content: '"';
-            position: absolute;
-            top: 0.5rem;
-            left: 1rem;
-            font-size: 3rem;
-            color: var(--border-color);
-            font-family: Georgia, serif;
-            line-height: 1;
-        }
-
-        .quote-box p {
-            font-style: italic;
-            color: var(--text-color);
-            margin: 0;
-            padding-left: 2rem;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .quote-box .author {
-            font-style: normal;
-            font-weight: 500;
-            margin-top: 0.75rem;
-            padding-left: 2rem;
-            color: var(--text-light);
-            font-size: 0.9rem;
+            background: var(--bg-tertiary);
         }
 
         /* Benefits Grid */
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
             gap: 1.25rem;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
         }
 
         .benefit-card {
-            background: var(--bg-card);
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.5rem;
-            transition: box-shadow 0.2s ease;
+            border-radius: 8px;
+            padding: 1.75rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .benefit-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-color);
         }
 
         .benefit-card h4 {
-            color: var(--primary-color);
-            font-size: 1rem;
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
         }
 
         .benefit-card p {
             font-size: 0.95rem;
-            color: var(--text-light);
+            color: var(--text-muted);
             margin: 0;
             line-height: 1.6;
         }
 
         /* References */
         .references {
-            background: var(--bg-light);
-            border-radius: 6px;
-            padding: 2rem;
-            margin: 2.5rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0;
             border: 1px solid var(--border-color);
         }
 
         .references h3 {
-            font-family: 'Georgia', serif;
-            font-size: 1.15rem;
-            color: var(--primary-color);
-            margin-bottom: 1.25rem;
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
             font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
         }
 
         .references ol {
@@ -371,86 +476,36 @@
 
         .references li {
             font-size: 0.9rem;
-            color: var(--text-light);
+            color: var(--text-muted);
             margin-bottom: 0.75rem;
-            line-height: 1.6;
-        }
-
-        /* Process Steps */
-        .process-steps {
-            margin: 2rem 0;
-        }
-
-        .process-step {
-            display: flex;
-            gap: 1.25rem;
-            margin-bottom: 1rem;
-            padding: 1.25rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            transition: box-shadow 0.2s ease;
-        }
-
-        .process-step:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .step-number {
-            background: var(--primary-color);
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
-        .step-content h4 {
-            color: var(--primary-color);
-            margin: 0 0 0.4rem 0;
-            font-size: 1.05rem;
-            font-weight: 600;
-        }
-
-        .step-content p {
-            margin: 0;
-            font-size: 0.95rem;
-            color: var(--text-light);
             line-height: 1.6;
         }
 
         /* Related Articles */
         .related-articles {
-            margin: 2.5rem 0;
+            margin: 3rem 0;
         }
 
         .related-articles h3 {
-            font-family: 'Georgia', serif;
-            font-size: 1.15rem;
-            color: var(--primary-color);
-            margin-bottom: 1.25rem;
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
             font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
         }
 
         .related-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
         }
 
         .related-card {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 1.25rem;
-            background: var(--bg-card);
+            display: block;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
             transition: all 0.2s ease;
         }
@@ -460,35 +515,32 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
-        .related-icon {
-            font-size: 1.25rem;
-            opacity: 0.7;
-        }
-
         .related-title {
-            color: var(--text-color);
+            font-family: var(--font-sans);
             font-size: 0.95rem;
             font-weight: 500;
+            color: var(--text-color);
         }
 
         /* Source Box */
         .source-box {
-            background: var(--bg-light);
-            border-radius: 6px;
-            padding: 1.5rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
             margin: 2rem 0;
             border: 1px solid var(--border-color);
         }
 
         .source-box p {
-            font-size: 0.875rem;
-            color: var(--text-light);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
             margin: 0;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .source-box strong {
-            color: var(--secondary-color);
+            color: var(--text-color);
         }
     </style>
 </head>
@@ -511,16 +563,19 @@
                     <span>TDD</span>
                 </nav>
             </header>
-            <div class="article-body-wrapper">
-                <div class="article-body">
-                    <div class="article-hero">
-                        <span class="paper-badge">Research Paper</span>
-                        <h1>Test-Driven Development: 테스트 주도 개발의 이론과 실제</h1>
-                        <p class="meta">Software Engineering Methodology Series</p>
-                    </div>
 
+            <div class="article-hero">
+                <div class="article-hero-content">
+                    <span class="paper-category">Software Engineering · Research Paper</span>
+                    <h1>Test-Driven Development: 테스트 주도 개발의 이론과 실제</h1>
+                    <p class="subtitle">Methodology Series Vol.1</p>
+                </div>
+            </div>
+
+            <div class="article-body-wrapper">
+                <div class="article-content">
                     <div class="abstract-box">
-                        <h3>Abstract</h3>
+                        <div class="label">Abstract</div>
                         <p>
                             테스트 주도 개발(Test-Driven Development, TDD)은 소프트웨어 개발 프로세스에서 테스트를 먼저 작성하고,
                             해당 테스트를 통과하는 최소한의 코드를 구현한 후, 리팩토링을 수행하는 반복적인 개발 방법론이다.
@@ -534,7 +589,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">1. Introduction</h2>
+                        <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
                         <p>
                             전통적인 소프트웨어 개발 방법론에서 테스트는 개발 완료 후 수행되는 검증 단계로 여겨져 왔다.
                             그러나 Kent Beck이 1999년 Extreme Programming(XP)의 핵심 실천법으로 TDD를 제안한 이후,
@@ -553,7 +608,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">2. Theoretical Background</h2>
+                        <h2 class="section-title"><span class="num">2.</span> Theoretical Background</h2>
 
                         <h3 class="subsection-title">2.1 TDD의 정의와 기원</h3>
                         <p>
@@ -605,7 +660,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">3. Implementation Methodology</h2>
+                        <h2 class="section-title"><span class="num">3.</span> Implementation Methodology</h2>
 
                         <h3 class="subsection-title">3.1 테스트 케이스 작성 원칙</h3>
                         <p>
@@ -681,7 +736,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">4. Benefits and Outcomes</h2>
+                        <h2 class="section-title"><span class="num">4.</span> Benefits and Outcomes</h2>
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
@@ -712,7 +767,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">5. Challenges and Limitations</h2>
+                        <h2 class="section-title"><span class="num">5.</span> Challenges and Limitations</h2>
                         <p>
                             TDD의 효과에도 불구하고, 실제 적용에는 여러 도전 과제가 존재한다:
                         </p>
@@ -726,7 +781,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">6. Conclusion</h2>
+                        <h2 class="section-title"><span class="num">6.</span> Conclusion</h2>
                         <p>
                             Test-Driven Development는 소프트웨어 품질 향상과 유지보수성 개선에 효과적인 개발 방법론임이
                             다양한 연구와 실무 사례를 통해 입증되었다. Red-Green-Refactor 사이클의 규율 있는 적용은
@@ -752,7 +807,7 @@
                     </div>
 
                     <div class="related-articles">
-                        <h3>관련 논문</h3>
+                        <h3>Related Papers</h3>
                         <div class="related-grid">
                             <a href="bdd-methodology.html" class="related-card">
                                 <span class="related-title">BDD: 행위 주도 개발</span>
@@ -767,8 +822,8 @@
                     </div>
 
                     <div class="source-box">
-                        <p><strong>Article Info:</strong> Software Engineering Methodology Series<br>
-                        <strong>Classification:</strong> Development Practices / Testing Methodology<br>
+                        <p><strong>Classification:</strong> Development Practices / Testing Methodology<br>
+                        <strong>Series:</strong> Software Engineering Methodology<br>
                         <strong>Last Updated:</strong> 2024</p>
                     </div>
                 </div>
