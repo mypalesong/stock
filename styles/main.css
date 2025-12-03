@@ -684,6 +684,29 @@ img {
 }
 
 /* ============================================
+   Desktop Responsive (ensure sidebar doesn't cover content)
+   ============================================ */
+
+@media (min-width: 1025px) {
+    .sidebar {
+        transform: none !important;
+        display: flex;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar-width) !important;
+    }
+
+    .mobile-header {
+        display: none !important;
+    }
+
+    .sidebar-overlay {
+        display: none !important;
+    }
+}
+
+/* ============================================
    Mobile Responsive
    ============================================ */
 
