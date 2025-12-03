@@ -6,299 +6,269 @@
     <title>DevOps Culture: 개발과 운영의 통합 문화와 실천 | Stock Insights</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #7f8c8d;
-            --text-color: #2c3e50;
-            --text-light: #5d6d7e;
-            --bg-light: #f8f9fa;
-            --bg-card: #ffffff;
-            --border-color: #e5e7eb;
+            --font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
+            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --border-color: #e2e8f0;
+            --border-light: #f1f5f9;
         }
 
-        .article-body {
-            overflow-x: hidden;
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        /* Desktop Layout - 70% of viewport on large screens */
+        .article-body-wrapper {
+            width: 100%;
+            padding: 0 1.5rem;
+        }
+
+        @media (min-width: 1200px) {
+            .article-body-wrapper {
+                width: 70%;
+                min-width: 900px;
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 0 3rem;
+            }
         }
 
         /* Professional Header */
         .article-hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%);
+            padding: 4rem 2rem;
             position: relative;
             overflow: hidden;
-            padding: 3rem 2rem;
+        }
+
+        @media (min-width: 1200px) {
+            .article-hero {
+                padding: 5rem 4rem;
+            }
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(15, 52, 96, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(26, 26, 46, 0.5) 0%, transparent 50%);
+        }
+
+        .article-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        @media (min-width: 1200px) {
+            .article-hero-content {
+                margin-left: 10%;
+            }
+        }
+
+        .paper-category {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
         }
 
         .article-hero h1 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
             color: #ffffff;
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-weight: 600;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
             letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
         }
 
-        .article-hero .meta {
+        .article-hero .subtitle {
+            font-family: var(--font-mono);
+            font-size: 1rem;
             color: #cbd5e1;
-            font-family: 'Georgia', serif;
-            font-size: 0.95rem;
+            font-weight: 400;
         }
 
-        /* Paper Sections */
+        /* Main Content */
+        .article-content {
+            padding: 3rem 0;
+        }
+
+        /* Abstract */
+        .abstract-box {
+            background: var(--bg-secondary);
+            padding: 2rem 2.5rem;
+            margin: 0 0 3rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .abstract-box .label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .abstract-box p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .keywords {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .keywords strong {
+            color: var(--text-color);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            letter-spacing: -0.01em;
+        }
+
+        .section-title .num {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .subsection-title {
+            font-family: var(--font-sans);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin: 2.5rem 0 1rem 0;
+        }
+
+        /* Body Text */
         .paper-section {
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
         .paper-section > p {
             font-size: 1.05rem;
-            line-height: 1.85;
+            line-height: 1.9;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-section > ul {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            padding-left: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-section > ul li {
+            margin-bottom: 0.75rem;
             color: var(--text-color);
         }
 
-        .section-title {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
+        .paper-section > ul li strong {
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .subsection-title {
-            font-family: 'Georgia', serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin: 1.5rem 0 0.8rem 0;
-        }
-
-        /* Abstract Box */
-        .abstract-box {
-            background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 6px;
-        }
-
-        .abstract-box h3 {
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .abstract-box p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: var(--text-color);
-            text-align: justify;
-        }
-
-        .keywords {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        .keywords strong {
-            color: var(--primary-color);
-        }
-
-        /* CALMS Cards */
-        .calms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .calms-card {
-            background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .calms-card .letter {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .calms-card h4 {
-            color: var(--secondary-color);
-            font-size: 0.95rem;
-            margin: 0.5rem 0;
-        }
-
-        .calms-card p {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        /* Three Ways Box */
-        .ways-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .way-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.5rem;
-            position: relative;
-        }
-
-        .way-card::before {
-            content: attr(data-way);
-            position: absolute;
-            top: -10px;
-            left: 15px;
-            background: var(--primary-color);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .way-card h4 {
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            margin: 0.5rem 0;
-        }
-
-        .way-card p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        /* Practice Cards */
-        .practice-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .practice-card {
-            background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.2rem;
-        }
-
-        .practice-card h4 {
-            color: var(--primary-color);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .practice-card p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        /* Tool Categories */
-        .tool-category {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            margin: 1rem 0;
-            overflow: hidden;
-        }
-
-        .tool-category-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.8rem 1rem;
-            font-weight: 600;
-        }
-
-        .tool-list {
-            padding: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tool-badge {
-            background: var(--bg-light);
-            color: var(--primary-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-        }
-
-        /* Metrics Table */
-        .metrics-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-        }
-
-        .metrics-table th {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.8rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .metrics-table td {
-            padding: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-color);
-        }
-
-        .metrics-table tr:nth-child(even) {
-            background: var(--bg-light);
         }
 
         /* Quote Box */
         .quote-box {
-            background: var(--bg-light);
+            background: var(--bg-tertiary);
+            padding: 2rem 2.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 6px;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-family: Georgia, serif;
+            font-size: 3rem;
+            color: var(--border-color);
+            line-height: 1;
         }
 
         .quote-box p {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
             font-style: italic;
-            color: var(--text-light);
+            color: var(--text-color);
             margin: 0;
+            padding-left: 2rem;
+            line-height: 1.7;
         }
 
         .quote-box .author {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             font-style: normal;
-            font-weight: 600;
-            margin-top: 0.5rem;
-            color: var(--primary-color);
+            color: var(--text-muted);
+            margin-top: 1rem;
+            padding-left: 2rem;
         }
 
-        /* Infinity Loop */
+        /* Figure Box */
+        .figure-box {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+
         .infinity-box {
             background: var(--secondary-color);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
             text-align: center;
         }
 
@@ -308,7 +278,7 @@
             align-items: center;
             gap: 0;
             flex-wrap: wrap;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
 
         .infinity-side {
@@ -318,102 +288,338 @@
         }
 
         .infinity-step {
-            padding: 0.5rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             font-weight: 600;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
             color: white;
         }
 
         .dev-step { background: #3b82f6; }
         .ops-step { background: #22c55e; }
+
         .infinity-center {
             font-size: 2rem;
             color: #94a3b8;
-            margin: 0 0.5rem;
+            margin: 0 1rem;
         }
 
         .figure-caption {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            font-style: italic;
-            margin-top: 0.8rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 1.5rem;
         }
 
-        /* Culture Comparison */
+        /* CALMS Cards */
+        .calms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2.5rem 0;
+        }
+
+        .calms-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .calms-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-color);
+        }
+
+        .calms-card .letter {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .calms-card h4 {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin: 0.5rem 0;
+        }
+
+        .calms-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Ways Grid */
+        .ways-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2.5rem 0;
+        }
+
+        .way-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            position: relative;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .way-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-color);
+        }
+
+        .way-card::before {
+            content: attr(data-way);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: var(--font-mono);
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .way-card h4 {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0.5rem 0 0.75rem 0;
+        }
+
+        .way-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Practice Cards */
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2.5rem 0;
+        }
+
+        .practice-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .practice-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-color);
+        }
+
+        .practice-card h4 {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .practice-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Tool Categories */
+        .tool-category {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 1.25rem 0;
+            overflow: hidden;
+        }
+
+        .tool-category-header {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.9rem 1.25rem;
+        }
+
+        .tool-list {
+            padding: 1.25rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tool-badge {
+            font-family: var(--font-mono);
+            background: var(--bg-secondary);
+            color: var(--text-color);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .tool-badge:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-color);
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        .data-table tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* Culture Grid */
         .culture-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 1.25rem;
+            margin: 2.5rem 0;
         }
 
         .culture-card {
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
+            background: var(--bg-primary);
         }
 
         .culture-card h4 {
-            padding: 0.8rem;
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            padding: 1rem 1.25rem;
             margin: 0;
-            font-size: 1rem;
         }
 
-        .culture-card.traditional h4 { background: #fef3c7; color: #92400e; }
-        .culture-card.devops h4 { background: var(--bg-light); color: var(--primary-color); }
+        .culture-card.traditional h4 {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .culture-card.devops h4 {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+        }
 
         .culture-card ul {
-            padding: 1rem 1rem 1rem 2rem;
+            padding: 1.25rem 1.25rem 1.25rem 2.5rem;
             margin: 0;
-            font-size: 0.9rem;
-            color: var(--text-light);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
         }
 
         .culture-card li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
         }
 
         /* Benefits Grid */
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 1.25rem;
+            margin: 2.5rem 0;
         }
 
         .benefit-card {
-            background: var(--bg-light);
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.2rem;
+            border-radius: 8px;
+            padding: 1.75rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .benefit-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-color);
         }
 
         .benefit-card h4 {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
             color: var(--primary-color);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .benefit-card p {
-            font-size: 0.9rem;
-            color: var(--text-light);
+            font-size: 0.95rem;
+            color: var(--text-muted);
             margin: 0;
+            line-height: 1.6;
         }
 
         /* References */
         .references {
-            background: var(--bg-light);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0;
+            border: 1px solid var(--border-color);
         }
 
         .references h3 {
-            font-family: 'Georgia', serif;
-            font-size: 1.1rem;
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .references ol {
@@ -422,23 +628,72 @@
         }
 
         .references li {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
         }
 
-        /* Desktop Layout */
-        @media (min-width: 1200px) {
-            .article-body-wrapper {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 2rem;
-            }
-            .article-body {
-                max-width: 70%;
-                margin: 0 auto;
-            }
+        /* Related Articles */
+        .related-articles {
+            margin: 3rem 0;
+        }
+
+        .related-articles h3 {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .related-card {
+            display: block;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .related-title {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        /* Source Box */
+        .source-box {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .source-box p {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        .source-box strong {
+            color: var(--text-color);
         }
     </style>
 </head>
@@ -461,15 +716,19 @@
                     <span>DevOps</span>
                 </nav>
             </header>
-            <div class="article-body-wrapper">
-                <div class="article-body">
-                    <div class="article-hero">
-                        <h1>DevOps Culture: 개발과 운영의 통합 문화와 실천</h1>
-                        <p class="meta">Research Paper</p>
-                    </div>
 
+            <div class="article-hero">
+                <div class="article-hero-content">
+                    <span class="paper-category">Software Engineering · Research Paper</span>
+                    <h1>DevOps Culture: 개발과 운영의 통합 문화와 실천</h1>
+                    <p class="subtitle">Methodology Series Vol.2</p>
+                </div>
+            </div>
+
+            <div class="article-body-wrapper">
+                <div class="article-content">
                     <div class="abstract-box">
-                        <h3>Abstract</h3>
+                        <div class="label">Abstract</div>
                         <p>
                             DevOps는 개발(Development)과 운영(Operations)의 통합을 통해 소프트웨어 전달 속도와
                             안정성을 동시에 향상시키는 문화적, 기술적 운동이다. 본 논문에서는 DevOps의 핵심 원칙인
@@ -483,7 +742,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">1. Introduction</h2>
+                        <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
                         <p>
                             DevOps라는 용어는 2009년 Patrick Debois가 개최한 첫 DevOpsDays 컨퍼런스에서
                             공식화되었다. 이전까지 개발팀과 운영팀은 서로 다른 목표(새 기능 출시 vs 안정성 유지)를
@@ -492,13 +751,13 @@
                         </p>
 
                         <div class="quote-box">
-                            <p>"DevOps is not a goal, but a never-ending process of continual improvement."</p>
+                            <p>DevOps is not a goal, but a never-ending process of continual improvement.</p>
                             <div class="author">— Jez Humble, Continuous Delivery 저자</div>
                         </div>
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">2. DevOps Infinity Loop</h2>
+                        <h2 class="section-title"><span class="num">2.</span> DevOps Infinity Loop</h2>
 
                         <div class="infinity-box">
                             <div class="infinity-loop">
@@ -521,7 +780,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">3. The Three Ways</h2>
+                        <h2 class="section-title"><span class="num">3.</span> The Three Ways</h2>
 
                         <p>Gene Kim이 "The Phoenix Project"에서 제시한 DevOps의 세 가지 원칙:</p>
 
@@ -551,7 +810,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">4. CALMS Framework</h2>
+                        <h2 class="section-title"><span class="num">4.</span> CALMS Framework</h2>
 
                         <p>DevOps 성숙도를 평가하는 CALMS 프레임워크:</p>
 
@@ -585,7 +844,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">5. Key Practices</h2>
+                        <h2 class="section-title"><span class="num">5.</span> Key Practices</h2>
 
                         <div class="practice-grid">
                             <div class="practice-card">
@@ -616,7 +875,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">6. DevOps Toolchain</h2>
+                        <h2 class="section-title"><span class="num">6.</span> DevOps Toolchain</h2>
 
                         <div class="tool-category">
                             <div class="tool-category-header">Source Control</div>
@@ -668,11 +927,11 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">7. DORA Metrics</h2>
+                        <h2 class="section-title"><span class="num">7.</span> DORA Metrics</h2>
 
                         <p>DevOps Research and Assessment의 핵심 성과 지표:</p>
 
-                        <table class="metrics-table">
+                        <table class="data-table">
                             <thead>
                                 <tr>
                                     <th>메트릭</th>
@@ -716,7 +975,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">8. Culture Shift</h2>
+                        <h2 class="section-title"><span class="num">8.</span> Culture Shift</h2>
 
                         <div class="culture-grid">
                             <div class="culture-card traditional">
@@ -743,7 +1002,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">9. Benefits</h2>
+                        <h2 class="section-title"><span class="num">9.</span> Benefits</h2>
 
                         <div class="benefits-grid">
                             <div class="benefit-card">
@@ -774,7 +1033,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">10. Conclusion</h2>
+                        <h2 class="section-title"><span class="num">10.</span> Conclusion</h2>
                         <p>
                             DevOps는 단순한 도구 세트가 아니라 조직 문화의 근본적인 변화를 요구하는 운동이다.
                             개발과 운영의 벽을 허물고, 자동화와 측정을 통해 지속적인 개선을 추구하며,
@@ -800,26 +1059,23 @@
                     </div>
 
                     <div class="related-articles">
-                        <h3>관련 논문</h3>
+                        <h3>Related Papers</h3>
                         <div class="related-grid">
                             <a href="ci-cd-pipeline.html" class="related-card">
-                                <span class="related-icon">🔄</span>
                                 <span class="related-title">CI/CD 파이프라인</span>
                             </a>
                             <a href="agile-scrum.html" class="related-card">
-                                <span class="related-icon">🔄</span>
                                 <span class="related-title">Agile과 Scrum</span>
                             </a>
                             <a href="integration-testing.html" class="related-card">
-                                <span class="related-icon">🔗</span>
                                 <span class="related-title">통합 테스트 전략</span>
                             </a>
                         </div>
                     </div>
 
                     <div class="source-box">
-                        <p><strong>Article Info:</strong> Software Engineering Methodology Series<br>
-                        <strong>Classification:</strong> DevOps / Culture & Practices<br>
+                        <p><strong>Classification:</strong> Development Practices / DevOps Culture<br>
+                        <strong>Series:</strong> Software Engineering Methodology<br>
                         <strong>Last Updated:</strong> 2024</p>
                     </div>
                 </div>

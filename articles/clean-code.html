@@ -6,154 +6,346 @@
     <title>Clean Code: 클린 코드 원칙과 실천 | Stock Insights</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/article.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #7f8c8d;
-            --text-color: #2c3e50;
-            --text-light: #5d6d7e;
-            --bg-light: #f8f9fa;
-            --bg-card: #ffffff;
-            --border-color: #e5e7eb;
+            --font-mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
+            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --border-color: #e2e8f0;
+            --border-light: #f1f5f9;
         }
 
-        .article-body {
-            overflow-x: hidden;
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        /* Desktop Layout - 70% of viewport on large screens */
+        .article-body-wrapper {
+            width: 100%;
+            padding: 0 1.5rem;
+        }
+
+        @media (min-width: 1200px) {
+            .article-body-wrapper {
+                width: 70%;
+                min-width: 900px;
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 0 3rem;
+            }
         }
 
         /* Professional Header */
         .article-hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%);
+            padding: 4rem 2rem;
             position: relative;
             overflow: hidden;
-            padding: 3rem 2rem;
+        }
+
+        @media (min-width: 1200px) {
+            .article-hero {
+                padding: 5rem 4rem;
+            }
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(15, 52, 96, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(26, 26, 46, 0.5) 0%, transparent 50%);
+        }
+
+        .article-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        @media (min-width: 1200px) {
+            .article-hero-content {
+                margin-left: 10%;
+            }
+        }
+
+        .paper-category {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
         }
 
         .article-hero h1 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
             color: #ffffff;
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-weight: 600;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
             letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
         }
 
-        .article-hero .meta {
+        .article-hero .subtitle {
+            font-family: var(--font-mono);
+            font-size: 1rem;
             color: #cbd5e1;
-            font-family: 'Georgia', serif;
-            font-size: 0.95rem;
+            font-weight: 400;
         }
 
-        /* Paper Sections */
+        /* Main Content */
+        .article-content {
+            padding: 3rem 0;
+        }
+
+        /* Abstract */
+        .abstract-box {
+            background: var(--bg-secondary);
+            padding: 2rem 2.5rem;
+            margin: 0 0 3rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .abstract-box .label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .abstract-box p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .keywords {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .keywords strong {
+            color: var(--text-color);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            letter-spacing: -0.01em;
+        }
+
+        .section-title .num {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .subsection-title {
+            font-family: var(--font-sans);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin: 2.5rem 0 1rem 0;
+        }
+
+        /* Body Text */
         .paper-section {
-            margin: 2.5rem 0;
+            margin: 2rem 0;
         }
 
         .paper-section > p {
             font-size: 1.05rem;
-            line-height: 1.85;
+            line-height: 1.9;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-section > ul {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            padding-left: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .paper-section > ul li {
+            margin-bottom: 0.75rem;
             color: var(--text-color);
         }
 
-        .section-title {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
+        .paper-section > ul li strong {
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
         }
 
-        .subsection-title {
-            font-family: 'Georgia', serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin: 1.5rem 0 0.8rem 0;
-        }
-
-        /* Abstract Box */
-        .abstract-box {
-            background: var(--bg-light);
+        /* Quote Box */
+        .quote-box {
+            background: var(--bg-tertiary);
+            padding: 2rem 2.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 6px;
+            position: relative;
         }
 
-        .abstract-box h3 {
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.8rem;
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-family: Georgia, serif;
+            font-size: 3rem;
+            color: var(--border-color);
+            line-height: 1;
+        }
+
+        .quote-box p {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-color);
+            margin: 0;
+            padding-left: 2rem;
+            line-height: 1.7;
+        }
+
+        .quote-box .author {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-style: normal;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            padding-left: 2rem;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
         }
 
-        .abstract-box p {
-            font-size: 0.95rem;
-            line-height: 1.7;
+        .data-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
             color: var(--text-color);
-            text-align: justify;
+            line-height: 1.6;
         }
 
-        .keywords {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: var(--text-light);
+        .data-table tr:nth-child(even) {
+            background: var(--bg-secondary);
         }
 
-        .keywords strong {
-            color: var(--primary-color);
+        .data-table tr:hover {
+            background: var(--bg-tertiary);
         }
 
-        /* Principle Cards */
-        .principle-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
+        .data-table .bad { color: #dc2626; font-family: var(--font-mono); }
+        .data-table .good { color: #16a34a; font-family: var(--font-mono); }
 
-        .principle-card {
-            background: var(--bg-light);
+        /* Rule List Box */
+        .rule-list {
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.5rem;
+            border-radius: 8px;
+            padding: 2rem 2.5rem;
+            margin: 2.5rem 0;
         }
 
-        .principle-card h4 {
-            color: var(--primary-color);
+        .rule-list h4 {
+            font-family: var(--font-sans);
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
         }
 
-        .principle-card p {
-            font-size: 0.9rem;
-            color: var(--text-light);
+        .rule-list ul {
             margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .rule-list li {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .rule-list li strong {
+            color: var(--primary-color);
+            font-weight: 600;
         }
 
         /* Code Comparison */
         .code-comparison {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 1.25rem;
+            margin: 2.5rem 0;
         }
 
         .code-box {
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
         .code-header {
-            padding: 0.6rem 1rem;
+            font-family: var(--font-mono);
+            padding: 0.75rem 1.25rem;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.02em;
         }
 
         .code-box.bad .code-header {
@@ -167,200 +359,187 @@
         }
 
         .code-content {
-            background: #1e293b;
-            padding: 1rem;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.8rem;
+            background: #0f172a;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
             overflow-x: auto;
             color: #e2e8f0;
+            line-height: 1.7;
         }
 
         .code-content .comment { color: #64748b; }
-        .code-content .keyword { color: #a78bfa; }
+        .code-content .keyword { color: #c084fc; }
         .code-content .function { color: #60a5fa; }
-        .code-content .string { color: #86efac; }
+        .code-content .string { color: #4ade80; }
 
-        /* SOLID Cards */
+        /* SOLID Grid */
         .solid-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2.5rem 0;
         }
 
         .solid-card {
-            background: var(--bg-card);
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1rem;
+            border-radius: 8px;
+            padding: 1.5rem;
             text-align: center;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .solid-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-color);
         }
 
         .solid-card .letter {
+            font-family: var(--font-mono);
             font-size: 2rem;
             font-weight: 700;
             color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
 
         .solid-card h4 {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 600;
             color: var(--secondary-color);
-            font-size: 0.9rem;
             margin: 0.5rem 0;
         }
 
         .solid-card p {
-            font-size: 0.75rem;
-            color: var(--text-light);
+            font-size: 0.8rem;
+            color: var(--text-muted);
             margin: 0;
-        }
-
-        /* Naming Guide */
-        .naming-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-        }
-
-        .naming-table th {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.8rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .naming-table td {
-            padding: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-color);
-        }
-
-        .naming-table tr:nth-child(even) {
-            background: var(--bg-light);
-        }
-
-        .naming-table .bad { color: #dc2626; }
-        .naming-table .good { color: #16a34a; }
-
-        /* Quote Box */
-        .quote-box {
-            background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 6px;
-        }
-
-        .quote-box p {
-            font-style: italic;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        .quote-box .author {
-            font-style: normal;
-            font-weight: 600;
-            margin-top: 0.5rem;
-            color: var(--primary-color);
+            line-height: 1.5;
         }
 
         /* Smell Cards */
         .smell-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 1.25rem;
+            margin: 2.5rem 0;
         }
 
         .smell-card {
             background: #fef2f2;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.2rem;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .smell-card:hover {
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
         }
 
         .smell-card h4 {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
             color: #b91c1c;
-            font-size: 1rem;
             margin-bottom: 0.5rem;
         }
 
         .smell-card p {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #991b1b;
             margin: 0;
+            line-height: 1.6;
         }
 
-        /* Best Practices */
+        /* Principle Cards */
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 1.25rem;
+            margin: 2.5rem 0;
+        }
+
+        .principle-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .principle-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-color);
+        }
+
+        .principle-card h4 {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .principle-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* Practice Cards */
         .practice-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 1.25rem;
+            margin: 2.5rem 0;
         }
 
         .practice-card {
-            background: var(--bg-card);
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.2rem;
+            border-radius: 8px;
+            padding: 1.75rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .practice-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-color);
         }
 
         .practice-card h4 {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
             color: var(--primary-color);
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .practice-card p {
-            font-size: 0.85rem;
-            color: var(--text-light);
+            font-size: 0.95rem;
+            color: var(--text-muted);
             margin: 0;
-        }
-
-        /* Function Rules */
-        .rule-list {
-            background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .rule-list h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .rule-list ul {
-            margin: 0;
-            padding-left: 1.2rem;
-        }
-
-        .rule-list li {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .rule-list li strong {
-            color: var(--primary-color);
+            line-height: 1.6;
         }
 
         /* References */
         .references {
-            background: var(--bg-light);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0;
+            border: 1px solid var(--border-color);
         }
 
         .references h3 {
-            font-family: 'Georgia', serif;
-            font-size: 1.1rem;
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .references ol {
@@ -369,23 +548,72 @@
         }
 
         .references li {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
         }
 
-        /* Desktop Layout */
-        @media (min-width: 1200px) {
-            .article-body-wrapper {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 2rem;
-            }
-            .article-body {
-                max-width: 70%;
-                margin: 0 auto;
-            }
+        /* Related Articles */
+        .related-articles {
+            margin: 3rem 0;
+        }
+
+        .related-articles h3 {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .related-card {
+            display: block;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .related-title {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        /* Source Box */
+        .source-box {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .source-box p {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        .source-box strong {
+            color: var(--text-color);
         }
     </style>
 </head>
@@ -408,15 +636,19 @@
                     <span>Clean Code</span>
                 </nav>
             </header>
-            <div class="article-body-wrapper">
-                <div class="article-body">
-                    <div class="article-hero">
-                        <h1>Clean Code: 클린 코드 원칙과 실천</h1>
-                        <p class="meta">Research Paper</p>
-                    </div>
 
+            <div class="article-hero">
+                <div class="article-hero-content">
+                    <span class="paper-category">Software Engineering · Research Paper</span>
+                    <h1>Clean Code: 클린 코드 원칙과 실천</h1>
+                    <p class="subtitle">Methodology Series Vol.3</p>
+                </div>
+            </div>
+
+            <div class="article-body-wrapper">
+                <div class="article-content">
                     <div class="abstract-box">
-                        <h3>Abstract</h3>
+                        <div class="label">Abstract</div>
                         <p>
                             클린 코드는 읽기 쉽고, 이해하기 쉽고, 변경하기 쉬운 코드를 작성하기 위한 원칙과 실천의 집합이다.
                             Robert C. Martin(Uncle Bob)의 저서 "Clean Code"를 중심으로, 본 논문에서는 의미 있는 네이밍,
@@ -430,7 +662,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">1. Introduction</h2>
+                        <h2 class="section-title"><span class="num">1.</span> Introduction</h2>
                         <p>
                             코드는 쓰는 시간보다 읽는 시간이 10배 이상 많다. 따라서 읽기 쉬운 코드를 작성하는 것은
                             개발 생산성에 직접적인 영향을 미친다. 클린 코드는 "작동하는 코드"를 넘어
@@ -438,21 +670,20 @@
                         </p>
 
                         <div class="quote-box">
-                            <p>"Clean code is simple and direct. Clean code reads like well-written prose."</p>
+                            <p>Clean code is simple and direct. Clean code reads like well-written prose.</p>
                             <div class="author">— Grady Booch</div>
                         </div>
 
                         <div class="quote-box">
-                            <p>"Any fool can write code that a computer can understand.
-                            Good programmers write code that humans can understand."</p>
+                            <p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
                             <div class="author">— Martin Fowler</div>
                         </div>
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">2. Meaningful Names</h2>
+                        <h2 class="section-title"><span class="num">2.</span> Meaningful Names</h2>
 
-                        <table class="naming-table">
+                        <table class="data-table">
                             <thead>
                                 <tr>
                                     <th>원칙</th>
@@ -491,7 +722,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">3. Functions</h2>
+                        <h2 class="section-title"><span class="num">3.</span> Functions</h2>
 
                         <div class="rule-list">
                             <h4>함수 작성 규칙</h4>
@@ -539,7 +770,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">4. SOLID Principles</h2>
+                        <h2 class="section-title"><span class="num">4.</span> SOLID Principles</h2>
 
                         <div class="solid-grid">
                             <div class="solid-card">
@@ -571,7 +802,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">5. Code Smells</h2>
+                        <h2 class="section-title"><span class="num">5.</span> Code Smells</h2>
 
                         <div class="smell-grid">
                             <div class="smell-card">
@@ -602,7 +833,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">6. Comments</h2>
+                        <h2 class="section-title"><span class="num">6.</span> Comments</h2>
 
                         <div class="principle-grid">
                             <div class="principle-card">
@@ -644,7 +875,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">7. Best Practices</h2>
+                        <h2 class="section-title"><span class="num">7.</span> Best Practices</h2>
 
                         <div class="practice-grid">
                             <div class="practice-card">
@@ -675,7 +906,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">8. Error Handling</h2>
+                        <h2 class="section-title"><span class="num">8.</span> Error Handling</h2>
 
                         <div class="principle-grid">
                             <div class="principle-card">
@@ -694,7 +925,7 @@
                     </div>
 
                     <div class="paper-section">
-                        <h2 class="section-title">9. Conclusion</h2>
+                        <h2 class="section-title"><span class="num">9.</span> Conclusion</h2>
                         <p>
                             클린 코드는 단순히 "작동하는 코드"를 넘어 "읽기 좋은 코드", "변경하기 쉬운 코드"를 목표로 한다.
                             의미 있는 네이밍, 작고 명확한 함수, SOLID 원칙 준수는 클린 코드의 핵심 요소이다.
@@ -718,26 +949,23 @@
                     </div>
 
                     <div class="related-articles">
-                        <h3>관련 논문</h3>
+                        <h3>Related Papers</h3>
                         <div class="related-grid">
                             <a href="refactoring.html" class="related-card">
-                                <span class="related-icon">🔧</span>
                                 <span class="related-title">리팩토링 전략</span>
                             </a>
                             <a href="code-review.html" class="related-card">
-                                <span class="related-icon">👁️</span>
                                 <span class="related-title">코드 리뷰 방법론</span>
                             </a>
                             <a href="tdd-methodology.html" class="related-card">
-                                <span class="related-icon">📋</span>
                                 <span class="related-title">TDD: 테스트 주도 개발</span>
                             </a>
                         </div>
                     </div>
 
                     <div class="source-box">
-                        <p><strong>Article Info:</strong> Software Engineering Methodology Series<br>
-                        <strong>Classification:</strong> Code Quality / Best Practices<br>
+                        <p><strong>Classification:</strong> Development Practices / Code Quality<br>
+                        <strong>Series:</strong> Software Engineering Methodology<br>
                         <strong>Last Updated:</strong> 2024</p>
                     </div>
                 </div>
